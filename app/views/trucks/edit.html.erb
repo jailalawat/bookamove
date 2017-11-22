@@ -1,0 +1,40 @@
+<% @page_title = raw("<i class='icon-truck blank3 blue-text'></i> Edit Truck Profile") %>
+
+<div class="body_top_margin col-md-12">
+  <legend><%= @truck.description %></legend>
+
+  <%= render 'form' %>
+
+</div>
+<br class="clearfix"><br>
+
+<script>
+    var topBar = document.getElementById("top-bar");
+
+    topBar.innerHTML = '<div class="msg"><div class="top-bar-left-margin2"><div class="row '
+        + '"><div class="text-left col-md-12">'
+        + '<div class="pleft46 pright10">'
+
+        + '<div class="colfl mright10">'
+        + '<a href="<%= accounts_path %>" class="text-dark mtop6 no_underline fc-button fc-state-default fc-state-disabled pointer fc-corner-left fc-corner-right">Company Profile</a>'
+        + '</div>'
+
+        + '<div class="colfl mright10">'
+        + '<a href="/accounts_staff" class="text-dark mtop6 no_underline fc-button fc-state-default fc-state-disabled pointer fc-corner-left fc-corner-right">Staff</a>'
+        + '</div>'
+
+        + '<div class="colfl mright10">'
+        + '<a href="/accounts_drivers" class="text-dark mtop6 no_underline fc-button fc-state-default fc-state-disabled pointer fc-corner-left fc-corner-right">Drivers</a>'
+        + '</div>'
+
+        + '<div class="colfl mright10">'
+        + '<a href="/clients" class="text-dark mtop6 no_underline fc-button fc-state-default fc-state-disabled pointer fc-corner-left fc-corner-right">Customers</a>'
+        + '</div>'
+
+        + '<div class="colfl mright10">'
+        + '<a href="#" class="text-dark mtop6 no_underline fc-button fc-state-default no_pointer fc-corner-left fc-corner-right">Trucks</a>'
+        + '</div>'
+
+        + '</div>'
+        + '</div></div></div></div>';
+</script>

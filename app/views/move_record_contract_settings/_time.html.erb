@@ -1,0 +1,65 @@
+<% @dates.each do |date| %>
+    <div class="row date-row">
+      <div class="form-group col-md-2">
+        <%= label :move_date, :move_date, class: "labels" %><br>
+
+        <div class="left-inner-addon">
+          <% css = @settings.show_move_date ? @enable_icon : @disable_icon %>
+          <i field="show_move_date" class="<%= css %>"></i>
+          <%= text_field :move_date, :move_date, disabled: true, class: 'form-control', style: 'width:100%' %>
+        </div>
+      </div>
+      <div class="form-group col-md-2">
+        <%= label :move_time, :move_time, class: "labels" %><br>
+
+        <div class="left-inner-addon">
+          <% css = @settings.show_move_time ? @enable_icon : @disable_icon %>
+          <i field="show_move_time" class="<%= css %>"></i>
+          <%= text_field :move_time, :move_time, disabled: true, class: 'form-control', style: 'width:100%' %>
+        </div>
+      </div>
+
+      <div class="form-group col-md-1">
+        <%= label :estimation_time, 'Est. Time', class: "labels"%><br>
+
+        <div class="left-inner-addon">
+          <% css = @settings.show_estimation_time ? @enable_icon : @disable_icon %>
+          <i field="show_estimation_time" class="<%= css %>"></i>
+          <%= select :estimation_time, :estimation_time, {}, {include_blank: true, disabled: true, }, class: 'form-control space-select-addon', style: 'width:100%', disabled: true %>
+        </div>
+      </div>
+
+      <div class="form-group col-md-2">
+        <%= label :time_range, 'Range', class: "labels" %><br>
+
+        <div class="left-inner-addon">
+          <% css = @settings.show_move_range ? @enable_icon : @disable_icon %>
+          <i field="show_move_range" class="<%= css %>"></i>
+          <%= text_field :time_range, :time_range, disabled: true, class: 'form-control', style: 'width:100%' %>
+        </div>
+      </div>
+      <div class="form-group col-md-3">
+        <%= label :time_detail, :time_details, class: "labels" %><br>
+
+        <div class="left-inner-addon">
+          <% css = @settings.show_move_time_detail ? @enable_icon : @disable_icon %>
+          <i field="show_move_time_detail" class="<%= css %>"></i>
+          <%= text_field :time_detail, :time_detail, disabled: true, class: 'form-control', style: 'width:100%' %>
+        </div>
+      </div>
+
+
+      <div class="form-group col-md-2">
+        <%= label :time_alert, 'Time Alert', class: "labels" %><br>
+
+        <div class="left-inner-addon">
+          <% css = @settings.show_time_alert ? @enable_icon : @disable_icon %>
+          <i field="show_time_alert" class="<%= css %>"></i>
+          <%= select 'Time Alert', 'Time alert', {}, {include_blank: true}, :class => 'form-control space-select-addon change-select ', style: 'width:100%', disabled: true %>
+          <% if validate_special_permission('edit.contract_field_default_values', @current_actions) %>
+            <i class="icon-edit-sign edit-dropdown-contract-settings" field="time_alerts" data-default="<%= @settings.time_alert_id %>" data-default-key="time_alert_id"></i>
+          <% end %>
+        </div>
+      </div>
+    </div>
+<% end %>

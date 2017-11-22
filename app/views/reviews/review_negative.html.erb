@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="format-detection" content="telephone=no">
+  <link rel="stylesheet" media="all" href="/assets/template/bootstrap/bootstrap.css" />
+  <link rel="stylesheet" media="all" href="/stylesheets/review.css" />
+  <script src="/assets/template/jquery/jquery.min.js"></script>
+  <script src="/assets/reviews.js"></script>
+</head>
+<body background="#f0f0f0">
+
+<table id="main_table" align="center" cellpadding="12" cellspacing="0" border="0">
+  <tr>
+    <td align="left" style="padding-left: 0px; padding-right: 0px; padding-bottom: 8px;">
+      <a href="<%= @account.site %>" target="_blank"><img src="<%= @logo %>" width="192" border="0" class="m_img img-responsive"></a>
+    </td>
+    <td align="right" style="padding-left: 0px; padding-right: 0px; padding-bottom: 8px;">
+      <b><a class="tel" href="tel:<%= @tel %>"><%= @tel %></a></b>
+      <br>
+      <span class="hours"><%= @account.working_hours %></span>
+    </td>
+  </tr>
+  <tr>
+    <td bgcolor="#264b7f" colspan="2" align="center" style="height: 13px; padding: 8px;">
+      <b class="title" style="color: white;">We're Listening</b>
+    </td>
+  </tr>
+  <tr style="line-height: 20px;">
+    <td bgcolor="white" colspan="2" class="main_td">
+
+      <div style="text-align: center">
+        <b style="color: #33679e">
+          Hello <b style="color: #000000"><%= params[:name] %></b>,<br><br>
+
+          We are sincerely sorry you were not satisfied with our service.<br>
+          Please detail here as much as you wish about your experience.<br>
+          You will get a prompt response, but better yet, call us direct.<br><br>
+
+          Unhappy customers are our top priority.<br>
+          We promise your concerns will be heard and will be addressed.
+        </b>
+      </div>
+
+      <br>
+
+      <table cellspacing="0" cellpadding="0" border="0" width="100%" align="center">
+        <tr><td>
+          <form method="post" action="/review_negative">
+            <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>"/>
+            <input name="move_id" type="hidden" value="<%= params[:move_id] %>"/>
+            <input name="account_id" type="hidden" value="<%= params[:account_id] %>"/>
+            <input name="user_id" type="hidden" value="<%= params[:user_id] %>"/>
+            <input name="token" type="hidden" value="<%= params[:token] %>"/>
+            <input name="city" type="hidden" value="<%= params[:city] %>"/>
+            <input name="name" type="hidden" value="<%= params[:name] %>"/>
+
+            <div style="margin-bottom: 10px;">
+              <textarea style="width:99%; height: 200px; border-radius: 3px !important; border-color: #d0d0d0; border-style: solid; border-width: 1px; outline: none; font-family: 'Comfortaa'; font-size: 9pt;" rows="20" placeholder="Your message" name="review_complaints" id="review_complaints" required></textarea>
+            </div>
+
+            <button type="submit" style="width: 100%; background-color: #f04241; border-radius: 3px; color: white; padding: 8px 10px; text-decoration: none; font-weight: bold; border: 0px; outline: none; font-family: 'Comfortaa'; font-size: 9pt;">SUBMIT</button>
+          </form>
+          </td></tr>
+        </table>
+
+      <br>
+
+    </td>
+  </tr>
+  <tr>
+    <td bgcolor="#264b7f" colspan="2" align="center" style="padding: 8px; color: white; height: 27px;">
+      <table cellspacing="0" cellpadding="0" border="0" width="100%">
+        <tr align="center">
+          <td>
+            <b class="reward_line">
+              Refer a friend and get a Referral Reward
+              <a target="_blank" href="http://<%= @account.subdomain %>.bookamove.ca/referrals?ra=<%= @ra_email %>" style="background-color: #f04241; border-radius: 3px; color: white; padding: 6px 8px; text-decoration: none; font-weight: bold; margin-left: 10px">Earn $50 - $100+</a>
+            </b>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" align="center" style="padding: 0px;">
+      <table cellspacing="0" cellpadding="12" border="0" width="100%">
+        <tr valign="middle">
+          <td style="padding-left: 0px;" class="addr">
+            <span class="bottom_links">
+              <%= @account.address.html_safe %>
+            </span>
+          </td>
+          <td align="center">
+            <a href="unsub" class="bottom_links">Unsubscribe</a>
+          </td>
+          <td align="center">
+            <a href="<%= @account.privacy_web_page %>" class="bottom_links">Privacy Policy</a>
+          </td>
+          <td align="center" style="padding-right: 0px;">
+            <a href="<%= @account.contact_us_web_page %>" class="bottom_links">Contact Us</a>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+
+</body>
+</html>

@@ -1,0 +1,6 @@
+var user = $('.user-name').data('user');
+var cal_id = <%= params[:id] %>;
+
+localStorage.removeItem(user + '_taskcalendar_' + cal_id);
+
+location.reload();

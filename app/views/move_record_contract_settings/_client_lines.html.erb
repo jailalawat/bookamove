@@ -1,0 +1,36 @@
+<% @clients.each.with_index do |client, index| %>
+    <div class="row client-row">
+      <%= form_for client, html: {class: 'form-inline'} do |f| %>
+          <!--name-->
+          <div class="form-group col-md-3">
+            <%= f.label :name, 'Name ' + (index == 0 ? '' : (index + 1).to_s), class: "labels" %><br>
+            <%= f.text_field :name, disabled: true, class: 'form-control', style: 'width:100%' %>
+          </div>
+          <!--title-->
+          <div class="form-group col-md-1">
+            <%= f.label :title, 'Title ' + (index == 0 ? '' : (index + 1).to_s), class: "labels" %><br>
+            <%= f.text_field :title, disabled: true, class: 'form-control', style: 'width:100%' %>
+          </div>
+          <!--home_phone-->
+          <div class="form-group col-md-2">
+            <%= f.label :home_phone, 'Home Phone ' + (index == 0 ? '' : (index + 1).to_s), class: "labels" %><br>
+            <%= f.text_field :home_phone, disabled: true, class: 'form-control', style: 'width:100%' %>
+          </div>
+          <!--cell_phone-->
+          <div class="form-group col-md-2">
+            <%= f.label :cell_phone, 'Cell Phone ' + (index == 0 ? '' : (index + 1).to_s), class: "labels" %><br>
+            <%= f.text_field :cell_phone, disabled: true, class: 'form-control', style: 'width:100%' %>
+          </div>
+          <!--work_phone-->
+          <div class="form-group col-md-2">
+            <%= f.label :work_phone, 'Work Phone ' + (index == 0 ? '' : (index + 1).to_s), class: "labels" %><br>
+            <%= f.text_field :work_phone, disabled: true, class: 'form-control', style: 'width:100%' %>
+          </div>
+          <!--email-->
+          <div class="form-group col-md-2">
+            <%= f.label :email, 'Email ' + (index == 0 ? '' : (index + 1).to_s), class: "labels" %><br>
+            <%= f.email_field :email, disabled: true, class: 'form-control', style: 'width:100%' %>
+          </div>
+      <% end %>
+    </div>
+<% end %>

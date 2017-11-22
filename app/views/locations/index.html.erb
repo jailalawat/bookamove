@@ -1,0 +1,46 @@
+<legend>Locations</legend>
+<div class="row">
+  <div class="col-md-12">
+    <%= link_to 'New Location', new_location_path, class: 'btn btn-primary' %>
+  </div>
+</div>
+<hr>
+<div class="row">
+  <div class="col-md-12">
+    <table class="table table-striped table-bordered table-hover">
+      <tr>
+        <th>No</th>
+        <th>Street</th>
+        <th>Apartment</th>
+        <th>Entry Number</th>
+        <th>Building</th>
+        <th>City</th>
+        <th>Locale</th>
+        <th>Province</th>
+        <th>Postal Code</th>
+        <th>Access Details</th>
+        <th>Access Alert</th>
+        <th>Actions</th>
+      </tr>
+      <% @locations.each do |location| %>
+          <tr>
+            <td><%= location.no %></td>
+            <td><%= location.street %></td>
+            <td><%= location.apartment %></td>
+            <td><%= location.entry_number %></td>
+            <td><%= location.building %></td>
+            <td><%= location.city %></td>
+            <td><%= location.locale %></td>
+            <td><%= location.province %></td>
+            <td><%= location.postal_code %></td>
+            <td><%= location.access_details %></td>
+            <td><%= location.access_alert_id %></td>
+            <td>
+              <%= link_to 'Edit', edit_location_path(location) %>
+              <%= link_to 'Destroy', location, method: :delete, data: {confirm: 'Are you sure?'} %>
+            </td>
+          </tr>
+      <% end %>
+    </table>
+  </div>
+</div>

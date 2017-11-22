@@ -1,0 +1,44 @@
+<% @page_title = raw("<i class='icon-user blank3 blue-text'></i>#{@title_page} ") + raw(" : <span id='calTitle'></span>") %>
+
+<div id='calendar-staff-available'></div>
+<div id="lbl7pm" class="col-md-10 move-top-17-2 timelbl" style="margin-top: 7px !important;"></div>
+<div class="form-group"></div>
+<div class="row">
+  <div class="col-md-12  calendar-staff-available update-messages-staff-available-calendar">
+  </div>
+</div>
+
+<% content_for :special_js do %>
+    <link href="/assets/template/plugins/available-fullcalendar.css" media="all" rel="stylesheet">
+    <script src="/assets/template/plugins/avalaible_calendar/available_fullcalendar.min.js"></script>
+    <script src="/assets/staff_availables.js"></script>
+<% end %>
+
+<script>
+  var topBar = document.getElementById("top-bar");
+
+  topBar.innerHTML = '<div class="msg"><div class="top-bar-left-margin2"><div class="row '
+      + '"><div class="text-left col-md-12">'
+      + '<div class="pleft46 pright10">'
+      + '<div id="calLeft" class="col1">'
+      + '</div>'
+
+        // Lock
+      + '<div id="calPreRight" class="col2 pull-right">'
+      + '<div id="calRight" class="pull-right ptop1"></div>'
+      + '<div id="calavailabletime" class="pull-right"><a href="" target="_self" data-url="/personal_calendars" class="calavailabletime" ><div class="btn btn-none"><span class="fc-button fc-state-default fc-corner-left fc-corner-right ">All</span></div></a></div>'
+      <% unless params['move_referred'].present?%>
+
+      <% end %>
+      + '</div>'
+      + '</div>'
+
+      + '</div></div></div></div>';
+
+</script>
+
+<style>
+  .fc-today-button {
+    margin-left: 3px;
+  }
+</style>

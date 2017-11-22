@@ -1,0 +1,15 @@
+<% @page_title = raw("<i class='icon-user blank3 blue-text'></i> My Profile ") %>
+
+<div class="body_top_margin col-md-12">
+  <legend>Who Am I?</legend>
+
+  <%= render 'form' %>
+
+
+  <% if @current_user.driver_commission || @current_user.move_commission %>
+      <legend>Costs $$$</legend>
+      <%= render 'form_costs' %>
+  <% end %>
+</div>
+
+<br class="clearfix"/><br/>

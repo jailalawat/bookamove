@@ -1,0 +1,62 @@
+<div class="row">
+  <div class="col-md-12">
+    <form class="col-md-10" id="form-date-post-report">
+      <div class="form-group">
+        <div class='input-group report-calendar-start col-md-4'>
+          <label>Start Date</label>
+	               	<span class="input-group-addon">
+	                    <span class="fa fa-calendar">
+	                    </span>
+	                </span>
+          <input type='text' class="form-control" name="report_calendar_start" autocomplete="off"/>
+        </div>
+        <div class='input-group report-calendar-end col-md-4'>
+          <label>End Date</label>
+	               	<span class="input-group-addon">
+	                    <span class="fa fa-calendar">
+	                    </span>
+	                </span>
+          <input type='text' class="form-control" name="report_calendar_end" autocomplete="off"/>
+        </div>
+        <button class="btn btn-link icon-search btn-submit-search-messages col-md-5" type="submit"></button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="row">
+  <div class="table-responsive col-md-12">
+    <div class="scrollable-area">
+      <table class="data-table-column-filter table table-bordered table-striped dataTable" style="margin-bottom:0;" id="DataTables_Table_report" aria-describedby="DataTables_Table_report_info" data-report="<%= type_report %>">
+        <thead>
+        <tr role="row">
+          <th class="sorting" role="columnheader" tabindex="0" rowspan="1" colspan="1">
+            Name
+          </th>
+          <th class="sorting" role="columnheader" tabindex="0" rowspan="1" colspan="1">
+            Move ID
+          </th>
+          <th class="sorting" role="columnheader" tabindex="0" rowspan="1" colspan="1">
+            Date
+          </th>
+          <th class="sorting" role="columnheader" tabindex="0" rowspan="1" colspan="1">
+            Group
+          </th>
+          <th class="sorting" role="columnheader" tabindex="0" rowspan="1" colspan="1">
+            Truck
+          </th>
+          <th class="sorting" role="columnheader" tabindex="0" rowspan="1" colspan="1">
+            Author
+          </th>
+          <th class="sorting" role="columnheader" tabindex="0" rowspan="1" colspan="1">
+            Source
+          </th>
+          <th class="sorting" role="columnheader" tabindex="0" rowspan="1" colspan="1">
+            Total Cost
+          </th>
+        </tr>
+        </thead>
+      </table>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,38 @@
+<style>
+  iframe {
+    min-height: 160px;
+  }
+</style>
+
+<%= form_for(@email_alert) do |f| %>
+    <% if @email_alert.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@email_alert.errors.count, "error") %> prohibited this move type from being saved:</h2>
+
+          <ul>
+            <% @email_alert.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+
+    <div class="form-group">
+      <%= f.label :description %><br>
+      <%= f.text_field :description, class: 'form-control', required: true %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :template %><br>
+      <%= f.text_area :template, class: 'form-control wysihtml5', required: true, placeholder: 'Your message...', rows: 12 %>
+    </div>
+
+    <br/>
+    <div class="form-group">
+      <button type="submit" name="commit" class="btn btn-primary">Save</button>
+      <a class="btn btn-primary" href="<% if not params[:from_settings].present? %>/email_alerts<% else %>/contract_settings?stage_id=<%= params[:stage_id] %>#stages<% end %>">Back</a>
+    </div>
+
+    <input type="hidden" id="email_alert_stage_id" name="email_alert[contact_stage_id]" value="<%= params[:stage_id] %>">
+    <input type="hidden" id="email_alert_from_settings" name="email_alert[from_settings]" value="<%= params[:from_settings] %>">
+<% end %>

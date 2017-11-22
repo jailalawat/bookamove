@@ -1,0 +1,117 @@
+<% @origins.each.with_index do |origin, index| %>
+    <div class="row origin-row">
+      <div>
+        <div class="col-md-12">
+          <b class="bold-label">ORIGIN <%= (index == 0 ? '' : (index + 1).to_s) %>:</b>
+        </div>
+      </div>
+
+      <%= form_for origin, html: {class: 'form-inline'} do |f| %>
+          <div class="form-group col-md-2">
+            <%= f.label :no, class: "labels" %><br>
+
+            <div class="left-inner-addon">
+              <% css = @settings.show_origin_no ? @enable_icon : @disable_icon %>
+              <i field="show_origin_no" class="<%= css %>"></i>
+              <%= f.text_field :no, disabled: true, class: 'form-control', style: 'width:100%' %>
+            </div>
+          </div>
+          <div class="form-group col-md-2">
+            <%= f.label :street, class: "labels" %><br>
+
+            <div class="left-inner-addon">
+              <% css = @settings.show_origin_street ? @enable_icon : @disable_icon %>
+              <i field="show_origin_street" class="<%= css %>"></i>
+              <%= f.text_field :street, disabled: true, class: 'form-control', style: 'width:100%' %>
+            </div>
+          </div>
+          <div class="form-group col-md-2">
+            <%= f.label :apartment, class: "labels" %><br>
+
+            <div class="left-inner-addon">
+              <% css = @settings.show_origin_apartment ? @enable_icon : @disable_icon %>
+              <i field="show_origin_apartment" class="<%= css %>"></i>
+              <%= f.text_field :apartment, disabled: true, class: 'form-control', style: 'width:100%' %>
+            </div>
+          </div>
+          <div class="form-group col-md-2">
+            <%= f.label :entry_number, class: "labels" %><br>
+
+            <div class="left-inner-addon">
+              <% css = @settings.show_origin_entry_number ? @enable_icon : @disable_icon %>
+              <i field="show_origin_entry_number" class="<%= css %>"></i>
+              <%= f.text_field :entry_number, disabled: true, class: 'form-control', style: 'width:100%' %>
+            </div>
+          </div>
+          <div class="form-group col-md-2">
+            <%= f.label :building, class: "labels" %><br>
+
+            <div class="left-inner-addon">
+              <% css = @settings.show_origin_building ? @enable_icon : @disable_icon %>
+              <i field="show_origin_building" class="<%= css %>"></i>
+              <%= f.text_field :building, disabled: true, class: 'form-control', style: 'width:100%' %>
+            </div>
+          </div>
+
+
+
+          <div class="form-group col-md-2">
+            <%= f.label :city, class: "labels" %><br>
+
+            <div class="left-inner-addon">
+              <% css = @settings.show_origin_city ? @enable_icon : @disable_icon %>
+              <i field="show_origin_city" class="<%= css %>"></i>
+              <%= f.text_field :city, disabled: true, class: 'form-control', style: 'width:100%' %>
+            </div>
+          </div>
+          <div class="form-group col-md-2">
+            <%= f.label :locale, class: "labels" %><br>
+
+            <div class="left-inner-addon">
+              <% css = @settings.show_origin_locale ? @enable_icon : @disable_icon %>
+              <i field="show_origin_locale" class="<%= css %>"></i>
+              <%= f.text_field :locale, disabled: true, class: 'form-control', style: 'width:100%' %>
+            </div>
+          </div>
+          <div class="form-group col-md-2">
+            <%= f.label :province, class: "labels" %><br>
+
+            <div class="left-inner-addon">
+              <% css = @settings.show_origin_province ? @enable_icon : @disable_icon %>
+              <i field="show_origin_province" class="<%= css %>"></i>
+              <%= f.text_field :province, disabled: true, class: 'form-control', style: 'width:100%' %>
+            </div>
+          </div>
+          <div class="form-group col-md-2">
+            <%= f.label :postal_code, class: "labels" %><br>
+
+            <div class="left-inner-addon">
+              <% css = @settings.show_origin_postal_code ? @enable_icon : @disable_icon %>
+              <i field="show_origin_postal_code" class="<%= css %>"></i>
+              <%= f.text_field :postal_code, disabled: true, class: 'form-control', style: 'width:100%' %>
+            </div>
+          </div>
+          <div class="form-group col-md-2">
+            <%= f.label :access_details, class: "labels" %><br>
+
+            <div class="left-inner-addon">
+              <% css = @settings.show_origin_access_details ? @enable_icon : @disable_icon %>
+              <i field="show_origin_access_details" class="<%= css %>"></i>
+              <%= f.text_field :access_details, disabled: true, class: 'form-control', style: 'width:100%' %>
+            </div>
+          </div>
+          <div class="form-group col-md-2">
+            <%= f.label :access_alert, class: "labels" %><br>
+
+            <div class="left-inner-addon">
+              <% css = @settings.show_origin_access_alert ? @enable_icon : @disable_icon %>
+              <i field="show_origin_access_alert" class="<%= css %>"></i>
+              <%= f.select :access_alert_id, {}, {include_blank: true}, :class => 'form-control space-select-addon change-select', style: 'width:100%', disabled: true %>
+              <% if validate_special_permission('edit.contract_field_default_values', @current_actions) %>
+                <i class="icon-edit-sign edit-dropdown-contract-settings" field="origin_access_alerts" data-default="<%= @settings.origin_access_alert_id %>" data-default-key="origin_access_alert_id"></i>
+              <% end %>
+            </div>
+          </div>
+      <% end %>
+    </div>
+<% end %>

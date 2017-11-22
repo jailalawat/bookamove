@@ -1,0 +1,28 @@
+<legend>Move Payment Alert</legend>
+<div class="row">
+  <div class="col-md-12">
+    <%= link_to 'New Move Type', new_payment_alert_path, class: 'btn btn-primary' %>
+  </div>
+</div>
+<hr>
+<div class="row">
+  <div class="col-md-12">
+    <table class="table table-striped table-bordered table-hover">
+      <tr>
+        <th>Description</th>
+        <th>Is Active?</th>
+        <th>Actions</th>
+      </tr>
+      <% @payment_alerts.each do |payment_alert| %>
+          <tr>
+            <td><%= payment_alert.description %></td>
+            <td><%= check_box_tag 'active', payment_alert.active, payment_alert.active, disabled: true %></td>
+            <td>
+              <%= link_to 'Edit', edit_payment_alert_path(payment_alert) %>
+              <%= link_to 'Destroy', payment_alert, method: :delete, data: {confirm: 'Are you sure?'} %>
+            </td>
+          </tr>
+      <% end %>
+    </table>
+  </div>
+</div>

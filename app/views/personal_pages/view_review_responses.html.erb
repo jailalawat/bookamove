@@ -1,0 +1,66 @@
+<div class="row">
+  <div class="col-md-12 flex" style="margin-top: -12px;">
+
+    <div class="pull-left flex text-nowrap">
+      <form class="flex" id="form-date-post-report">
+        <div class="pull-left text-nowrap flex pright15">
+          <label>Status</label> &nbsp;
+          <select id="filter_param_state" name="state" class="no_outline form-control" style="width: 122px">
+            <option value=""></option>
+            <option value="submitted is null">Positive</option>
+            <option value="posted is null">Negative</option>
+          </select>
+        </div>
+        <div class='input-group complete-report-calendar-start pull-left flex'>
+          <label>From</label>&nbsp;
+                    <span class="input-group-addon" style="padding-right: 24px;">
+                        <span class="fa fa-calendar"></span>
+                    </span>
+          <input type='text' class="form-control2 no_outline" name="report_calendar_start" autocomplete="off"/>
+        </div>
+        <div class='input-group complete-report-calendar-end pull-left flex'>
+          <label>To</label>&nbsp;
+                    <span class="input-group-addon" style="padding-right: 24px;">
+                        <span class="fa fa-calendar"></span>
+                    </span>
+          <input type='text' class="form-control2 no_outline" name="report_calendar_end" autocomplete="off"/>
+        </div>
+      </form>
+    </div>
+
+    <div class="pull-left" style="width: 100%">
+      <input id="searchInput" class="form-control pull-right" placeholder="Search" type="text"></div>
+
+  </div>
+</div>
+
+<div class="row ptop8">
+  <div class="table-responsive col-md-12">
+    <div class="scrollable-area">
+      <table class="data-table-review-responses-report table table-bordered table-striped dataTable" style="display: none;" id="DataTables_Table_report" aria-describedby="DataTables_Table_report_info" data-report="complete" data-calendar-range="<%= @calendar_range %>">
+        <thead>
+        <tr role="row">
+          <th class="no-sort" role="columnheader" tabindex="0" rowspan="1" colspan="1" style="width: 17%">
+            Name
+          </th>
+          <th class="no-sort" role="columnheader" tabindex="0" rowspan="1" colspan="1" style="width: 13%">
+            Email
+          </th>
+          <th class="sorting" role="columnheader" tabindex="0" rowspan="1" colspan="1" style="width: 13%">
+            Created
+          </th>
+          <th class="no-sort" role="columnheader" tabindex="0" rowspan="1" colspan="1" style="width: 8%">
+            Move
+          </th>
+          <th class="no-sort" role="columnheader" tabindex="0" rowspan="1" colspan="1" style="width: 14%">
+            Status
+          </th>
+          <th class="no-sort" role="columnheader" tabindex="0" rowspan="1" colspan="1" style="width: 35%">
+            Notes
+          </th>
+        </tr>
+        </thead>
+      </table>
+    </div>
+  </div>
+</div>

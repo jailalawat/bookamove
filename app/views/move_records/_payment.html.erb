@@ -1,0 +1,64 @@
+<!--type-->
+<div class="form-group col0-5 colmr">
+  <%= label :payment, :type, class: "labels" %><br>
+  <%= select :payment, :type_payment, options_for_select({"Cash" => "cash", "Invoice" => "invoice", "Multi-Part" => "multi_part", "Visa" => "visa", "Mastercard" => "mastercard", "Discover" => "discover"}), {}, class: 'form-control2', style: 'width:100%',
+             readonly: true %>
+</div>
+<!--status-->
+<div class="form-group col0-5 colmr">
+  <%= label :payment, :status, class: "hhidden labels" %><br>
+  <%= text_field :payment, :status, placeholder: "Status", class: 'form-control', style: 'width:100%', readonly:
+      true %>
+</div>
+<!--number_card-->
+<div class="form-group col1-5 colmr">
+  <%= label :payment, :number_card, 'Card #', class: "hhidden labels" %><br>
+  <%= text_field :payment, :number_card, placeholder: "Card #", class: 'form-control', style: 'width:100%', readonly: true %>
+</div>
+<!--exp-->
+<div class="form-group col0-5 colmr">
+  <%= label :payment, :exp, class: "hhidden labels" %><br>
+  <%= text_field :payment, :exp, placeholder: "Exp", class: 'form-control', style: 'width:100%', readonly: true %>
+</div>
+<!--cvc-->
+<div class="form-group col0-5 colmr">
+  <%= label :payment, :cvc, 'CVC', class: "hhidden labels" %><br>
+  <%= text_field :payment, :cvc, placeholder: "CVC", class: 'form-control', style: 'width:100%', readonly: true %>
+</div>
+<!--number_transaction-->
+<div class="form-group col1 colmr">
+  <%= label :payment, :number_transaction, "Transaction #", class: "hhidden labels" %><br>
+  <%= text_field :payment, :number_transaction, placeholder: "Transaction #", class: 'form-control', style: 'width:100%', readonly:
+      true %>
+</div>
+<!--pre_auth-->
+<div class="form-group col0-5 colmr">
+  <%= label :payment, :pre_auth, class: "hhidden labels" %><br>
+  <%= text_field :payment, :pre_auth, placeholder: "Pre Auth", class: 'form-control', style: 'width:100%', readonly: true %>
+</div>
+<!--amount-->
+<div class="form-group col0-5 colmr">
+  <%= label :payment, :amount, class: "hhidden labels" %><br>
+  <%= text_field :payment, :amount, placeholder: "Amount", class: 'form-control', style: 'width:100%', readonly:
+      true %>
+</div>
+<!--date-->
+<div class="form-group col0-5 colmr">
+  <%= label :payment, :date, class: "hhidden labels" %><br>
+  <%= text_field :payment, :date, placeholder: "Date", class: 'form-control date-mover', style: 'width:100%',
+                 readonly: true %>
+</div>
+<div>
+  <!--payment_detail-->
+  <div class="form-group col6 colmr">
+    <%= label :payment, :payment_detail, 'Payment alert details', class: "hhidden labels" %><br>
+    <%= text_field :payment, :payment_detail, placeholder: "Payment Alert Details", class: 'form-control', style: 'width:100%', readonly:
+        true %>
+  </div>
+  <!--payment_alert-->
+  <div class="form-group col1">
+    <%= label :payment, :payment_alert, class: "hhidden labels" %><br>
+    <%= select :payment, :payment_alert_id, options_from_collection_for_select(@payment_alert, :description, :description, @settings.payment_alert.description), {include_blank: "Payment Alert"}, :class => 'form-control text-grey', style: 'width:100%', readonly: true, data_id:
+        'payment_alert_id' %>
+  </div>
+</div>

@@ -1,0 +1,152 @@
+<h1>Cargo Weight Estimate</h1>
+
+<div class="terms_section">
+  <div class="vertical" id="name_section">
+    <img src="http://oomovers.moveonline.com/media/images/pdf/name.png" width="10px" height="35px" style="margin-top: 5px;"/>
+  </div>
+  <div class="section_content">
+    <table>
+      <tr>
+        <td class="small">Client</td>
+        <td class="data_cell"><%= move.blank? ? nil : move.move_record_client.first.client.name %></td>
+        <td class="small">Cell Phone</td>
+        <td class="data_cell"><%= move.blank? ? nil : move.move_record_client.first.client.cell_phone %></td>
+      </tr>
+      <tr>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td class="small">Email</td>
+        <td class="data_cell"><%= move.blank? ? nil : move.move_record_client.first.client.email %></td>
+      </tr>
+      <tr>
+        <td class="small">Move Date</td>
+        <td class="data_cell"><%= move.blank? ? nil : move.move_record_date.first.move_date.blank? ? nil : move.move_record_date.first.move_date.strftime("%Y-%m-%d") %></td>
+        <td class="small">Work Phone</td>
+        <td class="data_cell"><%= move.blank? ? nil : move.move_record_client.first.client.work_phone %></td>
+      </tr>
+      <tr>
+        <td class="small" colspan="4">
+          <strong>Attention: Exact dates and times are not confirmed. Contact your mover as soon as possible to
+            confirm.</strong></td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+<div class="terms_section margin_top">
+  <div class="vertical" id="weight_section">
+    <img src="http://oomovers.moveonline.com/media/images/pdf/weight.png" width="11px" height="49px" style="margin-top: 75px;"/>
+  </div>
+  <div class="section_content">
+    <div class="subsection_padded">
+      <strong>This cargo weight is an estimate only. Scale weight should be used whenever appropriate and
+        possible.</strong>
+
+      <p>Listed item weight and volume are typical. Actual weight and volume may vary. If correct weight and volume and
+        weight are available, enter item as Other Furnishing and include a description, weight, and volume of item.</p>
+
+      <p>Volumetric weight conversion is based on the average weight of 7 pounds per cubic foot for a large fully loaded
+        household moving van. This method is most accurate for full household moves. The large volumetric weights of
+        relatively light furnishing items are balanced by the low volumetric weight of the many heavy small items and
+        boxes in a typical house to give an average weight. This type of estimate is almost always based on using an
+        actual scale weight for actual charges.</p>
+
+      <p>If loads are smaller and/or cargo includes large quantities of heavy or light items, the volume conversion
+        formula will be less accurate. The client must provide accurate weight and volumes for this type of move to get
+        an accurate estimate. Usually in this case the cost will be based upon the larger of the two weights, volumetric
+        or estimated.</p>
+      <table>
+        <% estimated_volume = 0 %>
+        <% estimated_weight = 0 %>
+        <% estimated_volumetric_weight = 0 %>
+
+        <% unless move.blank? %>
+            <% for cargo in move.move_record_cargo %>
+                <% estimated_volume += cargo.unit_volume %>
+                <% estimated_weight += cargo.unit_weight %>
+            <% end %>
+            <% estimated_volumetric_weight = 7 * estimated_volume %>
+        <% end %>
+        <tr>
+          <td>
+            <strong>Volumetric Weight</strong>
+          </td>
+          <td>
+            <%= estimated_volumetric_weight %>
+          <td>
+            <strong>lbs</strong>
+          </td>
+          <td>
+            <strong> = Total Volume</strong>
+          </td>
+          <td>
+            <%= estimated_volume %>
+          </td>
+          <td>
+            <strong>ft3 x</strong>
+          </td>
+          <td>
+            7
+          </td>
+          <td>
+            <strong>lb/ft3</strong>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <strong>Estimated Weight From Cargo</strong>
+          </td>
+          <td>
+            <%= estimated_weight %>
+          </td>
+          <td>
+            <strong>lbs</strong>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <strong>Estimated Weight For Quotation</strong>
+          </td>
+          <td>
+            <% unless move.blank? %>
+                <%= move.cargo_weight.to_f %>
+            <% end %>
+          </td>
+          <td>
+            <strong>lbs</strong>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div class="terms_section margin_top" id="cargo_table_container">
+  <table class="blue_header" id="cargo_table" border="1">
+    <thead>
+    <tr>
+      <th>Description</th>
+      <th>Qty</th>
+      <th>Vol</th>
+      <th>Wt</th>
+      <th>Tot Vol</th>
+      <th>Tot Wt</th>
+    </tr>
+    </thead>
+    <% unless move.blank? %>
+        <% for cargo in move.move_record_cargo %>
+            <tr>
+              <td><%= cargo.description %></td>
+              <td class="right"><%= cargo.quantity %></td>
+              <td class="right"><%= cargo.unit_volume %></td>
+              <td class="right"><%= cargo.unit_weight %></td>
+              <td class="right"><%= cargo.quantity * cargo.unit_volume %></td>
+              <td class="right"><%= cargo.quantity * cargo.unit_weight %></td>
+            </tr>
+        <% end %>
+    <% end %>
+  </table>
+</div>
+
+<div class="centered footer"><img src="http://oomovers.moveonline.com/media/images/pdf/logo_long.png" width="550px" height="96px"/></div>
+<!-- TODO: update to account logo -->

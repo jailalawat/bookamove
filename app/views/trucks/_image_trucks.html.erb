@@ -1,0 +1,52 @@
+<div class='col-md-4'>
+  <div class='box'>
+    <div id="dropbox-user-profile" class="dropbox-user-profile">
+      <div class="carousel slide" id="carousel_user_profile" style="margin-bottom:0;">
+        <ol class="carousel-indicators">
+          <% if (@images_attach.present?) %>
+              <% @images_attach.each.with_index do |attach, index| %>
+                  <li data-image-id='<%= attach.id %>' data-slide-to=<%= index %> data-target="#carousel_user_profile" class="<%= index==0 ? 'active' : '' %>"></li>
+              <% end %>
+          <% else %>
+              <li data-slide-to="0" data-type="image-default" data-target="#carousel_user_profile" class="active"></li>
+          <% end %>
+        </ol>
+        <div class="carousel-inner">
+          <% if (@images_attach.present?) %>
+              <% @images_attach.each.with_index do |attach, index| %>
+                  <div data-image-id='<%= attach.id %>' class="item item_user_profile <%= index==0 ? 'active' : '' %>">
+                    <img class="remove-image-user-profile" src='<%= attach.file %>'>
+                  </div>
+              <% end %>
+          <% else %>
+              <div data-type="image-default" class="item item_user_profile active"><img src='/images/default_image.jpg'>
+              </div>
+          <% end %>
+        </div>
+        <a class="left carousel-control <%= @images_attach.size > 0 ? '' : 'hide' %>" data-slide="prev" href="#carousel_user_profile">
+          <span class="icon-angle-left icon-prev"></span>
+        </a>
+        <a class="right carousel-control <%= @images_attach.size > 0 ? '' : 'hide' %>" data-slide="next" href="#carousel_user_profile">
+          <span class="icon-angle-right icon-next"></span>
+        </a>
+      </div>
+      <div id="profile_dropzone_inner" class="text-center">
+        <small class="legend-user-profile">Drop images here to upload</small>
+      </div>
+    </div>
+  </div>
+  <div class="panel panel-default remove_image_toggle">
+    <div class="panel-heading">Images</div>
+  </div>
+  <div class="user_profile_toggle">
+    <% if (@images_attach.present?) %>
+        <% @images_attach.each.with_index do |attach, index| %>
+            <div class="item item_user_profile col-md-3" data-image-id='<%= attach.id %>'>
+              <div class="profile_image_delete_div" data-image-id='<%= attach.id %>'>
+                <img alt="X" class="profile_image_delete_button" src="/assets/x.png"></div>
+              <img class="img_responsive_user_profile" src='<%= attach.file %>'>
+            </div>
+        <% end %>
+    <% end %>
+  </div>
+</div>

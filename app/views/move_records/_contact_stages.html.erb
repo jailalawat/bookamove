@@ -1,0 +1,281 @@
+<div class="row pright15">
+  <div role="tabpanel" class="col-md-10">
+    <div class="tab-content clearfix">
+      <%= hidden_field :contact_stage, :stage %>
+      <div role="tabpanel" class="tab-pane active" id="Quote">
+        <table class="contact-stages quote">
+          <tr>
+            <td>
+              Contact Stage:
+            </td>
+            <td class="stages">
+              <% if @settings.show_lead %>
+                  <div class="pull-left">
+                    <%= label 'contact_stage', 'lead', '<i class="fa fa-check-circle icon-gray disable"></i> Lead'.html_safe, class: 'select-contact-stage', contact_stage_id: 1 %>
+                  </div>
+              <% end %>
+              <% if @settings.show_follow_up %>
+                  <div class="pull-left">
+                    <%= label 'contact_stage', 'follow_up', '<i class="fa fa-check-circle icon-gray disable"></i> Follow Up'.html_safe, class: 'select-contact-stage', contact_stage_id: 3 %>
+                  </div>
+              <% end %>
+              <% if @settings.show_quote %>
+                  <div class="pull-left">
+                    <%= label 'contact_stage', 'quote', '<i class="fa fa-check-circle icon-gray disable"></i> Quote'.html_safe, class: 'select-contact-stage', contact_stage_id: 2 %>
+                  </div>
+              <% end %>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              Contact Emails:
+            </td>
+            <td>
+              <% if @settings.show_lead %>
+                  <div class="pull-left">
+                    <% if @settings.show_lead_welcome %>
+                        <%= label 'lead', 'welcome', '<i class="fa icon-envelope icon-gray"></i> Welcome'.html_safe, class: 'select-contact-email', contact_email_id: 1, contact_stage_id: 1 %>
+                    <% end %>
+                  </div>
+              <% end %>
+
+              <% if @settings.show_follow_up %>
+                  <div class="pull-left">
+                    <% if @settings.show_follow_up_welcome %>
+                        <%= label 'follow_up', 'welcome', '<i class="fa icon-envelope icon-gray"></i> Welcome'.html_safe, class: 'select-contact-email', contact_email_id: 2, contact_stage_id: 3 %>
+                    <% end %>
+                  </div>
+              <% end %>
+
+              <% if @settings.show_quote %>
+                  <div class="pull-left">
+                    <% if @settings.show_quote_welcome %>
+                        <%= label 'quote', 'welcome', '<i class="fa icon-envelope icon-gray"></i> Welcome'.html_safe, class: 'select-contact-email', contact_email_id: 3, contact_stage_id: 2 %>
+                    <% end %>
+                    <% if @settings.show_quote_quote %>
+                        <%= label 'quote', 'quote', '<i class="fa icon-envelope icon-gray"></i> Quote'.html_safe, class: 'select-contact-email', contact_email_id: 4, contact_stage_id: 2 %>
+                    <% end %>
+                    <% if @settings.show_quote_callback %>
+                        <%= label 'quote', 'callback', '<i class="fa icon-envelope icon-gray"></i> Callback'.html_safe, class: 'select-contact-email', contact_email_id: 5, contact_stage_id: 2 %>
+                    <% end %>
+                  </div>
+              <% end %>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div role="tabpanel" class="tab-pane" id="Booked">
+        <table class="contact-stages booked">
+          <tr>
+            <td>
+              Contact Stage:
+            </td>
+            <td class="stages">
+              <% if @settings.show_book %>
+                  <div class="pull-left">
+                    <%= label 'contact_stage', 'book', '<i class="fa fa-check-circle icon-gray disable"></i> Book'.html_safe, class: 'select-contact-stage', contact_stage_id: 4 %>
+                  </div>
+              <% end %>
+
+              <% if @settings.show_dispatch %>
+                  <div class="pull-left">
+                    <%= label 'contact_stage', 'dispatch', '<i class="fa fa-check-circle icon-gray disable"></i> Dispatch'.html_safe, class: 'select-contact-stage', contact_stage_id: 5 %>
+                  </div>
+              <% end %>
+
+              <% if @settings.show_confirm %>
+                  <div class="pull-left">
+                    <%= label 'contact_stage', 'confirm', '<i class="fa fa-check-circle icon-gray disable"></i> Confirm'.html_safe, class: 'select-contact-stage', contact_stage_id: 6 %>
+                  </div>
+              <% end %>
+
+              <% if @settings.show_receive %>
+                  <div class="pull-left">
+                    <%= label 'contact_stage', 'receive', '<i class="fa fa-check-circle icon-gray disable"></i> Receive'.html_safe, class: 'select-contact-stage', contact_stage_id: 7 %>
+                  </div>
+              <% end %>
+
+              <% if @settings.show_active %>
+                  <div class="pull-left">
+                    <%= label 'contact_stage', 'active', '<i class="fa fa-check-circle icon-gray disable"></i> Active'.html_safe, class: 'select-contact-stage', contact_stage_id: 8 %>
+                  </div>
+              <% end %>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              Contact Emails:
+            </td>
+            <td>
+              <% if @settings.show_book %>
+                  <div class="pull-left">
+                    <% if @settings.show_book_welcome %>
+                        <%= label 'book', 'welcome', '<i class="fa icon-envelope icon-gray"></i> Welcome'.html_safe, class: 'select-contact-email', contact_email_id: 6, contact_stage_id: 4 %>
+                    <% end %>
+                    <% if @settings.show_book_confirm %>
+                        <%= label 'book', 'confirm', '<i class="fa icon-envelope icon-gray"></i> Confirm'.html_safe, class: 'select-contact-email', contact_email_id: 7, contact_stage_id: 4 %>
+                    <% end %>
+                    <% if @settings.show_book_dispatch %>
+                        <%= label 'book', 'dispatch', '<i class="fa icon-envelope icon-gray"></i> Dispatch'.html_safe, class: 'select-contact-email', contact_email_id: 8, contact_stage_id: 4 %>
+                    <% end %>
+                  </div>
+              <% end %>
+
+              <% if @settings.show_dispatch %>
+                  <div class="pull-left">
+                    <% if @settings.show_dispatch_welcome %>
+                        <%= label 'dispatch', 'welcome', '<i class="fa icon-envelope icon-gray"></i> Welcome'.html_safe, class: 'select-contact-email', contact_email_id: 9, contact_stage_id: 5 %>
+                    <% end %>
+                    <% if @settings.show_dispatch_confirm %>
+                        <%= label 'dispatch', 'confirm', '<i class="fa icon-envelope icon-gray"></i> Confirm'.html_safe, class: 'select-contact-email', contact_email_id: 10, contact_stage_id: 5 %>
+                    <% end %>
+                    <% if @settings.show_dispatch_dispatch %>
+                        <%= label 'dispatch', 'dispatch', '<i class="fa icon-envelope icon-gray"></i> Dispatch'.html_safe, class: 'select-contact-email', contact_email_id: 11, contact_stage_id: 5 %>
+                    <% end %>
+                  </div>
+              <% end %>
+
+              <% if @settings.show_confirm %>
+                  <div class="pull-left">
+                    <% if @settings.show_confirm_confirm %>
+                        <%= label 'confirm', 'confirm', '<i class="fa icon-envelope icon-gray"></i> Confirm'.html_safe, class: 'select-contact-email', contact_email_id: 12, contact_stage_id: 6 %>
+                    <% end %>
+                    <% if @settings.show_confirm_acknowledgement %>
+                        <%= label 'confirm', 'acknowledgement', '<i class="fa icon-envelope icon-gray"></i> Acknowledgement'.html_safe, class: 'select-contact-email', contact_email_id: 13, contact_stage_id: 6 %>
+                    <% end %>
+                  </div>
+              <% end %>
+
+              <% if @settings.show_receive %>
+                  <div class="pull-left">
+                    <% if @settings.show_receive_confirm %>
+                        <%= label 'receive', 'confirm', '<i class="fa icon-envelope icon-gray"></i> Confirm'.html_safe, class: 'select-contact-email', contact_email_id: 14, contact_stage_id: 7 %>
+                    <% end %>
+                    <% if @settings.show_receive_acknowledgement %>
+                        <%= label 'receive', 'acknowledgement', '<i class="fa icon-envelope icon-gray"></i> Acknowledgement'.html_safe, class: 'select-contact-email', contact_email_id: 15, contact_stage_id: 7 %>
+                    <% end %>
+                  </div>
+              <% end %>
+
+              <% if @settings.show_active %>
+                  <div class="pull-left">
+                    &nbsp;
+                  </div>
+              <% end %>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div role="tabpanel" class="tab-pane" id="Complete">
+        <table class="contact-stages complete">
+          <tr>
+            <td>
+              Contact Stage:
+            </td>
+            <td class="stages">
+              <% if @settings.show_complete %>
+                  <div class="pull-left">
+                    <%= label 'contact_stage', 'complete', '<i class="fa fa-check-circle icon-gray disable"></i> Complete'.html_safe, class: 'select-contact-stage', contact_stage_id: 9 %>
+                  </div>
+              <% end %>
+
+              <% if @settings.show_unable %>
+                  <div class="pull-left">
+                    <%= label 'contact_stage', 'unable', '<i class="fa fa-check-circle icon-gray disable"></i> Unable'.html_safe, class: 'select-contact-stage', contact_stage_id: 10 %>
+                  </div>
+              <% end %>
+
+              <% if @settings.show_cancel %>
+                  <div class="pull-left">
+                    <%= label 'contact_stage', 'cancel', '<i class="fa fa-check-circle icon-gray disable"></i> Cancel'.html_safe, class: 'select-contact-stage', contact_stage_id: 11 %>
+                  </div>
+              <% end %>
+
+              <% if @settings.show_submit %>
+                  <div class="pull-left">
+                    <%= label 'contact_stage', 'submit', '<i class="fa fa-check-circle icon-gray disable"></i> Submit'.html_safe, class: 'select-contact-stage', contact_stage_id: 12 %>
+                  </div>
+              <% end %>
+
+              <% if @settings.show_invoice %>
+                  <div class="pull-left">
+                    <%= label 'contact_stage', 'invoice', '<i class="fa fa-check-circle icon-gray disable"></i> Invoice'.html_safe, class: 'select-contact-stage', contact_stage_id: 13 %>
+                  </div>
+              <% end %>
+
+              <% if @settings.show_post %>
+                  <div class="pull-left">
+                    <%= label 'contact_stage', 'post', '<i class="fa fa-check-circle icon-gray disable"></i> Post'.html_safe, class: 'select-contact-stage', contact_stage_id: 14 %>
+                  </div>
+              <% end %>
+
+              <% if @settings.show_aftercare %>
+                  <div class="pull-left">
+                    <%= label 'contact_stage', 'aftercare', '<i class="fa fa-check-circle icon-gray disable"></i> Aftercare'.html_safe, class: 'select-contact-stage', contact_stage_id: 15 %>
+                  </div>
+              <% end %>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              Contact Emails:
+            </td>
+            <td>
+              <% if @settings.show_complete %>
+                  <div class="pull-left">
+                    &nbsp;
+                  </div>
+              <% end %>
+
+              <% if @settings.show_unable %>
+                  <div class="pull-left">
+                    <% if @settings.show_unable_unable %>
+                        <%= label 'unable', 'unable', '<i class="fa icon-envelope icon-gray"></i> Unable'.html_safe, class: 'select-contact-email', contact_email_id: 16, contact_stage_id: 10 %>
+                    <% end %>
+                  </div>
+              <% end %>
+
+              <% if @settings.show_cancel %>
+                  <div class="pull-left">
+                    <% if @settings.show_cancel_cancel %>
+                        <%= label 'cancel', 'cancel', '<i class="fa icon-envelope icon-gray"></i> Cancel'.html_safe, class: 'select-contact-email', contact_email_id: 17, contact_stage_id: 11 %>
+                    <% end %>
+                  </div>
+              <% end %>
+
+              <% if @settings.show_submit %>
+                  <div class="pull-left">
+                    &nbsp;
+                  </div>
+              <% end %>
+
+              <% if @settings.show_invoice %>
+                  <div class="pull-left">
+                    <% if @settings.show_invoice_invoice %>
+                        <%= label 'invoice', 'invoice', '<i class="fa icon-envelope icon-gray"></i> Invoice'.html_safe, class: 'select-contact-email', contact_email_id: 18, contact_stage_id: 13 %>
+                    <% end %>
+                  </div>
+              <% end %>
+
+              <% if @settings.show_post %>
+                  <div class="pull-left">
+                    <% if @settings.show_post_thankyou %>
+                        <%= label 'post', 'thank_you', '<i class="fa icon-envelope icon-gray"></i> Thank You'.html_safe, class: 'select-contact-email', contact_email_id: 19, contact_stage_id: 14 %>
+                    <% end %>
+                  </div>
+              <% end %>
+
+              <% if @settings.show_aftercare %>
+                  <div class="pull-left">
+                    <% if @settings.show_aftercare_survey %>
+                        <%= label 'survey', 'survey', '<i class="fa icon-envelope icon-gray"></i> Survey'.html_safe, class: 'select-contact-email', contact_email_id: 20, contact_stage_id: 15 %>
+                    <% end %>
+                  </div>
+              <% end %>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

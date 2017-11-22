@@ -1,0 +1,22 @@
+<form class="form-inline other-cost">
+  <!--gst-->
+  <div class="form-group col-md-1 text-center">
+    <%= label :packing, :gst, 'GST' %><br>
+    <%= check_box :packing, :gst, disabled: true, class: 'form-control', style: 'width:100%' %>
+  </div>
+  <!--pst-->
+  <div class="form-group col-md-1 text-center">
+    <%= label :packing, :pst, 'PST' %><br>
+    <%= check_box :packing, :pst, disabled: true, class: 'form-control', style: 'width:100%' %>
+  </div>
+  <!--description-->
+  <div class="form-group col-md-3">
+    <%= label :packing, :description, class: "labels" %><br>
+    <%= text_field :packing, :description, disabled: true, class: 'form-control', style: 'width:100%' %>
+  </div>
+  <!--other_cost-->
+  <div class="form-group col-md-3">
+    <%= label :packing, :other_cost, class: "labels" %><br>
+    <%= text_field :packing, :other_cost, disabled: true, class: 'form-control', style: 'width:100%' %>
+  </div>
+</form>

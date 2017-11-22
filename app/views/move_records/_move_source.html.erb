@@ -1,0 +1,39 @@
+<div class="row colpd hidden">
+  <% if @settings.show_move_source %>
+      <div class="form-group col1 colmr">
+        <%= label :move_record, :source, id: "source", class: "hhidden labels" %><br>
+        <%= select :move_record, :move_source_id, options_from_collection_for_select(@move_source, :description, :description, @settings.move_source.description), {include_blank: "Source"}, :class => 'form-control text-grey', style: 'width:100%', data_id: 'move_source_id', readonly: true, onchange: "showLabel('source')" %>
+      </div>
+  <% end %>
+  <% if @settings.show_move_keyword %>
+      <div class="form-group col1 colmr">
+        <%= label :move_record, :keyword, id: "keyword", class: "hhidden labels" %><br>
+        <%= select :move_record, :move_keyword_id, options_from_collection_for_select(@move_keyword, :description, :description, @settings.move_keyword.description), {include_blank: "Keyword"}, :class => 'form-control text-grey', style: 'width:100%', data_id: 'move_keyword_id', readonly: true, onchange: "showLabel('keyword')" %>
+      </div>
+  <% end %>
+  <% if @settings.show_move_webpage %>
+      <div class="form-group col1 colmr">
+        <%= label :move_record, :webpage, id: "webpage", class: "hhidden labels" %><br>
+        <%= select :move_record, :move_webpage_id, options_from_collection_for_select(@move_webpage, :description, :description, @settings.move_webpage.description), {include_blank: "Webpage"}, :class => 'form-control text-grey', style: 'width:100%', data_id: 'move_webpage_id', readonly: true, onchange: "showLabel('webpage')" %>
+      </div>
+  <% end %>
+  <% if @settings.show_move_referral %>
+      <div class="form-group col1 colmr">
+        <%= label :move_record, :referral, id: "referral", class: "hhidden labels" %><br>
+        <%= select :move_record, :move_referral_id, options_from_collection_for_select(@move_referral, :description, :description, @settings.move_referral.description), {include_blank: "Referral"}, :class => 'form-control text-grey', style: 'width:100%', data_id: 'move_referral_id', readonly: true, onchange: "showLabel('referral')" %>
+      </div>
+  <% end %>
+  <% if @settings.show_move_source_detail %>
+      <div class="form-group col2 colmr">
+        <%= label :move_record, :referral2, id: "referral2", class: "hhidden labels" %><br>
+        <%= text_field :move_record, :referral2, class: 'form-control', style: 'width:100%', readonly: true, placeholder: "Referral II", onchange: "showLabel('referral2')" %>
+      </div>
+  <% end %>
+  <% if @settings.show_move_source_alert %>
+      <div class="form-group col1">
+        <%= label :move_record, :source_alert, id: "sourceAlert", class: "hhidden labels" %><br>
+        <%= select :move_record, :move_source_alert_id, options_from_collection_for_select(@move_alert, :description, :description, @settings.move_source_alert.description), {include_blank: "Source Alert"}, :class => 'form-control text-grey', style: 'width:100%', data_id: 'move_source_alert_id', readonly: true, onchange: "showLabel('sourceAlert')" %>
+
+      </div>
+  <% end %>
+</div>

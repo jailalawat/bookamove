@@ -1,0 +1,102 @@
+<% @page_title = raw("<i class='fa fa-users blank3 blue-text'></i> Staff") %>
+
+<div class="body_top_margin col-md-12">
+
+  <legend>Staff</legend>
+  <% if validate_special_permission("create.user", @current_actions) %>
+    <%= render 'form_users', back_to: "/accounts_staff" %>
+  <% end %>
+
+  <div class="form-group mtop15">
+    <label for="active">Active</label>
+    <input type="radio" class="users_type_account" name="users_type_account" id="active" value="active" checked>
+    <label for="inactive">Inactive</label>
+    <input type="radio" class="users_type_account" name="users_type_account" id="inactive" value="inactive">
+  </div>
+
+  <div class="content">
+    <div class="table-users-active">
+      <table style="width:100%" class="table table-bordered table-hover table-striped">
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Role</th>
+        </tr>
+        <% @users.each do |user| %>
+            <% if user.active == true and user.roles %>
+                  <tr>
+                    <td>
+                      <% if validate_special_permission("view.staff_profiles", @current_actions) %>
+                          <a href="<%= edit_user_path(user.id) %>"><%= user.name %></a>
+                      <% else %>
+                          <%= user.name %>
+                      <% end %>
+                    </td>
+                    <td><%= user.email %></td>
+                    <td><%= user.role %></td>
+                  </tr>
+            <% end %>
+        <% end %>
+      </table>
+    </div>
+    <div class="table-users-inactive hidden">
+      <table style="width:100%" class="table table-bordered table-hover table-striped">
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Role</th>
+        </tr>
+        <% @users.each do |user| %>
+            <% if user.active == false and user.roles %>
+                <tr>
+                  <td>
+                    <% if validate_special_permission("view.staff_profiles", @current_actions) %>
+                        <a href="<%= edit_user_path(user.id) %>"><%= user.name %></a>
+                    <% else %>
+                        <%= user.name %>
+                    <% end %>
+                  </td>
+                  <td><%= user.email %></td>
+                  <td><%= user.role %></td>
+                </tr>
+            <% end %>
+        <% end %>
+      </table>
+    </div>
+  </div>
+  </br>
+
+</div>
+
+<br class="clearfix"/><br/>
+
+<script>
+  var topBar = document.getElementById("top-bar");
+
+  topBar.innerHTML = '<div class="msg"><div class="top-bar-left-margin2"><div class="row '
+      + '"><div class="text-left col-md-12">'
+      + '<div class="pleft46 pright10">'
+
+      + '<div class="colfl mright10">'
+      + '<a href="<%= accounts_path %>" class="text-dark mtop6 no_underline fc-button fc-state-default fc-state-disabled pointer fc-corner-left fc-corner-right">Company Profile</a>'
+      + '</div>'
+
+      + '<div class="colfl mright10">'
+      + '<a href="#" class="text-dark mtop6 no_underline fc-button fc-state-default no_pointer fc-corner-left fc-corner-right">Staff</a>'
+      + '</div>'
+
+      + '<div class="colfl mright10">'
+      + '<a href="/accounts_drivers" class="text-dark mtop6 no_underline fc-button fc-state-default fc-state-disabled pointer fc-corner-left fc-corner-right">Drivers</a>'
+      + '</div>'
+
+      + '<div class="colfl mright10">'
+      + '<a href="/clients" class="text-dark mtop6 no_underline fc-button fc-state-default fc-state-disabled pointer fc-corner-left fc-corner-right">Customers</a>'
+      + '</div>'
+
+      + '<div class="colfl mright10">'
+      + '<a href="<%= trucks_path %>" class="text-dark mtop6 no_underline fc-button fc-state-default fc-state-disabled pointer fc-corner-left fc-corner-right">Trucks</a>'
+      + '</div>'
+
+      + '</div>'
+      + '</div></div></div></div>';
+</script>

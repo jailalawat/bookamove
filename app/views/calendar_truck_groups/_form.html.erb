@@ -1,0 +1,127 @@
+<%= form_for(@calendar_truck_group) do |f| %>
+    <% if @calendar_truck_group.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@calendar_truck_group.errors.count, "error") %> prohibited this truck group from being
+            saved:</h2>
+
+          <ul>
+            <% @calendar_truck_group.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+
+    <div class="form-group col50 colmr">
+      <%= f.label :name %><br>
+      <%= f.text_field :name, class: 'form-control', required: true %>
+    </div>
+
+    <div class="form-group col50-2">
+      <%= f.label :phone_number %><br>
+      <%= f.text_field :phone_number, class: 'form-control' %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :address %><br>
+      <%= f.text_field :address, class: 'form-control' %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :description %><br>
+      <%= f.text_field :description, class: 'form-control', required: true %>
+    </div>
+
+    <label>Taxes</label><br>
+    <div class="form-group col1 colmr">
+      <div class="p10" style="padding-left: 0px !important;">
+        GST/HST <input class="form-control form-control2" step="0.01" type="number" value="<%= @gst %>" name="gst">
+      </div>
+    </div>
+
+    <div class="form-group col1 colmr">
+      <div class="p10">
+        PST <input class="form-control form-control2" step="0.01" type="number" value="<%= @pst %>" name="pst">
+      </div>
+    </div>
+
+    <div class="form-group clearfix">
+      <%= f.label :active %><br>
+      <%= f.check_box :active %>
+    </div>
+    <br/>
+
+    <div class="form-group truck-profile-form">
+      <%= f.label :trucks, 'Assing trucks' %><br>
+      <%= f.collection_select :trucks, @trucks, :id, :description, {include_blank: true, :selected => @list_truck_group}, class: 'form-control multi-select-calendar-trucks', multiple: true, 'data-placeholder' => 'Select a truck', style: 'visibility: hidden;' %>
+    </div>
+    <br/>
+
+    <!--
+    <div class="form-group ptop5">
+      <label>Province</label><br>
+      <select class="form-control" id="sprovinces" name="calendar_truck_group[province_id]" required>
+        <option></option>
+        <% @provinces.each do |province| %>
+            <option value="<%= province.id %>" <% if province.id == @calendar_truck_group.province_id %>selected<% end %>><%= province.description %></option>
+        <% end %>
+      </select>
+    </div>
+
+    <div class="form-group ptop5">
+      <label>City</label><br>
+      <select class="form-control" id="scities" name="calendar_truck_group[city_id]" required>
+        <option></option>
+        <% @cities.each do |city| %>
+            <option value="<%= city.id %>" <% if city.id == @calendar_truck_group.city_id %>selected<% end %>><%= city.description %></option>
+        <% end %>
+      </select>
+    </div>
+
+    <div class="form-group ptop5">
+      <a href="#" class="pull-right" onclick="show_locale_modal()">+ add new locale</a>
+      <label>Locale</label><br>
+      <select class="form-control" id="slocales" name="calendar_truck_group[locale_id]">
+        <option></option>
+        <% @locales.each do |locale| %>
+            <option value="<%= locale.id %>" <% if locale.id == @calendar_truck_group.locale_id %>selected<% end %>><%= locale.locale_name %></option>
+        <% end %>
+      </select>
+    </div>
+    -->
+
+    <div class="form-group">
+      <br/>
+      <button type="submit" name="commit" class="btn btn-primary">Save</button>
+      <%= link_to 'Back', calendar_truck_groups_path, class: 'btn btn-primary' %>
+    </div>
+    <input type="hidden" id="hcalendar_city_id" value="<%= @calendar_truck_group.city_id %>">
+    <input type="hidden" id="hcalendar_locale_id" value="<%= @calendar_truck_group.locale_id %>">
+<% end %>
+
+<!-- Locale Modal -->
+<div class="modal fade" id="localeModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <form onsubmit="event.preventDefault()">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title">Add new locale</h4>
+
+        </div>
+        <div class="modal-body">
+
+          <div class="form-group">
+            <label for="locale" class="control-label">Locale</label>
+            <input type="text" class="form-control" id="locale_name" name="city_locale[locale_name]" required>
+          </div>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" id="saveLocale">Save</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

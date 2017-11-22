@@ -1,0 +1,88 @@
+<div class="row">
+  <div class="form-group col-md-2">
+    <%= label :cargo, :cargo_type, class: "labels" %><br>
+
+    <div class="left-inner-addon">
+      <% css = @settings.show_cargo_type ? @enable_icon : @disable_icon %>
+      <i field="show_cargo_type" class="<%= css %>"></i>
+      <%= select :cargo, :type, {}, {include_blank: true}, :class => 'form-control space-select-addon change-select', style: 'width:100%', disabled: true %>
+      <% if validate_special_permission('edit.contract_field_default_values', @current_actions) %>
+        <i class="icon-edit-sign edit-dropdown-contract-settings" field="cargo_types" data-default="<%= @settings.cargo_type_id %>" data-default-key="cargo_type_id"></i>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="form-group col-md-1">
+    <%= label :cargo, 'Descriptor', class: "labels" %><br>
+
+    <div class="left-inner-addon">
+      <% css = @settings.show_cargo_descriptor ? @enable_icon : @disable_icon %>
+      <i field="show_cargo_descriptor" class="<%= css %>"></i>
+      <%= text_field :cargo, :cargo_descriptor, disabled: true, class: 'form-control', style: 'width:100%' %>
+    </div>
+  </div>
+
+  <div class="form-group col-md-1">
+    <%= label :cargo, '#Rooms', class: "labels" %><br>
+
+    <div class="left-inner-addon">
+      <% css = @settings.show_cargo_room ? @enable_icon : @disable_icon %>
+      <i field="show_cargo_room" class="<%= css %>"></i>
+      <%= text_field :cargo, :cargo_room, disabled: true, class: 'form-control', style: 'width:100%' %>
+    </div>
+  </div>
+
+  <div class="form-group col-md-1">
+    <%= label :cargo, 'Weigth', class: "labels" %><br>
+
+    <div class="left-inner-addon">
+      <% css = @settings.show_cargo_weight ? @enable_icon : @disable_icon %>
+      <i field="show_cargo_weight" class="<%= css %>"></i>
+      <%= text_field :cargo, :cargo_weight, disabled: true, class: 'form-control', style: 'width:100%' %>
+    </div>
+  </div>
+
+  <div class="form-group col-md-1">
+    <%= label :cargo, 'Cubic', class: "labels" %><br>
+
+    <div class="left-inner-addon">
+      <% css = @settings.show_cargo_cubic ? @enable_icon : @disable_icon %>
+      <i field="show_cargo_cubic" class="<%= css %>"></i>
+      <%= text_field :cargo, :cargo_cubic, disabled: true, class: 'form-control', style: 'width:100%' %>
+    </div>
+  </div>
+
+
+  <div class="form-group col-md-4">
+    <%= label :cargo, :cargo_details, class: "labels" %><br>
+
+    <div class="left-inner-addon">
+      <% css = @settings.show_cargo_details ? @enable_icon : @disable_icon %>
+      <i field="show_cargo_details" class="<%= css %>"></i>
+      <%= text_field :cargo, :cargo_details, disabled: true, class: 'form-control', style: 'width:100%' %>
+    </div>
+  </div>
+  <div class="form-group col-md-2">
+    <%= label :cargo, :cargo_alert, class: "labels" %><br>
+
+    <div class="left-inner-addon">
+      <% css = @settings.show_cargo_alert ? @enable_icon : @disable_icon %>
+      <i field="show_cargo_alert" class="<%= css %>"></i>
+      <%= select :cargo, :cargo_alert, {}, {include_blank: true}, :class => 'form-control space-select-addon change-select', style: 'width:100%', disabled: true %>
+      <% if validate_special_permission('edit.contract_field_default_values', @current_actions) %>
+        <i class="icon-edit-sign edit-dropdown-contract-settings" field="cargo_alerts" data-default="<%= @settings.cargo_alert_id %>" data-default-key="cargo_alert_id"></i>
+      <% end %>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="form-group col-md-12">
+    <%= label :cargo, :cargo_description, class: "labels" %><br>
+
+    <div class="left-inner-addon">
+      <% css = @settings.show_description ? @enable_icon : @disable_icon %>
+      <i field="show_description" class="<%= css %>"></i>
+      <%= text_area :cargo, :cargo_description, disabled: true, class: 'form-control', style: 'width:100%', rows: 1 %>
+    </div>
+  </div>
+</div>

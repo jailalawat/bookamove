@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="format-detection" content="date=no">
+    <meta name="format-detection" content="address=no">
+    <meta name="format-detection" content="email=no">
+
+    <style type="text/css">
+        @import url('https://fonts.googleapis.com/css?family=Comfortaa');
+
+        a { text-decoration: none }
+        a:hover { color: #2a6496 !important; text-decoration: none !important; outline: 0 !important; }
+        a:focus { color: #2a6496 !important; text-decoration: none !important; outline: 0 !important; }
+
+        body {
+            font-family: 'Comfortaa', Lucida, sans-serif, Arial;
+            font-size: 12pt;
+            background-color: #f0f0f0;
+            color: #000000
+        }
+    </style>
+</head>
+<body background="#f0f0f0">
+
+    <table width="500" align="center" cellpadding="12" cellspacing="0" border="0" style="width: 500px; margin: 0 auto;">
+        <tr>
+            <td align="left" style="padding-left: 0px; padding-right: 0px;">
+                <a href="https://www.oomovers.com/"><img src="http://oomovers.moversnetwork.ca/images/logo2.png" width="218" border="0"></a>
+            </td>
+            <td align="right" style="padding-left: 0px; padding-right: 0px;">
+                <b><a style="font-size: 17.5pt; line-height: 18px; color: #f04241" href="tel:604-638-5073">604-638-5073</a></b>
+                <br>
+                <span style="color: #33679e; font-size: 8.9pt">MON-FRI 8-8 SAT-SUN 8-4</span>
+            </td>
+        </tr>
+        <tr>
+            <td bgcolor="#264b7f" colspan="2" align="center" height="39">
+                <b style="color: white; font-size: 20pt">Reward Your Mover</b>
+            </td>
+        </tr>
+        <tr style="line-height: 20px;">
+            <td bgcolor="white" colspan="2" align="center" style="padding: 20px; color: #000000">
+                Thank you <b>John Anthony</b> for choosing <span style="color: #e7403f">oo</span> movers.<br>
+                Please take a moment and share your experience.
+
+                <br><br>
+
+                <b style="color: #33679e; font-size: 14pt">Would you recommend <span style="color: #e7403f">oo</span> movers to others?</b>
+
+                <br><br>
+
+                <a href="<%= @url %>/review_negative?move_id=<%= @move.id %>&account_id=<%= @move_record_client.account_id %>&user_id=<%= @move_record_client.user_id %>&city=<%= @city %>" style="background-color: #f34541; border-radius: 3px; color: white; padding: 8px 16px; text-decoration: none; font-weight: bold; font-size: 14pt">NO</a> <a href="<%= @url %>/review_positive?move_id=<%= @move.id %>&account_id=<%= @move_record_client.account_id %>&user_id=<%= @move_record_client.user_id %>&city=<%= @city %>" style="background-color: #49bf67; border-radius: 3px; color: white; padding: 8px 16px; text-decoration: none; font-weight: bold; font-size: 14pt">YES</a>
+
+                <br><br><br>
+
+                <!-- <span style="font-size: 10pt">All of our <span style="color: #e7403f">oo</span> movers who get a positive online review receive a <b>Review Reward</b> of up to <b>$25</b> from our organization. If you feel your <span style="color: #e7403f">oo</span> movers did a great job then here is how you can reward them.</span> -->
+
+                <b>Review Bonus Program</b><br>
+                Every <span style="color: #e7403f">oo</span> movers partner who gets a<br> positive online review receives a bonus of up to <b>$25</b>
+            </td>
+        </tr>
+        <tr>
+            <td bgcolor="#264b7f" height="63" colspan="2" align="center" style="padding: 0px; color: white;">
+                <table cellspacing="0" cellpadding="0" border="0" width="100%" style="font-size: 9pt">
+                    <tr align="center">
+                        <td>
+                            <b style="color: white;">
+                                Refer a friend and get a Referral Reward
+                                <a href="https://www.oomovers.com/referrals" style="background-color: #f04241; border-radius: 3px; color: white; padding: 6px 8px; text-decoration: none; font-weight: bold; margin-left: 10px">Earn $50 - $100+</a>
+                            </b>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" align="center">
+                <table cellspacing="0" cellpadding="0" border="0" width="100%">
+                    <tr valign="middle">
+                        <td>
+                            <b style="color: #a4a4a4; font-size: 9pt">Records Office: <br/>Box 95, 5646 Osprey St. Sechelt, BC, VON 3A0</b>
+                        </td>
+                        <td align="center"><img src="http://oomovers.moversnetwork.ca/images/facebook_icon.png" width="42"></td>
+                        <td align="center">
+                            <img src="http://oomovers.moversnetwork.ca/images/bbb_icon.png" width="42">
+                        </td>
+                        <td align="center">
+                            <img src="http://oomovers.moversnetwork.ca/images/google_icon2.png" width="42">
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td valign="top" colspan="2">
+                <span style="margin-right: 20px">
+                    <a href="unsub" style="color: #a4a4a4; font-size: 9pt">Unsubscribe</a>
+                </span>
+                <a href="https://www.oomovers.com/privacy" style="color: #a4a4a4; font-size: 9pt">Privacy Policy</a>
+            </td>
+        </tr>
+    </table>
+
+</body>
+</html>

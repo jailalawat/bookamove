@@ -1,0 +1,63 @@
+<!--boxes-->
+<div class="form-group col0-5">
+  <%= label :packing, :boxes, class: "labels" %><br>
+  <%= text_field :packing, :boxes, :value => 0, class: 'form-control2 calcPacking', style: 'width:100%', readonly:
+      true %>
+</div>
+<%= label :packing, '+', class: 'less-cost colpds colfl' %>
+<!--paper-->
+<div class="form-group col0-5">
+  <%= label :packing, :paper, class: "labels" %><br>
+  <%= text_field :packing, :paper, :value => 0, class: 'form-control2 calcPacking', style: 'width:100%', readonly:
+      true %>
+</div>
+<%= label :packing, '+', class: 'less-cost colpds colfl' %>
+<!--tape-->
+<div class="form-group col0-5">
+  <%= label :packing, :tape, class: "labels" %><br>
+  <%= text_field :packing, :tape, :value => 0, class: 'form-control2 calcPacking', style: 'width:100%', readonly:
+      true %>
+</div>
+<%= label :packing, '+', class: 'less-cost colpds colfl' %>
+<!--wrap-->
+<div class="form-group col0-5">
+  <%= label :packing, :wrap, class: "labels" %><br>
+  <%= text_field :packing, :wrap, :value => 0, class: 'form-control2 calcPacking', style: 'width:100%', readonly:
+      true %>
+</div>
+<%= label :packing, '+', class: 'less-cost colpds colfl' %>
+<!--bags-->
+<div class="form-group col0-5">
+  <%= label :packing, :bags, class: "labels" %><br>
+  <%= text_field :packing, :bags, :value => 0, class: 'form-control2 calcPacking', style: 'width:100%', readonly:
+      true %>
+</div>
+<%= label :packing, '+', class: 'less-cost colpds colfl' %>
+<!--box_rent-->
+<div class="form-group col0-5 colmr">
+  <%= label :packing, :box_rent, class: "labels" %><br>
+  <%= text_field :packing, :box_rent, :value => 0, class: 'form-control2 calcPacking', style: 'width:100%',
+                 readonly: true %>
+</div>
+
+<!--packing_alert-->
+<div class="form-group col1-5 colmr">
+  <%= label :packing, :packing_alert, class: "hhidden labels" %><br>
+  <%= select :packing, :packing_alert_id, options_from_collection_for_select(@packing_alert, :description, :description, @settings.packing_alert.description), {include_blank: "Packing Alert"}, :class => 'form-control text-grey', style: 'width:100%', readonly: true, data_id:
+      'packing_alert_id' %>
+</div>
+<!--other-->
+<div class="form-group col0-5">
+  <%= label :packing, :other, class: "labels" %><br>
+  <%= text_field :packing, :other, :value => 0, class: 'form-control2 calcPacking', style: 'width:100%', readonly:
+      true %>
+</div>
+<div class="text-center center-block col0-5">
+  <label></label><br/>
+  <%= label :packing, '=', class: 'less-cost colpds colfl center-block', style: "width: 100%" %>
+</div>
+<!--packing-->
+<div class="form-group col0-8">
+  <%= label :packing, :packing, 'Packing Cost', class: "labels" %><br>
+  <%= text_field :packing, :total_packing, :value => 0, readonly: true, class: 'form-control2 calculateTotal packing_total_packing', style: 'width:100%', readonly: true %>
+</div>

@@ -1,0 +1,30 @@
+<legend>Taxes</legend>
+<div class="row">
+  <div class="col-md-12">
+    <%= link_to 'New Tax', new_tax_path, class: 'btn btn-primary' %>
+  </div>
+</div>
+<hr>
+<div class="row">
+  <div class="col-md-12">
+    <table class="table table-striped table-bordered table-hover">
+      <tr>
+        <th>Province</th>
+        <th>GST</th>
+        <th>PST</th>
+        <th>Actions</th>
+      </tr>
+      <% @taxes.each do |tax| %>
+          <tr>
+            <td><%= tax.province %></td>
+            <td><%= tax.gst %></td>
+            <td><%= tax.pst %></td>
+            <td>
+              <%= link_to 'Edit', edit_tax_path(tax) %>
+              <%= link_to 'Destroy', tax, method: :delete, data: {confirm: 'Are you sure?'} %>
+            </td>
+          </tr>
+      <% end %>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,52 @@
+<div class="row">
+  <div class="col-md-12 flex" style="margin-top: -12px;">
+    <form class="col-md-8 no-pleft" id="form-date-post-report">
+      <div class="form-group">
+        <div class='input-group lead-report-calendar-start col-md-4 no-pleft text-nowrap'>
+          <label class="">From</label>&nbsp;
+                  <span class="input-group-addon">
+	                    <span class="fa fa-calendar">
+	                    </span>
+	                </span>
+          <input type='text' class="form-control2 no_outline" name="report_calendar_start" autocomplete="off"/>
+        </div>
+        <div class='input-group lead-report-calendar-end col-md-5 no-pright'>
+          <label class="">To</label>&nbsp;
+                  <span class="input-group-addon">
+	                    <span class="fa fa-calendar">
+	                    </span>
+	                </span>
+          <input type='text' class="form-control2 no_outline" name="report_calendar_end" autocomplete="off"/>
+        </div>
+        <!--<button class="btn btn-link icon-search btn-submit-search-messages col-md-5 no-pleft ptop1" type="submit" style="outline: none; text-decoration: blink; font-size: 18px !important;"></button>-->
+      </div>
+    </form>
+    <div class="col-md-4 no-pright">
+      <input id="searchInput" class="form-control pull-right" placeholder="Search" type="text"></div>
+  </div>
+</div>
+
+<div class="row ptop8">
+  <div class="table-responsive col-md-12">
+    <div class="scrollable-area">
+      <table class="data-table-lead-report table table-bordered table-striped dataTable" style="display: none;" id="DataTables_Table_report" aria-describedby="DataTables_Table_report_info" data-report="lead" data-calendar-range="<%= @calendar_range %>">
+        <thead>
+        <tr role="row">
+          <th class="no-sort" role="columnheader" tabindex="0" rowspan="1" colspan="1" style="width: 27%">
+            <b>Name</b>
+          </th>
+          <th class="sorting" role="columnheader" tabindex="0" rowspan="1" colspan="1" style="width: 15%">
+            Created Date
+          </th>
+          <th class="no-sort" role="columnheader" tabindex="0" rowspan="1" colspan="1" style="width: 8%">
+            Stage
+          </th>
+          <th class="no-sort" role="columnheader" tabindex="0" rowspan="1" colspan="1" style="width: 35%">
+            Notes
+          </th>
+        </tr>
+        </thead>
+      </table>
+    </div>
+  </div>
+</div>

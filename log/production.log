@@ -1,0 +1,10 @@
+I, [2017-05-12T03:29:56.352515 #50138]  INFO -- : [e23d04b4-a210-47a3-b3c2-0f1eb643d404] Started GET "/" for  at 2017-05-12 03:29:56 +0300
+I, [2017-05-12T03:29:56.418889 #50138]  INFO -- : [e23d04b4-a210-47a3-b3c2-0f1eb643d404] Processing by SessionsController#index as HTML
+I, [2017-05-12T03:29:56.427888 #50138]  INFO -- : [e23d04b4-a210-47a3-b3c2-0f1eb643d404]   Rendering sessions/index.html.erb within layouts/sessions
+I, [2017-05-12T03:29:56.432648 #50138]  INFO -- : [e23d04b4-a210-47a3-b3c2-0f1eb643d404]   Rendered sessions/index.html.erb within layouts/sessions (4.6ms)
+I, [2017-05-12T03:29:56.433560 #50138]  INFO -- : [e23d04b4-a210-47a3-b3c2-0f1eb643d404] Completed 200 OK in 15ms (Views: 7.4ms)
+I, [2017-05-12T03:29:56.527868 #50138]  INFO -- : [e8c63e2a-d764-4000-bc0b-bb95ba6ca80f] Started GET "/" for  at 2017-05-12 03:29:56 +0300
+I, [2017-05-12T03:29:56.528710 #50138]  INFO -- : [e8c63e2a-d764-4000-bc0b-bb95ba6ca80f] Processing by SessionsController#index as HTML
+I, [2017-05-12T03:29:56.529471 #50138]  INFO -- : [e8c63e2a-d764-4000-bc0b-bb95ba6ca80f]   Rendering sessions/index.html.erb within layouts/sessions
+I, [2017-05-12T03:29:56.530373 #50138]  INFO -- : [e8c63e2a-d764-4000-bc0b-bb95ba6ca80f]   Rendered sessions/index.html.erb within layouts/sessions (0.8ms)
+I, [2017-05-12T03:29:56.531385 #50138]  INFO -- : [e8c63e2a-d764-4000-bc0b-bb95ba6ca80f] Completed 200 OK in 3ms (Views: 2.2ms)

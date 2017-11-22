@@ -1,0 +1,39 @@
+<% @clients.each.with_index do |client, index| %>
+    <% number_line = (index == 0 ? '' : (index + 1).to_s) %>
+    <% disabled_input = (index == 0 ? false : true) %>
+    <div class="row client-row colpd">
+      <!--name-->
+      <div class="form-group col1-5 colmr">
+        <%= label :client, :client, :name, id: "name", class: "hhidden labels" %><br>
+        <%= text_field "clients[#{index}]", :name, class: 'form-control client-name', style: 'width:100%', required: false, placeholder: "Name " + number_line, onfocus: "showLabel('name')" %>
+      </div>
+      <!--title-->
+      <div class="form-group col0-5 colmr">
+        <%= label :client, :title, id: "title", class: "hhidden labels" %><br>
+        <%= text_field "clients[#{index}]", :title, class: 'form-control client-title', style: 'width:100%', placeholder: "Title " + number_line, onfocus: "showLabel('title')" %>
+      </div>
+      <!--home_phone-->
+      <div class="form-group col1 colmr">
+        <%= label :client, :home_phone, id: "homePhone", class: "hhidden labels" %><br>
+        <%= text_field "clients[#{index}]", :home_phone, class: 'form-control client-home-phone', style: 'width:100%', placeholder: "Home Phone " + number_line, onfocus: "showLabel('homePhone')" %>
+      </div>
+      <!--cell_phone-->
+      <div class="form-group col1 colmr">
+        <%= label :client, :cell_phone, id: "cellPhone", class: "hhidden labels" %><br>
+        <%= text_field "clients[#{index}]", :cell_phone, class: 'form-control client-cell-phone', style: 'width:100%', placeholder: "Cell Phone " + number_line, onfocus: "showLabel('cellPhone')" %>
+      </div>
+      <!--work_phone-->
+      <div class="form-group col1 colmr">
+        <%= label :client, :work_phone, id: "workPhone", class: "hhidden labels" %><br>
+        <%= text_field "clients[#{index}]", :work_phone, class: 'form-control client-work-phone', style: 'width:100%', placeholder: "Work Phone " + number_line, onfocus: "showLabel('workPhone')" %>
+      </div>
+      <!--email-->
+      <div class="form-group col2">
+        <%= label :client, :email, id: "email", class: "hhidden labels" %><br>
+        <%= text_field "clients[#{index}]", :email, class: 'form-control client-email', style: 'width:100%', list: 'client_email', required: false, placeholder: "Email " + number_line, onfocus: "showLabel('email')" %>
+        <datalist id="client_email">
+          <option value="N/A">N/A</option>
+        </datalist>
+      </div>
+    </div>
+<% end %>

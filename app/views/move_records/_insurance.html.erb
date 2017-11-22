@@ -1,0 +1,22 @@
+<!--declared_value-->
+<div class="form-group col0-5 colmr">
+  <%= label :insurance, :declared_value, 'Value/K', class: "hhidden labels" %><br>
+  <%= text_field :insurance, :declared_value, placeholder: "Value/K", class: 'form-control calculateInsurance insurance_declared_value', style: 'width:100%', readonly: true %>
+</div>
+<!--dolar_k-->
+<div class="form-group col0-5 colmr">
+  <%= label :insurance, :dolar_k, '$/K', class: "hhidden labels" %><br>
+  <%= text_field :insurance, :dolar_k, placeholder: "$/K", class: 'form-control calculateInsurance insurance_dolar_k',
+                 style: 'width:100%', readonly: true %>
+</div>
+<!--description-->
+<div class="form-group col4 colmr">
+  <%= label :insurance, :description, class: "hhidden labels" %><br>
+  <%= text_field :insurance, :description, placeholder: "Description", class: 'form-control', style: 'width:100%',
+                 readonly: true %>
+</div>
+<!--insurance_cost-->
+<div class="form-group col0-8 pull-right colmr">
+  <%= label :insurance, :insurance_cost, "Insur. Cost", class: "labels" %><br>
+  <%= text_field :insurance, :insurance_cost, :value => 0, class: 'form-control2 calculateTotal insurance_insurance_cost', style: 'width:100%', readonly: true %>
+</div>

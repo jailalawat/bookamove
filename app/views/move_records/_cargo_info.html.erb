@@ -1,0 +1,54 @@
+<div class="row colpd">
+  <% if @settings.show_cargo_type %>
+      <div class="form-group col1 colmr">
+        <%= label :cargo, :cargo_type, id: "cargoType", class: "hhidden labels" %><br>
+        <%= select :move_record, :cargo_type_id, options_from_collection_for_select(@cargo_type, :description, :description, @settings.cargo_type.description), {include_blank: "Cargo Type"}, :class => 'form-control text-grey', style: 'width:100%', data_id: 'cargo_type_id', readonly: true, onchange: "showLabel('cargoType')" %>
+      </div>
+  <% end %>
+  <% if @settings.show_cargo_descriptor %>
+      <div class="form-group col0-5 colmr">
+        <%= label :cargo, 'Descriptor', id: "descriptor", class: "hhidden labels" %><br>
+        <%= text_field :move_record, :cargo_descriptor, class: 'form-control', style: 'width:100%;', readonly: true, placeholder: "Descriptor", onchange: "showLabel('descriptor')" %>
+      </div>
+  <% end %>
+  <% if @settings.show_cargo_room %>
+      <div class="form-group col0-5 colmr">
+        <%= label :cargo, '#Rooms', id: "noRooms", class: "hhidden labels" %><br>
+        <%= text_field :move_record, :cargo_room, class: 'form-control', style: 'width:100%', readonly: true, placeholder: "#Rooms", onchange: "showLabel('noRooms')" %>
+      </div>
+  <% end %>
+  <% if @settings.show_cargo_weight %>
+      <div class="form-group col0-5 colmr">
+        <%= label :cargo, 'Weigth', id: "weight", class: "hhidden labels" %><br>
+        <%= text_field :move_record, :cargo_weight, class: 'form-control', style: 'width:100%', readonly: true, placeholder: "Weight", onchange: "showLabel('weight')" %>
+      </div>
+  <% end %>
+  <% if @settings.show_cargo_cubic %>
+      <div class="form-group col0-5 colmr">
+        <%= label :cargo, 'Cubic', id: "cubic", class: "hhidden labels" %><br>
+        <%= text_field :move_record, :cargo_cubic, class: 'form-control', style: 'width:100%', readonly: true, placeholder: "Cubic", onchange: "showLabel('cubic')" %>
+      </div>
+  <% end %>
+  <% if @settings.show_description %>
+      <div class="form-group col3 colmr">
+
+        <%= label :cargo, :cargo_description, id: "cargoDescription", class: "hhidden labels" %><br>
+        <%= text_field :move_record, :cargo_description, class: 'form-control text-grey', style: 'width:100%', readonly: true, placeholder: "Cargo Description", onchange: "showLabel('cargoDescription')" %>
+      </div>
+  <% end %>
+  <% if @settings.show_cargo_alert %>
+      <div class="form-group col1 colmr">
+        <%= label :cargo, :cargo_alert, id: "cargoAlert", class: "hhidden labels" %><br>
+        <%= select :move_record, :cargo_alert_id, options_from_collection_for_select(@cargo_alert, :description, :description, @settings.cargo_alert.description), {include_blank: "Cargo Alert"}, :class => 'form-control text-grey', style: 'width:100%', data_id: 'cargo_alert_id', readonly: true, onchange: "showLabel('cargoAlert')" %>
+      </div>
+  <% end %>
+</div>
+<% if @settings.show_cargo_details %>
+    <div class="row colpd">
+      <div class="form-group col7 colmr">
+
+        <%= label :cargo, :cargo_details, "Cargo Alert Details", id: "cargoDetails", class: "hhidden labels" %><br>
+        <%= text_area :move_record, :cargo_detail, class: 'form-control', style: 'width:100%', rows: 1, readonly: true, placeholder: "Cargo Alert Details", onchange: "showLabel('cargoDetails')" %>
+      </div>
+    </div>
+<% end %>

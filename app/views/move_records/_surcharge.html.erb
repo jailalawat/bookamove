@@ -1,0 +1,23 @@
+<!--gst-->
+<div class="form-group surcharge col1 colpd colmr text-center">
+  <%= label :surcharge, :gst, 'GST' %><br>
+  <%= check_box :surcharge, :gst, class: 'form-control calculateTax percentage_gst surcharge_gst', style: 'width:100%', readonly: true %>
+  <%= hidden_field :surcharge, :percentage_gst, value: 0 %>
+</div>
+<!--pst-->
+<div class="form-group surcharge col1 colpd colmr text-center">
+  <%= label :surcharge, :pst, 'PST' %><br>
+  <%= check_box :surcharge, :pst, class: 'form-control calculateTax surcharge_pst', style: 'width:100%', readonly: true %>
+  <%= hidden_field :surcharge, :percentage_pst, value: 0 %>
+</div>
+<!--description-->
+<div class="form-group col3 colmr">
+  <%= label :surcharge, :description, class: "hhidden labels" %><br>
+  <%= text_field :surcharge, :description, placeholder: "Description", class: 'form-control', style: 'width:100%',
+                 readonly: true %>
+</div>
+<!--surcharge-->
+<div class="form-group col0-8 pull-right colmr">
+  <%= label :surcharge, :surcharge, class: "labels" %><br>
+  <%= text_field :surcharge, :surcharge, value: 0, class: 'form-control2 calculateTax calculateTotal surcharge_surcharge', style: 'width:100%', readonly: true %>
+</div>

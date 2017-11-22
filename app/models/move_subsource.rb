@@ -1,0 +1,2 @@
+class MoveSubsource < ApplicationRecord
+end

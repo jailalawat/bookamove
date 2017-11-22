@@ -1,0 +1,26 @@
+<%= form_for(@subject_suggestion) do |f| %>
+    <% if @subject_suggestion.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@subject_suggestion.errors.count, "error") %> prohibited this move type from being
+            saved:</h2>
+
+          <ul>
+            <% @subject_suggestion.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+
+    <div class="form-group">
+      <%= f.label :description %><br>
+      <%= f.text_field :description, class: 'form-control', required: true %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :active %><br>
+      <%= f.check_box :active %>
+    </div>
+    <button type="submit" name="commit" class="btn btn-primary">Save</button>
+    <%= link_to 'Back', subject_suggestions_path, class: 'btn btn-primary' %>
+<% end %>

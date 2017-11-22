@@ -1,0 +1,95 @@
+<!-- truck group, contact stage, booker, truck, driver -->
+<div class="row">
+  <div class="col-md-12 flex" style="margin-top: -12px;">
+
+    <div class="pull-left flex text-nowrap">
+      <form class="flex" id="form-date-post-report">
+        <div class="pull-left flex pright15">
+          <label class="nowrap">Truck Group</label> &nbsp;
+          <select id="filter_param_group" name="group" class="no_outline">
+            <option value="">All</option>
+          </select>
+        </div>
+
+        <div class="pull-left text-nowrap flex pright15">
+          <label>Stage</label> &nbsp;
+  <!-- booked, dispatched, booked and dispatched (default) ,not confirmed ,not recived, , not 2nd rec, not 2nd conf, not 7 conf (use the hidden values that were created when the second mails whent out to determine if a mail has gone out amd not been replied to -->
+          <select id="filter_param_state" name="state" class="no_outline">
+            <option value="canceled is null and dispatched is not null">Booked and Dispatched</option>
+            <option value="canceled is null">Booked</option>
+            <option value="canceled is null and dispatched is not null">Dispatched</option>
+            <option value="canceled is null and confirmed is null">Not Confirmed</option>
+            <option value="canceled is null and recieved is null">Not Received</option>
+            <option value="canceled is null and recieved2 is null">Not Received 2</option>
+            <option value="canceled is null and confirmed2 is null">Not Confirmed 2</option>
+            <option value="canceled is null and confirmed7 is null">Not Confirmed 7</option>
+          </select>
+        </div>
+
+        <div class="pull-left flex pright15">
+          <label>Booker</label> &nbsp;
+          <select id="filter_param_booker" name="booker" class="no_outline">
+            <option value="">All</option>
+          </select>
+        </div>
+
+        <div class="pull-left flex pright15">
+          <label>Truck</label> &nbsp;
+          <select id="filter_param_truck" name="truck" class="no_outline">
+            <option value="">All</option>
+          </select>
+        </div>
+
+        <div class="pull-left flex pright15">
+          <label>Driver</label> &nbsp;
+          <select id="filter_param_driver" name="driver" class="no_outline">
+            <option value="">All</option>
+          </select>
+        </div>
+
+      </form>
+    </div>
+
+    <div class="pull-left" style="width: 100%">
+      <input id="searchInput" class="form-control search-box pull-right" placeholder="Search" type="text">
+    </div>
+
+  </div>
+</div>
+
+<div class="row ptop8">
+  <div class="table-responsive col-md-12">
+    <div class="scrollable-area">
+      <table class="data-table-book-report table table-bordered table-striped dataTable" style="display: none;" id="DataTables_Table_report" aria-describedby="DataTables_Table_report_info" data-report="book">
+        <thead>
+        <tr role="row">
+          <th class="no-sort" role="columnheader" tabindex="0" rowspan="1" colspan="1" style="width: 17%">
+            Name
+          </th>
+          <th class="sorting" role="columnheader" tabindex="0" rowspan="1" colspan="1" style="width: 11%">
+            Move Date
+          </th>
+          <th class="no-sort" role="columnheader" tabindex="0" rowspan="1" colspan="1" style="width: 10%">
+            Stage
+          </th>
+          <th class="no-sort" role="columnheader" tabindex="0" rowspan="1" colspan="1" style="width: 10%">
+            Booker
+          </th>
+          <th class="no-sort" role="columnheader" tabindex="0" rowspan="1" colspan="1" style="width: 10%">
+            Truck
+          </th>
+          <th class="no-sort" role="columnheader" tabindex="0" rowspan="1" colspan="1" style="width: 10%">
+            Driver
+          </th>
+          <th class="no-sort" role="columnheader" tabindex="0" rowspan="1" colspan="1" style="width: 13%">
+            Status
+          </th>
+          <th class="no-sort" role="columnheader" tabindex="0" rowspan="1" colspan="1" style="width: 19%">
+            Notes
+          </th>
+        </tr>
+        </thead>
+      </table>
+    </div>
+  </div>
+</div>

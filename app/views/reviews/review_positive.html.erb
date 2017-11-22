@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="format-detection" content="telephone=no">
+  <link rel="stylesheet" media="all" href="/assets/template/bootstrap/bootstrap.css" />
+  <link rel="stylesheet" media="all" href="/stylesheets/review.css" />
+  <script src="/assets/template/jquery/jquery.min.js"></script>
+  <script src="/assets/reviews.js"></script>
+</head>
+<body background="#f0f0f0">
+
+<table id="main_table" align="center" cellpadding="12" cellspacing="0" border="0">
+  <tr>
+    <td align="left" style="padding-left: 0px; padding-right: 0px; padding-bottom: 8px;">
+      <a href="<%= @account.site %>" target="_blank"><img src="<%= @logo %>" width="192" border="0" class="m_img img-responsive"></a>
+    </td>
+    <td align="right" style="padding-left: 0px; padding-right: 0px; padding-bottom: 8px;">
+      <b><a class="tel" href="tel:<%= @tel %>"><%= @tel %></a></b>
+      <br>
+      <span class="hours"><%= @account.working_hours %></span>
+    </td>
+  </tr>
+  <tr>
+    <td bgcolor="#264b7f" colspan="2" align="center" style="height: 13px; padding: 8px;">
+      <b class="title" style="color: white;">Reward Your Mover</b>
+    </td>
+  </tr>
+  <tr style="line-height: 20px;">
+    <td bgcolor="white" colspan="2" align="center" class="main_td">
+
+      <div>
+      <b style="color: #33679e">
+        Thank you <b style="color: #000000"><%= params[:name] %></b> for your time.<br>
+        You are going to make <% if params[:truck_driver].blank? %><b style="color: #000000">mover</b><% else %><b style="color: #000000"><%= params[:truck_driver] %></b><% end %> and crew smile today.
+        <br><br>
+        Icons below go direct to <% if @account.name == "oomovers" %><span style="color: #e7403f">oo</span> movers<% else %><%= @account.name %><% end %> review page and profile.<br>
+        You must belong to first three. The BBB is open to all.
+      </b>
+      </div>
+
+      <br>
+
+      <table cellspacing="0" cellpadding="8" border="0" width="85%">
+        <tr valign="top">
+          <% if @links %>
+            <% @links.each_with_index do |link, index| %>
+              <%= "</tr><tr valign='top'>".html_safe if index == 4 or index == 8 or index == 12 or index == 16 or index == 20 or index == 24 or index == 28 or index == 32 %>
+              <td align="center" width="25%">
+                <% if not link[:icon].nil? %>
+                  <p style="margin-bottom: 0px; margin-top: 5px;">
+                    <a target="_blank" href="<%= link.link_url %>" class="review_icn" data-move-id="<%= params[:move_id] %>" data-account-id="<%= params[:account_id] %>" data-user-id="<%= params[:user_id] %>" data-site="<%= link.name %>"><img src="http://<%= @account.name %>.moversnetwork.ca/uploads/review_link/<%= link[:icon] %>" width="36"></a>
+                  </p>
+                <% end %>
+                <a target="_blank" href="<%= link.link_url %>" style="color: #000 !important;">
+                <b style="font-size: 8pt">
+                  <%= link.name.html_safe %>
+                </b>
+                </a>
+              </td>
+            <% end %>
+          <% else %>
+              <td align="center">
+                <p style="margin-bottom: 0px; margin-top: 5px;">
+                <a target="_blank" class="review_icn" href="<%= @links_old[:google] %>" id="review_google" data-move-id="<%= params[:move_id] %>" data-account-id="<%= params[:account_id] %>" data-user-id="<%= params[:user_id] %>" data-site="Google"><img src="http://oomovers.moversnetwork.ca/images/google_icon.png" width="36"></a>
+                </p>
+                <b style="font-size: 8pt">
+                Google
+                </b>
+                </td>
+              <td align="center">
+                <p style="margin-bottom: 0px; margin-top: 5px;">
+                <a target="_blank" class="review_icn" href="<%= @links_old[:facebook] %>" id="review_facebook" data-move-id="<%= params[:move_id] %>" data-account-id="<%= params[:account_id] %>" data-user-id="<%= params[:user_id] %>" data-site="Facebook"><img src="http://oomovers.moversnetwork.ca/images/facebook_icon.png" width="36"></a>
+                </p>
+                <b style="font-size: 8pt">
+                Facebook
+                </b>
+              </td>
+              <td align="center">
+                <p style="margin-bottom: 0px; margin-top: 5px;">
+                <a target="_blank" class="review_icn" href="<%= @links_old[:yelp] %>" id="review_yelp" data-move-id="<%= params[:move_id] %>" data-account-id="<%= params[:account_id] %>" data-user-id="<%= params[:user_id] %>" data-site="Yelp"><img src="http://oomovers.moversnetwork.ca/images/yelp_icon.png" width="36"></a>
+                </p>
+                <b style="font-size: 8pt">
+                Yelp
+                </b>
+              </td>
+              <td align="center" class="bbb">
+                <p style="margin-bottom: 0px; margin-top: 5px;">
+                <a target="_blank" class="review_icn" href="<%= @links_old[:bbb] %>" id="review_bbb" data-move-id="<%= params[:move_id] %>" data-account-id="<%= params[:account_id] %>" data-user-id="<%= params[:user_id] %>" data-site="BBB"><img src="http://oomovers.moversnetwork.ca/images/bbb_icon.png" width="36"></a>
+                </p>
+                <b style="font-size: 8pt; line-height: 13px; margin-bottom: 10.7px;">
+                BBB
+                </b>
+                <div class="no_reg"><span class="reg_na">Registration not required:</span></div>
+              </td>
+          <% end %>
+        </tr>
+      </table>
+
+      <br>
+
+      <b>Review Bonus Program</b><br>
+      <% if @account.name == "oomovers" %><span style="color: #e7403f">oo</span> movers<% else %><%= @account.name %><% end %> who get positive online reviews get a bonus up to <b>$25</b>
+
+      <br><br>
+
+      <div>
+      <b style="color: #33679e">Thank you again from <% if params[:truck_driver].blank? %><b style="color: #000000">mover</b><% else %><b style="color: #000000"><%= params[:truck_driver] %></b><% end %> and the <% if @account.name == "oomovers" %><span style="color: #e7403f">oo</span> movers<% else %><%= @account.name %><% end %> team.
+        <br> Your support means the world to all of us !</b>
+      </div>
+
+    </td>
+  </tr>
+  <tr>
+    <td bgcolor="#264b7f" colspan="2" align="center" style="padding: 8px; color: white; height: 27px;">
+      <table cellspacing="0" cellpadding="0" border="0" width="100%">
+        <tr align="center">
+          <td>
+            <b class="reward_line">
+                Refer a friend and get a Referral Reward
+                <a target="_blank" href="http://<%= @account.subdomain %>.bookamove.ca/referrals?ra=<%= @ra_email %>" style="background-color: #f04241; border-radius: 3px; color: white; padding: 6px 8px; text-decoration: none; font-weight: bold; margin-left: 10px">Earn $50 - $100+</a>
+            </b>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" align="center" style="padding: 0px;">
+      <table cellspacing="0" cellpadding="12" border="0" width="100%">
+        <tr valign="middle">
+          <td style="padding-left: 0px;" class="addr">
+            <span class="bottom_links">
+              <%= @account.address.html_safe %>
+            </span>
+          </td>
+          <td align="center">
+            <a href="unsub" class="bottom_links">Unsubscribe</a>
+          </td>
+          <td align="center">
+            <a href="<%= @account.privacy_web_page %>" class="bottom_links">Privacy Policy</a>
+          </td>
+          <td align="center" style="padding-right: 0px;">
+            <a href="<%= @account.contact_us_web_page %>" class="bottom_links">Contact Us</a>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!--gst_hst-->
+<div class="form-group col0-5 colmr">
+  <%= label :move_record, :gst_hst, "GST/HST", class: "labels" %><br>
+  <%= text_field :move_record, :gst_hst, :value => 0, readonly: true, class: 'form-control2 calcTotalMove move_record_gst_hst', style: 'width:100%' %>
+</div>
+<!--pst-->
+<div class="form-group col0-5 colmr">
+  <%= label :move_record, :pst, 'PST', class: "labels" %><br>
+  <%= text_field :move_record, :pst, :value => 0, readonly: true, class: 'form-control2 calcTotalMove move_record_pst', style: 'width:100%' %>
+</div>
+<!--subtotal-->
+<div class="form-group col1 colmr">
+  <%= label :move_record, :subtotal, class: "labels" %><br>
+  <%= text_field :move_record, :subtotal, :value => 0, readonly: true, class: 'form-control2', style: 'width:100%' %>
+</div>
+<!--deposit-->
+<div class="form-group col1 colmr">
+  <%= label :move_record, :deposit, class: "labels" %><br>
+  <%= text_field :move_record, :deposit, :value => 0, class: 'form-control2 calculateBalance', style: 'width:100%' %>
+</div>
+<!--payment-->
+<div class="form-group col1 colmr">
+  <%= label :move_record, :payment, class: "labels" %><br>
+  <%= text_field :move_record, :payment, :value => 0, class: 'form-control2 calculateBalance', style: 'width:100%',
+                 readonly: true %>
+</div>
+<!--balance_due-->
+<div class="form-group col1 colmr">
+  <%= label :move_record, :balance_due, class: "labels" %><br>
+  <%= text_field :move_record, :balance_due, :value => 0, readonly: true, class: 'form-control2', style:
+      'width:100%' %>
+</div>
+<!--total_cost-->
+<div class="form-group col0-8 pull-right colmr">
+  <%= label :move_record, :total_cost, class: "labels" %><br>
+  <%= text_field :move_record, :total_cost, :value => 0, readonly: true, class: 'form-control2', style: 'width:100%' %>
+</div>

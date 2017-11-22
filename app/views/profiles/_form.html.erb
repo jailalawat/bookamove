@@ -1,0 +1,211 @@
+<%= form_for (@current_user), :html => {:class => 'form form-horizontal form-user-profile'}, url: profile_path(id: @current_user.id) do |f| %>
+    <% if @current_user.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@current_user.errors.count, "error") %> prohibited this user from being saved:</h2>
+
+          <ul>
+            <% @current_user.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+    <div class='row'>
+      <div class='col-md-4'>
+        <div class='box'>
+          <div id="dropbox-user-profile" class="dropbox-user-profile">
+            <div class="carousel slide" id="carousel_user_profile" style="margin-bottom:0;">
+              <ol class="carousel-indicators">
+                <% if (@images_attach.present?) %>
+                    <% @images_attach.each.with_index do |attach, index| %>
+                        <li data-image-id='<%= attach.id %>' data-slide-to=<%= index %> data-target="#carousel_user_profile" class="<%= index==0 ? 'active' : '' %>"></li>
+                    <% end %>
+                <% else %>
+                    <li data-slide-to="0" data-type="image-default" data-target="#carousel_user_profile" class="active"></li>
+                <% end %>
+              </ol>
+              <div class="carousel-inner">
+                <% if (@images_attach.present?) %>
+                    <% @images_attach.each.with_index do |attach, index| %>
+                        <div data-image-id='<%= attach.id %>' class="item item_user_profile <%= index==0 ? 'active' : '' %>">
+                          <img class="remove-image-user-profile" src='<%= attach.file %>'>
+                        </div>
+                    <% end %>
+                <% else %>
+                    <div data-type="image-default" class="item item_user_profile active">
+                      <img src='/images/default_image.jpg'></div>
+                <% end %>
+              </div>
+              <a class="left carousel-control <%= @images_attach.size > 0 ? '' : 'hide' %>" data-slide="prev" href="#carousel_user_profile">
+                <span class="icon-angle-left icon-prev"></span>
+              </a>
+              <a class="right carousel-control <%= @images_attach.size > 0 ? '' : 'hide' %>" data-slide="next" href="#carousel_user_profile">
+                <span class="icon-angle-right icon-next"></span>
+              </a>
+            </div>
+            <div id="profile_dropzone_inner" class="text-center">
+              <small class="legend-user-profile">Drop images here to upload</small>
+            </div>
+          </div>
+        </div>
+        <div class="panel panel-default remove_image_toggle">
+          <div class="panel-heading">Images</div>
+        </div>
+        <div class="user_profile_toggle">
+          <% if (@images_attach.present?) %>
+              <% @images_attach.each.with_index do |attach, index| %>
+                  <div class="item item_user_profile col-md-3" data-image-id='<%= attach.id %>'>
+                    <div class="profile_image_delete_div" data-image-id='<%= attach.id %>'>
+                      <img alt="X" class="profile_image_delete_button" src="/assets/x.png"></div>
+                    <img class="img_responsive_user_profile" src='<%= attach.file %>'>
+                  </div>
+              <% end %>
+          <% end %>
+        </div>
+      </div>
+      <div class="col-md-8">
+        <div class="form-group">
+          <%= f.label :name, class: 'control-label col-md-1' %>
+          <div class="col-md-5">
+            <%= f.text_field :name, class: 'form-control', required: true %>
+          </div>
+          <%= f.label :spouse, class: 'control-label col-md-1' %>
+          <div class="col-md-5">
+            <%= f.text_field :spouse, class: 'form-control' %>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :title, class: 'control-label col-md-1' %>
+          <div class="col-md-2">
+            <%= f.text_field :title, class: 'form-control' %>
+          </div>
+          <%= f.label :dob, class: 'control-label col-md-1' %>
+          <div class="col-md-2">
+            <%= f.text_field :dob, class: 'form-control' %>
+          </div>
+          <%= f.label :children, class: 'control-label col-md-1' %>
+          <div class="col-md-5">
+            <%= f.text_field :children, class: 'form-control' %>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :home_phone, class: 'control-label col-md-1' %>
+          <div class="col-md-5">
+            <%= f.text_field :home_phone, class: 'form-control' %>
+          </div>
+          <%= f.label :address, class: 'control-label col-md-1' %>
+          <div class="col-md-5">
+            <%= f.text_field :address, class: 'form-control' %>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :cell_phone, class: 'control-label col-md-1' %>
+          <div class="col-md-5">
+            <%= f.text_field :cell_phone, class: 'form-control' %>
+          </div>
+          <%= f.label :building, class: 'control-label col-md-1' %>
+          <div class="col-md-5">
+            <%= f.text_field :building, class: 'form-control' %>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :work_phone, class: 'control-label col-md-1' %>
+          <div class="col-md-5">
+            <%= f.text_field :work_phone, class: 'form-control' %>
+          </div>
+          <%= f.label :city, class: 'control-label col-md-1' %>
+          <div class="col-md-5">
+            <select name="user[city]" class="form-control" style="width:100%" required>
+              <option></option>
+              <% @cities.each do |city| %>
+                  <option value="<%= city.description %>"<%= @current_user.city == city.description ? 'selected' : '' %> > <%= city.description %></option>
+              <% end %>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :email, class: 'control-label col-md-1' %>
+          <div class="col-md-5">
+            <%= f.text_field :email, class: 'form-control', required: true %>
+          </div>
+          <%= f.label :locale, class: 'control-label col-md-1' %>
+          <div class="col-md-5">
+            <%= f.text_field :locale, class: 'form-control' %>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :pers_email, class: 'control-label col-md-1' %>
+          <div class="col-md-5">
+            <%= f.text_field :email_pers, class: 'form-control' %>
+          </div>
+          <%= f.label :Prov_Post, 'Prov/Post', class: 'control-label col-md-1' %>
+          <div class="col-md-2">
+            <select name="user[province]" class="form-control" style="width:100" %>
+              <% @provinces.each do |prov| %>
+                  <option value="<%= prov.description %>"<%= @current_user.province == prov.description ? 'selected' : '' %> > <%= prov.description %></option>
+              <% end %>
+            </select>
+          </div>
+          <div class="col-md-3">
+            <%= f.text_field :postal_code, class: 'form-control' %>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :sin, class: 'control-label col-md-1' %>
+          <div class="col-md-5">
+            <%= f.text_field :sin, class: 'form-control' %>
+          </div>
+          <%= f.label :active, class: 'control-label col-md-1' %>
+          <div class="col-md-5">
+            <%= f.check_box :active, disabled: true %>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :role, class: 'control-label col-md-1' %>
+          <div class="col-md-5">
+            <%= text_field :user_role, 'role', :value => RoleUser.get_name_rol(@current_user.id), class: 'form-control', readonly: true %>
+          </div>
+          <%= f.label :phone_pass, class: 'control-label col-md-1' %>
+          <div class="col-md-5">
+            <%= f.text_field :phone_pass, class: 'form-control' %>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :vm_pass, class: 'control-label col-md-1' %>
+          <div class="col-md-5">
+            <%= f.text_field :vm_pass, class: 'form-control' %>
+          </div>
+          <%= f.label :ext_no, class: 'control-label col-md-1' %>
+          <div class="col-md-5">
+            <%= f.text_field :ext_no, class: 'form-control' %>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :groups, class: 'control-label col-md-1' %><br>
+
+          <div class="col-md-5">
+            <%= f.text_field :groups, class: 'form-control' %>
+          </div>
+        </div>
+      </div>
+      <%= f.label :bio, class: 'control-label col-md-1' %>
+      <div class="col-md-11">
+        <%= f.text_area :bio, class: 'form-control' %>
+      </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="pull-right btn-user-profile">
+      <button type="submit" name="commit" class="btn btn-primary ok-user-profile">Save</button>
+      <%= link_to 'Back', home_path, class: 'btn btn-primary' %>
+    </div>
+<% end %>

@@ -1,0 +1,92 @@
+<% @page_title = raw("<i class='icon-calendar blank3 blue-text'></i>Personal ") + raw(" Calendar : <span id='calTitle'></span>") %>
+<br/>
+<div id="error-calendar"></div>
+<div id='calendar-personal' class="col-md-12"></div>
+<div id="lbl7pm" class="col-md-10 move-top-17 timelbl"></div>
+<div class="form-group"></div>
+<div class="row">
+  <div class="col-md-12 calendar-personal update-messages-personal-calendar">
+  </div>
+</div>
+
+
+
+<script>
+  var topBar = document.getElementById("top-bar");
+
+  topBar.innerHTML = '<div class="msg"><div class="top-bar-left-margin2"><div class="row '
+      + '"><div class="text-left col-md-12">'
+      + '<div class="pleft46 pright10">'
+      + '<div id="calLeft" class="col2">'
+      + '</div>'
+
+        // Tasks
+      <% if ( @staff_truck.present?) %>
+      + '<div class="col1 text-center">'
+      <% else %>
+      + '<div class="col2 text-center">'
+      <% end %>
+      <% if ( @staff_subtask.present?) %>
+      + '<div class="dropdown">'
+      + '<a href="javascript:void(0)" class="dropdown-toggle" id="dropdownTaskMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">'
+      + '<i class="icon-tasks"></i> Roles <span class="caret"></span>'
+      + '</button>'
+      + '<ul class="dropdown-menu text-left" aria-labelledby="dropdownMenu1">'
+      + '<li>'
+      + '<a href="javascript:void(0)" class="all-update-personal-calendar">All</a>'
+      + '</li>'
+      <% @staff_subtask.each do |task| %>
+      + '<li><a href="javascript:void(0)" class="update-personal-calendar" data-infoid="<%= task.subtask_staff_group_id %>" data-field="task_id">'
+      + '<%= task.subtask_staff_group.name %>'
+      + '</a></li>'
+      <% end %>
+      + '</ul>'
+      + '</div>'
+      <% end %>
+      + '</div>'
+
+      + '<div class="col1 text-center">'
+        // Trucks
+      <% if ( @staff_truck.present?) %>
+      + '<div class="dropdown">'
+      + '<a href="javascript:void(0)" class="dropdown-toggle" id="dropdownTruckMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">'
+      + '<i class="icon-truck"></i> Trucks <span class="caret"></span>'
+      + '</button>'
+      + '<ul class="dropdown-menu text-left" aria-labelledby="dropdownMenu1">'
+      + '<li>'
+      + '<a href="javascript:void(0)" class="all-update-personal-calendar">All</a>'
+      + '</li>'
+      <% @staff_truck.each do |trucks| %>
+      + '<li><a href="javascript:void(0)" class="update-personal-calendar" data-infoid="<%= trucks.truck_id %>" data-field="truck_id">'
+      + '<%= trucks.truck.description %>'
+      + '</a></li>'
+      <% end %>
+      + '</ul>'
+      + '</div>'
+      <% end %>
+      + '</div>'
+
+        // Lock
+      + '<div id="calPreRight" class="col2 pull-right">'
+      + '<div id="calavailabletime" class="colfl"><a href="" target="_self" data-url="<%= staff_availables_path(staff: @current_user.id) %>" class="calavailabletime" ><div class="btn btn-none"><span class="fc-button fc-state-default fc-corner-left fc-corner-right ">My Availability</span></div></a></div>'
+      + '<div id="calRight" class="colfl"></div>'
+      <% unless params['move_referred'].present?%>
+      + '<div class="pull-right">'
+      + '<div class="btn btn-default btn-none text-white lock-calendar" data-locked="<%= params['locked'].present? ? true : false %>" data-id="<%= params['group'] %>" data-calendartype="personalcalendar">'
+      + '<%= params['locked'].present? ? raw('<i class="icon-unlock lfont"></i>') : raw('<i class="icon-lock lfont"></i>') %>'
+        //+'<span> <%= params['locked'].present? ? 'Unlock' : 'Lock' %></span>'
+      + '</div>'
+      + '</div>'
+      <% end %>
+      + '</div>'
+      + '</div>'
+      + '</div></div></div></div>';
+
+</script>
+
+<style>
+  .fc-button-today {
+    margin-left: 3px;
+  }
+</style>
+

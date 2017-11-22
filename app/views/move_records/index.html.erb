@@ -1,0 +1,563 @@
+<% @page_title = raw("<i class='icon-truck blank3 blue-text'></i>") + "New Move" %>
+<div class="row">
+  <div class="fixed-stick-move-record pleft30 msg">
+    <div class="">
+      <div class="">
+        <div class="col7 colmr"><h5><b class=" bold caps">Enter name and email to create new move
+          record</b></h5></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="well pleft30">
+
+    <% flash.each do |message_type, message| %>
+        <div class="mtop5 alert alert-<%= message_type %>">
+          <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><%= message %>
+        </div>
+    <% end %>
+
+    <%= form_for @move_record do |f| %>
+        <div class="row colpd mtop10">
+          <div class="col7">
+            <legend id="SSwho">
+              <span onclick="expand_who()" class="pointer"><i class="fa fa-user" aria-hidden="true"></i> WHO</span>
+              <div class="pull-right">
+                <!-- <a class="btn btn-xs btn-link no_underline expand-who" href="javascript:void(0)" onclick="expand_who()">Collapse <i class="fa fa-chevron-up"></i></a> -->
+              </div>
+            </legend>
+          </div>
+        </div>
+
+        <div class="who-section">
+        <%= render 'client_lines' %>
+        <%= render 'move_type' %>
+        <%= render 'move_source' %>
+        <div class="row colpd hidden">
+          <% if @settings.show_who_note %>
+              <div class="form-group col7">
+                <%= label :note, 'Source Note', id: "note1", class: "hhidden labels" %><br>
+
+                <div class="left-inner-addon">
+                  <%= text_area :move_record, :who_note, class: 'form-control', style: 'width:100%', rows: 1, readonly: true, onchange: "showLabel('note1')", placeholder: "Source Note" %>
+                </div>
+              </div>
+          <% end %>
+        </div>
+        </div>
+        <br/>
+
+        <div class="row colpd mtop5 hidden">
+          <div class="col7">
+            <div>
+              <legend id="SSwhat">
+                <span onclick="expand_what()" class="pointer"><i class="fa fa-suitcase" aria-hidden="true"></i> WHAT</span>
+                <div class="pull-right">
+                  <span class="what_links">
+                    <a data-toggle="modal" href="#modal-cargo">Cargo Calculator <i class="icon-collapse-top"></i></a>
+                  </span>
+                  <a class="btn btn-xs btn-link no_underline expand-what" href="javascript:void(0)" onclick="expand_what()">Collapse <i class="fa fa-chevron-up"></i></a>
+                </div>
+              </legend>
+            </div>
+          </div>
+        </div>
+
+        <div class="what-section hidden">
+        <%= render 'cargo_info' %>
+        <div class="row colpd">
+          <% if @settings.show_what_note %>
+              <div class="form-group col7">
+                <%= label :note, 'Cargo Note', id: "note2", class: "hhidden labels" %><br>
+                <%= text_area :move_record, :what_note, class: 'form-control', style: 'width:100%', rows: 1, readonly: true, placeholder: "Cargo Note", onchange: "showLabel('note2')" %>
+              </div>
+          <% end %>
+        </div>
+        </div>
+        <br class="hidden"/>
+
+        <div class="row colpd mtop5 hidden">
+          <div class="col7">
+            <div>
+              <legend id="SSwhere">
+                <span onclick="expand_where()" class="pointer"><i class="fa fa-location-arrow" aria-hidden="true"></i> WHERE</span>
+                <div class="pull-right">
+                  <span class="where_links">
+                    <a target="_blank" href="#" class="move-map">Street View <i class="icon-external-link"></i></a>
+                    <a target="_blank" href="#" class="move-map">GPS View <i class="icon-external-link"></i></a>
+                    <a href="javascript:void(0)" style="cursor: text">Origin</a>
+                    <i field="number_of_origin" class="fa fa-plus move-add-line" style="cursor: pointer"></i>
+                    <a href="javascript:void(0)" style="cursor: text">Destination</a>
+                    <i field="number_of_destination" class="fa fa-plus move-add-line" style="cursor: pointer"></i>
+                  </span>
+                  <a class="btn btn-xs btn-link no_underline expand-where" href="javascript:void(0)" onclick="expand_where()">Collapse <i class="fa fa-chevron-up"></i></a>
+                </div>
+              </legend>
+            </div>
+          </div>
+        </div>
+
+        <div class="where-section hidden">
+        <%= render 'location_origin' %>
+        <%= render 'location_destination' %>
+        <div class="row colpd">
+          <% if @settings.show_where_note %>
+              <div class="form-group col7 colmr">
+                <%= label :note, 'Destination Note', id: "note3", class: "hhidden labels" %><br>
+                <%= text_area :move_record, :where_note, class: 'form-control', style: 'width:100%', rows: 1, readonly: true, placeholder: "Destination Note", onchange: "showLabel('note3')" %>
+              </div>
+          <% end %>
+        </div>
+        </div>
+        <br class="hidden"/>
+
+        <div class="row colpd mtop5 hidden">
+          <div class="col7">
+            <legend id="SSwhen">
+              <span onclick="expand_when()" class="pointer"><i class="fa fa-clock-o" aria-hidden="true"></i> WHEN</span>
+              <div class="pull-right">
+                <a class="btn btn-xs btn-link no_underline expand-when" href="javascript:void(0)" onclick="expand_when()">Collapse <i class="fa fa-chevron-up"></i></a>
+              </div>
+            </legend>
+          </div>
+        </div>
+
+        <div class="when-section hidden">
+        <%= render 'time' %>
+        <div class="row colpd">
+          <% if @settings.show_when_note %>
+              <div class="form-group col7">
+                <%= label :note, 'Time Note', class: "hhidden" %><br>
+                <%= text_area :move_record, :when_note, placeholder: "Time Note", class: 'form-control', style: 'width:100%', rows: 1, readonly: true %>
+              </div>
+          <% end %>
+        </div>
+        </div>
+        <br class="hidden"/>
+
+        <div class="row colpd mtop5 hidden">
+          <div class="col7">
+            <legend id="SShow">
+              <span onclick="expand_how()" class="pointer"><i class="fa fa-truck" aria-hidden="true"></i> HOW</span>
+              <div class="pull-right">
+                <a class="btn btn-xs btn-link no_underline expand-how" href="javascript:void(0)" onclick="expand_how()">Collapse <i class="fa fa-chevron-up"></i></a>
+              </div>
+            </legend>
+          </div>
+        </div>
+
+        <div class="how-section hidden">
+        <%= render 'truck_lines' %>
+        <div>
+          <% if @settings.show_how_note %>
+              <div class="row colpd">
+                <div class="form-group col7">
+                  <%= label :note, 'Equipment Note', class: "hhidden labels" %><br>
+                  <%= text_area :move_record, :how_note, placeholder: "Equipment Note", class: 'form-control', style: 'width:100%', rows: 1, readonly: true %>
+                </div>
+              </div>
+          <% end %>
+        </div>
+        </div>
+        <br class="hidden"/>
+
+        <div class="row colpd mtop5 hidden">
+          <div class="col7">
+            <legend id="SScost">
+              <div class="row col-md-3 no-pright">
+                <span onclick="expand_how_much()" class="pointer">
+                    <i class="fa fa-dollar" aria-hidden="true"></i><i class="fa fa-dollar" aria-hidden="true"></i> HOW MUCH
+                </span>
+              </div>
+              <span class="how_much_links">
+              <div class="options-move-record col-md-2">
+                <div class="options pointer">Options <span class="caret"></span></div>
+                <ul class="dropdown-menu dropdown-options cost-option-hide" role="menu">
+                  <% if @settings.show_move_cost && !@settings.checked_cost_hourly %>
+                      <li field="cost_hourly">
+                        <a href="#">Cost Hourly <i class="fa fa-plus icon-green pull-right"></i></a>
+                      </li>
+                  <% end %>
+                  <% if @settings.show_packing && !@settings.checked_packing %>
+                      <li field="packing">
+                        <a href="#">Packing <i class="fa fa-plus icon-green pull-right"></i></a>
+                      </li>
+                  <% end %>
+                  <% if @settings.show_other_cost && !@settings.checked_other_cost %>
+                      <li field="other_cost">
+                        <a href="#">Other Cost <i class="fa fa-plus icon-green pull-right"></i></a>
+                      </li>
+                  <% end %>
+                  <% if @settings.show_surcharge && !@settings.checked_surchage %>
+                      <li field="surchage">
+                        <a href="#">Surchage <i class="fa fa-plus icon-green pull-right"></i></a>
+                      </li>
+                  <% end %>
+                  <% if @settings.show_flat_rate && !@settings.checked_flat_rate %>
+                      <li field="flat_rate">
+                        <a href="#">Move cost - flat rate <i class="fa fa-plus icon-green pull-right"></i></a>
+                      </li>
+                  <% end %>
+                  <% if @settings.show_discount && !@settings.checked_discount %>
+                      <li field="discount">
+                        <a href="#">Move cost - discount <i class="fa fa-plus icon-green pull-right"></i></a>
+                      </li>
+                  <% end %>
+                  <% if @settings.show_insurance && !@settings.checked_insurance %>
+                      <li field="insurance">
+                        <a href="#">Insurance <i class="fa fa-plus icon-green pull-right"></i></a>
+                      </li>
+                  <% end %>
+                  <% if @settings.show_fuel_cost && !@settings.checked_fuel_cost %>
+                      <li field="fuel_cost">
+                        <a href="#">Fuel cost <i class="fa fa-plus icon-green pull-right"></i></a>
+                      </li>
+                  <% end %>
+                  <% if @settings.show_payment && !@settings.checked_payment %>
+                      <li field="payment">
+                        <a href="#">Payment <i class="fa fa-plus icon-green pull-right"></i></a>
+                      </li>
+                  <% end %>
+                </ul>
+              </div>
+              </span>
+              <div class="pull-right">
+                <a class="btn btn-xs btn-link no_underline expand-how-much" href="javascript:void(0)" onclick="expand_how_much()">Collapse <i class="fa fa-chevron-up"></i></a>
+              </div>
+              <div class="clearfix"></div>
+            </legend>
+          </div>
+        </div>
+
+        <div class="cost how-much-section hidden">
+        <div class="cost">
+          <% if @settings.show_move_cost %>
+              <% toggle = @settings.checked_cost_hourly ? 'show' : 'hide' %>
+              <div class="<%= toggle %> check-option-disabled cost_hourly">
+                <div class="row colpd">
+                  <div class="col1 colmr">
+                    <label><b class="bold-label">Move Cost Hourly</b></label>
+                  </div>
+                  <%= render 'cost_hourly' %>
+                </div>
+                <hr>
+                <input type="hidden" name="move_record[cost_hourly_selected]" value="true">
+              </div>
+          <% end %>
+          <% if @settings.show_packing %>
+              <% toggle = @settings.checked_packing ? 'show' : 'hide' %>
+              <div class="<%= toggle %> check-option-disabled packing">
+                <div class="row colpd">
+                  <div class="col1 colmr">
+                    <label></label><br/>
+                    <label><b class="bold-label">Packing</b></label>
+                  </div>
+                  <%= render 'packing' %>
+                </div>
+                <hr>
+                <input type="hidden" name="move_record[packing_selected]" value="true">
+              </div>
+          <% end %>
+          <% if @settings.show_other_cost %>
+              <% toggle = @settings.checked_other_cost ? 'show' : 'hide' %>
+              <div class="<%= toggle %> check-option-disabled other_cost">
+                <div class="row colpd">
+                  <div class="col1 colmr">
+                    <label></label><br/>
+                    <label><b class="bold-label">Other Cost</b></label>
+                  </div>
+                  <%= render 'other_cost' %>
+                </div>
+                <hr>
+                <input type="hidden" name="move_record[other_cost_selected]" value="true">
+              </div>
+          <% end %>
+          <% if @settings.show_surcharge %>
+              <% toggle = @settings.checked_surchage ? 'show' : 'hide' %>
+              <div class="<%= toggle %> check-option-disabled surchage">
+                <div class="row colpd">
+                  <div class="col1 colmr">
+                    <label></label><br/>
+                    <label><b class="bold-label">Surcharge</b></label>
+                  </div>
+                  <%= render 'surcharge' %>
+                </div>
+                <hr>
+                <input type="hidden" name="move_record[surchage_selected]" value="true">
+              </div>
+          <% end %>
+          <% if @settings.show_flat_rate %>
+              <% toggle = @settings.checked_flat_rate ? 'show' : 'hide' %>
+              <div class="<%= toggle %> check-option-disabled flat_rate">
+                <div class="row colpd">
+                  <div class="col1 colmr">
+                    <label><b class="bold-label">Move Cost - Flat Rate</b></label>
+                  </div>
+                  <%= render 'flat_rate' %>
+                </div>
+                <hr>
+                <input type="hidden" name="move_record[flat_rate_selected]" value="true">
+              </div>
+          <% end %>
+          <% if @settings.show_discount %>
+              <% toggle = @settings.checked_discount ? 'show' : 'hide' %>
+              <div class="<%= toggle %> check-option-disabled discount">
+                <div class="row colpd">
+                  <div class="col1 colmr">
+                    <label><b class="bold-label">Move Cost - Discount</b></label>
+                  </div>
+                  <%= render 'discount' %>
+                </div>
+                <hr>
+                <input type="hidden" name="move_record[discount_selected]" value="true">
+              </div>
+          <% end %>
+          <% if @settings.show_insurance %>
+              <% toggle = @settings.checked_insurance ? 'show' : 'hide' %>
+              <div class="<%= toggle %> check-option-disabled insurance">
+                <div class="row colpd">
+                  <div class="col1 colmr">
+                    <label></label><br/>
+                    <label><b class="bold-label">Insurance</b></label>
+                  </div>
+                  <%= render 'insurance' %>
+                </div>
+                <hr>
+                <input type="hidden" name="move_record[insurance_selected]" value="true">
+              </div>
+          <% end %>
+          <% if @settings.show_fuel_cost %>
+              <% toggle = @settings.checked_fuel_cost ? 'show' : 'hide' %>
+              <div class="<%= toggle %> check-option-disabled fuel_cost">
+                <div class="row colpd">
+                  <div class="col1 colmr">
+                    <label></label><br/>
+                    <label><b class="bold-label">Fuel Cost</b></label>
+                  </div>
+                  <%= render 'fuel_cost' %>
+                </div>
+                <hr>
+                <input type="hidden" name="move_record[fuel_cost_selected]" value="true">
+              </div>
+          <% end %>
+          <div class="row total-cost colpd">
+            <div class="col1 colmr">
+              <label></label><br/>
+              <label><b class="bold-label">Total Cost</b></label>
+            </div>
+            <%= render 'total_cost' %>
+          </div>
+          <hr>
+          <% if @settings.show_payment %>
+              <% toggle = @settings.checked_payment ? 'show' : 'hide' %>
+              <div class="<%= toggle %> check-option-disabled payment">
+                <div class="row colpd">
+                  <div class="col1 colmr">
+                    <label></label><br/>
+                    <label><b class="bold-label">Payment</b></label>
+                  </div>
+                  <%= render 'payment' %>
+                </div>
+                <hr>
+                <input type="hidden" name="move_record[payment_selected]" value="true">
+              </div>
+          <% end %>
+          <% if @settings.show_cost_note %>
+              <div class="row colpd">
+                <div class="form-group col7 note">
+                  <%= label :note, 'Payment Note', class: "hhidden" %><br>
+                  <%= text_area :move_record, :cost_note, placeholder: "Payment Note", class: 'form-control', style: 'width:100%', rows: 1, readonly: "true" %>
+                </div>
+              </div>
+          <% end %>
+        </div>
+        </div>
+        <br class="hidden"/>
+
+        <% if @settings.show_contract_note %>
+            <div class="row colpd mtop5 hidden">
+              <div class="col7">
+                <legend id="SScontact">
+                  <span onclick="expand_note()" class="pointer"><i class="fa fa-sticky-note" aria-hidden="true"></i> MOVE NOTES</span>
+                  <div class="pull-right">
+                    <a class="btn btn-xs btn-link no_underline expand-note" href="javascript:void(0)" onclick="expand_note()">Collapse <i class="fa fa-chevron-up"></i></a>
+                  </div>
+                </legend>
+              </div>
+            </div>
+
+            <div class="note-section hidden">
+            <div class="row colpd">
+              <div class="form-group col7">
+                <%= label :note, 'Move Note', class: "hhidden" %><br>
+                <%= text_area :move_record, :contract_note, placeholder: "Move Note", class: 'form-control', style: 'width:100%', rows: 1, readonly: true %>
+              </div>
+            </div>
+            </div>
+            <br/>
+        <% end %>
+
+        <div class="row colpd mtop5 hidden">
+          <div class="col7">
+            <legend>
+              <table>
+                <tr>
+                  <td class="pright15">
+                    <i class="fa fa-address-book" aria-hidden="true"></i> CONTACT STAGES
+                  </td>
+                  <td>
+                    <ul class="nav nav-pills non-nav-pills" role="tablist">
+                      <li role="presentation" class="active">
+                        <a href="#Quote" aria-controls="Quote" role="tab" data-toggle="tab">Quote</a></li>
+                      <li role="presentation">
+                        <a href="#Booked" aria-controls="Booked" role="tab" data-toggle="tab">Booked</a></li>
+                      <li role="presentation">
+                        <a href="#Complete" aria-controls="Complete" role="tab" data-toggle="tab">Complete</a></li>
+                    </ul>
+                  </td>
+                </tr>
+              </table>
+            </legend>
+          </div>
+        </div>
+
+        <div class="stages_section hidden">
+          <%= render 'contact_stages' %>
+          <% if @settings.show_contract_stage %>
+              <br/>
+
+              <div class="row colpd">
+                <div class="form-group col7">
+                  <%= label :note, 'Contact Stage Note', class: "hhidden" %><br>
+                  <%= text_area :move_record, :contract_stage_note, placeholder: "Contact Stage Note", class: 'form-control', style: 'width:100%', rows: 1, readonly: true %>
+                </div>
+              </div>
+          <% end %>
+            <div class="row colpd">
+              <div class="form-group col6 colmr">
+                <% if @settings.show_contract_stage_detail %>
+                  <%= label :move_record, :contract_stage_detail, 'Contact Stage alert details', id: "conStageDetails", class: "hhidden labels" %><br>
+                  <%= text_field :move_record, :contract_stage_detail, class: 'form-control', style: 'width:100%', placeholder: "Contact Stage Alert Details", onfocus: "showLabel('conStageDetails')" %>
+                <% end %>
+              </div>
+              <div class="form-group col1">
+                <% if @settings.show_move_stage_alert %>
+                  <%= label :move_record, :contract_stage_alert_id, "Contact Stage Alert", id: "conStageAlert", class: "hhidden labels" %><br>
+                  <%= select :move_record, :contract_stage_alert_id, options_from_collection_for_select(@contract_stage_alert, :description, :description, @settings.move_stage_alert.description), {include_blank: "Contact Stage Alert"}, :class => 'form-control text-grey', style: 'width:100%', data_id: 'move_stage_alert_id', readonly: true, onchange: "showLabel('conStageAlert')" %>
+                <% end %>
+              </div>
+            </div>
+        </div>
+        <br class="hidden" />
+
+        <div class="row colpd">
+          <div class="col7 text-center">
+            <button type="submit" name="commit" class="btn btn-blue2 center">Create Move</button>
+          </div>
+        </div>
+
+
+        <div class="modal fade" tabindex="-1" role="dialog" id="modal-cargo" data-backdrop="static" data-keyboard="false">
+          <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button aria-hidden="true" class="close" data-dismiss="modal" type="button">×</button>
+                <h4 class="modal-title" id="myModalLabel"> Cargo Calculator </h4>
+              </div>
+              <div class="modal-body">
+                <div class="row">
+                  <div class="col-md-4">
+                    <div class="row">
+                      <div class="col-md-12 form-group">
+                        <label>Room</label>
+                        <%= select "room_cargo", "room_cargo", options_from_collection_for_select(@rooms, "id", :name), {include_blank: true}, :class => 'form-control room-cargo', style: 'width:100%' %>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-12">
+                        <table class="table table-bordered dataTable furnishings-table table-hover" style="margin-bottom:0;">
+                          <thead>
+                          <tr role="row">
+                            <th role="columnheader" tabindex="0" rowspan="1" colspan="1">
+                              Furnishings
+                            </th>
+                          </tr>
+                          </thead>
+                          <tbody>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+
+                  </div>
+
+                  <div class="col-md-8">
+                    <label> </label>
+                    <table class="table table-bordered dataTable cargo-template-table" style="margin-bottom:0;">
+                      <thead>
+                      <tr role="row">
+                        <th role="columnheader" tabindex="0" rowspan="1" colspan="1">
+                        </th>
+                        <th role="columnheader" tabindex="0" rowspan="1" colspan="1">
+                          Description
+                        </th>
+                        <th role="columnheader" tabindex="0" rowspan="1" colspan="1">
+                          Quantity
+                        </th>
+                        <th role="columnheader" tabindex="0" rowspan="1" colspan="1">
+                          Volume
+                        </th>
+                        <th role="columnheader" tabindex="0" rowspan="1" colspan="1">
+                          Weight
+                        </th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                      <tr class="cargo_template">
+                        <td><i class="icon-minus icon-red remove-cargo-template"></i></td>
+                        <td>
+                          <input type="text" name="calc_cargo[new_1][description]" value="" placeholder="Description" class="form-control cargo-description" autocomplete="off" readonly="true">
+                        </td>
+                        <td>
+                          <input type="number" name="calc_cargo[new_1][quantity]" value="0" placeholder="Quantity" class="form-control quantity" min="0" step="0.5" readonly="true">
+                        </td>
+                        <td>
+                          <input type="number" name="calc_cargo[new_1][volume]" value="0" placeholder="Volume" class="form-control volume" min="0" step="0.5" readonly="true">
+                        </td>
+                        <td>
+                          <input type="number" name="calc_cargo[new_1][weight]" value="0" placeholder="Weight" class="form-control weight" min="0" step="0.5" readonly="true">
+                        </td>
+                      </tr>
+                      </tbody>
+                    </table>
+                    <btn class="add-new-cargo-template pointer pull-right"><i class="fa fa-plus icon-green"></i> Add new
+                      line
+                    </btn>
+                    <div class="clearfix"></div>
+                    <hr>
+                    <div class="col-md-12 text-right">
+                      <div class="row">
+                        <label>Estimated Volume:&nbsp;</label><span class="calc-volume">0</span> cuft
+                      </div>
+                      <div class="row">
+                        <label>Estimated Volumentric Weight:&nbsp;</label><span class="calc-volume-weight">0</span> lbs
+                      </div>
+                      <div class="row">
+                        <label>Estimated Weight:&nbsp;</label><span class="calc-weight">0</span> lbs
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button class="btn btn-default" data-dismiss="modal" type="button">Close</button>
+                <button class="btn btn-primary save-cargo" type="button" data-dismiss="modal">Save</button>
+              </div>
+            </div>
+          </div>
+        </div>
+    <% end %>
+  </div>
+
+</div>
+<%= render "move_top_links", no_expand_all: true %>

@@ -1,0 +1,52 @@
+<%= form_for(@role, remote: f_remote) do |f| %>
+    <% if @role.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@role.errors.count, "error") %> prohibited this role from being saved:</h2>
+
+          <ul>
+            <% @role.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+    <input type="hidden" name="redirect_url" value="<%= redirect_url %>">
+    <input type="hidden" name="calendar_staff_group_id" value="<%= calendar_staff_group_id %>">
+    <input type="hidden" id="subtask_id" value="<%= @role.subtask_staff_group.nil? ? nil : @role.subtask_staff_group.id %>">
+
+    <div class="form-group">
+      <%= f.label :name %><br>
+      <%= f.text_field :name, class: 'form-control', required: true, disabled: @form_disabled %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :description %><br>
+      <%= f.text_field :description, class: 'form-control', required: true, disabled: @form_disabled %>
+    </div>
+
+    <div class="form-group ptop5">
+      <i class="glyphicon glyphicon-info-sign" data-toggle="tooltip" data-placement="top" title="Role level sets security for role/user. For example, user can see all mailboxes at or below his role level." style="font-size: 13px !important;"></i> <label> Role Level</label>
+      <br>
+      <select class="form-control" id="role_level" name="role[role_level]" required <% if @form_disabled %>disabled<% end %>>
+        <% for i in 1..100 do %>
+          <option <% if @role.role_level == i %>selected<% end %>><%= i %></option>
+        <% end %>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :mailbox %><br>
+      <%= f.check_box :mailbox %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :active %><br>
+      <%= f.check_box :active %>
+    </div>
+
+    <br/>
+    <div class="form-group">
+      <button type="submit" name="commit" class="btn btn-primary">Save</button>
+      <%= link_to 'Back', roles_path, class: 'btn btn-primary' if redirect_url.nil? %>
+    </div>
+<% end %>

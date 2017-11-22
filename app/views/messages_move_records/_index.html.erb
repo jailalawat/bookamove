@@ -1,0 +1,237 @@
+<div class="message-inbox-move-record new-message-move-record" href="#messages">
+  <div class="row box pright15">
+    <div class="col-md-12 box-header red-background">
+      <div class="row legend2 clearfix" style="margin-top: 0px;">
+        <% if defined?(@from_move) %><i class="fa fa-address-card" aria-hidden="true"></i> <% end %>CONTACT LOG
+      </div>
+    </div>
+  </div>
+  <div class="form-group"></div>
+  <div class="row pright15">
+    <div class="col-md-12">
+      <div class="col-md-2 ptop5">
+        <i class='icon-star-empty star-priority fa-2x' data-toggle="tooltip" data-placement="right" title="Toggle for normal/important/urgent priority"></i>
+        <input type="hidden" class="message-priority" value="0"/>
+
+        <% if @can_edit_move_record %>
+          <div class="mtop10">
+            <a href="javascript:void(0)" onclick="do_email()" data-toggle="tooltip" data-placement="right" title="Email client"><i class="fa fa-envelope" aria-hidden="true" id="icon_email_client"></i></a>
+            <br/>
+            <a href="javascript:void(0)" onclick="do_call()" data-toggle="tooltip" data-placement="right" title="Call client"><i class="fa fa-phone-square" aria-hidden="true" style="font-size: 18px !important;" id="icon_phone"></i></a>
+          </div>
+        <% end %>
+      </div>
+
+
+      <div id="msg_form">
+        <div class="col-md-8 row">
+          <div class="col-md-4">
+            <% staff = {'Staff' => [['All', 'staff_all']] + @all_staff_users.map { |v| [v.name, 'staff_' + v.id.to_s] }} %>
+            <% task = {'Role' => @all_subtask.map { |v| [v.name, 'task_' + v.id.to_s] }} %>
+            <% if @move_record_trucks[0].lead == @current_user.id || @move_record_clients[0].client.user_id == @current_user.id %>
+                <% data_select = task.merge(staff) %>
+                <%
+                   if !@all_subtask.find { |v| v.name.match(/operation/i) }.nil?
+                     operations_id = @all_subtask.find { |v| v.name.match(/operation/i) }.id.to_s
+                   else
+                     operations_id = @all_subtask.find { |v| v.name.match(//i) }.id.to_s
+                   end
+                %>
+                <%= select :email, :users, grouped_options_for_select(data_select, 'task_' + operations_id), {}, class: 'form-control multi-select-new-message-to', multiple: true, 'data-placeholder' => 'Name', style: 'visibility: hidden;height:0px;' %>
+            <% else %>
+                <% customer = options_for_select([['Customer - ' + @move_record_clients[0].client.name, 'customer_' + @move_record_clients[0].client.user_id.to_s]]) %>
+                <% driver = @move_record_trucks[0].lead.present? ? options_for_select([['Driver - ' + @move_record_trucks[0].user.name, 'driver_' + @move_record_trucks[0].lead.to_s]]) : '' %>
+                <% data_select = staff.merge(task) %>
+                <%= select :email, :users, customer + driver + grouped_options_for_select(data_select), {}, class: 'form-control multi-select-new-message-to', multiple: true, 'data-placeholder' => 'Name', style: 'visibility: hidden;height:0px;' %>
+            <% end %>
+
+          </div>
+          <div class="col-md-8">
+            <input class='form-control message-subject' placeholder='Subject' maxlength="250" list="subject_suggestion"/>
+            <datalist id="subject_suggestion">
+              <%= options_from_collection_for_select(@subject_suggestions, "description", :description,) %>
+            </datalist>
+          </div>
+          <div class="form-group clearfix"></div>
+          <div class="col-md-12">
+            <textarea class='form-control message-body' placeholder='Your message...' rows='1'></textarea>
+          </div>
+        </div>
+        <div class="col-md-2 pull-right no-pright">
+          <div class='form-group col-md-12 no-pright'>
+            <input type="file" class="attach-file-message" multiple="true"/>
+          </div>
+          <div class="col-md-12 no-pright" style="padding-top: 10px !important;">
+            <div class="btn btn-danger send-new-message-move-record col-md-12 btn-blue3" data-move-record="<%= params[:id] %>" data-token="<%= params[:token] %>">Send Mail
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div id="call_form" style="display: none">
+        <div class="col-md-8 row">
+          <div class="col-md-4">
+            <input type="hidden" name="message_type" value="call">
+            <input type="hidden" id="call_started" value="0">
+            <input class="form-control2" name="name-call" id="name_phone" value="Customer">
+          </div>
+          <div class="col-md-8">
+            <input class='form-control message-subject-call' placeholder='Subject' maxlength="250"/>
+          </div>
+          <div class="form-group clearfix"></div>
+          <div class="col-md-12">
+            <textarea class='form-control message-body-call' placeholder='Your message...' rows='1'></textarea>
+          </div>
+        </div>
+
+        <div class="col-md-2 pull-right no-pright">
+          <div class='form-group col-md-12 no-pright'>
+            <div class="btn btn-danger col-md-12 btn-blue3" onclick="start_call()" id="call_btn">Start Call</div>
+          </div>
+          <div class="col-md-12 no-pright">
+            <div class="btn btn-danger send-new-call-move-record col-md-12 btn-blue3" data-move-record="<%= params[:id] %>">Finish/Save</div>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+  <div class="clearfix"></div>
+
+  <div class="row mtop30">
+    <div class="col-md-12 pright15">
+      <div class="pright15">
+        <div class="box_header p3">
+          <div class="col-md-1">
+            <span></span>
+          </div>
+          <div class="col-md-1">
+            <b class="text-black text-big">From</b>
+          </div>
+          <div class="col-md-8 row">
+            <div class="col-md-4">
+              <b class="text-black text-big">To</b>
+            </div>
+            <div class="col-md-4">
+              <b class="text-black text-big">Subject</b>
+            </div>
+            <div class="col-md-4">
+
+            </div>
+          </div>
+          <div class="col-md-2">
+            <a href="<%= edit_move_record_path(@move_record, type: 'message', message_sort: (params[:message_sort].present? ? (params[:message_sort] == 'DESC' ? 'ASC' : 'DESC') : 'DESC')) %>" class="underline-out"><span class="">Time/Date <i class="<%= (params[:message_sort].present? ? (params[:message_sort] == 'DESC' ? 'icon-caret-up' : 'icon-caret-down') : 'icon-caret-down') %>"></i> </span></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="clearfix"></div>
+  <% if @full_messages.blank? %>
+      <div class="col-md-12 full-wrap-messages-move-record pright15"> No messages available.</div>
+  <% end %>
+  <div class="full-wrap-messages-move-record pright15">
+    <% @full_messages.each.with_index do |all_message, index| %>
+        <% if all_message[:main].present? %>
+            <% main_attachment = MessagesMoveRecord.get_attachments(all_message[:main].account_id, all_message[:main].id) %>
+            <% to_users = all_message[:main].user_messages_move_record.map { |v| v.user.name } + all_message[:main].task_messages_move_record.map { |v| v.subtask_staff_group.name } + all_message[:main].email_messages_move_record.map { |v| v.user_id == @move_record_clients[0].client.user_id ? 'Customer' : nil } + all_message[:main].email_messages_move_record.map { |v| v.user_id == @move_record_trucks[0].lead ? 'Driver' : nil } %>
+            <div class='panel panel-default wrap-full-message' data-message="<%= all_message[:main].id %>">
+              <div class='panel-heading accordion-toggle collapsed' data-parent='#accordion<%= index %>' data-toggle='collapse' href='#collapse-<%= index %>-<%= index %>' title="Click to expand">
+                <div class="row">
+                  <div class="col-md-1">
+                    <%= all_message[:main].urgent == 2 ? '<i class="icon-star star-urgent" title="Urgent"></i>'.html_safe : all_message[:main].urgent == 1 ? '<i class="icon-star star-urgent color-yellow" title="Important"></i>'.html_safe : '' %>
+                    <%= all_message[:main].message_type == "email" ? '<i class="fa fa-envelope" aria-hidden="true"></i>'.html_safe : all_message[:main].message_type == "call" ? '<i class="fa fa-phone-square" aria-hidden="true" style="font-size: 18px !important;"></i>'.html_safe : '' %>
+                  </div>
+                  <div class="col-md-1">
+                    <span>
+                      <% if not all_message[:main].user_id.nil? %>
+                        <%= all_message[:main].user_id == @move_record_trucks[0].lead ? 'Driver' : all_message[:main].user_id == @move_record_clients[0].client.user_id ? 'Customer' : all_message[:main].user.name %>
+                    <% end %>
+                    </span>
+                  </div>
+                  <div class="row col-md-8">
+                    <div class="col-md-4">
+                      <span><%= all_message[:main].message_type == "call" ? "Customer" : to_users.compact.reject(&:blank?).join(', ') %></span>
+                    </div>
+                    <div class="col-md-7">
+                      <span class="subject"><%= all_message[:main].subject.blank? ? nil : all_message[:main].subject.html_safe %></span>
+                      <span class="text-gray"> - <%= truncate(strip_tags(all_message[:main].body).gsub(/&nbsp;/i, ""), length: 40) %></span>
+                    </div>
+                  </div>
+                  <div class="col-md-2">
+                    <%= main_attachment.size > 0 ? '<i class="icon-paperclip attachment-icon" title="Attachment"></i>'.html_safe : '<i class="icon-"></i>'.html_safe %>
+                    <span><%= all_message[:main].created_at.strftime("%l:%M %P %b %d") %></span>
+                  </div>
+                </div>
+              </div>
+              <div class='panel-collapse collapse' id='collapse-<%= index %>-<%= index %>'>
+                <div class='panel-body body-warp-message'>
+                  <div class="body-message col-md-8 col-md-offset-2 p13"><%= all_message[:main].body.blank? ? all_message[:main].body : all_message[:main].body.html_safe %></div>
+                  <% if main_attachment.size > 0 %>
+                      <div class="attachment-message col-md-8 col-md-offset-2">
+                        <% main_attachment.each do |attachment| %>
+                            <% temp_name = attachment.file_path.split('_') %>
+                            <%= attachment.file_path.gsub(temp_name[0] +'_'+temp_name[1]+'_', '') %>
+                            <a href="<%= attachment.file_path %>" target="_blank" class="link-attachment">
+                              View
+                            </a>
+                        <% end %>
+                      </div>
+                  <% end %>
+                </div>
+              </div>
+              <% all_message[:reply].each.with_index do |reply_message, index_reply| %>
+                  <div class='wrap-full-message wrap-message-reply' data-message='<%= reply_message.id %>'>
+                    <hr>
+                    <div class='panel-heading'>
+                      <div class="row">
+                        <div class="col-md-1 text-right">
+                          (<%= index_reply + 2 %>)
+                        </div>
+                        <div class="col-md-1">
+                          <%= reply_message.user_id == @move_record_trucks[0].lead ? 'Driver' : reply_message.user_id == @move_record_clients[0].client.user_id ? 'Customer' : reply_message.user.name %></span>
+                        </div>
+                        <div class="row col-md-8">
+                          <div class="col-md-4">
+                      <span>
+                      </span>
+                          </div>
+                          <div class="col-md-4">
+                      <span>
+                        <%= all_message[:main].subject %>
+                      </span>
+                          </div>
+                          <div class="col-md-3">
+                          </div>
+                          <div class="col-md-1">
+                            <div class="pull-left">
+                              <a class='accordion-toggle' data-parent='#accordion<%= index %>' data-toggle='collapse' href='#collapse-reply-<%= index %>-<%= index_reply %>'>
+                                <div class='parent-message  btn btn-default expand-message' data-message='<%= all_message[:main].id %>'>
+                                  <i class="icon-caret-down"></i>
+                                </div>
+                              </a>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-md-2">
+                    <span>
+                      <%= reply_message.created_at.strftime("%l:%M %P %b %d") %>
+                    </span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class='panel-collapse' id='collapse-reply-<%= index %>-<%= index_reply %>'>
+                      <div class='panel-body body-warp-message'>
+                        <div class="body-message col-md-8 col-md-offset-2"><%= reply_message.body.html_safe %></div>
+                      </div>
+                    </div>
+                  </div>
+              <% end %>
+            </div>
+        <% end %>
+    <% end %>
+  </div>
+</div>

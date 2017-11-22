@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  move_date_time: 2015-02-17 15:05:27
+  cargo_type_id: 1
+  move_type_id: 1
+  client_id: 1
+  account_id: 1
+
+two:
+  move_date_time: 2015-02-17 15:05:27
+  cargo_type_id: 1
+  move_type_id: 1
+  client_id: 1
+  account_id: 1

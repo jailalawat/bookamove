@@ -1,0 +1,401 @@
+<div class="row">
+<a name="stages" id="stages"></a>
+<div class="col-md-4" style="padding-right: 65px; padding-left: 52px;">
+  <div class="mbottom15 mtop15 border_bottom">
+    <b class="caps"><i class="fa fa-lock icon-green" style="margin-left: 2px; margin-right: 2px; cursor: default;"></i> Lead</b>
+    <div class="pull-right"><span class="small"><a href="javascript:void(0)" onclick="assign_emails_to_stages(0,<%= @contact_stage1.email_alerts.map{ |email| [email.id, email.auto_send]} %>);$('#attach_stage_id').val('<%= @contact_stage1.id %>');$('#attach_stage_name').html('Lead')"><i class="icon-edit-sign big font_grey"></i></a></span></div>
+
+    <div class="mtop10">
+      <div id="email_alerts<%= @contact_stage1.id %>" class="email_alerts_section">
+        <div class="mtop10 mbottom15 pleft20">
+        <% @contact_stage1.email_alerts.each do |email| %>
+              <div id="email_alert<%= email.id %>" class="clearfix">
+                <i class="small_icon fa icon-envelope no_pointer faded"></i>
+                <% if validate_special_permission('create_edit.emails', @current_actions) %>
+                    <a href="javascript:void(0)" class="font_grey font_normal" onclick="edit_email(false, <%= email.id %>, 0, '<%= email.description %>', '<%= email.instructions %>', '<%= email.template.to_s.gsub(/[\n]/, "") %>')"><%= email.description[0, 20] %></a>
+                <% else %>
+                    <%= email.description[0, 20] %>
+                <% end %>
+                <% if email.auto_send %><img src="/assets/auto-send.png" height="13" style="vertical-align: text-bottom"><% end %>
+              </div>
+        <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="text-left stage0_substages">
+    <% @contact_stage1_sub_stages.each do |stage| %>
+        <div class="mbottom15 mtop15 border_bottom subs0 <% if stage.default %> rearange-disabled<% end %>" id="sub_stage<%= stage.id %>" data-id="<%= stage.id %>">
+          <i class="activate_sub_stage mright1 fa <% if stage.active %> fa-check-circle icon-green<% else %> fa-times icon-red<% end %>" data-id="<%= stage.id %>"></i> <span class="sub_stage_name caps"><%= stage.sub_stage %></span>
+          <div class="pull-right">
+            <% if not stage.default %> <a href="javascript:void(0)" style="cursor: move"><i class="fa fa-bars small" aria-hidden="true"></i></a> | <a href="javascript:void(0)" onclick="$('#update_sub_stage_modal').modal('show');$('#edit_sub_stage_name').val('<%= stage.sub_stage %>');$('#edit_id').val('<%= stage.id %>');$('#edit_stage_num').val(0);$('#delete_stage_id').attr('href', '/contact_stages/<%= stage.id %>')"><i class="fa fa-pencil small" aria-hidden="true"></i></a> |
+            <% end %>
+            <span class="small"><a href="javascript:void(0)" onclick="assign_emails_to_stages(0,<%= stage.email_alerts.map{ |email| [email.id, email.auto_send]} %>);$('#attach_stage_id').val('<%= stage.id %>');$('#attach_stage_name').html('Lead')"><i class="icon-edit-sign big font_grey"></i></a></span>
+          </div>
+
+              <div class="mtop10">
+                  <div id="email_alerts<%= stage.id %>" class="email_alerts_section">
+                    <div class="mtop10 mbottom15 pleft20">
+                    <% stage.email_alerts.each do |email| %>
+                          <div id="email_alert<%= email.id %>" class="clearfix">
+                            <i class="small_icon fa icon-envelope no_pointer faded"></i>
+                            <% if validate_special_permission('create_edit.emails', @current_actions) %>
+                                <a href="javascript:void(0)" class="font_grey font_normal" onclick="edit_email(<%= !email.default %>, <%= email.id %>, 0, '<%= email.description %>', '<%= email.instructions %>', '<%= email.template.to_s.gsub(/[\n]/, "") %>')"><%= email.description[0, 20] %></a>
+                            <% else %>
+                                <%= email.description[0, 20] %>
+                            <% end %>
+
+                            <% if email.auto_send %><img src="/assets/auto-send.png" height="13" style="vertical-align: text-bottom"><% end %>
+                          </div>
+                    <% end %>
+                    </div>
+                  </div>
+              </div>
+
+          <div class="clearfix"></div>
+        </div>
+    <% end %>
+  </div>
+
+</div>
+
+<div class="col-md-4" style="border-right: 1px solid #dedede; border-left: 1px solid #dedede; padding-right: 62px; padding-left: 52px;">
+  <div class="mbottom15 mtop15 border_bottom">
+    <b class="caps"><i class="fa fa-lock icon-green" style="margin-left: 2px; margin-right: 2px; cursor: default;"></i> Book</b>
+    <div class="pull-right"><span class="small"><a href="javascript:void(0)" onclick="assign_emails_to_stages(1,<%= @contact_stage2.email_alerts.map{ |email| [email.id, email.auto_send]} %>);$('#attach_stage_id').val('<%= @contact_stage2.id %>');$('#attach_stage_name').html('Book')"><i class="icon-edit-sign big font_grey"></i></a></span></div>
+
+    <div class="mtop10">
+      <div id="email_alerts<%= @contact_stage2.id %>" class="email_alerts_section">
+        <div class="mtop10 mbottom15 pleft20">
+        <% @contact_stage2.email_alerts.each do |email| %>
+              <div id="email_alert<%= email.id %>" class="clearfix">
+                <i class="small_icon fa icon-envelope no_pointer faded"></i>
+                <% if validate_special_permission('create_edit.emails', @current_actions) %>
+                    <a href="javascript:void(0)" class="font_grey font_normal" onclick="edit_email(false, <%= email.id %>, 0, '<%= email.description %>', '<%= email.instructions %>', '<%= email.template.to_s.gsub(/[\n]/, "") %>')"><%= email.description[0, 20] %></a>
+                <% else %>
+                    <%= email.description[0, 20] %>
+                <% end %>
+
+                <% if email.auto_send %><img src="/assets/auto-send.png" height="13" style="vertical-align: text-bottom"><% end %>
+              </div>
+        <% end %>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="text-left stage1_substages">
+    <% @contact_stage2_sub_stages.each do |stage| %>
+        <div class="mbottom15 mtop15 border_bottom subs1<% if stage.default %> rearange-disabled<% end %>" id="sub_stage<%= stage.id %>" data-id="<%= stage.id %>">
+          <i class="activate_sub_stage mright1 fa <% if stage.active %> fa-check-circle icon-green<% else %> fa-times icon-red<% end %>" data-id="<%= stage.id %>"></i> <span class="sub_stage_name caps"><%= stage.sub_stage %></span>
+          <div class="pull-right">
+            <% if not stage.default %> <a href="javascript:void(0)" style="cursor: move"><i class="fa fa-bars small" aria-hidden="true"></i></a> | <a href="javascript:void(0)" onclick="$('#update_sub_stage_modal').modal('show');$('#edit_sub_stage_name').val('<%= stage.sub_stage %>');$('#edit_id').val('<%= stage.id %>');$('#edit_id').val('<%= stage.id %>');$('#edit_stage_num').val(1);$('#delete_stage_id').attr('href', '/contact_stages/<%= stage.id %>')"><i class="fa fa-pencil small" aria-hidden="true"></i></a> |
+            <% end %>
+            <span class="small"><a href="javascript:void(0)" onclick="assign_emails_to_stages(1,<%= stage.email_alerts.map{ |email| [email.id, email.auto_send]} %>);$('#attach_stage_id').val('<%= stage.id %>');$('#attach_stage_name').html('Book')"><i class="icon-edit-sign big font_grey"></i></a></span>
+          </div>
+
+              <div class="mtop10">
+                <div id="email_alerts<%= stage.id %>" class="email_alerts_section">
+                  <div class="mtop10 mbottom15 pleft20">
+                    <% stage.email_alerts.each do |email| %>
+                        <div id="email_alert<%= email.id %>" class="clearfix">
+                          <i class="small_icon fa icon-envelope no_pointer faded"></i>
+                          <% if validate_special_permission('create_edit.emails', @current_actions) %>
+                              <a href="javascript:void(0)" class="font_grey font_normal" onclick="edit_email(<%= !email.default %>, <%= email.id %>, 0, '<%= email.description %>', '<%= email.instructions %>', '<%= email.template.to_s.gsub(/[\n]/, "") %>')"><%= email.description[0, 20] %></a>
+                          <% else %>
+                              <%= email.description[0, 20] %>
+                          <% end %>
+
+                          <% if email.auto_send %><img src="/assets/auto-send.png" height="13" style="vertical-align: text-bottom"><% end %>
+                        </div>
+                    <% end %>
+                  </div>
+                </div>
+              </div>
+
+          <div class="clearfix"></div>
+        </div>
+    <% end %>
+  </div>
+</div>
+
+<div class="col-md-4" style="padding-right: 65px; padding-left: 52px;">
+  <div class="mbottom15 mtop15 border_bottom">
+    <b class="caps"><i class="fa fa-lock icon-green" style="margin-left: 2px; margin-right: 2px; cursor: default;"></i> Complete</b>
+    <div class="pull-right"><span class="small"><a href="javascript:void(0)" onclick="assign_emails_to_stages(2,<%= @contact_stage3.email_alerts.map{ |email| [email.id, email.auto_send]} %>);$('#attach_stage_id').val('<%= @contact_stage3.id %>');$('#attach_stage_name').html('Complete')"><i class="icon-edit-sign big font_grey"></i></a></span></div>
+
+    <div class="mtop10">
+      <div id="email_alerts<%= @contact_stage3.id %>" class="email_alerts_section">
+        <div class="mtop10 mbottom15 pleft20">
+        <% @contact_stage3.email_alerts.each do |email| %>
+              <div id="email_alert<%= email.id %>" class="clearfix">
+                <i class="small_icon fa icon-envelope no_pointer faded"></i>
+                <% if validate_special_permission('create_edit.emails', @current_actions) %>
+                    <a href="javascript:void(0)" class="font_grey font_normal" onclick="edit_email(false, <%= email.id %>, 0, '<%= email.description %>', '<%= email.instructions %>', '<%= email.template.to_s.gsub(/[\n]/, "") %>')"><%= email.description[0, 20] %></a>
+                <% else %>
+                    <%= email.description[0, 20] %>
+                <% end %>
+
+                <% if email.auto_send %><img src="/assets/auto-send.png" height="13" style="vertical-align: text-bottom"><% end %>
+              </div>
+        <% end %>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="text-left stage2_substages">
+    <% @contact_stage3_sub_stages.each do |stage| %>
+        <div class="mbottom15 mtop15 border_bottom subs2<% if stage.default %> rearange-disabled<% end %>" id="sub_stage<%= stage.id %>" data-id="<%= stage.id %>">
+          <i class="activate_sub_stage mright1 fa <% if stage.active %> fa-check-circle icon-green<% else %> fa-times icon-red<% end %>" data-id="<%= stage.id %>"></i> <span class="sub_stage_name caps"><%= stage.sub_stage %></span>
+          <div class="pull-right">
+            <% if not stage.default %><a href="javascript:void(0)" style="cursor: move"><i class="fa fa-bars small" aria-hidden="true"></i></a> | <a href="javascript:void(0)" onclick="$('#update_sub_stage_modal').modal('show');$('#edit_sub_stage_name').val('<%= stage.sub_stage %>');$('#edit_id').val('<%= stage.id %>');$('#edit_id').val('<%= stage.id %>');$('#edit_stage_num').val(2);$('#delete_stage_id').attr('href', '/contact_stages/<%= stage.id %>')"><i class="fa fa-pencil small" aria-hidden="true"></i></a> |
+            <% end %>
+            <span class="small"><a href="javascript:void(0)" onclick="assign_emails_to_stages(2,<%= stage.email_alerts.map{ |email| [email.id, email.auto_send]} %>);$('#attach_stage_id').val('<%= stage.id %>');$('#attach_stage_name').html('Complete')"><i class="icon-edit-sign big font_grey"></i></a></span>
+          </div>
+
+                <div class="mtop10">
+                  <div id="email_alerts<%= stage.id %>" class="email_alerts_section">
+                    <div class="mtop10 mbottom15 pleft20">
+                      <% stage.email_alerts.each do |email| %>
+                          <div id="email_alert<%= email.id %>" class="clearfix">
+                            <i class="small_icon fa icon-envelope no_pointer faded"></i>
+                            <% if validate_special_permission('create_edit.emails', @current_actions) %>
+                              <a href="javascript:void(0)" class="font_grey font_normal" onclick="edit_email(<%= !email.default %>, <%= email.id %>, 0, '<%= email.description %>', '<%= email.instructions %>', '<%= email.template.to_s.gsub(/[\n]/, "") %>')"><%= email.description[0, 20] %></a>
+                            <% else %>
+                                <%= email.description[0, 20] %>
+                            <% end %>
+
+                            <% if email.auto_send %><img src="/assets/auto-send.png" height="13" style="vertical-align: text-bottom"><% end %>
+                          </div>
+                      <% end %>
+                    </div>
+                  </div>
+                </div>
+
+          <div class="clearfix"></div>
+        </div>
+    <% end %>
+  </div>
+</div>
+
+</div>
+
+
+<!-- Add Stage Modal -->
+<div class="modal fade" id="add_sub_stage_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <form onsubmit="event.preventDefault()">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title">Create New Stage</h4>
+
+        </div>
+        <div class="modal-body">
+
+          <div class="form-group">
+            <label for="add_stage_num" class="control-label">Primary Contact Stage</label>
+            <select class="form-control" id="add_stage_num" name="add_stage_num">
+              <option value="0">Lead</option>
+              <option value="1">Book</option>
+              <option value="2">Complete</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="sub-stage" class="control-label">Stage Name</label>
+            <input type="text" class="form-control" id="add_sub_stage_name" name="add_sub_stage_name" required>
+          </div>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" id="save_sub_stage">Save</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Update Stage Modal -->
+<div class="modal fade" id="update_sub_stage_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <form onsubmit="event.preventDefault()">
+        <div class="modal-header">
+          <div class="pull-right">
+            <a id="delete_stage_id" href="" data-confirm="Are you sure?" data-remote="true" data-method="delete" class="mright15"><i class="fa fa-trash font_normal" aria-hidden="true"></i> delete</a>
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          </div>
+          <h4 class="modal-title">Edit Stage</h4>
+        </div>
+        <div class="modal-body">
+
+          <div class="form-group">
+            <label for="edit_stage_num" class="control-label">Primary Contact Stage</label>
+            <select class="form-control" id="edit_stage_num" name="edit_stage_num">
+              <option value="0">Lead</option>
+              <option value="1">Book</option>
+              <option value="2">Complete</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="sub-stage" class="control-label">Stage Name</label>
+            <input type="text" class="form-control" id="edit_sub_stage_name" name="edit_sub_stage_name" required>
+            <input type="hidden" id="edit_id" name="edit_id">
+          </div>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" id="update_sub_stage">Save</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+<!-- Add Email Modal -->
+<div class="modal fade" id="add_email_alert_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <form onsubmit="event.preventDefault()">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title">Create New Email</h4>
+
+        </div>
+        <div class="modal-body">
+
+          <div class="form-group">
+            <label for="add_email_alert_stage_num" class="control-label">Primary Contact Stage</label>
+            <select class="form-control" id="add_email_alert_stage_num" name="add_email_alert_stage_num">
+              <option value="0">Lead</option>
+              <option value="1">Book</option>
+              <option value="2">Complete</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="email_alert" class="control-label">Email Name</label>
+            <input type="text" class="form-control" id="add_email_alert_name" name="add_email_alert_name" required>
+          </div>
+
+          <div class="form-group">
+            <label for="email_alert" class="control-label">Email Description or Special Instructions</label>
+            <input type="text" class="form-control" id="add_email_alert_instructions" name="add_email_alert_instructions" required>
+          </div>
+
+          <div class="form-group">
+            <label for="email_alert_template">Email Template</label><br>
+            <textarea class="form-control wysihtml5" required="required" placeholder="" rows="12" name="email_alert_template" id="email_alert_template"></textarea>
+          </div>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" id="save_email_alert">Save</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+<!-- Edit Email Modal -->
+<div class="modal fade" id="edit_email_alert_modal" tabindex="1" role="dialog" aria-labelledby="myModalLabel2" aria-hidden="true" style="z-index: 1050">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <form onsubmit="event.preventDefault()">
+        <div class="modal-header">
+          <div class="pull-right">
+            <a id="edit_email_delete_link" href="" data-confirm="Are you sure?" data-remote="true" data-method="delete" class="mright15"><i class="fa fa-trash font_normal" aria-hidden="true"></i> delete</a>
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          </div>
+          <h4 class="modal-title">Edit Email <span id="email_edit_mode" class="small faded"></span></h4>
+
+        </div>
+        <div class="modal-body">
+
+          <div class="form-group">
+            <label for="email_alert" class="control-label">Name</label>
+            <input type="text" class="form-control" id="edit_email_alert_name" name="edit_email_alert_name" required>
+            <input type="hidden" id="edit_email_alert_id" name="edit_email_alert_id">
+          </div>
+
+          <div class="form-group">
+            <label for="email_alert" class="control-label">Email Description or Special Instructions</label>
+            <input type="text" class="form-control" id="edit_email_alert_instructions" name="edit_email_alert_instructions" required>
+          </div>
+
+          <div class="form-group">
+            <label for="email_alert_template">Template</label><br>
+            <textarea class="form-control wysihtml5" required="required" placeholder="" rows="12" name="edit_email_alert_template" id="edit_email_alert_template"></textarea>
+          </div>
+
+        </div>
+        <div class="modal-footer" id="edit_email_footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" id="edit_email_alert">Save</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- Attach Emails Modal -->
+<div class="modal fade" id="attach_emails_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <form onsubmit="event.preventDefault()">
+        <div class="modal-header">
+          <div class="pull-right">
+            <button type="button" class="btn btn-primary mright15 btn-md" id="attach_stage_emails">Save</button>
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          </div>
+          <h4 class="modal-title">Select Emails to Attach</h4>
+
+        </div>
+        <div class="modal-body">
+
+          <div class="form-group">
+            <table class="table table-striped table-bordered table-hover">
+              <tr>
+                <th><span id="attach_stage_name">Lead</span> Emails</th>
+                <th width="15%" class="nowrap text-center" align="center">Attach</th>
+                <th width="15%" class="nowrap text-center" align="center">Auto-Send</th>
+              </tr>
+              <% @emails.each do |email| %>
+                  <tr class="email_alert_row email_alert_stage_num_<%= email.stage_num %>">
+                    <td><label class=""><i class="small_icon fa icon-envelope no_pointer faded"></i>
+                      <% if validate_special_permission('create_edit.emails', @current_actions) %>
+                          <a href="javascript:void(0)" class="font_grey font_normal" onclick="edit_email(<%= !email.default %>, <%= email.id %>, 0, '<%= email.description %>', '<%= email.instructions %>', '<%= email.template.to_s.gsub(/[\n]/, "") %>')"><%= email.description %></a>
+                      <% else %>
+                          <%= email.description %>
+                      <% end %>
+                    </label></td>
+                    <td align="center">
+                      <i class="fa fa-times icon-red stage_emails_check1" data-id="<%= email.id %>"></i>
+                      <input type="checkbox" class="stage_emails_check2 hidden" id="stage_emails_checkbox" data-id="<%= email.id %>">
+                    </td>
+                    <td align="center"><img height="14" class="<% if email.description != "Confirmation" and email.description != "Reconfirmation 2" and email.description != "Reconfirmation 7" %>autosend_sub_stage_email<% end %> pointer" data-id="<%= email.id %>" <% if email.auto_send %>data-state="auto_send" src="/assets/auto-send-with-box.png"<% else %>data-state="empty" src="/assets/auto-send-empty.png"<% end %>></td>
+                  </tr>
+              <% end %>
+            </table>
+
+            <input type="hidden" id="attach_stage_id" name="attach_stage_id">
+          </div>
+
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

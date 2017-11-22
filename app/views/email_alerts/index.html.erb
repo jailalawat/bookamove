@@ -1,0 +1,116 @@
+<% @page_title = raw("<i class='fa fa-envelope blank3 blue-text'></i>") + "Master Email List" %>
+
+<div class="email-alerts col-md-12 mtop30">
+
+  <div class="row">
+
+    <div class="col-md-12">
+      <a class="btn btn-primary" href="/email_alerts/new">Create New Email</a>
+    </div>
+    <br>
+
+    <div class="col-md-12">
+      <table class="table table-striped table-bordered table-hover">
+        <tr>
+          <th width="50%">Description</th>
+          <th width="40%">Stages</th>
+          <th width="10%" class="nowrap">Auto-Send?</th>
+        </tr>
+        <% @email_alerts.each do |email_alert| %>
+            <tr id="e_alert<%= email_alert.id %>">
+              <td>
+                <i class="activate_sub_stage_email mright1 fa <% if email_alert.active %>fa-check-circle icon-green<% else %>fa-times icon-red<% end %>" data-id="<%= email_alert.id %>"></i> <%= email_alert.description %>
+                <div class="pull-right">
+                  <% if not email_alert.default %>
+                      <a href="/email_alerts/<%= email_alert.id %>/edit" class="mright5"><i class="fa fa-pencil small" aria-hidden="true"></i></a>
+                  <% end %>
+                </div>
+              </td>
+              <td id="email_stages_<%= email_alert.id %>" class="caps">
+                <% email_alert.contact_stages.each do |stage| %>
+                    <%= stage.stage || stage.sub_stage %>
+                    <%= ", " if stage != email_alert.contact_stages.last %>
+                <% end %>
+                <div class="pull-right">
+                  <a href="javascript:void(0)" onclick="assign_stages_popup(<%= email_alert.contact_stages.map(&:id) %>);$('#email_id').val('<%= email_alert.id %>')" class="mright5"><i class="fa fa-pencil small" aria-hidden="true"></i></a>
+                </div>
+              </td>
+              <td class="text-center" style="padding-top: 5px;">
+                <i class="autosend_sub_stage_email <% if email_alert.auto_send %>icon-active-green-small<% else %>icon-active-red-small<% end %> pointer" data-id="<%= email_alert.id %>"></i>
+              </td>
+            </tr>
+        <% end %>
+      </table>
+    </div>
+  </div>
+
+</div>
+
+<!-- Assign Stages Modal -->
+<div class="modal fade" id="assign_stages_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <form onsubmit="event.preventDefault()">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title">Assign Stages</h4>
+
+        </div>
+        <div class="modal-body">
+
+          <div class="form-group">
+
+            <div class="row">
+
+            <div class="col-md-4">
+              <% @stages.select{ |stage| stage[:stage_num] == 0 }.each_with_index do |stage, index| %>
+                  <div class="mbottom5 mtop10 border_bottom">
+                    <div class="mbottom5 mtop5">
+                      <label class="caps <% if index == 0 %>bold<% end %>"><input type="checkbox" checked="checked" class="stage_check" id="stages_checkbox" data-id="<%= stage.id %>"> &nbsp;<%= stage.stage || stage.sub_stage %></label>
+                    </div>
+                  </div>
+              <% end %>
+            </div>
+            <div class="col-md-4" style="border-right: 1px solid #dedede; border-left: 1px solid #dedede;">
+              <% @stages.select{ |stage| stage[:stage_num] == 1 }.each_with_index do |stage, index| %>
+                  <div class="mbottom5 mtop10 border_bottom">
+                    <div class="mbottom5 mtop5">
+                      <label class="caps <% if index == 0 %>bold<% end %>"><input type="checkbox" checked="checked" class="stage_check" id="stages_checkbox" data-id="<%= stage.id %>"> &nbsp;<%= stage.stage || stage.sub_stage %></label>
+                    </div>
+                  </div>
+              <% end %>
+            </div>
+            <div class="col-md-4">
+              <% @stages.select{ |stage| stage[:stage_num] == 2 }.each_with_index do |stage, index| %>
+                  <div class="mbottom5 mtop10 border_bottom">
+                    <div class="mbottom5 mtop5">
+                      <label class="caps <% if index == 0 %>bold<% end %>"><input type="checkbox" checked="checked" class="stage_check" id="stages_checkbox" data-id="<%= stage.id %>"> &nbsp;<%= stage.stage || stage.sub_stage %></label>
+                    </div>
+                  </div>
+              <% end %>
+            </div>
+
+            </div>
+
+            <input type="hidden" id="email_id" value="">
+          </div>
+
+        </div>
+        <div class="modal-footer mtop0">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" id="assign_stages_btn">Save</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script>
+    var topBar = document.getElementById("top-bar");
+
+    topBar.innerHTML = '<div class="msg"><div class="top-bar-left-margin2"><div class="row ' +
+        '"><div class="text-left">'
+        + '<div class="col1 colmr"><a href="/contract_settings#stages" class="btn btn-xs btn-link white no_underline top">CONTACT STAGES</a></div>'
+        + '</div></div></div></div>';
+
+</script>

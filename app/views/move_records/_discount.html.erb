@@ -1,0 +1,23 @@
+<!--percentage-->
+<div class="form-group col0-5 colmr">
+  <%= label :discount, :percentage, '%', class: "hhidden labels" %><br>
+  <%= text_field :discount, :percentage, placeholder: "%", class: 'form-control calculateDiscount
+    discount_percentage', style: 'width:100%', readonly: true %>
+</div>
+<!--hourly-->
+<div class="form-group col0-5 colmr">
+  <%= label :discount, :hourly, class: "hhidden labels" %><br>
+  <%= text_field :discount, :hourly, placeholder: "Hourly", class: 'form-control calculateDiscount discount_hourly',
+                 style: 'width:100%', readonly: true %>
+</div>
+<!--notes-->
+<div class="form-group col4 colmr">
+  <%= label :discount, :notes, class: "hhidden labels" %><br>
+  <%= text_field :discount, :notes, placeholder: "Discount Notes", class: 'form-control', style: 'width:100%', readonly:
+      true %>
+</div>
+<!--discount-->
+<div class="form-group col0-8 pull-right colmr">
+  <%= label :discount, :discount, class: "labels" %><br>
+  <%= text_field :discount, :discount, :value => 0, class: 'form-control2 calculateTotal discount discount_discount', style: 'width:100%', readonly: true %>
+</div>

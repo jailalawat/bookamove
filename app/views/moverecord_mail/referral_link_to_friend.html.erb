@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="format-detection" content="date=no">
+  <meta name="format-detection" content="address=no">
+  <meta name="format-detection" content="email=no">
+
+  <style type="text/css">
+    a { text-decoration: none; color: #33679e }
+    a:hover { color: #2a6496 !important; text-decoration: none !important; outline: 0 !important; }
+    a:focus { color: #2a6496 !important; text-decoration: none !important; outline: 0 !important; }
+
+    body {
+      font-family: Arial, sans-serif;
+      font-size: 9.6pt;
+      background-color: #f0f0f0;
+      color: #000000
+    }
+  </style>
+</head>
+<body background="#f0f0f0" style="background-color: #f0f0f0; padding: 8px; color: #000000">
+
+
+  <%= render partial: "moverecord_mail/link_to_friend", locals: {name: @name, account: @account, ra_email: @ra_email, ra_name: @ra ? @ra.name : "", logo: @logo, tel: @tel} %>
+
+
+</body>
+</html>

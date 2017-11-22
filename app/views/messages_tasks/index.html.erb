@@ -1,0 +1,230 @@
+<% @page_title = raw("<i class='icon-envelope blank3 blue-text'></i>") + params[:page_title].to_s + " Mail" %>
+<% if @subtask.active == true and @subtask.mailbox == true %>
+<div class="message-inbox-task new-message-task">
+  <div class="row new-message-fixed colpd">
+    <div class="col-md-12">
+      <div class="box pright15">
+        <div class="col-md-12 box-header red-background">
+          <div class="row legend2">
+            <div class="col-md-1">
+              <span>MAIL</span>
+            </div>
+            <div class="col-md-1">
+              <span>FROM</span>
+            </div>
+            <div class="col-md-8 row">
+              <div class="col-md-4">
+                <span>TO</span>
+              </div>
+              <div class="col-md-4">
+                <span>SUBJECT</span>
+              </div>
+              <div class="col-md-4">
+
+              </div>
+            </div>
+            <div class="col-md-2">
+              <a href="<%= messages_tasks_path(@move_record, type: 'inbox', message_sort: (params[:message_sort].present? ? (params[:message_sort] == 'DESC' ? 'ASC' : 'DESC') : 'DESC')) %>" class="underline-out"><span>Time/Date <i class="<%= (params[:message_sort].present? ? (params[:message_sort] == 'DESC' ? 'icon-caret-up' : 'icon-caret-down') : 'icon-caret-down') %>"></i> </span></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="form-group"></div>
+    <div class="col-md-12 wrap-new-message-task">
+      <div class="col-md-1">
+        <i class='icon-star-empty star-priority fa-2x' title="Toggle for normal/important/urgent priority"></i>
+        <input type="hidden" class="message-priority" value="0"/>
+      </div>
+      <div class="col-md-1">
+      </div>
+      <div class="col-md-8 row">
+        <div class="col-md-4">
+          <% staff = {} %>
+          <% task = {'Role' => @all_subtask.map { |v| [v.name, 'task_' + v.id.to_s] }} %>
+          <% data_select = task.merge(staff) %>
+          <%= select :email, :users, grouped_options_for_select(data_select), {}, class: 'form-control multi-select-new-message-to', multiple: true, 'data-placeholder' => 'Name', style: 'visibility: hidden;height:0px;' %>
+
+        </div>
+        <div class="col-md-8">
+          <input class='form-control message-subject' placeholder='Subject' maxlength="250" list="subject_suggestion"/>
+          <datalist id="subject_suggestion">
+            <%= options_from_collection_for_select(@subject_suggestions, "description", :description,) %>
+          </datalist>
+        </div>
+        <div class="form-group clearfix"></div>
+        <div class="col-md-12">
+          <textarea class='form-control message-body' placeholder='Your message...' rows='1'></textarea>
+        </div>
+      </div>
+      <div class="col-md-2 pull-right no-pright pright15">
+        <div class='form-group col-md-12 no-pright'>
+          <input type="file" class="attach-file-message" multiple="true"/>
+        </div>
+        <div class="col-md-12 no-pright" style="padding-top: 10px !important;">
+          <div class="btn btn-danger send-new-message-task col-md-12 btn-blue3" data-task="<%= params[:task]
+          %>">Send
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="row colpd">
+    <div class="col-md-12">
+      <div class="tabbable full-wrap-messages-tabs pright15">
+        <ul class="nav nav-tabs no-m-bottom">
+          <li class="<%= params[:type] == 'inbox' ? '' : '' %>">
+            <a href="<%= messages_tasks_path(task: params[:task], type: 'inbox') %>">
+              <i class="icon-envelope-alt"></i>
+              Inbox
+            </a>
+          </li>
+        </ul>
+        <div class="tab-content">
+          <div class="tab-pane active">
+            <div class="">
+              <div class="clearfix"></div>
+              <% if @full_messages.blank? %>
+                  <div class="col-md-12 full-wrap-messages text-center"> No messages
+                    available.
+                  </div>
+              <% end %>
+              <div class="col-md-12 no-pright no-pleft">
+                <% @full_messages.each.with_index do |all_message, index| %>
+                    <% if all_message[:main].present? %>
+                        <% main_attachment = all_message[:type] === 'task' ? MessagesTask.get_attachments(all_message[:main].account_id, all_message[:main].id) : MessagesMoveRecord.get_attachments(all_message[:main].account_id, all_message[:main].id) %>
+                        <% to_users = all_message[:type] === 'task' ? [all_message[:main].subtask_staff_group.name] : all_message[:main].task_messages_move_record.map { |v| v.subtask_staff_group.name } %>
+                        <% temp_user_message = all_message[:type] === 'task' ? all_message[:main].user_messages_task : nil %>
+                        <!-- <div class='panel panel-default wrap-full-message <%= all_message[:type] === 'task' ? temp_user_message.where(user_id: @current_user.id).first.readed ? '' : 'non-read' : '' %>' data-message="<%= all_message[:main].id %>" data-type-message="<%= all_message[:type] %>">
+                          <div class='panel-heading accordion-toggle collapsed' data-parent='#accordion<%= index %>' data-toggle='collapse' href='#collapse-<%= index %>-<%= index %>' title="Click to expand"> -->
+
+                        <div class='panel panel-default wrap-full-message <%= all_message[:main].task_messages_move_record[0][:readed] ? '' : 'non-read' %>' data-message="<%= all_message[:main].id %>" data-type-message="<%= all_message[:type] %>">
+                          <div class='panel-heading accordion-toggle collapsed' data-parent='#accordion<%= index %>' data-toggle='collapse' href='#collapse-<%= index %>-<%= index %>' title="Click to expand">
+
+                            <div class="row">
+                              <div class="col-md-1">
+                                <%= all_message[:main].urgent == 2 ? '<i class="icon-star star-urgent" title="Urgent"></i>'.html_safe : all_message[:main].urgent == 1 ? '<i class="icon-star star-urgent color-yellow" title="Important"></i>'.html_safe : '' %>
+                                <% if all_message[:type] === 'task' %>
+                                    <i class="icon-tags pointer mark-message <%= temp_user_message.where(user_id: @current_user.id).first.marked ? 'icon-yellow' : 'icon-gray' %>" title="Mark" data-type-message="<%= all_message[:type] %>" data-message-tag-id="<%= all_message[:main].id %>"></i>
+                                <% end %>
+                              </div>
+                              <div class="col-md-1">
+                                <span><b><%= all_message[:type] === 'task' ? (all_message[:main].task_sender_id.blank? ? all_message[:main].user.name : all_message[:main].task_sender.name) : all_message[:main].user.name %></b></span>
+                              </div>
+                              <div class="row col-md-8">
+                                <div class="col-md-4">
+                                  <span><b><%= to_users.compact.reject(&:blank?).join(', ') %></b></span>
+                                </div>
+                                <div class="col-md-4">
+                                <span class="subject"><b><%= all_message[:main].subject.blank? ? nil :
+                                                                 all_message[:main].subject.html_safe %></b></span>
+                                  <span class="text-gray"> - <%= truncate(strip_tags(all_message[:main].body).gsub(/&nbsp;/i, ""), length: 40) %></span>
+                                </div>
+                                <% if all_message[:type] === 'task_move_record' %>
+                                    <div class="col-md-3">
+                                      <a href="<%= edit_move_record_path(id: all_message[:main].move_record_id) %>" target="_blank" class="redirect_move_record">
+                                        <i class="icon-truck"></i>&nbsp; <%= all_message[:main].move_record.move_contract_name %>
+                                      </a>
+                                    </div>
+                                <% end %>
+                              </div>
+                              <div class="col-md-2 no-pright nowrap">
+                                <%= main_attachment.size > 0 ? '<i class="icon-paperclip attachment-icon" title="Attachment"></i>'.html_safe : '<i class="icon-"></i>'.html_safe %>
+                                <span><b><%= all_message[:main].created_at.strftime("%l:%M %P %b %d") %></b></span>
+                                <i class="icon-trash pointer pull-right delete-message" title="Trash" data-message="<%= all_message[:main].id.to_s %>" data-type-message="<%= all_message[:type] %>"></i>
+                              </div>
+                            </div>
+                          </div>
+                          <div class='panel-collapse collapse' id='collapse-<%= index %>-<%= index %>'>
+                            <div class='panel-body body-warp-message'>
+                              <div class="body-message col-md-8 col-md-offset-2 p13"><%= all_message[:main].body.blank? ? all_message[:main].body : all_message[:main].body.html_safe %></div>
+                              <div class="col-md-2">
+                              </div>
+                              <% if main_attachment.size > 0 %>
+                                  <div class="attachment-message col-md-8 col-md-offset-2">
+                                    <% main_attachment.each do |attachment| %>
+                                        <% temp_name = attachment.file_path.split('_') %>
+                                        <%= attachment.file_path.gsub(temp_name[0] +'_'+temp_name[1]+'_', '') %>
+                                        <a href="<%= attachment.file_path %>" target="_blank" class="link-attachment">
+                                          View
+                                        </a>
+                                    <% end %>
+                                  </div>
+                              <% end %>
+                            </div>
+                          </div>
+                          <% all_message[:reply].each.with_index do |reply_message, index_reply| %>
+                              <div class='wrap-full-message wrap-message-reply' data-message='<%= reply_message.id %>'>
+                                <hr>
+                                <div class='panel-heading'>
+                                  <div class="row">
+                                    <div class="col-md-1 text-right">
+                                      (<%= index_reply + 2 %>)
+                                    </div>
+                                    <div class="col-md-1">
+                                      <span><b><%= reply_message.user.name %></b></span>
+                                    </div>
+                                    <div class="row col-md-8">
+                                      <div class="col-md-4">
+                                    <span>
+                                    </span>
+                                      </div>
+                                      <div class="col-md-4">
+                                    <span>
+                                      <b><%= all_message[:main].subject %></b>
+                                    </span>
+                                      </div>
+                                      <div class="col-md-3">
+                                      </div>
+                                      <div class="col-md-1">
+                                        <div class="pull-left">
+                                          <a class='accordion-toggle' data-parent='#accordion<%= index %>' data-toggle='collapse' href='#collapse-reply-<%= index %>-<%= index_reply %>'>
+                                            <div class='parent-message  btn btn-default expand-message' data-message='<%= all_message[:main].id %>'>
+                                              <i class="icon-caret-down"></i>
+                                            </div>
+                                          </a>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                  <span>
+                                    <b><%= reply_message.created_at.strftime("%l:%M %P %b %d") %></b>
+                                  </span>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class='panel-collapse' id='collapse-reply-<%= index %>-<%= index_reply %>'>
+                                  <div class='panel-body body-warp-message'>
+                                    <div class="body-message col-md-8 col-md-offset-2 p13"><%= reply_message.body.html_safe
+                                    %></div>
+                                  </div>
+                                </div>
+                              </div>
+                          <% end %>
+                        </div>
+                    <% end %>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<% else %>
+    <div class="message-inbox-task new-message-task">
+      <div class="row new-message-fixed colpd">
+        <div class="col-md-12">
+          <h3>This mailbox is inactive!</h3>
+          <a class='btn btn-md btn-ablock' href='/home.html'>
+            <i class='icon-chevron-left'></i>
+            Go Back Home
+          </a>
+        </div>
+      </div>
+    </div>
+<% end %>
+<br class="clearfix"><br>

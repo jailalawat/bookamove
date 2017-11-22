@@ -1,0 +1,24 @@
+<% @page_title = raw("<i class='fa fa-envelope blank3 blue-text'></i>") + "Master Emails List" %>
+
+<div class="col-md-12 mtop30">
+
+  <legend>
+    Edit Email
+    <div class="pull-right">
+      <a href="/email_alerts/<%= params[:id] %>" data-confirm="Are you sure?" data-remote="true" data-method="delete" class="font_normal"><i class="fa fa-trash font_normal" aria-hidden="true"></i> delete</a>
+    </div>
+  </legend>
+
+  <%= render 'form' %>
+
+</div>
+
+<script>
+    var topBar = document.getElementById("top-bar");
+
+    topBar.innerHTML = '<div class="msg"><div class="top-bar-left-margin2"><div class="row ' +
+        '"><div class="text-left">'
+        + '<div class="col1 colmr"><a href="/contract_settings#stages" class="btn btn-xs btn-link white no_underline top">CONTACT STAGES</a></div>'
+        + '</div></div></div></div>';
+
+</script>

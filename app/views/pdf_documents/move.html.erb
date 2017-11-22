@@ -1,0 +1,310 @@
+<% if !document_type.blank? && document_type == Pdf::PROPOSAL %>
+    <div id="proposal_warning">This is a move proposal only. Contact customer service to book your move.</div>
+<% end %>
+<div id="contract_title">
+  <div id="questions_call">Questions Call:  <%= move.account.office_phone %>
+  </div>
+  <%= Pdf.document_title(move, document_type, false).html_safe %> <strong>Please Read Carefully</strong>
+</div>
+
+<div class="terms_section">
+  <div class="vertical" id="id_section">
+    <img src="http://oomovers.moveonline.com/media/images/pdf/id.png" width="10px" height="12px"/></div>
+  <div class="section_content">
+    <table class="details">
+      <tr>
+        <td>Name</td>
+        <td class="data_cell"><%= move.blank? ? nil : move.move_record_client.first.client.name %></td>
+        <td>Phone</td>
+        <td class="data_cell"><%= move.blank? ? nil : move.move_record_client.first.client.home_phone %></td>
+        <td>Cell</td>
+        <td class="data_cell"><%= move.blank? ? nil : move.move_record_client.first.client.cell_phone %></td>
+        <td>Work</td>
+        <td class="data_cell"><%= move.blank? ? nil : move.move_record_client.first.client.work_phone %></td>
+      </tr>
+    </table>
+    <table class="details">
+      <tr>
+        <td>Move Date</td>
+        <td class="data_cell"><%= move.blank? ? nil : move.move_record_date.first.move_date.blank? ? nil : move.move_record_date.first.move_date.strftime("%Y-%m-%d") %></td>
+        <td>Start</td>
+        <td class="data_cell"><%= move.blank? ? nil : move.move_record_cost_hourly.start %></td>
+        <td>Move ID</td>
+        <td class="data_cell"><%= move.blank? ? nil : move.id %></td>
+        <td>Source</td>
+        <td class="data_cell"><%= move.blank? ? nil : move.move_referral.blank? ? nil : move.move_referral.description %></td>
+        <td>Confirmed</td>
+        <td class="data_cell"><%= move.blank? ? nil : MoveStatusEmailAlert.is_confirmed(move.id, move.account.id) %></td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+<div class="two_section_container margin_top">
+  <div class="half_section">
+    <div class="vertical">
+      <img src="http://oomovers.moveonline.com/media/images/pdf/pick_up.png" width="11px" height="49px"/></div>
+    <table class="details">
+      <tr>
+        <td>Street</td>
+        <td class="street_width data_cell">
+          <% unless move.blank? %>
+              <% unless move.move_record_location_origin.first.location.apartment.blank? %>
+                  <%= move.move_record_location_origin.first.location.apartment %> -
+              <% end %>
+              <%= move.move_record_location_origin.first.location.street %>
+          <% end %>
+        </td>
+        <td class="right">Code</td>
+        <td class="data_cell"><%= move.blank? ? nil : move.move_record_location_origin.first.location.postal_code %></td>
+      </tr>
+      <tr>
+        <td>City</td>
+        <td class="data_cell"><%= move.blank? ? nil : move.move_record_location_origin.first.location.city %></td>
+        <td class="right">Site</td>
+        <td class="data_cell"><%= move.blank? ? nil : move.move_record_location_origin.first.location.locale %></td>
+      </tr>
+      <tr>
+        <td colspan="4">Comments &nbsp; <strong><%= move.blank? ? nil : move.where_note %></strong></td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="half_section">
+    <div class="vertical" id="drop_section">
+      <img src="http://oomovers.moveonline.com/media/images/pdf/drop.png" width="11px" height="35px"/></div>
+    <table class="details">
+      <tr>
+        <td>Street</td>
+        <td class="street_width data_cell">
+          <% unless move.blank? %>
+              <% unless move.move_record_location_destination.first.location.apartment.blank? %>
+                  <%= move.move_record_location_destination.first.location.apartment %> -
+              <% end %>
+              <%= move.move_record_location_destination.first.location.street %>
+          <% end %>
+        </td>
+        <td class="right">Code</td>
+        <td class="data_cell"><%= move.blank? ? nil : move.move_record_location_destination.first.location.postal_code %></td>
+      </tr>
+      <tr>
+        <td>City</td>
+        <td class="data_cell"><%= move.blank? ? nil : move.move_record_location_destination.first.location.city %></td>
+        <td class="right">Site</td>
+        <td class="data_cell"><%= move.blank? ? nil : move.move_record_location_destination.first.location.locale %></td>
+      </tr>
+      <tr>
+        <td colspan="4">Comments &nbsp; <strong><%= move.blank? ? nil : move.where_note %></strong></td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+<div class="terms_section margin_top clear">
+  <div class="vertical">
+    <img src="http://oomovers.moveonline.com/media/images/pdf/details.png" width="11px" height="50px"/></div>
+  <div class="section_content">
+    <table class="details">
+      <tr>
+        <td id="cargo_label">Cargo</td>
+        <td class="data_cell"><%= move.cargo_type.blank? ? nil : move.cargo_type.description %></td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+<div class="two_section_container margin_top">
+  <div class="half_section">
+    <h2>Notes</h2>
+
+    <div id="notes">
+      <%= move.blank? ? nil : move.contract_note %>
+    </div>
+
+    <div class="dashed small">
+      <div class="subsection_padded">
+        <h3>Replacement Value Protection (RVP)</h3>
+        ooMovers' Replacement Value Protection (RVP) plan offers a superior level of protection. Should an item sustain
+        damage while in our care under RVP, we accept responsibility to restore the item to the point where it is in the
+        same condition as when we picked it up at the origin address. If repairs are not possible, or if loss of an item
+        or items occurs for which we are responsible, we will replace the item with a one of comparable quality.
+      </div>
+    </div>
+
+    <div class="dashed small">
+      <div class="subsection_padded">
+        <h3>All cargo claims are subject to a $100 deductible.</h3>
+        ooMovers' liability in the event of loss or damage is limited by the Terms or Conditions of Carriage shown here
+        and on the reverse side of this agreement.<br/>
+        Commercial General Liability coverage provided is $2 million with a $2,500 deductible on property damage.<br/>
+        <em>See reverse for further terms and conditions.</em>
+      </div>
+    </div>
+
+    <div class="dashed small">
+      <div class="subsection_padded">
+        <p>I have read and accept all the above terms and conditions.</p>
+
+        <p>X_________________ Date_________________</p>
+
+        <p>Services ordered were performed and shipment was received in apparent good condition. I accept charges as
+          shown above.</p>
+
+        <p>X_________________ Date_________________</p>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="half_section">
+    <h2>Payment Terms</h2>
+
+    <div class="small">
+      <div class="subsection_padded">
+        <strong>Hourly Rate</strong> services shall be at the rate of
+        <strong><%= move.blank? ? 0 : number_to_currency(move.move_record_cost_hourly.hourly_rate) %></strong>. The
+        total cost will reflect actual work time and may exceed the original estimate. <strong>Flat Rate</strong>
+        service is guaranteed not to exceed the price of
+        <strong><%= move.blank? ? 0 : number_to_currency(move.move_record_flat_rate.move_cost) %></strong> provided only
+        listed items are shipped and access is as described. <strong>Travel Time</strong> of
+        <strong><%= move.blank? ? 0 : move.move_record_cost_hourly.travel %></strong> hour(s) will be added to the work
+        time to pay the crews driving to and from the work sites.
+      </div>
+    </div>
+
+    <div class="dashed small" id="card_info_container">
+      <div class="subsection_padded">
+        Payment method to be <strong><%= move.blank? ? nil : move.move_record_payment.type_payment %></strong>. No
+        cheques accepted.<br/>
+        Card Number <strong><%= move.blank? ? nil : move.move_record_payment.number_card %></strong><br/>
+        Expiry <strong><%= move.blank? ? nil : move.move_record_payment.exp %></strong>
+
+        <div class="float half_half">Pre Auth #
+          <strong><%= move.blank? ? nil : move.move_record_payment.pre_auth %></strong></div>
+      </div>
+    </div>
+
+    <div class="dashed small" id="time_info_container">
+      <table class="small">
+        <tr>
+          <td>&nbsp;&nbsp;Stop Time</td>
+          <td class="bottom_border hours_width right data_cell">
+            <%= !move.blank? && document_type >= Pdf::INVOICE ? move.move_record_cost_hourly.stop : nil %>
+          </td>
+          <td class="hrs_width">&nbsp;</td>
+          <td>+ Travel</td>
+          <td class="bottom_border hours_width right data_cell">
+            <%= !move.blank? && document_type >= Pdf::INVOICE ? move.move_record_cost_hourly.travel : nil %>
+          </td>
+          <td>/hrs</td>
+        </tr>
+        <tr>
+          <td>- Start Time</td>
+          <td class="bottom_border hours_width right data_cell">
+            <%= !move.blank? && document_type >= Pdf::INVOICE ? move.move_record_cost_hourly.start : nil %>
+          </td>
+          <td class="hrs_width">&nbsp;</td>
+          <td>- Breaks</td>
+          <td class="bottom_border hours_width right data_cell">
+            <%= !move.blank? && document_type >= Pdf::INVOICE ? move.move_record_cost_hourly.breaks : nil %>
+          </td>
+          <td>/hrs</td>
+        </tr>
+        <tr>
+          <td>= Work Time</td>
+          <td class="bottom_border hours_width right data_cell">
+            <%= !move.blank? && document_type >= Pdf::INVOICE ? move.move_record_cost_hourly.hours : nil %>
+          </td>
+          <td class="hrs_width">/hrs</td>
+          <td>= Total</td>
+          <td class="bottom_border hours_width right data_cell">
+            <%= !move.blank? && document_type >= Pdf::INVOICE ? move.move_record_cost_hourly.estimate_time : nil %>
+          </td>
+          <td>/hrs</td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="lined small">
+      <table id="pricing_table">
+        <tr>
+          <td class="item_description_width">Move Cost</td>
+          <td>$</td>
+          <td class="bottom_border item_price_width right data_cell">
+            <%= !move.blank? && document_type >= Pdf::INVOICE ? number_with_precision(move.move_record_cost_hourly.move_cost, :precision => 2) : nil %>
+          </td>
+        </tr>
+        <tr>
+          <td>Discounted Move Cost</td>
+          <td>$</td>
+          <td class="bottom_border right data_cell">
+            <%= !move.blank? && document_type >= Pdf::INVOICE ? number_with_precision(move.move_record_discount.discount, :precision => 2) : nil %>
+          </td>
+        </tr>
+        <tr>
+          <td>Packing Supplies (see reverse)</td>
+          <td>$</td>
+          <td class="bottom_border right data_cell">
+            <%= move.blank? ? nil : number_with_precision(move.move_record_packing.total_packing, :precision => 2) %>
+          </td>
+        </tr>
+        <tr>
+          <td>Other Costs</td>
+          <td>$</td>
+          <td class="bottom_border right data_cell">
+            <%= move.blank? ? nil : number_with_precision(move.move_record_other_cost.other_cost, :precision => 2) %>
+          </td>
+        </tr>
+        <tr>
+          <td>Surcharges</td>
+          <td>$</td>
+          <td class="bottom_border right data_cell">
+            <%= move.blank? ? nil : number_with_precision(move.move_record_surcharge.surcharge, :precision => 2) %>
+          </td>
+        </tr>
+        <tr>
+          <td>Subtotal</td>
+          <td>$</td>
+          <td class="double_bottom_border right data_cell">
+            <%= !move.blank? && document_type >= Pdf::INVOICE ? number_with_precision(move.subtotal, :precision => 2) : nil %>
+          </td>
+        </tr>
+        <tr>
+          <td>GST/HST (#833755937)</td>
+          <td>$</td>
+          <td class="bottom_border right data_cell">
+            <%= !move.blank? && document_type >= Pdf::INVOICE ? number_with_precision(move.gst_hst, :precision => 2) : nil %>
+          </td>
+        </tr>
+        <tr>
+          <td>PST</td>
+          <td>$</td>
+          <td class="bottom_border right data_cell">
+            <%= !move.blank? && document_type >= Pdf::INVOICE ? number_with_precision(move.pst, :precision => 2) : nil %>
+          </td>
+        </tr>
+        <tr>
+          <td>Deposit</td>
+          <td>$</td>
+          <td class="bottom_border right data_cell">
+            <%= move.blank? ? nil : number_with_precision(move.deposit, :precision => 2) %>
+          </td>
+        </tr>
+        <tr>
+          <td>Total</td>
+          <td>$</td>
+          <td class="double_bottom_border right data_cell">
+            <%= !move.blank? && document_type >= Pdf::INVOICE ? number_with_precision(move.total_cost, :precision => 2) : nil %>
+          </td>
+        </tr>
+      </table>
+      <div class="subsection_padded" id="pricing_footer
+        <% document_type < Pdf::INVOICE ? '_1' : nil %>">
+        <div id="please_pay">
+          <% document_type >= Pdf::INVOICE ? 'Please pay on receipt. Late payment charges of 1.5% (19.56% per annum) will be applied monthly on overdue balance.' : nil %>
+        </div>
+        <div id="card_charges">Card charges on your statement will be from <strong>moversnetwork.ca</strong></div>
+      </div>
+    </div>
+  </div>
+</div>

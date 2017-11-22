@@ -1,0 +1,71 @@
+<%= form_for(@location) do |f| %>
+    <% if @location.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@location.errors.count, "error") %> prohibited this location from being saved:</h2>
+
+          <ul>
+            <% @location.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+
+    <div class="form-group">
+      <%= f.label :no %><br>
+      <%= f.text_field :no, class: 'form-control', required: true %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :street %><br>
+      <%= f.text_field :street, class: 'form-control', required: true %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :apartment %><br>
+      <%= f.text_field :apartment, class: 'form-control', required: true %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :entry_number %><br>
+      <%= f.text_field :entry_number, class: 'form-control', required: true %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :building %><br>
+      <%= f.text_field :building, class: 'form-control', required: true %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :city %><br>
+      <%= f.text_field :city, class: 'form-control', required: true %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :locale %><br>
+      <%= f.text_field :locale, class: 'form-control', required: true %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :province %><br>
+      <%= f.text_field :province, class: 'form-control', required: true %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :postal_code %><br>
+      <%= f.text_field :postal_code, class: 'form-control', required: true %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :access_details %><br>
+      <%= f.text_field :access_details, class: 'form-control', required: true %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :access_alert %><br>
+      <%= f.text_field :access_alert_id, class: 'form-control', required: true %>
+    </div>
+
+    <button type="submit" name="commit" class="btn btn-primary">Save</button>
+    <%= link_to 'Back', locations_path, class: 'btn btn-primary' %>
+<% end %>

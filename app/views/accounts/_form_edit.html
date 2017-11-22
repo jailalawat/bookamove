@@ -1,0 +1,107 @@
+<%= form_for @current_account, url: { action: "edit" } ,:html => {:class => 'form form-horizontal form-user-profile'} do |f| %>
+<% if @current_account.errors.any? %>
+<div id="error_explanation">
+    <h2><%= pluralize(@current_account.errors.count, "error") %> prohibited this user from being saved:</h2>
+    <ul>
+        <% @current_account.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+        <% end %>
+    </ul>
+</div>
+<% end %>
+
+<div class="col-md-12">
+    <div class="form-group">
+        <%= f.label :Company , class: 'control-label col-md-1'%>
+        <div class="col-md-5">
+            <%= f.text_field :name, class: 'form-control', required: true %>
+        </div>
+        <%= f.label :site , class: 'control-label col-md-1'%>
+        <div class="col-md-5">
+            <%= f.text_field :site, class: 'form-control', required: true %>
+        </div>
+    </div>
+    <div class="form-group">
+        <%= f.label :Email , class: 'control-label col-md-1'%>
+        <div class="col-md-5">
+            <%= f.text_field :email, class: 'form-control', required: true %>
+        </div>
+        <%= f.label :Address , class: 'control-label col-md-1'%>
+        <div class="col-md-5">
+            <%= f.text_field :address, class: 'form-control' %>
+        </div>
+    </div>
+    <div class="form-group">
+        <%= f.label :Toll_free , class: 'control-label col-md-1'%>
+        <div class="col-md-5">
+            <%= f.text_field :toll_free_phone, class: 'form-control' , required: true%>
+        </div>
+        <%= f.label :Building , class: 'control-label col-md-1'%>
+        <div class="col-md-5">
+            <%= f.text_field :building, class: 'form-control' %>
+        </div>
+    </div>
+    <div class="form-group">
+        <%= f.label :Office , class: 'control-label col-md-1'%>
+        <div class="col-md-5">
+            <%= f.text_field :office_phone, class: 'form-control'%>
+        </div>
+        <%= f.label :City , class: 'control-label col-md-1'%>
+        <div class="col-md-5">
+            <%= f.text_field :city, class: 'form-control' %>
+        </div>
+    </div>
+    <div class="form-group">
+        <%= f.label :Fax , class: 'control-label col-md-1'%>
+        <div class="col-md-5">
+            <%= f.text_field :fax, class: 'form-control' %>
+        </div>
+        <%= f.label :Locale , class: 'control-label col-md-1'%>
+        <div class="col-md-5">
+            <%= f.text_field :locale, class: 'form-control' %>
+        </div>
+    </div>
+    <div class="form-group">
+        <%= f.label :Subdomain , class: 'control-label col-md-1'%>
+        <div class="col-md-5">
+            <%= f.text_field :subdomain, class: 'form-control' %>
+        </div>
+        <%= f.label :Post , class: 'control-label col-md-1'%>
+        <div class="col-md-5">
+            <%= f.text_field :postal_code, class: 'form-control', required: true %>
+        </div>
+    </div>
+    <div class="form-group">
+        <%= f.label :Web_Site , class: 'control-label col-md-1'%>
+        <div class="col-md-5">
+            <%= f.text_field :site, class: 'form-control' , required: true%>
+        </div>
+        <%= f.label :Prov ,'Prov' , class: 'control-label col-md-1'%>
+        <div class="col-md-5">
+            <select name="account[province]" class="form-control" style="width:100" %>
+                <% @provinces.each do |prov| %>
+                <option value="<%= prov.description %>"
+                <%= @current_account.province == prov.description ? 'selected' : '' %> > <%= prov.description %></option>
+                <% end %>
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <%= f.label :status , class: 'control-label col-md-1'%>
+        <div class="col-md-5">
+            <%= f.check_box :active %>
+        </div>
+    </div>
+</div>
+<div class="form-group">
+    <%= f.label :bio , class: 'control-label col-md-1'%>
+    <div class="col-md-11">
+        <%= f.text_area :bio, class: 'form-control' %>
+    </div>
+</div>
+<div class="clearfix"></div>
+<div class="pull-right btn-user-profile">
+    <button type="submit" name="commit" class="btn btn-primary ok-user-profile">Save</button>
+    <%= link_to 'Back', home_path, class: 'btn btn-primary' %>
+</div>
+<% end %>

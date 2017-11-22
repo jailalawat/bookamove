@@ -1,0 +1,32 @@
+<div class="body_top_margin col-md-12">
+
+<% if flash[:notice] %>
+    <div class="alert alert-success alert-dismissable">
+      <h4>
+        <i class="icon-ok-sign"></i>
+        Successful
+      </h4>
+
+      <p><%= flash[:notice] %></p>
+    </div>
+<% end %>
+<legend>
+  <% if params[:type] == "driver" %>
+      Mover Profile
+  <% else %>
+      Staff Profile
+  <% end %>
+</legend>
+
+<%= render 'form' %>
+
+<br class="clearfix"><br>
+
+  <% if validate_special_permission("edit_shares.pay_rates", @current_actions) %>
+    <legend>Costs $$$</legend>
+
+    <%= render 'form_costs' %>
+  <% end %>
+</div>
+
+<br class="clearfix"><br>

@@ -1,0 +1,20 @@
+<div class="row colpd hidden">
+  <% if @settings.show_move_type %>
+      <div class="form-group col1 colmr">
+        <%= label :move_record, 'Move Type', id: "moveType", class: "hhidden labels" %><br>
+        <%= select :move_record, :move_type_id, options_from_collection_for_select(@move_type_data, "id", :description, @settings.move_type_id), {include_blank: "Move Type"}, :class => 'form-control text-grey', style: 'width:100%', data_id: 'move_type_id', readonly: true, onchange: "showLabel('moveType')" %>
+      </div>
+  <% end %>
+  <% if @settings.show_move_type_details %>
+      <div class="form-group col5 colmr">
+        <%= label :move_type, 'Move type alert details', id: "moveTypeDetails", class: "hhidden labels" %><br>
+        <%= text_field :move_record, :move_type_detail, class: 'form-control text-grey', style: 'width:100%', readonly: true, placeholder: "Move Type Alert Details", onchange: "showLabel('moveTypeDetails')" %>
+      </div>
+  <% end %>
+  <% if @settings.show_move_type_alert %>
+      <div class="form-group col1">
+        <%= label :move_type_details, 'Move type alert', id: "moveTypeAlert", class: "hhidden labels" %><br>
+        <%= select :move_record, :move_type_alert_id, options_from_collection_for_select(@move_type_alert, :description, :description, @settings.move_type_alert.description), {include_blank: "Move Type Alert"}, :class => 'form-control text-grey', style: 'width:100%', data_id: 'move_type_alert_id', readonly: true, onchange: "showLabel('moveTypeAlert')" %>
+      </div>
+  <% end %>
+</div>

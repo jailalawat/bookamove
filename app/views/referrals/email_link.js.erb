@@ -1,0 +1,4 @@
+<% if params[:ra_email].present? %>
+  alert("Email has been send");
+  $("#f_emails").html("<%= j(render partial: "referrals/email_link") %>");
+<% end %>

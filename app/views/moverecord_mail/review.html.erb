@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="format-detection" content="date=no">
+  <meta name="format-detection" content="address=no">
+  <meta name="format-detection" content="email=no">
+
+  <style type="text/css">
+    a { text-decoration: none; color: #33679e }
+    a:hover { color: #2a6496 !important; text-decoration: none !important; outline: 0 !important; }
+    a:focus { color: #2a6496 !important; text-decoration: none !important; outline: 0 !important; }
+
+    body {
+      font-family: Arial, sans-serif;
+      font-size: 9.6pt;
+      background-color: #f0f0f0;
+      color: #000000
+    }
+  </style>
+</head>
+<body background="#f0f0f0" style="font-family: Arial, sans-serif; background-color: #f0f0f0; padding: 8px; color: #000000">
+
+<table width="500" align="center" cellpadding="12" cellspacing="0" border="0" style="width: 500px; margin: 0 auto;">
+  <tr>
+    <td align="left" style="padding-left: 0px; padding-right: 0px; padding-bottom: 8px;">
+      <a href="<%= @account.site %>"><img src="<%= @logo %>" width="192" border="0"></a>
+    </td>
+    <td align="right" style="padding-left: 0px; padding-right: 0px; padding-bottom: 8px;">
+      <b><a style="font-family: Arial, sans-serif; font-size: 16pt; line-height: 16px; color: #f04241" href="tel:<%= @tel %>"><%= @tel %></a></b>
+      <br>
+      <span style="font-family: Arial, sans-serif; color: #33679e; font-size: 8.25pt"><%= @account.working_hours %></span>
+    </td>
+  </tr>
+  <tr>
+    <td bgcolor="#264b7f" colspan="2" align="center" style="height: 13px; padding: 8px;">
+      <b style="font-family: Arial, sans-serif; color: white; font-size: 17pt">Reward Your Mover</b>
+    </td>
+  </tr>
+  <tr style="line-height: 20px;">
+    <td bgcolor="white" colspan="2" align="center" style="padding: 20px; color: #000000">
+      <b style="font-family: Arial, sans-serif; color: #33679e">
+        Thank you <b style="color: #000000"><%= @name %></b> for choosing <% if @account.name == "oomovers" %><span style="color: #e7403f">oo</span> movers<% else %><%= @account.name %><% end %>.<br>
+        Please take a moment and share your experience.
+      </b>
+
+      <br><br>
+
+      <b style="font-family: Arial, sans-serif; color:#33679e">Would you recommend <% if @account.name == "oomovers" %><span style="color: #e7403f">oo</span> movers<% else %><%= @account.name %><% end %> to others?</b>
+
+      <br><br>
+
+      <a href="<%= @url %>/review_negative?move_id=<%= @move.id %>&account_id=<%= @move_record_client.account_id %>&user_id=<%= @move_record_client.user_id %>&city=<%= @city %>&name=<%= @name %>&truck_driver=<%= @truck_driver %>&token=<%= @token %>" style="font-family: Arial, sans-serif; background-color: #f34541; border-radius: 3px; color: white; padding: 6px 8px; text-decoration: none; font-weight: bold;">No</a> <a href="<%= @url %>/review_positive?move_id=<%= @move.id %>&account_id=<%= @move_record_client.account_id %>&user_id=<%= @move_record_client.user_id %>&city=<%= @city %>&name=<%= @name %>&truck_driver=<%= @truck_driver %>&token=<%= @token %>" style="font-family: Arial, sans-serif; background-color: #49bf67; border-radius: 3px; color: white; padding: 6px 8px; text-decoration: none; font-weight: bold;">Yes</a>
+
+      <br><br>
+
+      <b style="font-family: Arial, sans-serif; color: #000000">Review Bonus Program</b><br>
+      <span style="font-family: Arial, sans-serif; color: #000000">
+        <% if @account.name == "oomovers" %><span style="color: #e7403f">oo</span> movers<% else %><%= @account.name %><% end %> who get positive online reviews get a bonus up to <b>$25</b>
+      </span>
+    </td>
+  </tr>
+  <tr>
+    <td bgcolor="#264b7f" colspan="2" align="center" style="padding: 8px; color: white; height: 27px;">
+      <table cellspacing="0" cellpadding="0" border="0" width="100%">
+        <tr align="center">
+          <td>
+            <b style="font-family: Arial, sans-serif; color: white;">
+              Refer a friend and get a Referral Reward
+              <a href="http://<%= @account.subdomain %>.bookamove.ca/referrals?ra=<%= @ra_email %>" style="font-family: Arial, sans-serif; background-color: #f04241; border-radius: 3px; color: white; padding: 6px 8px; text-decoration: none; font-weight: bold; margin-left: 10px">Earn $50 - $100+</a>
+            </b>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" align="center" style="padding: 0px;">
+      <table cellspacing="0" cellpadding="12" border="0" width="100%">
+        <tr valign="middle">
+          <td style="padding-left: 0px;">
+            <span style="font-family: Arial, sans-serif; color: #a4a4a4; font-size: 9pt">
+              <%= @account.address.html_safe %>
+            </span>
+          </td>
+          <td align="center" style="white-space: nowrap;">
+            <a href="unsub" style="font-family: Arial, sans-serif; color: #a4a4a4; font-size: 9pt">Unsubscribe</a>
+          </td>
+          <td align="center" style="white-space: nowrap;">
+            <a href="<%= @account.privacy_web_page %>" style="font-family: Arial, sans-serif; color: #a4a4a4; font-size: 9pt">Privacy Policy</a>
+          </td>
+          <td align="center" style="white-space: nowrap; padding-right: 0px;">
+            <a href="<%= @account.contact_us_web_page %>" style="font-family: Arial, sans-serif; color: #a4a4a4; font-size: 9pt">Contact Us</a>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+
+</body>
+</html>

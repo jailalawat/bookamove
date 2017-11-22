@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="format-detection" content="telephone=no">
+  <link rel="stylesheet" media="all" href="/assets/template/bootstrap/bootstrap.css" />
+  <link rel="stylesheet" media="all" href="/stylesheets/review.css" />
+  <script src="/assets/template/jquery/jquery.min.js"></script>
+  <script src="/assets/reviews.js"></script>
+</head>
+<body background="#f0f0f0">
+<table id="main_table" align="center" cellpadding="12" cellspacing="0" border="0">
+  <tr>
+    <td align="left" style="padding-left: 0px; padding-right: 0px; padding-bottom: 8px;">
+      <a href="<%= @account.site %>" target="_blank"><img src="<%= @logo %>" width="192" border="0" class="m_img img-responsive"></a>
+    </td>
+    <td align="right" style="padding-left: 0px; padding-right: 0px; padding-bottom: 8px;">
+      <b><a class="tel" href="tel:<%= @tel %>"><%= @tel %></a></b>
+      <br>
+      <span class="hours"><%= @account.working_hours %></span>
+    </td>
+  </tr>
+  <tr>
+    <td bgcolor="#264b7f" colspan="2" align="center" style="height: 13px; padding: 8px;">
+      <b class="title" style="color: white;">Bad Review</b>
+    </td>
+  </tr>
+  <tr style="line-height: 20px;">
+    <td bgcolor="white" colspan="2" align="center" class="main_td">
+
+      <br>
+      <b style="color: #33679e">
+        Thank you for the feedback on your move experience.<br>
+        Complaints as well as praise help us improve our service.<br><br>
+
+        We are sincerely sorry that you were not satisfied.<br>
+        Your concerns have been shared with all involved.<br><br>
+
+        If you wish to discuss this further please call anytime.<br>
+        We welcome the opportunity to resolve your complaint.
+      </b>
+      <br><br>
+
+    </td>
+  </tr>
+  <tr>
+    <td bgcolor="#264b7f" colspan="2" align="center" style="padding: 8px; color: white; height: 27px;">
+      <table cellspacing="0" cellpadding="0" border="0" width="100%">
+        <tr align="center">
+          <td>
+            <b class="reward_line">
+              Refer a friend and get a Referral Reward
+              <a target="_blank" href="http://<%= @account.subdomain %>.bookamove.ca/referrals?ra=<%= @ra_email %>" style="background-color: #f04241; border-radius: 3px; color: white; padding: 6px 8px; text-decoration: none; font-weight: bold; margin-left: 10px">Earn $50 - $100+</a>
+            </b>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" align="center" style="padding: 0px;">
+      <table cellspacing="0" cellpadding="12" border="0" width="100%">
+        <tr valign="middle">
+          <td style="padding-left: 0px;" class="addr">
+            <span class="bottom_links">
+              <%= @account.address.html_safe %>
+            </span>
+          </td>
+          <td align="center">
+            <a href="unsub" class="bottom_links">Unsubscribe</a>
+          </td>
+          <td align="center">
+            <a href="<%= @account.privacy_web_page %>" class="bottom_links">Privacy Policy</a>
+          </td>
+          <td align="center" style="padding-right: 0px;">
+            <a href="<%= @account.contact_us_web_page %>" class="bottom_links">Contact Us</a>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+
+</body>
+</html>

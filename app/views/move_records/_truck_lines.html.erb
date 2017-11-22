@@ -1,0 +1,121 @@
+<% @trucks.each.with_index do |truck, index| %>
+    <div class="row truck-row colpd">
+      <% if @settings.show_truck %>
+          <div class="form-group col0-5 colmr">
+            <%= label :truck, 'Truck', class: "hhidden labels" %><br>
+            <%= text_field "move_record_truck[#{index}]", :truck_id, value: nil, placeholder: "Truck", class: 'form-control', style: 'width:100%', readonly: true, disabled: true %>
+          </div>
+      <% end %>
+      <% if @settings.show_truck_name %>
+          <div class="form-group col1 colmr">
+            <%= label :truck, :truck_size, class: "hhidden labels" %><br>
+            <%= text_field "move_record_truck[#{index}]", :truck_name, placeholder: "Truck Size", class: 'form-control', style:
+                'width:100%', readonly: true %>
+          </div>
+      <% end %>
+      <% if @settings.show_truck_equipment_details %>
+          <div class="form-group col4-5 colmr">
+            <%= label :truck, 'Equipment details', class: "hhidden labels" %><br>
+            <%= text_field "move_record_truck[#{index}]", :equipment_details, placeholder: "Equipment Alert Details", class:
+                'form-control', style: 'width:100%', readonly: true %>
+          </div>
+      <% end %>
+      <% if @settings.show_truck_name_equipment_alert %>
+          <div class="form-group col1">
+            <%= label :truck, 'Equipment alert', class: "hhidden labels" %><br>
+            <%= select "move_record_truck[#{index}]", :equipment_alert_id, options_from_collection_for_select(@equipment_alert, :description, :description, @settings.equipment_alert.description), {include_blank: "Equipment alert"}, :class => 'form-control text-grey', style: 'width:100%', readonly: true, data_id: 'equipment_alert_id' %>
+          </div>
+      <% end %>
+      <div class="row colpd">
+        <% if @settings.show_men %>
+            <div class="form-group col0-5 colmr">
+              <%= label :how, 'men', class: "hhidden labels" %><br>
+              <%= select "move_record_truck[#{index}]", :number_man_id, options_for_select({1 => "1", 2 => "2", 3 => "3", 4 => "4", 5 => "5", 6 => "6", 7 => "7", 8 => "8", 9 => "9", 10 => "10"}, @settings.number_man_id), {include_blank: "men"}, class: 'form-control text-grey', style: 'width:100%', readonly: true, data_id: 'number_man_id' %>
+            </div>
+        <% end %>
+        <% if @settings.show_lead %>
+            <div>
+              <div class="form-group col0-6">
+                <%= label :how, 'lead', class: "hhidden labels" %><br>
+                <%= select "move_record_truck[#{index}]", :lead, options_from_collection_for_select(@users, "id", :email), {include_blank: "lead"}, :class => 'form-control text-grey', style: 'width:100%', readonly: true %>
+              </div>
+              <div class="form-group col0-6 colmr">
+                <%= label :how, 'hours', class: "hhidden labels" %><br>
+                <%= text_field "move_record_truck[#{index}]", :lead_hour, placeholder: "hours", class: 'form-control',
+                               style: 'width:100%', readonly: true %>
+              </div>
+            </div>
+        <% end %>
+
+        <% if @settings.show_mover_2 %>
+            <div>
+              <div class="form-group col0-6">
+                <%= label :how, 'mover', class: "hhidden labels" %><br>
+                <%= select "move_record_truck[#{index}]", :mover_2, options_from_collection_for_select(@users, "id", :email), {include_blank: "mover"}, :class => 'form-control text-grey', style: 'width:100%', readonly: true %>
+              </div>
+              <div class="form-group col0-6 colmr">
+                <%= label :how, 'hours', class: "hhidden labels" %><br>
+                <%= text_field "move_record_truck[#{index}]", :mover_2_hour, placeholder: "hours", class:
+                    'form-control', style: 'width:100%', readonly: true %>
+              </div>
+            </div>
+        <% end %>
+
+        <% if @settings.show_mover_3 %>
+            <div>
+              <div class="form-group col0-6">
+                <%= label :how, 'mover', class: "hhidden labels" %><br>
+                <%= select "move_record_truck[#{index}]", :mover_3, options_from_collection_for_select(@users, "id", :email), {include_blank: "mover"}, :class => 'form-control text-grey', style: 'width:100%', readonly: true %>
+              </div>
+              <div class="form-group col0-6 colmr">
+                <%= label :how, 'hours', class: "hhidden labels" %><br>
+                <%= text_field "move_record_truck[#{index}]", :mover_3_hour, placeholder: "hours", class:
+                    'form-control', style: 'width:100%', readonly: true %>
+              </div>
+            </div>
+        <% end %>
+
+        <% if @settings.show_mover_4 %>
+            <div>
+              <div class="form-group col0-6">
+                <%= label :how, 'mover', class: "hhidden labels" %><br>
+                <%= select "move_record_truck[#{index}]", :mover_4, options_from_collection_for_select(@users, "id", :email), {include_blank: "mover"}, :class => 'form-control text-grey', style: 'width:100%', readonly: true %>
+              </div>
+              <div class="form-group col0-6 colmr">
+                <%= label :how, 'hours', class: "hhidden labels" %><br>
+                <%= text_field "move_record_truck[#{index}]", :mover_4_hour, placeholder: "hours", class:
+                    'form-control', style: 'width:100%', readonly: true %>
+              </div>
+            </div>
+        <% end %>
+
+        <% if @settings.show_mover_5 %>
+            <div>
+              <div class="form-group col0-6">
+                <%= label :how, 'mover', class: "hhidden labels" %><br>
+                <%= select "move_record_truck[#{index}]", :mover_5, options_from_collection_for_select(@users, "id", :email), {include_blank: "mover"}, :class => 'form-control text-grey', style: 'width:100%', readonly: true %>
+              </div>
+              <div class="form-group col0-6 colmr">
+                <%= label :how, 'hours', class: "hhidden labels" %><br>
+                <%= text_field "move_record_truck[#{index}]", :mover_5_hour, placeholder: "hours", class:
+                    'form-control', style: 'width:100%', readonly: true %>
+              </div>
+            </div>
+        <% end %>
+
+        <% if @settings.show_mover_6 %>
+            <div>
+              <div class="form-group col0-6">
+                <%= label :how, 'mover', class: "hhidden labels" %><br>
+                <%= select "move_record_truck[#{index}]", :mover_6, options_from_collection_for_select(@users, "id", :email), {include_blank: "mover"}, :class => 'form-control text-grey', style: 'width:100%', readonly: true %>
+              </div>
+              <div class="form-group col0-6 colmr">
+                <%= label :how, 'hours', class: "hhidden labels" %><br>
+                <%= text_field "move_record_truck[#{index}]", :mover_6_hour, class: 'form-control', placeholder: "hours",
+                               style: 'width:100%', readonly: true %>
+              </div>
+            </div>
+        <% end %>
+      </div>
+    </div>
+<% end %>

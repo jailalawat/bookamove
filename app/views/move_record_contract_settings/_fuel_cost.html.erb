@@ -1,0 +1,22 @@
+<form class="form-inline">
+  <!--percentage_mc-->
+  <div class="form-group col-md-1">
+    <%= label :fuel, :percentage_mc, '%/MC', class: "labels" %><br>
+    <%= text_field :fuel, :percentage_mc, disabled: true, class: 'form-control', style: 'width:100%' %>
+  </div>
+  <!--fixed-->
+  <div class="form-group col-md-1">
+    <%= label :fuel, :fixed, class: "labels" %><br>
+    <%= text_field :fuel, :fixed, disabled: true, class: 'form-control', style: 'width:100%' %>
+  </div>
+  <!--notes-->
+  <div class="form-group col-md-5">
+    <%= label :fuel, :notes, class: "labels" %><br>
+    <%= text_field :fuel, :notes, disabled: true, class: 'form-control', style: 'width:100%' %>
+  </div>
+  <!--fuel_cost-->
+  <div class="form-group col-md-3">
+    <%= label :fuel, :fuel_cost, class: "labels" %><br>
+    <%= text_field :fuel, :fuel_cost, disabled: true, class: 'form-control', style: 'width:100%' %>
+  </div>
+</form>

@@ -1,0 +1,13 @@
+$("#successModal").modal("show");
+$('#name_error').hide();
+$('#phone_email_error').hide();
+$("#referral_agent_email_error").hide();
+
+<% if @success %>
+  $("#error").hide();
+  $("#request_title").html("Success").css("color", "green");
+  $("#request_body").html("<h4>Thank you for your referral, check your email for updates on the progress of this move.</h4>");
+<% elsif @error%>
+  $("#request_title").html("Error").css("color", "red");
+  $("#request_body").html("<h4><%= @error %></h4>");
+<% end %>

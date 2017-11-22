@@ -1,0 +1,19 @@
+<% @page_title = raw("<i class='fa fa-envelope blank3 blue-text'></i>") + "Master Email List" %>
+
+<div class="col-md-12 mtop30">
+
+  <legend>New Email</legend>
+
+  <%= render 'form' %>
+
+</div>
+
+<script>
+    var topBar = document.getElementById("top-bar");
+
+    topBar.innerHTML = '<div class="msg"><div class="top-bar-left-margin2"><div class="row ' +
+        '"><div class="text-left">'
+        + '<div class="col1 colmr"><a href="/contract_settings#stages" class="btn btn-xs btn-link white no_underline top">CONTACT STAGES</a></div>'
+        + '</div></div></div></div>';
+
+</script>

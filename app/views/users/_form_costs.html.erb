@@ -1,0 +1,596 @@
+<form method="post" accept-charset="UTF-8" action="/edit_user_commissions/<%= params[:id] %>" class="form form-horizontal">
+  <!--driver-->
+  <div class="row <%= !@user.driver_commission ? 'hide' : '' %>">
+    <div class="form-group col-md-12">
+      <div class="col-md-1 text-right">
+        <br><%= label :driver, '', 'DRIVER' %>
+      </div>
+      <div class="col-md-5">
+        <div class="col-md-2">
+          <%= label :driver, :move, 'Move' %><br>
+          <%= text_field :driver, :move, :value => @driver_commission..blank? ? @driver_commission.move : '0.0', class: 'form-control', style: 'width:100%' %>
+        </div>
+        <div class="col-md-2">
+          <%= label :driver, :storage, 'Storage' %><br>
+          <%= text_field :driver, :storage, :value => @driver_commission..blank? ? @driver_commission.storage : '0.0', class: 'form-control', style: 'width:100%' %>
+        </div>
+        <div class="col-md-2">
+          <%= label :driver, :packing, 'Packing' %><br>
+          <%= text_field :driver, :packing, :value => @driver_commission..blank? ? @driver_commission.packing : '0.0', class: 'form-control', style: 'width:100%' %>
+        </div>
+        <div class="col-md-2">
+          <%= label :driver, :insurance, 'Insurance' %><br>
+          <%= text_field :driver, :insurance, :value => @driver_commission..blank? ? @driver_commission.insurance : '0.0', class: 'form-control', style: 'width:100%' %>
+        </div>
+        <div class="col-md-2">
+          <%= label :driver, :other, 'Other' %><br>
+          <%= text_field :driver, :other, :value => @driver_commission..blank? ? @driver_commission.other : '0.0', class: 'form-control', style: 'width:100%' %>
+        </div>
+        <div class="col-md-2">
+          <%= label :driver, :blank, 'Blank' %><br>
+          <%= text_field :driver, :blank, :value => @driver_commission..blank? ? @driver_commission.blank : '0.0', class: 'form-control', style: 'width:100%' %>
+        </div>
+      </div>
+      <div class="col-md-1 text-right">
+        <br><%= label :driver, '', 'LD' %>
+      </div>
+      <div class="col-md-5">
+        <div class="col-md-2">
+          <%= label :driver, :ld_move, 'Move' %><br>
+          <%= text_field :driver, :ld_move, :value => @driver_commission..blank? ? @driver_commission.ld_move : '0.0', class: 'form-control', style: 'width:100%' %>
+        </div>
+        <div class="col-md-2">
+          <%= label :driver, :ld_storage, 'Storage' %><br>
+          <%= text_field :driver, :ld_storage, :value => @driver_commission..blank? ? @driver_commission.ld_storage : '0.0', class: 'form-control', style: 'width:100%' %>
+        </div>
+        <div class="col-md-2">
+          <%= label :driver, :ld_packing, 'Packing' %><br>
+          <%= text_field :driver, :ld_packing, :value => @driver_commission..blank? ? @driver_commission.ld_packing : '0.0', class: 'form-control', style: 'width:100%' %>
+        </div>
+        <div class="col-md-2">
+          <%= label :driver, :ld_insurance, 'Insurance' %><br>
+          <%= text_field :driver, :ld_insurance, :value => @driver_commission..blank? ? @driver_commission.ld_insurance : '0.0', class: 'form-control', style: 'width:100%' %>
+        </div>
+        <div class="col-md-2">
+          <%= label :driver, :ld_other, 'Other' %><br>
+          <%= text_field :driver, :ld_other, :value => @driver_commission..blank? ? @driver_commission.ld_other : '0.0', class: 'form-control', style: 'width:100%' %>
+        </div>
+        <div class="col-md-2">
+          <%= label :driver, :ld_blank, 'Blank' %><br>
+          <%= text_field :driver, :ld_blank, :value => @driver_commission..blank? ? @driver_commission.ld_blank : '0.0', class: 'form-control', style: 'width:100%' %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--pay-->
+  <div class="row <%= !@user.move_commission ? 'hide' : '' %>">
+    <div class="form-group col-md-12">
+      <div class="col-md-1 text-right">
+        <br><%= label :pay, '', 'PAY' %>
+      </div>
+      <div class="col-md-11">
+        <div class="col-md-1">
+          <%= label :pay, :hourly, 'Hourly' %><br>
+          <%= text_field :pay, :hourly, :value => @pay_commission.present? ? @pay_commission.hourly : '0.0', class: 'form-control', style: 'width:100%' %>
+        </div>
+        <div class="col-md-1">
+          <%= label :pay, :monthly, 'Monthly' %><br>
+          <%= text_field :pay, :monthly, :value => @pay_commission.present? ? @pay_commission.monthly : '0.0', class: 'form-control', style: 'width:100%' %>
+        </div>
+        <div class="col-md-10">
+          <%= label :pay, :detail, 'Details' %><br>
+          <%= text_field :pay, :detail, :value => @pay_commission.present? ? @pay_commission.detail : '', class: 'form-control', style: 'width:100%' %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--lead-->
+  <div class="row <%= !@user.move_commission ? 'hide' : '' %>">
+    <div class="form-group col-md-12">
+      <div class="col-md-1 text-right">
+        <br><%= label :lead, '', 'LEAD' %>
+      </div>
+      <div class="col-md-5">
+        <div class="col-md-2">
+          <%= label :lead, :move, 'Move' %><br>
+          <%= text_field :lead, :move, :value => @lead_commission..blank? ? @lead_commission.move : '0.0', class: 'form-control', style: 'width:100%' %>
+        </div>
+        <div class="col-md-2">
+          <%= label :lead, :storage, 'Storage' %><br>
+          <%= text_field :lead, :storage, :value => @lead_commission..blank? ? @lead_commission.storage : '0.0', class: 'form-control', style: 'width:100%' %>
+        </div>
+        <div class="col-md-2">
+          <%= label :lead, :packing, 'Packing' %><br>
+          <%= text_field :lead, :packing, :value => @lead_commission..blank? ? @lead_commission.packing : '0.0', class: 'form-control', style: 'width:100%' %>
+        </div>
+        <div class="col-md-2">
+          <%= label :lead, :insurance, 'Insurance' %><br>
+          <%= text_field :lead, :insurance, :value => @lead_commission..blank? ? @lead_commission.insurance : '0.0', class: 'form-control', style: 'width:100%' %>
+        </div>
+        <div class="col-md-2">
+          <%= label :lead, :other, 'Other' %><br>
+          <%= text_field :lead, :other, :value => @lead_commission..blank? ? @lead_commission.other : '0.0', class: 'form-control', style: 'width:100%' %>
+        </div>
+        <div class="col-md-2">
+          <%= label :lead, :blank, 'Blank' %><br>
+          <%= text_field :lead, :blank, :value => @lead_commission..blank? ? @lead_commission.blank : '0.0', class: 'form-control', style: 'width:100%' %>
+        </div>
+      </div>
+      <div class="col-md-1 text-right">
+        <br><%= label :lead, '', 'LD' %>
+      </div>
+      <div class="col-md-5">
+        <div class="col-md-2">
+          <%= label :lead, :ld_move, 'Move' %><br>
+          <%= text_field :lead, :ld_move, :value => @lead_commission..blank? ? @lead_commission.ld_move : '0.0', class: 'form-control', style: 'width:100%' %>
+        </div>
+        <div class="col-md-2">
+          <%= label :lead, :ld_storage, 'Storage' %><br>
+          <%= text_field :lead, :ld_storage, :value => @lead_commission..blank? ? @lead_commission.ld_storage : '0.0', class: 'form-control', style: 'width:100%' %>
+        </div>
+        <div class="col-md-2">
+          <%= label :lead, :ld_packing, 'Packing' %><br>
+          <%= text_field :lead, :ld_packing, :value => @lead_commission..blank? ? @lead_commission.ld_packing : '0.0', class: 'form-control', style: 'width:100%' %>
+        </div>
+        <div class="col-md-2">
+          <%= label :lead, :ld_insurance, 'Insurance' %><br>
+          <%= text_field :lead, :ld_insurance, :value => @lead_commission..blank? ? @lead_commission.ld_insurance : '0.0', class: 'form-control', style: 'width:100%' %>
+        </div>
+        <div class="col-md-2">
+          <%= label :lead, :ld_other, 'Other' %><br>
+          <%= text_field :lead, :ld_other, :value => @lead_commission..blank? ? @lead_commission.ld_other : '0.0', class: 'form-control', style: 'width:100%' %>
+        </div>
+        <div class="col-md-2">
+          <%= label :lead, :ld_blank, 'Blank' %><br>
+          <%= text_field :lead, :ld_blank, :value => @lead_commission..blank? ? @lead_commission.ld_blank : '0.0', class: 'form-control', style: 'width:100%' %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--quote-->
+  <div class="row <%= !@user.move_commission ? 'hide' : '' %>">
+    <div class="form-group col-md-12">
+      <div class="col-md-1 text-right">
+        <br><%= label :quote, '', 'QUOTE' %>
+      </div>
+      <div class="col-md-5">
+        <div class="col-md-2">
+          <%= label :quote, :move, 'Move' %><br>
+          <%= text_field :quote, :move, :value => @quote_commission..blank? ? @quote_commission.move : '0.0', class: 'form-control', style: 'width:100%' %>
+        </div>
+        <div class="col-md-2">
+          <%= label :quote, :storage, 'Storage' %><br>
+          <%= text_field :quote, :storage, :value => @quote_commission..blank? ? @quote_commission.storage : '0.0', class: 'form-control', style: 'width:100%' %>
+        </div>
+        <div class="col-md-2">
+          <%= label :quote, :packing, 'Packing' %><br>
+          <%= text_field :quote, :packing, :value => @quote_commission..blank? ? @quote_commission.packing : '0.0', class: 'form-control', style: 'width:100%' %>
+        </div>
+        <div class="col-md-2">
+          <%= label :quote, :insurance, 'Insurance' %><br>
+          <%= text_field :quote, :insurance, :value => @quote_commission..blank? ? @quote_commission.insurance : '0.0', class: 'form-control', style: 'width:100%' %>
+        </div>
+        <div class="col-md-2">
+          <%= label :quote, :other, 'Other' %><br>
+          <%= text_field :quote, :other, :value => @quote_commission..blank? ? @quote_commission.other : '0.0', class: 'form-control', style: 'width:100%' %>
+        </div>
+        <div class="col-md-2">
+          <%= label :quote, :blank, 'Blank' %><br>
+          <%= text_field :quote, :blank, :value => @quote_commission..blank? ? @quote_commission.blank : '0.0', class: 'form-control', style: 'width:100%' %>
+        </div>
+      </div>
+      <div class="col-md-1 text-right">
+        <br><%= label :quote, '', 'LD' %>
+      </div>
+      <div class="col-md-5">
+        <div class="col-md-2">
+          <%= label :quote, :ld_move, 'Move' %><br>
+          <%= text_field :quote, :ld_move, :value => @quote_commission..blank? ? @quote_commission.ld_move : '0.0', class: 'form-control', style: 'width:100%' %>
+        </div>
+        <div class="col-md-2">
+          <%= label :quote, :ld_storage, 'Storage' %><br>
+          <%= text_field :quote, :ld_storage, :value => @quote_commission..blank? ? @quote_commission.ld_storage : '0.0', class: 'form-control', style: 'width:100%' %>
+        </div>
+        <div class="col-md-2">
+          <%= label :quote, :ld_packing, 'Packing' %><br>
+          <%= text_field :quote, :ld_packing, :value => @quote_commission..blank? ? @quote_commission.ld_packing : '0.0', class: 'form-control', style: 'width:100%' %>
+        </div>
+        <div class="col-md-2">
+          <%= label :quote, :ld_insurance, 'Insurance' %><br>
+          <%= text_field :quote, :ld_insurance, :value => @quote_commission..blank? ? @quote_commission.ld_insurance : '0.0', class: 'form-control', style: 'width:100%' %>
+        </div>
+        <div class="col-md-2">
+          <%= label :quote, :ld_other, 'Other' %><br>
+          <%= text_field :quote, :ld_other, :value => @quote_commission..blank? ? @quote_commission.ld_other : '0.0', class: 'form-control', style: 'width:100%' %>
+        </div>
+        <div class="col-md-2">
+          <%= label :quote, :ld_blank, 'Blank' %><br>
+          <%= text_field :quote, :ld_blank, :value => @quote_commission..blank? ? @quote_commission.ld_blank : '0.0', class: 'form-control', style: 'width:100%' %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--book-->
+  <div class="row <%= !@user.move_commission ? 'hide' : '' %>">
+    <div class="form-group col-md-12">
+      <div class="col-md-1 text-right">
+        <br><%= label :book, '', 'BOOK' %>
+      </div>
+      <div class="col-md-5">
+        <div class="col-md-2">
+          <%= label :book, :move, 'Move' %><br>
+          <%= text_field :book, :move, :value => @book_commission..blank? ? @book_commission.move : '0.0', class: 'form-control', style: 'width:100%' %>
+        </div>
+        <div class="col-md-2">
+          <%= label :book, :storage, 'Storage' %><br>
+          <%= text_field :book, :storage, :value => @book_commission..blank? ? @book_commission.storage : '0.0', class: 'form-control', style: 'width:100%' %>
+        </div>
+        <div class="col-md-2">
+          <%= label :book, :packing, 'Packing' %><br>
+          <%= text_field :book, :packing, :value => @book_commission..blank? ? @book_commission.packing : '0.0', class: 'form-control', style: 'width:100%' %>
+        </div>
+        <div class="col-md-2">
+          <%= label :book, :insurance, 'Insurance' %><br>
+          <%= text_field :book, :insurance, :value => @book_commission..blank? ? @book_commission.insurance : '0.0', class: 'form-control', style: 'width:100%' %>
+        </div>
+        <div class="col-md-2">
+          <%= label :book, :other, 'Other' %><br>
+          <%= text_field :book, :other, :value => @book_commission..blank? ? @book_commission.other : '0.0', class: 'form-control', style: 'width:100%' %>
+        </div>
+        <div class="col-md-2">
+          <%= label :book, :blank, 'Blank' %><br>
+          <%= text_field :book, :blank, :value => @book_commission..blank? ? @book_commission.blank : '0.0', class: 'form-control', style: 'width:100%' %>
+        </div>
+      </div>
+      <div class="col-md-1 text-right">
+        <br><%= label :book, '', 'LD' %>
+      </div>
+      <div class="col-md-5">
+        <div class="col-md-2">
+          <%= label :book, :ld_move, 'Move' %><br>
+          <%= text_field :book, :ld_move, :value => @book_commission..blank? ? @book_commission.ld_move : '0.0', class: 'form-control', style: 'width:100%' %>
+        </div>
+        <div class="col-md-2">
+          <%= label :book, :ld_storage, 'Storage' %><br>
+          <%= text_field :book, :ld_storage, :value => @book_commission..blank? ? @book_commission.ld_storage : '0.0', class: 'form-control', style: 'width:100%' %>
+        </div>
+        <div class="col-md-2">
+          <%= label :book, :ld_packing, 'Packing' %><br>
+          <%= text_field :book, :ld_packing, :value => @book_commission..blank? ? @book_commission.ld_packing : '0.0', class: 'form-control', style: 'width:100%' %>
+        </div>
+        <div class="col-md-2">
+          <%= label :book, :ld_insurance, 'Insurance' %><br>
+          <%= text_field :book, :ld_insurance, :value => @book_commission..blank? ? @book_commission.ld_insurance : '0.0', class: 'form-control', style: 'width:100%' %>
+        </div>
+        <div class="col-md-2">
+          <%= label :book, :ld_other, 'Other' %><br>
+          <%= text_field :book, :ld_other, :value => @book_commission..blank? ? @book_commission.ld_other : '0.0', class: 'form-control', style: 'width:100%' %>
+        </div>
+        <div class="col-md-2">
+          <%= label :book, :ld_blank, 'Blank' %><br>
+          <%= text_field :book, :ld_blank, :value => @book_commission..blank? ? @book_commission.ld_blank : '0.0', class: 'form-control', style: 'width:100%' %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--post-->
+  <div class="row <%= !@user.move_commission? ? 'hide' : '' %>">
+    <div class="form-group col-md-12">
+      <div class="col-md-1 text-right">
+        <br><%= label :post, '', 'POST' %>
+      </div>
+      <div class="col-md-5">
+        <div class="col-md-2">
+          <%= label :post, :move, 'Move' %><br>
+          <%= text_field :post, :move, :value => @post_commission..blank? ? @post_commission.move : '0.0', class: 'form-control', style: 'width:100%' %>
+        </div>
+        <div class="col-md-2">
+          <%= label :post, :storage, 'Storage' %><br>
+          <%= text_field :post, :storage, :value => @post_commission..blank? ? @post_commission.storage : '0.0', class: 'form-control', style: 'width:100%' %>
+        </div>
+        <div class="col-md-2">
+          <%= label :post, :packing, 'Packing' %><br>
+          <%= text_field :post, :packing, :value => @post_commission..blank? ? @post_commission.packing : '0.0', class: 'form-control', style: 'width:100%' %>
+        </div>
+        <div class="col-md-2">
+          <%= label :post, :insurance, 'Insurance' %><br>
+          <%= text_field :post, :insurance, :value => @post_commission..blank? ? @post_commission.insurance : '0.0', class: 'form-control', style: 'width:100%' %>
+        </div>
+        <div class="col-md-2">
+          <%= label :post, :other, 'Other' %><br>
+          <%= text_field :post, :other, :value => @post_commission..blank? ? @post_commission.other : '0.0', class: 'form-control', style: 'width:100%' %>
+        </div>
+        <div class="col-md-2">
+          <%= label :post, :blank, 'Blank' %><br>
+          <%= text_field :post, :blank, :value => @post_commission..blank? ? @post_commission.blank : '0.0', class: 'form-control', style: 'width:100%' %>
+        </div>
+      </div>
+      <div class="col-md-1 text-right">
+        <br><%= label :post, '', 'LD' %>
+      </div>
+      <div class="col-md-5">
+        <div class="col-md-2">
+          <%= label :post, :ld_move, 'Move' %><br>
+          <%= text_field :post, :ld_move, :value => @post_commission..blank? ? @post_commission.ld_move : '0.0', class: 'form-control', style: 'width:100%' %>
+        </div>
+        <div class="col-md-2">
+          <%= label :post, :ld_storage, 'Storage' %><br>
+          <%= text_field :post, :ld_storage, :value => @post_commission..blank? ? @post_commission.ld_storage : '0.0', class: 'form-control', style: 'width:100%' %>
+        </div>
+        <div class="col-md-2">
+          <%= label :post, :ld_packing, 'Packing' %><br>
+          <%= text_field :post, :ld_packing, :value => @post_commission..blank? ? @post_commission.ld_packing : '0.0', class: 'form-control', style: 'width:100%' %>
+        </div>
+        <div class="col-md-2">
+          <%= label :post, :ld_insurance, 'Insurance' %><br>
+          <%= text_field :post, :ld_insurance, :value => @post_commission..blank? ? @post_commission.ld_insurance : '0.0', class: 'form-control', style: 'width:100%' %>
+        </div>
+        <div class="col-md-2">
+          <%= label :post, :ld_other, 'Other' %><br>
+          <%= text_field :post, :ld_other, :value => @post_commission..blank? ? @post_commission.ld_other : '0.0', class: 'form-control', style: 'width:100%' %>
+        </div>
+        <div class="col-md-2">
+          <%= label :post, :ld_blank, 'Blank' %><br>
+          <%= text_field :post, :ld_blank, :value => @post_commission..blank? ? @post_commission.ld_blank : '0.0', class: 'form-control', style: 'width:100%' %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--after-->
+  <div class="row <%= !@user.move_commission ? 'hide' : '' %>">
+    <div class="form-group col-md-12">
+      <div class="col-md-1 text-right">
+        <br><%= label :after, '', 'AFTER' %>
+      </div>
+      <div class="col-md-5">
+        <div class="col-md-2">
+          <%= label :after, :move, 'Move' %><br>
+          <%= text_field :after, :move, :value => @after_commission..blank? ? @after_commission.move : '0.0', class: 'form-control', style: 'width:100%' %>
+        </div>
+        <div class="col-md-2">
+          <%= label :after, :storage, 'Storage' %><br>
+          <%= text_field :after, :storage, :value => @after_commission..blank? ? @after_commission.storage : '0.0', class: 'form-control', style: 'width:100%' %>
+        </div>
+        <div class="col-md-2">
+          <%= label :after, :packing, 'Packing' %><br>
+          <%= text_field :after, :packing, :value => @after_commission..blank? ? @after_commission.packing : '0.0', class: 'form-control', style: 'width:100%' %>
+        </div>
+        <div class="col-md-2">
+          <%= label :after, :insurance, 'Insurance' %><br>
+          <%= text_field :after, :insurance, :value => @after_commission..blank? ? @after_commission.insurance : '0.0', class: 'form-control', style: 'width:100%' %>
+        </div>
+        <div class="col-md-2">
+          <%= label :after, :other, 'Other' %><br>
+          <%= text_field :after, :other, :value => @after_commission..blank? ? @after_commission.other : '0.0', class: 'form-control', style: 'width:100%' %>
+        </div>
+        <div class="col-md-2">
+          <%= label :after, :blank, 'Blank' %><br>
+          <%= text_field :after, :blank, :value => @after_commission..blank? ? @after_commission.blank : '0.0', class: 'form-control', style: 'width:100%' %>
+        </div>
+      </div>
+      <div class="col-md-1 text-right">
+        <br><%= label :after, '', 'LD' %>
+      </div>
+      <div class="col-md-5">
+        <div class="col-md-2">
+          <%= label :after, :ld_move, 'Move' %><br>
+          <%= text_field :after, :ld_move, :value => @after_commission..blank? ? @after_commission.ld_move : '0.0', class: 'form-control', style: 'width:100%' %>
+        </div>
+        <div class="col-md-2">
+          <%= label :after, :ld_storage, 'Storage' %><br>
+          <%= text_field :after, :ld_storage, :value => @after_commission..blank? ? @after_commission.ld_storage : '0.0', class: 'form-control', style: 'width:100%' %>
+        </div>
+        <div class="col-md-2">
+          <%= label :after, :ld_packing, 'Packing' %><br>
+          <%= text_field :after, :ld_packing, :value => @after_commission..blank? ? @after_commission.ld_packing : '0.0', class: 'form-control', style: 'width:100%' %>
+        </div>
+        <div class="col-md-2">
+          <%= label :after, :ld_insurance, 'Insurance' %><br>
+          <%= text_field :after, :ld_insurance, :value => @after_commission..blank? ? @after_commission.ld_insurance : '0.0', class: 'form-control', style: 'width:100%' %>
+        </div>
+        <div class="col-md-2">
+          <%= label :after, :ld_other, 'Other' %><br>
+          <%= text_field :after, :ld_other, :value => @after_commission..blank? ? @after_commission.ld_other : '0.0', class: 'form-control', style: 'width:100%' %>
+        </div>
+        <div class="col-md-2">
+          <%= label :after, :ld_blank, 'Blank' %><br>
+          <%= text_field :after, :ld_blank, :value => @after_commission..blank? ? @after_commission.ld_blank : '0.0', class: 'form-control', style: 'width:100%' %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--dispatch-->
+  <div class="row <%= !@user.move_commission ? 'hide' : '' %>">
+    <div class="form-group col-md-12">
+      <div class="col-md-1 text-right">
+        <br><%= label :dispatch, '', 'DISPATCH' %>
+      </div>
+      <div class="col-md-5">
+        <div class="col-md-2">
+          <%= label :dispatch, :move, 'Move' %><br>
+          <%= text_field :dispatch, :move, :value => @dispatch_commission..blank? ? @dispatch_commission.move : '0.0', class: 'form-control', style: 'width:100%' %>
+        </div>
+        <div class="col-md-2">
+          <%= label :dispatch, :storage, 'Storage' %><br>
+          <%= text_field :dispatch, :storage, :value => @dispatch_commission..blank? ? @dispatch_commission.storage : '0.0', class: 'form-control', style: 'width:100%' %>
+        </div>
+        <div class="col-md-2">
+          <%= label :dispatch, :packing, 'Packing' %><br>
+          <%= text_field :dispatch, :packing, :value => @dispatch_commission..blank? ? @dispatch_commission.packing : '0.0', class: 'form-control', style: 'width:100%' %>
+        </div>
+        <div class="col-md-2">
+          <%= label :dispatch, :insurance, 'Insurance' %><br>
+          <%= text_field :dispatch, :insurance, :value => @dispatch_commission..blank? ? @dispatch_commission.insurance : '0.0', class: 'form-control', style: 'width:100%' %>
+        </div>
+        <div class="col-md-2">
+          <%= label :dispatch, :other, 'Other' %><br>
+          <%= text_field :dispatch, :other, :value => @dispatch_commission..blank? ? @dispatch_commission.other : '0.0', class: 'form-control', style: 'width:100%' %>
+        </div>
+        <div class="col-md-2">
+          <%= label :dispatch, :blank, 'Blank' %><br>
+          <%= text_field :dispatch, :blank, :value => @dispatch_commission..blank? ? @dispatch_commission.blank : '0.0', class: 'form-control', style: 'width:100%' %>
+        </div>
+      </div>
+      <div class="col-md-1 text-right">
+        <br><%= label :dispatch, '', 'LD' %>
+      </div>
+      <div class="col-md-5">
+        <div class="col-md-2">
+          <%= label :dispatch, :ld_move, 'Move' %><br>
+          <%= text_field :dispatch, :ld_move, :value => @dispatch_commission..blank? ? @dispatch_commission.ld_move : '0.0', class: 'form-control', style: 'width:100%' %>
+        </div>
+        <div class="col-md-2">
+          <%= label :dispatch, :ld_storage, 'Storage' %><br>
+          <%= text_field :dispatch, :ld_storage, :value => @dispatch_commission..blank? ? @dispatch_commission.ld_storage : '0.0', class: 'form-control', style: 'width:100%' %>
+        </div>
+        <div class="col-md-2">
+          <%= label :dispatch, :ld_packing, 'Packing' %><br>
+          <%= text_field :dispatch, :ld_packing, :value => @dispatch_commission..blank? ? @dispatch_commission.ld_packing : '0.0', class: 'form-control', style: 'width:100%' %>
+        </div>
+        <div class="col-md-2">
+          <%= label :dispatch, :ld_insurance, 'Insurance' %><br>
+          <%= text_field :dispatch, :ld_insurance, :value => @dispatch_commission..blank? ? @dispatch_commission.ld_insurance : '0.0', class: 'form-control', style: 'width:100%' %>
+        </div>
+        <div class="col-md-2">
+          <%= label :dispatch, :ld_other, 'Other' %><br>
+          <%= text_field :dispatch, :ld_other, :value => @dispatch_commission..blank? ? @dispatch_commission.ld_other : '0.0', class: 'form-control', style: 'width:100%' %>
+        </div>
+        <div class="col-md-2">
+          <%= label :dispatch, :ld_blank, 'Blank' %><br>
+          <%= text_field :dispatch, :ld_blank, :value => @dispatch_commission..blank? ? @dispatch_commission.ld_blank : '0.0', class: 'form-control', style: 'width:100%' %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--confirm-->
+  <div class="row <%= !@user.move_commission ? 'hide' : '' %>">
+    <div class="form-group col-md-12">
+      <div class="col-md-1 text-right">
+        <br><%= label :confirm, '', 'CONFIRM' %>
+      </div>
+      <div class="col-md-5">
+        <div class="col-md-2">
+          <%= label :confirm, :move, 'Move' %><br>
+          <%= text_field :confirm, :move, :value => @confirm_commission..blank? ? @confirm_commission.move : '0.0', class: 'form-control', style: 'width:100%' %>
+        </div>
+        <div class="col-md-2">
+          <%= label :confirm, :storage, 'Storage' %><br>
+          <%= text_field :confirm, :storage, :value => @confirm_commission..blank? ? @confirm_commission.storage : '0.0', class: 'form-control', style: 'width:100%' %>
+        </div>
+        <div class="col-md-2">
+          <%= label :confirm, :packing, 'Packing' %><br>
+          <%= text_field :confirm, :packing, :value => @confirm_commission..blank? ? @confirm_commission.packing : '0.0', class: 'form-control', style: 'width:100%' %>
+        </div>
+        <div class="col-md-2">
+          <%= label :confirm, :insurance, 'Insurance' %><br>
+          <%= text_field :confirm, :insurance, :value => @confirm_commission..blank? ? @confirm_commission.insurance : '0.0', class: 'form-control', style: 'width:100%' %>
+        </div>
+        <div class="col-md-2">
+          <%= label :confirm, :other, 'Other' %><br>
+          <%= text_field :confirm, :other, :value => @confirm_commission..blank? ? @confirm_commission.other : '0.0', class: 'form-control', style: 'width:100%' %>
+        </div>
+        <div class="col-md-2">
+          <%= label :confirm, :blank, 'Blank' %><br>
+          <%= text_field :confirm, :blank, :value => @confirm_commission..blank? ? @confirm_commission.blank : '0.0', class: 'form-control', style: 'width:100%' %>
+        </div>
+      </div>
+      <div class="col-md-1 text-right">
+        <br><%= label :confirm, '', 'LD' %>
+      </div>
+      <div class="col-md-5">
+        <div class="col-md-2">
+          <%= label :confirm, :ld_move, 'Move' %><br>
+          <%= text_field :confirm, :ld_move, :value => @confirm_commission..blank? ? @confirm_commission.ld_move : '0.0', class: 'form-control', style: 'width:100%' %>
+        </div>
+        <div class="col-md-2">
+          <%= label :confirm, :ld_storage, 'Storage' %><br>
+          <%= text_field :confirm, :ld_storage, :value => @confirm_commission..blank? ? @confirm_commission.ld_storage : '0.0', class: 'form-control', style: 'width:100%' %>
+        </div>
+        <div class="col-md-2">
+          <%= label :confirm, :ld_packing, 'Packing' %><br>
+          <%= text_field :confirm, :ld_packing, :value => @confirm_commission..blank? ? @confirm_commission.ld_packing : '0.0', class: 'form-control', style: 'width:100%' %>
+        </div>
+        <div class="col-md-2">
+          <%= label :confirm, :ld_insurance, 'Insurance' %><br>
+          <%= text_field :confirm, :ld_insurance, :value => @confirm_commission..blank? ? @confirm_commission.ld_insurance : '0.0', class: 'form-control', style: 'width:100%' %>
+        </div>
+        <div class="col-md-2">
+          <%= label :confirm, :ld_other, 'Other' %><br>
+          <%= text_field :confirm, :ld_other, :value => @confirm_commission..blank? ? @confirm_commission.ld_other : '0.0', class: 'form-control', style: 'width:100%' %>
+        </div>
+        <div class="col-md-2">
+          <%= label :confirm, :ld_blank, 'Blank' %><br>
+          <%= text_field :confirm, :ld_blank, :value => @confirm_commission..blank? ? @confirm_commission.ld_blank : '0.0', class: 'form-control', style: 'width:100%' %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--invoice-->
+  <div class="row <%= !@user.move_commission ? 'hide' : '' %>">
+    <div class="form-group col-md-12">
+      <div class="col-md-1 text-right">
+        <br><%= label :invoice, '', 'INVOICE' %>
+      </div>
+      <div class="col-md-5">
+        <div class="col-md-2">
+          <%= label :invoice, :move, 'Move' %><br>
+          <%= text_field :invoice, :move, :value => @invoice_commission..blank? ? @invoice_commission.move : '0.0', class: 'form-control', style: 'width:100%' %>
+        </div>
+        <div class="col-md-2">
+          <%= label :invoice, :storage, 'Storage' %><br>
+          <%= text_field :invoice, :storage, :value => @invoice_commission..blank? ? @invoice_commission.storage : '0.0', class: 'form-control', style: 'width:100%' %>
+        </div>
+        <div class="col-md-2">
+          <%= label :invoice, :packing, 'Packing' %><br>
+          <%= text_field :invoice, :packing, :value => @invoice_commission..blank? ? @invoice_commission.packing : '0.0', class: 'form-control', style: 'width:100%' %>
+        </div>
+        <div class="col-md-2">
+          <%= label :invoice, :insurance, 'Insurance' %><br>
+          <%= text_field :invoice, :insurance, :value => @invoice_commission..blank? ? @invoice_commission.insurance : '0.0', class: 'form-control', style: 'width:100%' %>
+        </div>
+        <div class="col-md-2">
+          <%= label :invoice, :other, 'Other' %><br>
+          <%= text_field :invoice, :other, :value => @invoice_commission..blank? ? @invoice_commission.other : '0.0', class: 'form-control', style: 'width:100%' %>
+        </div>
+        <div class="col-md-2">
+          <%= label :invoice, :blank, 'Blank' %><br>
+          <%= text_field :invoice, :blank, :value => @invoice_commission..blank? ? @invoice_commission.blank : '0.0', class: 'form-control', style: 'width:100%' %>
+        </div>
+      </div>
+      <div class="col-md-1 text-right">
+        <br><%= label :invoice, '', 'LD' %>
+      </div>
+      <div class="col-md-5">
+        <div class="col-md-2">
+          <%= label :invoice, :ld_move, 'Move' %><br>
+          <%= text_field :invoice, :ld_move, :value => @invoice_commission..blank? ? @invoice_commission.ld_move : '0.0', class: 'form-control', style: 'width:100%' %>
+        </div>
+        <div class="col-md-2">
+          <%= label :invoice, :ld_storage, 'Storage' %><br>
+          <%= text_field :invoice, :ld_storage, :value => @invoice_commission..blank? ? @invoice_commission.ld_storage : '0.0', class: 'form-control', style: 'width:100%' %>
+        </div>
+        <div class="col-md-2">
+          <%= label :invoice, :ld_packing, 'Packing' %><br>
+          <%= text_field :invoice, :ld_packing, :value => @invoice_commission..blank? ? @invoice_commission.ld_packing : '0.0', class: 'form-control', style: 'width:100%' %>
+        </div>
+        <div class="col-md-2">
+          <%= label :invoice, :ld_insurance, 'Insurance' %><br>
+          <%= text_field :invoice, :ld_insurance, :value => @invoice_commission..blank? ? @invoice_commission.ld_insurance : '0.0', class: 'form-control', style: 'width:100%' %>
+        </div>
+        <div class="col-md-2">
+          <%= label :invoice, :ld_other, 'Other' %><br>
+          <%= text_field :invoice, :ld_other, :value => @invoice_commission..blank? ? @invoice_commission.ld_other : '0.0', class: 'form-control', style: 'width:100%' %>
+        </div>
+        <div class="col-md-2">
+          <%= label :invoice, :ld_blank, 'Blank' %><br>
+          <%= text_field :invoice, :ld_blank, :value => @invoice_commission..blank? ? @invoice_commission.ld_blank : '0.0', class: 'form-control', style: 'width:100%' %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="clearfix"></div>
+  <div class="pull-right btn-user-profile <%= @pay_commission.blank? && @driver_commission.blank? ? 'hide' : '' %>">
+    <button type="submit" name="commit" class="btn btn-primary ok-user-profile">Save</button>
+    <%= link_to 'Back', accounts_path, class: 'btn btn-primary' %>
+  </div>
+</form>

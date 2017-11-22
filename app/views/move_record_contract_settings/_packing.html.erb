@@ -1,0 +1,60 @@
+<form class="form-inline">
+  <!--boxes-->
+  <div class="form-group col-md-1">
+    <%= label :packing, :boxes, class: "labels" %><br>
+    <%= text_field :packing, :boxes, disabled: true, class: 'form-control', style: 'width:100%' %>
+  </div>
+  <%= label :packing, '+', class: 'less-cost' %>
+  <!--paper-->
+  <div class="form-group col-md-1">
+    <%= label :packing, :paper, class: "labels" %><br>
+    <%= text_field :packing, :paper, disabled: true, class: 'form-control', style: 'width:100%' %>
+  </div>
+  <%= label :packing, '+', class: 'less-cost' %>
+  <!--tape-->
+  <div class="form-group col-md-1">
+    <%= label :packing, :tape, class: "labels" %><br>
+    <%= text_field :packing, :tape, disabled: true, class: 'form-control', style: 'width:100%' %>
+  </div>
+  <%= label :packing, '+', class: 'less-cost' %>
+  <!--wrap-->
+  <div class="form-group col-md-1">
+    <%= label :packing, :wrap, class: "labels" %><br>
+    <%= text_field :packing, :wrap, disabled: true, class: 'form-control', style: 'width:100%' %>
+  </div>
+  <%= label :packing, '+', class: 'less-cost' %>
+  <!--bags-->
+  <div class="form-group col-md-1">
+    <%= label :packing, :bags, class: "labels" %><br>
+    <%= text_field :packing, :bags, disabled: true, class: 'form-control', style: 'width:100%' %>
+  </div>
+  <%= label :packing, '=', class: 'less-cost' %>
+  <!--box_rent-->
+  <div class="form-group col-md-1">
+    <%= label :packing, :box_rent, class: "labels" %><br>
+    <%= text_field :packing, :box_rent, disabled: true, class: 'form-control', style: 'width:100%' %>
+  </div>
+
+  <!--packing_alert-->
+  <div class="form-group col-md-2">
+    <%= label :packing, :packing_alert, class: "labels" %><br>
+
+    <div class="left-inner-addon">
+      <%= select :packing, :packing_alert, {}, {include_blank: true}, :class => 'form-control change-select disabled', style: 'width:100%', disabled: true %>
+      <% if validate_special_permission('edit.contract_field_default_values', @current_actions) %>
+        <i class="icon-edit-sign edit-dropdown-contract-settings" field="packing_alerts" data-default="<%= @settings.packing_alert_id %>" data-default-key="packing_alert_id"></i>
+      <% end %>
+    </div>
+  </div>
+  <!--other-->
+  <div class="form-group col-md-1">
+    <%= label :packing, :other, class: "labels" %><br>
+    <%= text_field :packing, :other, disabled: true, class: 'form-control', style: 'width:100%' %>
+  </div>
+  <%= label :packing, '=', class: 'less-cost' %>
+  <!--packing-->
+  <div class="form-group col-md-1">
+    <%= label :packing, :packing, class: "labels" %><br>
+    <%= text_field :packing, :packing, disabled: true, class: 'form-control', style: 'width:100%' %>
+  </div>
+</form>

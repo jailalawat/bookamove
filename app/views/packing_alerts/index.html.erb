@@ -1,0 +1,28 @@
+<legend>Move Packing Alert</legend>
+<div class="row">
+  <div class="col-md-12">
+    <%= link_to 'New Move Type', new_packing_alert_path, class: 'btn btn-primary' %>
+  </div>
+</div>
+<hr>
+<div class="row">
+  <div class="col-md-12">
+    <table class="table table-striped table-bordered table-hover">
+      <tr>
+        <th>Description</th>
+        <th>Is Active?</th>
+        <th>Actions</th>
+      </tr>
+      <% @packing_alerts.each do |packing_alert| %>
+          <tr>
+            <td><%= packing_alert.description %></td>
+            <td><%= check_box_tag 'active', packing_alert.active, packing_alert.active, disabled: true %></td>
+            <td>
+              <%= link_to 'Edit', edit_packing_alert_path(packing_alert) %>
+              <%= link_to 'Destroy', packing_alert, method: :delete, data: {confirm: 'Are you sure?'} %>
+            </td>
+          </tr>
+      <% end %>
+    </table>
+  </div>
+</div>

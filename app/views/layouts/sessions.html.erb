@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Login</title>
+  <link rel="preload" as="font" crossorigin="crossorigin" type="font/woff" href="/assets/fonts/gotham-book.woff" />
+  <%= stylesheet_link_tag 'application', media: 'all' %>
+  <%= csrf_meta_tags %>
+</head>
+<body class='contrast-red login contrast-background'>
+<div class='middle-container'>
+  <div class='middle-row'>
+    <div class='middle-wrapper'>
+      <%= yield %>
+    </div>
+  </div>
+</div>
+
+<%= javascript_include_tag 'application' %>
+</body>
+</html>

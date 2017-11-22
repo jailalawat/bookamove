@@ -1,0 +1,77 @@
+<div class="row">
+  <div class="col-md-12 flex" style="margin-top: -12px;">
+
+    <div class="pull-left flex text-nowrap">
+      <form class="flex" id="form-date-post-report">
+        <div class='input-group quote-report-calendar-start pull-left flex pright15'>
+          <label>From</label>&nbsp;
+                    <span class="input-group-addon" style="padding-right: 24px;">
+                        <span class="fa fa-calendar"></span>
+                    </span>
+          <input type='text' class="form-control form-control2 no_outline" name="report_calendar_start" autocomplete="off"/>
+        </div>
+
+        <div class='input-group quote-report-calendar-end pull-left flex pright15'>
+          <label>To</label>&nbsp;
+                    <span class="input-group-addon" style="padding-right: 24px;">
+                        <span class="fa fa-calendar"></span>
+                    </span>
+          <input type='text' class="form-control form-control2 no_outline" name="report_calendar_end" autocomplete="off"/>
+        </div>
+        <div class="pull-left flex pright15">
+          <label class="nowrap">Truck Group</label> &nbsp;
+          <select id="filter_param_group" name="group" class="no_outline">
+            <option value="">All</option>
+          </select>
+        </div>
+        <div class="pull-left text-nowrap flex pright15">
+          <label>Stage</label> &nbsp;
+          <select id="filter_param_state" name="state" class="no_outline">
+            <option value="unabled is null">Quote and Follow Up</option>
+            <option value="followed_up is null and stage = 'Quote'">Quote</option>
+            <option value="followed_up is not null and stage = 'Follow Up'">Follow Up</option>
+            <option value="unabled is not null">Unable</option>
+          </select>
+        </div>
+        <div class="pull-left flex">
+          <label>Estimator</label> &nbsp;
+          <select id="filter_param_estimator" name="estimator" class="no_outline">
+            <option value="">All</option>
+          </select>
+        </div>
+      </form>
+    </div>
+
+    <div class="pull-left hidden">
+      <input id="searchInput" class="form-control search-box pull-right" placeholder="Search" type="text"></div>
+
+  </div>
+</div>
+
+<div class="row ptop8">
+  <div class="table-responsive col-md-12">
+    <div class="scrollable-area">
+      <table class="data-table-quote-report table table-bordered table-striped dataTable" style="display: none;" id="DataTables_Table_report" aria-describedby="DataTables_Table_report_info" data-report="quote" data-calendar-range="<%= @calendar_range %>">
+        <thead>
+        <tr role="row">
+          <th class="no-sort" role="columnheader" tabindex="0" rowspan="1" colspan="1" style="width: 26%">
+            Name
+          </th>
+          <th class="sorting" role="columnheader" tabindex="0" rowspan="1" colspan="1" style="width: 17%">
+            Quote Date
+          </th>
+          <th class="no-sort" role="columnheader" tabindex="0" rowspan="1" colspan="1" style="width: 10%">
+            Stage
+          </th>
+          <th class="no-sort" role="columnheader" tabindex="0" rowspan="1" colspan="1" style="width: 10%">
+            Estimator
+          </th>
+          <th class="no-sort" role="columnheader" tabindex="0" rowspan="1" colspan="1" style="width: 37%">
+            Notes
+          </th>
+        </tr>
+        </thead>
+      </table>
+    </div>
+  </div>
+</div>

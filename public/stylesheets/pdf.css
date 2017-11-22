@@ -1,0 +1,575 @@
+body {
+    font-size: 12px;
+    line-height: 18px;
+    font-family: arial;
+}
+
+h3 {
+    font-size: 10px;
+    margin: 0px;
+}
+
+.centered {
+    text-align: center;
+}
+
+.padded {
+    padding-left: 50px;
+    padding-right: 50px;
+}
+
+.tiny {
+    font-size: 8px;
+    line-height: 8px;
+}
+
+.claim_info {
+    width: 210px;
+    height: 30px;
+    font-size: 8px;
+    border-left: 1px solid black;
+    border-top: 1px solid black;
+}
+
+.clear {
+    clear: both;
+}
+
+.float {
+    float: left;
+}
+
+.float_right {
+    float: right;
+}
+
+.right {
+    text-align: right;
+}
+
+.claim_info_row, .article_row, .row {
+    width: 100%;
+    clear: both;
+}
+
+.claim_info_row div:last-child {
+    border-right: 1px solid black;
+}
+
+.last_row div {
+    border-bottom: 1px solid black;
+}
+
+.title {
+    background-color: black;
+    color: white;
+    font-weight: bold;
+}
+
+.claimant_title {
+    background-color: black;
+    color: white;
+    font-weight: bold;
+    padding-left: 5px;
+    padding-right: 5px;
+    margin-top: 10px;
+    width: 200px;
+    line-height: 20px;
+}
+
+.main_title {
+    color: #db361a;
+    font-size: 25px;
+    font-weight: bold;
+    margin-left: 200px;
+    margin-bottom: 5px;
+}
+
+#claimant_info_section {
+    width: 435px;
+    line-height: 10px;
+}
+
+#declaration {
+    width: 260px;
+    margin-left: 5px;
+    line-height: 23px;
+    font-family: times;
+}
+
+.article_width {
+    width: 215px;
+    padding-left: 5px;
+}
+
+.damage_width {
+    width: 315px;
+    padding-left: 5px;
+}
+
+.claimed_width {
+    width: 150px;
+    padding-left: 5px;
+}
+
+.article_row div {
+    border-left: 1px solid black;
+    border-top: 1px solid black;
+    border-right: 1px solid black;
+}
+
+#address {
+    margin-left: 15px;
+    padding-left: 15px;
+    border-left: 1px solid gray;
+    margin-top: 5px;
+    font-weight: bold;
+    font-size: 10px;
+}
+
+#phone {
+    margin-left: 25px;
+    margin-top: 5px;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+#phone .description {
+    font-size: 10px;
+}
+
+#email {
+    margin-left: 25px;
+    margin-top: 10px;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+#read_this {
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 32px;
+    line-height: 32px;
+    padding-top: 5px;
+}
+
+#read_this #this {
+    letter-spacing: 0.06em;
+    font-size: 18px;
+    line-height: 20px;
+}
+
+#disclaimer {
+    color: #db361a;
+    font-weight: bold;
+    margin-left: 20px;
+    line-height: 14px;
+    padding-top: 5px;
+}
+
+#total {
+    font-weight: bold;
+    padding-top: 20px;
+    padding-left: 20px;
+}
+
+#total_box {
+    border: 1px solid black;
+    height: 20px;
+    width: 157px;
+    margin-left: 10px;
+}
+
+#disclosure {
+    font-family: times;
+    width: 300px;
+    margin-top: 10px;
+    line-height: 13px;
+    font-size: 11px;
+}
+
+#disclosure #i {
+    font-size: 50px;
+    float: left;
+    line-height: 50px;
+    margin-right: 5px;
+}
+
+#signature_container {
+    width: 400px;
+}
+
+#the_above {
+    margin-top: 15px;
+    margin-left: 10px;
+    font-family: times;
+    font-weight: bold;
+    font-size: 17px;
+    line-height: 17px;
+}
+
+#signature {
+    margin-left: 10px;
+    margin-top: 20px;
+    font-size: 10px;
+}
+
+#claimant {
+    float: right;
+}
+
+.terms_section {
+    border: 1px solid black;
+    overflow: auto;
+    line-height: 14px;
+    font-size: 10px;
+}
+
+.terms_section h2, .half_section h2 {
+    color: white;
+    background-color: #006fff;
+    padding-top: 0px;
+    margin-top: 0px;
+    font-size: 12px;
+    padding-left: 5px;
+    line-height: 28px;
+    border-bottom: 1px solid black;
+    text-transform: uppercase;
+
+}
+
+.terms_section h2.terms {
+    text-transform: none;
+    line-height: 20px;
+}
+
+.half_section h2 {
+    text-align: center;
+    margin-bottom: 0px;
+}
+
+.terms_section table {
+    width: 100%;
+    font-size: 10px;
+    line-height: 12px;
+}
+
+.terms_section table thead tr th {
+    text-align: left;
+}
+
+.half {
+    width: 340px;
+    margin-top: -5px;
+    margin-left: 5px;
+}
+
+.terms_section .item {
+    overflow: auto;
+}
+
+.double_item_number {
+    margin-left: 15px;
+    float: left;
+}
+
+.item_body {
+    float: left;
+    margin-left: 5px;
+    width: 305px;
+}
+
+.double_section_number {
+    float: left;
+    height: 100%;
+    margin-left: 10px;
+}
+
+#totals {
+    float: left;
+    text-align: right;
+    width: 200px;
+    margin-left: 380px;
+}
+
+#packing_supplies tr td {
+    line-height: 10px;
+    font-size: 10px;
+}
+
+.footer {
+    margin-top: 5px;
+}
+
+.vertical {
+    color: white;
+    background-color: #006fff;
+    padding: 15px;
+    width: 10px;
+    text-transform: uppercase;
+    font-weight: bold;
+    border-right: 1px solid black;
+    float: left;
+    position: relative;
+}
+
+.vertical div {
+    position: absolute;
+    top: 50%;
+}
+
+.section_content {
+    float: left;
+    width: 664px;
+}
+
+.section_content table.details, table.details {
+    margin-top: 0px;
+}
+
+.section_content table.details td, table.details td {
+    font-size: 12px;
+    line-height: 20px;
+}
+
+.terms_section .blue_header thead tr {
+    background-color: #006fff;
+    border-bottom: 1px solid black;
+}
+
+.terms_section .blue_header thead tr th {
+    color: white;
+    text-transform: uppercase;
+    font-size: 14px;
+    line-height: 20px;
+    text-align: center;
+}
+
+.terms_section .blue_header {
+    border-collapse: collapse;
+    width: 691px;
+    margin-top: 0px;
+}
+
+.terms_section .blue_header td {
+    border-collapse: collapse;
+}
+
+#cargo_table {
+    width: 732px;
+}
+
+#cargo_table_container {
+    min-height: 480px;
+}
+
+.margin_top {
+    margin-top: 10px;
+}
+
+.min_height {
+    min-height: 325px;
+}
+
+.two_section_container {
+    overflow: auto;
+}
+
+.half_section {
+    width: 360px;
+    float: left;
+    border: 1px solid black;
+}
+
+.half_section:first-child {
+    margin-right: 10px;
+}
+
+.dashed {
+    border-top: 1px dashed black;
+    overflow: auto;
+}
+
+.lined {
+    border-top: 1px solid black;
+}
+
+#proposal_warning {
+    text-align: center;
+    font-weight: bold;
+    font-family: courier;
+}
+
+#contract_title {
+    font-size: 16px;
+}
+
+#questions_call {
+    float: right;
+}
+
+.small, table.small {
+    font-size: 10px;
+    line-height: 14px;
+}
+
+.subsection_padded {
+    padding: 5px;
+}
+
+.small p:first-child {
+    margin-top: 0px;
+}
+
+#notes {
+    min-height: 185px;
+    max-height: 185px;
+    overflow: hidden;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.half_half {
+    width: 150px;
+}
+
+td.bottom_border {
+    border-bottom: 1px solid black;
+}
+
+td.double_bottom_border {
+    border-bottom: 2px solid black;
+}
+
+.item_description_width {
+    width: 240px;
+}
+
+.item_price_width {
+    width: 100px;
+}
+
+.hours_width {
+    width: 90px;
+}
+
+.hrs_width {
+    width: 40px;
+}
+
+#id_section {
+    height: 47px;
+}
+
+#id_section img {
+    margin-top: 20px;
+}
+
+#drop_section {
+    height: 49px;
+}
+
+#drop_section img {
+    margin-top: 7px;
+}
+
+#pricing_table {
+    font-size: 12px;
+    line-height: 18px;
+    margin-top: 1px;
+}
+
+#time_info_container .small, #card_info_container {
+    line-height: 16px;
+}
+
+.street_width {
+    width: 130px;
+}
+
+.data_cell {
+    font-weight: bold;
+}
+
+#card_charges {
+    margin-top: 9px;
+}
+
+#pricing_footer {
+    height: 51px;
+}
+
+#pricing_footer_1 {
+    height: 53px;
+}
+
+#please_pay {
+    height: 34px;
+}
+
+#name_section {
+    height: 45px;
+}
+
+#weight_section {
+    height: 210px;
+}
+
+#cargo_label {
+    width: 50px;
+}
+
+h1#resolution_title {
+    color: red;
+    clear: both;
+}
+
+#resolution_logo {
+    width: 300px;
+}
+
+#resolution_contact {
+    width: 400px;
+}
+
+#resolution_customer_id {
+    width: 200px;
+}
+
+table.bordered {
+    border-collapse: collapse;
+    border: 1px solid #999;
+    width: 100%;
+}
+
+table.bordered td {
+    border-collapse: collapse;
+    border: 1px solid #999;
+    font-size: 12px;
+}
+
+table.bordered tr td:first-child {
+    width: 200px;
+}
+
+#print_name {
+    border-top: 1px solid black;
+    width: 500px;
+    float: left;
+    margin-right: 50px;
+    font-weight: bold;
+    font-size: 12px;
+}
+
+#print_date {
+    border-top: 1px solid black;
+    float: left;
+    width: 150px;
+    font-weight: bold;
+    font-size: 12px;
+}
+
+#card_subtext {
+    font-size: 10px;
+    margin-top: -5px;
+}

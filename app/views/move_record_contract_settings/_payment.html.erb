@@ -1,0 +1,66 @@
+<form class="form-inline">
+  <!--type-->
+  <div class="form-group col-md-1">
+    <%= label :payment, :type, '%', class: "labels" %><br>
+    <%= text_field :payment, :type, disabled: true, class: 'form-control', style: 'width:100%' %>
+  </div>
+  <!--status-->
+  <div class="form-group col-md-1">
+    <%= label :payment, :status, class: "labels" %><br>
+    <%= text_field :payment, :status, disabled: true, class: 'form-control', style: 'width:100%' %>
+  </div>
+  <!--number_card-->
+  <div class="form-group col-md-2">
+    <%= label :payment, :number_card, class: "labels" %><br>
+    <%= text_field :payment, :number_card, disabled: true, class: 'form-control', style: 'width:100%' %>
+  </div>
+  <!--exp-->
+  <div class="form-group col-md-1">
+    <%= label :payment, :exp, class: "labels" %><br>
+    <%= text_field :payment, :exp, disabled: true, class: 'form-control', style: 'width:100%' %>
+  </div>
+  <!--cvc-->
+  <div class="form-group col-md-1">
+    <%= label :payment, :cvc, 'CVC', class: "labels" %><br>
+    <%= text_field :payment, :cvc, disabled: true, class: 'form-control', style: 'width:100%' %>
+  </div>
+  <!--number_transaction-->
+  <div class="form-group col-md-2">
+    <%= label :payment, :number_transaction, class: "labels" %><br>
+    <%= text_field :payment, :number_transaction, disabled: true, class: 'form-control', style: 'width:100%' %>
+  </div>
+  <!--pre_auth-->
+  <div class="form-group col-md-1">
+    <%= label :payment, :pre_auth, class: "labels" %><br>
+    <%= text_field :payment, :pre_auth, disabled: true, class: 'form-control', style: 'width:100%' %>
+  </div>
+  <!--amount-->
+  <div class="form-group col-md-1">
+    <%= label :payment, :amount, class: "labels" %><br>
+    <%= text_field :payment, :amount, disabled: true, class: 'form-control', style: 'width:100%' %>
+  </div>
+  <!--date-->
+  <div class="form-group col-md-1">
+    <%= label :payment, :date, class: "labels" %><br>
+    <%= text_field :payment, :date, disabled: true, class: 'form-control', style: 'width:100%' %>
+  </div>
+  <div>
+    <!--payment_detail-->
+    <div class="form-group col-md-10">
+      <%= label :payment, :payment_detail, 'Payment details', class: "labels" %><br>
+      <%= text_field :payment, :payment_detail, disabled: true, class: 'form-control', style: 'width:100%' %>
+    </div>
+    <!--payment_alert-->
+    <div class="form-group col-md-2">
+      <%= label :payment, :payment_alert, class: "labels" %><br>
+
+      <div class="left-inner-addon">
+        <%= select :payment, :payment_alert, {}, {include_blank: true}, :class => 'form-control change-select disabled', style: 'width:100%', disabled: true %>
+        <% if validate_special_permission('edit.contract_field_default_values', @current_actions) %>
+          <i class="icon-edit-sign edit-dropdown-contract-settings" field="payment_alerts" data-default="<%= @settings.payment_alert_id %>" data-default-key="payment_alert_id"></i>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+</form>

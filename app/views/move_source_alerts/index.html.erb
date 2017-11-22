@@ -1,0 +1,28 @@
+<legend>Move Source Alert</legend>
+<div class="row">
+  <div class="col-md-12">
+    <%= link_to 'New Move Type', new_move_source_alert_path, class: 'btn btn-primary' %>
+  </div>
+</div>
+<hr>
+<div class="row">
+  <div class="col-md-12">
+    <table class="table table-striped table-bordered table-hover">
+      <tr>
+        <th>Description</th>
+        <th>Is Active?</th>
+        <th>Actions</th>
+      </tr>
+      <% @move_source_alerts.each do |move_source_alert| %>
+          <tr>
+            <td><%= move_source_alert.description %></td>
+            <td><%= check_box_tag 'active', move_source_alert.active, move_source_alert.active, disabled: true %></td>
+            <td>
+              <%= link_to 'Edit', edit_move_source_alert_path(move_source_alert) %>
+              <%= link_to 'Destroy', move_source_alert, method: :delete, data: {confirm: 'Are you sure?'} %>
+            </td>
+          </tr>
+      <% end %>
+    </table>
+  </div>
+</div>

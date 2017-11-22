@@ -1,0 +1,502 @@
+<div class="row">
+  <div class="well pleft30">
+
+    <!-- confirm flash -->
+    <% if !flash[:notice].blank? %>
+        <div class="alert alert-success alert-dismissable move-record-message mtop5">
+          <a class="close" data-dismiss="alert" href="#">×
+          </a>
+          <h4>
+            <i class="icon-ok-sign"></i>
+            Successful
+          </h4>
+
+          <p><%= flash[:notice] %></p>
+        </div>
+    <% end %>
+    <!-- error flash -->
+    <% if !flash[:error].blank? %>
+        <div class="alert alert-danger alert-dismissable move-record-message mtop5">
+          <a class="close" data-dismiss="alert" href="#">×
+          </a>
+          <h4>
+            <i class="icon-ok-sign"></i>
+            Unsuccessful
+          </h4>
+
+          <p><%= flash[:error] %></p>
+        </div>
+    <% end %>
+
+    <!-- WHO -->
+    <div class="row colpd ptop8">
+      <div class="col7">
+        <legend id="SSwho" class="clearfix">
+          <span class="col1-5"><i class="fa fa-user" aria-hidden="true"></i> WHO</span>
+          <% if not @client.title.blank? %>
+              <span class="black font_xnormal bold" style="text-shadow: none"><%= @client.title %></span>
+          <% end %>
+          <span class="mright5 black font_xnormal bold" style="text-shadow: none"><%= @client.name %></span>
+          <% if not @client.home_phone.blank? %>
+              <span class="mright5 black font_xnormal bold" style="text-shadow: none"><%= @client.home_phone %></span>
+          <% end %>
+          <% if not @client.cell_phone.blank? %>
+              <span class="mright5 black font_xnormal bold" style="text-shadow: none"><%= @client.cell_phone %></span>
+          <% end %>
+          <% if not @client.work_phone.blank? %>
+              <span class="mright5 black font_xnormal bold" style="text-shadow: none"><%= @client.work_phone %></span>
+          <% end %>
+          <% if not @client.email.blank? and not @client.email == "N/A" %>
+              <span class="mright5 black font_xnormal bold" style="text-shadow: none"><%= @client.email %></span>
+          <% end %>
+        </legend>
+      </div>
+    </div>
+
+    <div class="row colpd">
+      <% if not @move_record.who_note.blank? %>
+          <div class="col7 form-group">
+            <label>Notes: </label><br/> <b class="black font_xnormal"><%= @move_record.who_note %></b>
+          </div>
+      <% end %>
+    </div>
+    <br/>
+
+    <!-- WHAT -->
+    <div class="row colpd">
+      <div class="col7">
+        <legend id="SSwho" class="clearfix">
+          <span class="col1-5"><i class="fa fa-suitcase" aria-hidden="true"></i> WHAT</span>
+          <% if not @move_record.cargo_type_id.blank? %>
+              <span class="mright5 black font_xnormal bold" style="text-shadow: none"><%= @move_record.cargo_type_id %></span>
+          <% end %>
+          <% if not @move_record.cargo_descriptor.blank? %>
+              <span class="mright5 black font_xnormal bold" style="text-shadow: none"><%= @move_record.cargo_descriptor %></span>
+          <% end %>
+          <% if not @move_record.cargo_room.blank? %>
+              <span class="mright5 black font_xnormal bold" style="text-shadow: none"><%= @move_record.cargo_room %></span>
+          <% end %>
+          <% if not @move_record.cargo_weight.blank? %>
+              <span class="mright5 black font_xnormal bold" style="text-shadow: none"><%= @move_record.cargo_weight %></span>
+          <% end %>
+          <% if not @move_record.cargo_cubic.blank? %>
+              <span class="mright5 black font_xnormal bold" style="text-shadow: none"><%= @move_record.cargo_cubic %></span>
+          <% end %>
+          <% if not @move_record.cargo_description.blank? %>
+              <span class="mright5 black font_xnormal bold" style="text-shadow: none"><%= @move_record.cargo_description %></span>
+          <% end %>
+          <a data-toggle="modal" class="no_underline pull-right" href="#modal-cargo">Cargo Calculator <i class="icon-collapse-top"></i></a>
+        </legend>
+      </div>
+    </div>
+
+    <div class="row colpd">
+      <% if not @move_record.what_note.blank? %>
+        <div class="col7">
+          <label class="">Notes</label><br/> <b class="black font_xnormal"><%= @move_record.what_note %></b>
+        </div>
+      <% end %>
+    </div>
+    <br/>
+
+    <!-- WHERE -->
+    <div class="row colpd">
+      <div class="col7">
+        <legend id="SSwho" class="clearfix">
+          <span class="col1-5"><i class="fa fa-location-arrow" aria-hidden="true"></i> WHERE</span>
+          <div class="pull-right">
+            <a target="_blank" href="https://www.google.ca/maps/dir/<%= @move_record_origins[0].location.no.blank? ? "" : "#{@move_record_origins[0].location.no} " %><%= @move_record_origins[0].location.street.blank? ? "" : "#{@move_record_origins[0].location.street} " %><%= @move_record_origins[0].location.city.blank? ? "" : "#{@move_record_origins[0].location.city} " %><%= @move_record_origins[0].location.province.blank? ? "" : "#{@move_record_origins[0].location.province} " %><%= @move_record_origins[0].location.postal_code.blank? ? "" : "#{@move_record_origins[0].location.postal_code}" %>/<%= @move_record_destinations[0].location.no.blank? ? "" : "#{@move_record_destinations[0].location.no} " %><%= @move_record_destinations[0].location.street.blank? ? "" : "#{@move_record_destinations[0].location.street} " %><%= @move_record_destinations[0].location.city.blank? ? "" : "#{@move_record_destinations[0].location.city} " %><%= @move_record_destinations[0].location.province.blank? ? "" : "#{@move_record_destinations[0].location.province} " %><%= @move_record_destinations[0].location.postal_code.blank? ? "" : "#{@move_record_destinations[0].location.postal_code}" %>" class="no_underline" type="street">Street View
+              <i field="number_of_origin" class="icon-external-link"></i></a>
+            <a target="_blank" href="https://www.google.ca/maps/dir/<%= @move_record_origins[0].location.no.blank? ? "" : "#{@move_record_origins[0].location.no} " %><%= @move_record_origins[0].location.street.blank? ? "" : "#{@move_record_origins[0].location.street} " %><%= @move_record_origins[0].location.city.blank? ? "" : "#{@move_record_origins[0].location.city} " %><%= @move_record_origins[0].location.province.blank? ? "" : "#{@move_record_origins[0].location.province} " %><%= @move_record_origins[0].location.postal_code.blank? ? "" : "#{@move_record_origins[0].location.postal_code}" %>/<%= @move_record_destinations[0].location.no.blank? ? "" : "#{@move_record_destinations[0].location.no} " %><%= @move_record_destinations[0].location.street.blank? ? "" : "#{@move_record_destinations[0].location.street} " %><%= @move_record_destinations[0].location.city.blank? ? "" : "#{@move_record_destinations[0].location.city} " %><%= @move_record_destinations[0].location.province.blank? ? "" : "#{@move_record_destinations[0].location.province} " %><%= @move_record_destinations[0].location.postal_code.blank? ? "" : "#{@move_record_destinations[0].location.postal_code}" %>" class="no_underline" type="gps">GPS View
+              <i field="number_of_origin" class="icon-external-link"></i></a>
+          </div>
+        </legend>
+      </div>
+    </div>
+
+    <div class="row colpd">
+      <% @move_record_origins.each.with_index do |origin, index| %>
+        <div class="col7 form-group">
+          <span class="mright10"><label>Origin <%= (index == 0 ? '' : (index + 1).to_s) %></label></span><br/>
+
+          <b class="black font_xnormal"><%= origin.location.apartment %><% if not origin.location.apartment.blank? %>-<% end %><%= origin.location.no %><% if not origin.location.no.blank? %>-<% end %><%= origin.location.street %><% if not origin.location.street.blank? %>-<% end %><%= origin.location.locale %><% if not origin.location.locale.blank? %>,<% end %><%= origin.location.city %>,<%= origin.location.province %>, <%= origin.location.building %><% if not origin.location.building.blank? %>,<% end %><%= origin.location.entry_number %></b>
+        </div>
+      <% end %>
+
+      <% @move_record_destinations.each.with_index do |destination, index| %>
+          <div class="col7">
+            <span class="mright10"><label>Destination <%= (index == 0 ? '' : (index + 1).to_s) %></label></span><br/>
+
+            <b class="black font_xnormal"><%= destination.location.apartment %><% if not destination.location.apartment.blank? %>-<% end %><%= destination.location.no %><% if not destination.location.no.blank? %>-<% end %><%= destination.location.street %><% if not destination.location.street.blank? %>-<% end %><%= destination.location.locale %><% if not destination.location.locale.blank? %>,<% end %><%= destination.location.city %>,<%= destination.location.province %>, <%= destination.location.building %><% if not destination.location.building.blank? %>,<% end %><%= destination.location.entry_number %></b>
+
+          </div>
+      <% end %>
+
+    </div>
+    <br/>
+
+    <!-- WHEN -->
+    <div class="row colpd">
+      <div class="col7">
+        <legend id="SSwho" class="clearfix">
+          <span class="col1-5"><i class="fa fa-clock-o" aria-hidden="true"></i> WHEN</span>
+          <span class="mright5 black font_xnormal bold" style="text-shadow: none"><%= @move_record_date.move_date.strftime("%d/%m/%Y") if not @move_record_date.move_date.blank? %></span>
+          <div class="pull-right">
+            <a href="/calendar?group=<%= @move_record_origins[0].location.calendar_truck_group_id %>&kind_calendar=resourceDay&date_calendar=<%= @move_record_date.move_date.strftime("%Y-%m-%d") %>" id="cal_link" data-date-link="<%= @move_record_date.move_date.strftime("%Y-%m-%d") %>" class="no_underline"><span>Show on Calendar</span></a> <i class="icon-calendar blank"></i>
+          </div>
+        </legend>
+      </div>
+    </div>
+
+    <div class="row colpd">
+      <% if not @move_record.when_note.blank? %>
+          <div class="col7">
+            <label class="">Notes</label><br/> <b class="black font_xnormal"><%= @move_record.when_note %></b>
+          </div>
+      <% end %>
+    </div>
+    <br/>
+
+    <!-- HOW -->
+    <div class="row colpd">
+      <div class="col7">
+        <legend id="SSwho" class="clearfix">
+          <span class="col1-5"><i class="fa fa-truck" aria-hidden="true"></i> HOW</span>
+          <span class="mright5 black font_xnormal bold" style="text-shadow: none"><%= @move_record_trucks[0].truck.description if @move_record_trucks[0].truck %> <%= @move_record_trucks[0].truck.size if @move_record_trucks[0].truck %></span>
+        </legend>
+      </div>
+    </div>
+
+    <div class="row colpd">
+      <% if not @move_record.how_note.blank? %>
+          <div class="col7">
+            <label class="">Notes</label><br/> <b class="black font_xnormal"><%= @move_record.how_note %></b>
+          </div>
+      <% end %>
+    </div>
+    <br/>
+
+    <!-- HOW MUCH -->
+    <div class="row colpd">
+      <div class="col7">
+        <legend id="SSwho" class="clearfix">
+          <span class="col1-5"><i class="fa fa-dollar" aria-hidden="true"></i><i class="fa fa-dollar" aria-hidden="true"></i> HOW MUCH</span>
+          <span class="mright5 black font_xnormal" style="text-shadow: none">
+            <% if @move_record_flat_rate.move_cost.to_i > 0 %>
+              Flat Rate: <span class="bold"><%= @move_record_flat_rate.move_cost %></span>
+            <% else %>
+              Hourly Rate: <span class="bold"><%= @move_record_cost_hourly.hourly_rate %></span>
+            <% end %>
+          </span>
+        </legend>
+      </div>
+    </div>
+
+    <div class="row colpd">
+      <% if @is_move_posted and @move_record_cost_hourly.move_cost.to_i > 0 %>
+          <div class="col7 form-group">
+            <span class="col1"><label class="">Move Cost</label><br/></span>
+            <span class="mright5 colfl"><label class="labels">Flat Rate</label><br/> <span class="black font_xnormal"><%= @move_record_flat_rate.move_cost %></span></span>
+            <span class="mright10 mleft10 colfl"><br/><span class="black font_xnormal">+</span></span>
+            <span class="mright10 mleft10 colfl"><label class="labels">Hourly Rate</label><br/> <span class="black font_xnormal"><%= @move_record_cost_hourly.hourly_rate %></span></span>
+            <span class="mright10 mleft10 colfl"><br/><span class="black font_xnormal">X</span></span>
+            <span class="mright10 mleft10 colfl"><label class="labels">Move Time</label><br/> <span class="black font_xnormal"><%= @move_record_cost_hourly.hourly_rate %></span></span>
+            <span class="mright10 mleft10 colfl"><br/><span class="black font_xnormal">=</span></span>
+            <span class="mright10 mleft10 colfl"><label class="labels">Move Cost</label><br/> <span class="black font_xnormal"><%= @move_record_cost_hourly.move_cost %></span></span>
+          </div>
+      <% end %>
+
+      <% if @is_move_posted and @move_record_packing.total_packing.to_i > 0 %>
+          <div class="col7 form-group">
+            <span class="col1"><label class="">Packing Cost</label><br/></span>
+            <span class="mright5 colfl"><label class="labels">Boxes</label><br/> <span class="black font_xnormal"><%= @move_record_packing.boxes %></span></span>
+            <label class="mright10 mleft10 colfl"><br/><span class="black font_xnormal">+</span></label>
+            <span class="mright10 mleft10 colfl"><label class="labels">Paper</label><br/> <span class="black font_xnormal"><%= @move_record_packing.paper %></span></span>
+            <label class="mright10 mleft10 colfl"><br/><span class="black font_xnormal">+</span></label>
+            <span class="mright10 mleft10 colfl"><label class="labels">Tape</label><br/> <span class="black font_xnormal"><%= @move_record_packing.tape %></span></span>
+            <label class="mright10 mleft10 colfl"><br/><span class="black font_xnormal">+</span></label>
+            <span class="mright10 mleft10 colfl"><label class="labels">Wrap</label><br/> <span class="black font_xnormal"><%= @move_record_packing.wrap %></span></span>
+            <label class="mright10 mleft10 colfl"><br/><span class="black font_xnormal">+</span></label>
+            <span class="mright10 mleft10 colfl"><label class="labels">Bags</label><br/> <span class="black font_xnormal"><%= @move_record_packing.bags %></span></span>
+            <label class="mright10 mleft10 colfl"><br/><span class="black font_xnormal">+</span></label>
+            <span class="mright10 mleft10 colfl"><label class="labels">Box Rent</label><br/> <span class="black font_xnormal"><%= @move_record_packing.box_rent %></span></span>
+            <label class="mright10 mleft10 colfl"><br/><span class="black font_xnormal">+</span></label>
+            <span class="mright10 mleft10 colfl"><label class="labels">Other</label><br/> <span class="black font_xnormal"><%= @move_record_packing.other %></span></span>
+            <label class="mright10 mleft10 colfl"><br/><span class="black font_xnormal">=</span></label>
+            <span class="mright10 mleft10 colfl"><label class="labels">Packing Cost</label><br/> <span class="black font_xnormal"><%= @move_record_packing.total_packing %></span></span>
+
+          </div>
+      <% end %>
+
+      <% if @move_record_other_cost.other_cost.to_i > 0 %>
+          <div class="col7 form-group">
+            <span class="col1"><label class="">Other Cost</label><br/></span>
+            <% if @move_record_other_cost.gst %>
+              <span class="mright5 colfl"><label class="labels">GST/HST</label><br/> <i class="fa fa-check icon-green" aria-hidden="true"></i></span>
+            <% end %>
+            <% if @move_record_other_cost.pst %>
+              <span class="mright10 mleft10 colfl pright10"><label class="labels">PST</label><br/> <i class="fa fa-check icon-green" aria-hidden="true"></i></span>
+            <% end %>
+            <span class="mright10 colfl"><label class="labels">Description</label><br/> <span class="black font_xnormal"><%= @move_record_other_cost.description %></span></span>
+            <span class="mright10 mleft10 colfl"><label class="labels">Other Cost</label><br/> <span class="black font_xnormal"><%= @move_record_other_cost.other_cost %></span></span>
+          </div>
+      <% end %>
+
+      <% if @move_record_surchage.surcharge.to_i > 0 %>
+          <div class="col7 form-group">
+            <span class="col1"><label class="">Surcharge</label><br/></span>
+            <% if @move_record_surchage.gst %>
+              <span class="mright5 colfl"><label class="labels">GST/HST</label><br/> <i class="fa fa-check icon-green" aria-hidden="true"></i></span>
+            <% end %>
+            <% if @move_record_surchage.pst %>
+              <span class="mright10 mleft10 colfl pright10"><label class="labels">PST</label><br/> <i class="fa fa-check icon-green" aria-hidden="true"></i></span>
+            <% end %>
+            <span class="mright10 colfl"><label class="labels">Description</label><br/> <span class="black font_xnormal"><%= @move_record_surchage.description %></span></span>
+            <span class="mright10 mleft10 colfl"><label class="labels">Surcharge</label><br/> <span class="black font_xnormal"><%= @move_record_surchage.surcharge %></span></span>
+          </div>
+      <% end %>
+
+
+      <% if @move_record_discount.discount.to_i > 0 %>
+          <div class="col7 form-group">
+            <span class="col1"><label class="">Discount</label><br/></span>
+            <% if not @move_record_discount.percentage.blank? %>
+                <span class="mright10 colfl"><label class="labels">Percentage</label><br/> <span class="black font_xnormal"><%= @move_record_discount.percentage %>%</span></span>
+            <% end %>
+            <% if not @move_record_discount.hourly.blank? %>
+                <span class="mright10 colfl"><label class="labels">Hourly</label><br/> <span class="black font_xnormal"><%= @move_record_discount.hourly %></span></span>
+            <% end %>
+            <% if not @move_record_discount.notes.blank? %>
+                <span class="mright10 colfl"><label class="labels">Notes</label><br/> <span class="black font_xnormal"><%= @move_record_discount.notes %></span></span>
+            <% end %>
+            <span class="mright10 colfl"><label class="labels">Discount</label><br/> <span class="black font_xnormal"><%= @move_record_discount.discount %></span></span>
+
+          </div>
+      <% end %>
+
+      <% if @move_record_insurance.insurance_cost.to_f > 0.0 %>
+          <div class="col7 form-group">
+            <span class="col1"><label class="">Insurance</label><br/></span>
+            <% if not @move_record_insurance.declared_value.blank? %>
+                <span class="mright10 colfl"><label class="labels">Value/K</label><br/> <span class="black font_xnormal"><%= @move_record_insurance.declared_value %></span></span>
+            <% end %>
+            <% if not @move_record_insurance.dolar_k.blank? %>
+                <span class="mright10 colfl"><label class="labels">$/K</label><br/> <span class="black font_xnormal"><%= @move_record_insurance.dolar_k %></span></span>
+            <% end %>
+            <% if not @move_record_insurance.description.blank? %>
+                <span class="mright10 colfl"><label class="labels">Description</label><br/> <span class="black font_xnormal"><%= @move_record_insurance.description %></span></span>
+            <% end %>
+            <span class="mright10 colfl"><label class="labels">Insur. Cost</label><br/> <span class="black font_xnormal"><%= @move_record_insurance.insurance_cost %></span></span>
+
+          </div>
+      <% end %>
+
+      <% if @move_record_fuel_cost.fuel_cost.to_f > 0.0 %>
+          <div class="col7 form-group">
+            <span class="col1"><label class="">Fuel Cost</label><br/></span>
+            <% if not @move_record_fuel_cost.percentage_mc.blank? %>
+                <span class="mright10 colfl"><label class="labels">%/MC</label><br/> <span class="black font_xnormal"><%= @move_record_fuel_cost.percentage_mc %>%</span></span>
+            <% end %>
+            <% if not @move_record_fuel_cost.fixed.blank? %>
+                <span class="mright10 colfl"><label class="labels">Fixed</label><br/> <span class="black font_xnormal"><%= @move_record_fuel_cost.fixed %></span></span>
+            <% end %>
+            <% if not @move_record_fuel_cost.notes.blank? %>
+                <span class="mright10 colfl"><label class="labels">Notes</label><br/> <span class="black font_xnormal"><%= @move_record_fuel_cost.notes %></span></span>
+            <% end %>
+            <span class="mright10 colfl"><label class="labels">Fuel Cost</label><br/> <span class="black font_xnormal"><%= @move_record_fuel_cost.fuel_cost %></span></span>
+
+          </div>
+      <% end %>
+
+      <% if @is_move_posted %>
+          <div class="col7 form-group">
+            <span class="col1"><label class="">Total Cost</label><br></span>
+            <span class="mright5 colfl"><label class="labels">GST/HST</label><br> <span class="black font_xnormal"><%= @move_record.gst_hst %></span></span>
+            <span class="mright10 mleft10 colfl"><label class="labels">PST</label><br> <span class="black font_xnormal"><%= @move_record.pst %></span></span>
+            <span class="mright10 mleft10 colfl"><label class="labels">Subtotal</label><br> <span class="black font_xnormal"><%= @move_record.subtotal %></span></span>
+            <span class="mright10 mleft10 colfl"><label class="labels">Deposit</label><br> <span class="black font_xnormal"><%= @move_record.deposit %></span></span>
+            <span class="mright10 mleft10 colfl"><label class="labels">Payment</label><br> <span class="black font_xnormal"><%= @move_record.payment %></span></span>
+            <span class="mright10 mleft10 colfl"><label class="labels">Balance Due</label><br> <span class="black font_xnormal"><%= @move_record.balance_due %></span></span>
+            <span class="mright10 mleft10 colfl"><label class="labels">Total Cost</label><br> <span class="black font_xnormal"><%= @move_record.total_cost %></span></span>
+          </div>
+      <% end %>
+
+      <% if @move_record_payment.amount.to_f > 0.0 %>
+          <div class="col7 form-group">
+            <span class="col1"><label class="">Payment</label><br/></span>
+            <% if not @move_record_payment.type_payment.blank? %>
+                <span class="mright10 colfl"><label class="labels">Type</label><br/> <span class="black font_xnormal"><%= @move_record_payment.type_payment %></span></span>
+            <% end %>
+            <% if not @move_record_payment.status.blank? %>
+                <span class="mright10 colfl"><label class="labels">Status</label><br/> <span class="black font_xnormal"><%= @move_record_payment.status %></span></span>
+            <% end %>
+            <% if not @move_record_payment.number_card.blank? %>
+                <span class="mright10 colfl"><label class="labels">Card #</label><br/> <span class="black font_xnormal">************<%= @move_record_payment.number_card.last(4) %></span></span>
+            <% end %>
+            <% if not @move_record_payment.exp.blank? %>
+                <span class="mright10 colfl"><label class="labels">Exp</label><br/> <span class="black font_xnormal"><%= @move_record_payment.exp %></span></span>
+            <% end %>
+            <% if not @move_record_payment.cvc.blank? %>
+                <span class="mright10 colfl"><label class="labels">CVC</label><br/> <span class="black font_xnormal"><%= @move_record_payment.cvc %></span></span>
+            <% end %>
+            <span class="mright10 colfl"><label class="labels">Amount</label><br/> <span class="black font_xnormal"><%= @move_record_payment.amount %></span></span>
+            <% if not @move_record_payment.date.blank? %>
+                <span class="mright10 colfl"><label class="labels">Date</label><br/> <span class="black font_xnormal"><%= @move_record_payment.date.strftime("%d/%m/%Y") %></span></span>
+            <% end %>
+
+          </div>
+      <% end %>
+
+      <% if not @move_record.cost_note.blank? %>
+          <div class="col7 form-group">
+            <label class="">Notes</label><br/> <b class="black font_xnormal"><%= @move_record.cost_note %></b>
+          </div>
+      <% end %>
+
+    </div>
+    <br/>
+
+
+    <% @from_move = true %>
+    <%= render :partial => 'messages_move_records/index' %>
+
+  </div>
+</div>
+
+<% content_for :special_js do %>
+    <script type="text/javascript">
+      var topBar = document.getElementById("top-bar");
+
+      topBar.innerHTML = "<div class='msg pleft30 colpd'>" +
+          "<div class='text-left'>"
+          + "<%= "<div class='col-md-3'>Print Documents: &nbsp; <i class='icon-print toggle-div pointer printer-icon white'></i><ul class='dropdown-menu cost-option-hide text-left' role='menu'><li href='#{terms_path(id: params[:id])}' class='printers-item pointer'><a><i class='small_icon fa fa-file-pdf-o'></i> Terms</a></li><li href='#{cargo_path(id: params[:id])}' class='printers-item pointer'><a><i class='small_icon fa fa-file-pdf-o'></i> Cargo</a></li><li href='#{cc_consent_path(id: params[:id])}' class='printers-item pointer'><a><i class='small_icon fa fa-file-pdf-o'></i> CC Consent</a></li><li href='#{damage_claim_path(id: params[:id])}' class='printers-item pointer'><a><i class='small_icon fa fa-file-pdf-o'></i> Damage Claim</a></li><li href='#{costs_and_surchage_path(id: params[:id])}' class='printers-item pointer'><a><i class='small_icon fa fa-file-pdf-o'></i> Costs and Surchage</a></li><li href='#{non_disclosure_path(id: params[:id])}' class='printers-item pointer'><a><i class='small_icon fa fa-file-pdf-o'></i> Settlement Agreement</a></li><li href='#{non_disclosure_path(id: params[:id], blank: true)}' class='printers-item pointer'><a><i class='small_icon fa fa-file-pdf-o'></i> Blank Settlement Agreement</a></li><li href='#{move_path(id: params[:id], document_type: Pdf::PROPOSAL)}' class='printers-item pointer'><a><i class='small_icon fa fa-file-pdf-o'></i> Move Proposal</a></li><li href='#{move_path(id: params[:id], document_type: Pdf::CONTRACT)}' class='printers-item pointer'><a><i class='small_icon fa fa-file-pdf-o'></i> Move Contract</a></li><li href='#{move_path(id: params[:id], document_type: Pdf::INVOICE)}' class='printers-item pointer'><a><i class='small_icon fa fa-file-pdf-o'></i> Move Invoice</a></li><li href='#{move_path(id: params[:id], document_type: Pdf::RECEIPT)}' class='printers-item pointer'><a><i class='small_icon fa fa-file-pdf-o'></i> Move Receipt</a></li></ul></div>".html_safe %>"
+          + "<span class='pull-right'>Current Move Stage: <span id='stage_name'><%= @move_stage_name.stage || @move_stage_name.sub_stage %></span></span>"
+          + "</div></div>";
+
+      <% if params[:token].present? and not params[:message].present? %>
+        customer_active_move_record();
+      <% end %>
+    </script>
+<% end %>
+
+
+<!-- Cargo calculator -->
+<div class="modal fade" tabindex="-1" role="dialog" id="modal-cargo" data-backdrop="static" data-keyboard="false">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button aria-hidden="true" class="close" data-dismiss="modal" type="button">×</button>
+        <h4 class="modal-title" id="myModalLabel"> Cargo Calculator </h4>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-md-4">
+            <div class="row">
+              <div class="col-md-12 form-group">
+                <label>Room</label>
+                <%= select "room_cargo", "room_cargo", options_from_collection_for_select(@rooms, "id", :name), {include_blank: true}, :class => 'form-control room-cargo', style: 'width:100%' %>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <table class="table table-bordered dataTable furnishings-table table-hover" style="margin-bottom:0;">
+                  <thead>
+                  <tr role="row">
+                    <th role="columnheader" tabindex="0" rowspan="1" colspan="1">
+                      Furnishings
+                    </th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-8">
+            <label> </label>
+            <table class="table table-bordered dataTable cargo-template-table" style="margin-bottom:0;">
+              <thead>
+              <tr role="row">
+                <th role="columnheader" tabindex="0" rowspan="1" colspan="1">
+                </th>
+                <th role="columnheader" tabindex="0" rowspan="1" colspan="1">
+                  Description
+                </th>
+                <th role="columnheader" tabindex="0" rowspan="1" colspan="1">
+                  Quantity
+                </th>
+                <th role="columnheader" tabindex="0" rowspan="1" colspan="1">
+                  Volume
+                </th>
+                <th role="columnheader" tabindex="0" rowspan="1" colspan="1">
+                  Weight
+                </th>
+              </tr>
+              </thead>
+              <tbody>
+              <% if @calc_cargo.blank? %>
+                  <tr class="cargo_template">
+                    <td><i class="icon-minus icon-red remove-cargo-template"></i></td>
+                    <td>
+                      <input type="text" name="calc_cargo[new_1][description]" value="" placeholder="Description" class="form-control cargo-description" autocomplete="off">
+                    </td>
+                    <td>
+                      <input type="number" name="calc_cargo[new_1][quantity]" value="0" placeholder="Quantity" class="form-control quantity" min="0" step="0.5">
+                    </td>
+                    <td>
+                      <input type="number" name="calc_cargo[new_1][volume]" value="0" placeholder="Volume" class="form-control volume" min="0" step="0.5">
+                    </td>
+                    <td>
+                      <input type="number" name="calc_cargo[new_1][weight]" value="0" placeholder="Weight" class="form-control weight" min="0" step="0.5">
+                    </td>
+                  </tr>
+              <% else %>
+                  <% @calc_cargo.each do |cargo| %>
+                      <tr class="cargo_template">
+                        <td>
+                          <i class="icon-minus icon-red remove-cargo-template" data-cargo="<%= cargo.id %>"></i>
+                        </td>
+                        <td>
+                          <input type="text" name="calc_cargo[<%= cargo.id %>][description]" value="<%= cargo.description %>" placeholder="Description" class="form-control cargo-description" autocomplete="off">
+                        </td>
+                        <td>
+                          <input type="number" name="calc_cargo[<%= cargo.id %>][quantity]" value="<%= cargo.quantity %>" placeholder="Quantity" class="form-control quantity" min="0" step="0.5">
+                        </td>
+                        <td>
+                          <input type="number" name="calc_cargo[<%= cargo.id %>][volume]" value="<%= cargo.unit_volume %>" placeholder="Volume" class="form-control volume" min="0" step="0.5">
+                        </td>
+                        <td>
+                          <input type="number" name="calc_cargo[<%= cargo.id %>][weight]" value="<%= cargo.unit_weight %>" placeholder="Weight" class="form-control weight" min="0" step="0.5">
+                        </td>
+                      </tr>
+                  <% end %>
+              <% end %>
+              </tbody>
+            </table>
+            <btn class="add-new-cargo-template pointer pull-right"><i class="fa fa-plus icon-green"></i> Add new
+              line
+            </btn>
+            <div class="clearfix"></div>
+            <hr>
+            <div class="col-md-12 text-right">
+              <div class="row">
+                <label>Estimated Volume:&nbsp;</label><span class="calc-volume">0</span> cuft
+              </div>
+              <div class="row">
+                <label>Estimated Volumentric Weight:&nbsp;</label><span class="calc-volume-weight">0</span> lbs
+              </div>
+              <div class="row">
+                <label>Estimated Weight:&nbsp;</label><span class="calc-weight">0</span> lbs
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-default" data-dismiss="modal" type="button">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

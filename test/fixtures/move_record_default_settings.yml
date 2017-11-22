@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  number_of_client_lines: 1
+  number_of_trucks: 1
+  show_move_type: false
+  account_id: 1
+
+two:
+  number_of_client_lines: 1
+  number_of_trucks: 1
+  show_move_type: false
+  account_id: 1

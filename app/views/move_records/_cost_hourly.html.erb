@@ -1,0 +1,58 @@
+<!--start-->
+<div class="form-group col1">
+  <%= label :cost_hourly, :start, class: "hhidden labels" %><br>
+  <%= text_field :cost_hourly, :start, placeholder: "Start", class: 'form-control calcMoveHours cost_hourly_start
+    time-mover', style: 'width:100%', readonly: true %>
+</div>
+<!--stop-->
+<div class="form-group col1 colmr">
+  <%= label :cost_hourly, :stop, class: "hhidden labels" %><br>
+  <%= text_field :cost_hourly, :stop, placeholder: "Stop", class: 'form-control calcMoveHours cost_hourly_stop
+    time-mover', style: 'width:100%', readonly: true %>
+</div>
+<!--hours-->
+<div class="form-group col0-5">
+  <%= label :cost_hourly, :hours, class: "labels" %><br>
+  <%= text_field :cost_hourly, :hours, :value => 0, readonly: true, class: 'form-control2 cost_hourly_hours', style: 'width:100%', readonly: true %>
+</div>
+<%= label :cost_hourly, '-', class: 'less-cost colpds colfl' %>
+<!--breaks-->
+<div class="form-group col0-5">
+  <%= label :cost_hourly, :breaks, class: "hhidden labels" %><br>
+  <%= text_field :cost_hourly, :breaks, placeholder: "Breaks", class: 'form-control calcMoveHours
+    cost_hourly_breaks', style: 'width:100%', readonly: true %>
+</div>
+<%= label :cost_hourly, '+', class: 'less-cost colpds colfl' %>
+<!--travel-->
+<div class="form-group col0-5">
+  <%= label :cost_hourly, :travel, class: "hhidden labels" %><br>
+  <%= text_field :cost_hourly, :travel, placeholder: "Travel", class: 'form-control calcMoveHours
+    cost_hourly_travel', style: 'width:100%', readonly: true %>
+</div>
+<%= label :cost_hourly, '=', class: 'less-cost colpds colfl' %>
+<!--estimate_time-->
+<div class="form-group col0-5 colmr">
+  <%= label :cost_hourly, :estimate_time, "Est. time", class: "labels" %><br>
+  <%= text_field :cost_hourly, :estimate_time, :value => 0, readonly: true, class: 'form-control2 cost_hourly_estimate_time', style: 'width:100%', readonly: true %>
+</div>
+
+<!--actual-->
+<div class="form-group col0-5">
+  <%= label :cost_hourly, :actual, class: "labels" %><br>
+  <%= text_field :cost_hourly, :actual, :value => 0, class: 'form-control2 calcMoveHours cost_hourly_actual', style: 'width:100%', readonly: true %>
+</div>
+<%= label :cost_hourly, 'x', class: 'less-cost colpds colfl' %>
+<!--hourly_rate-->
+<div class="form-group col0-8">
+  <%= label :cost_hourly, :hourly_rate, class: "labels" %><br>
+  <%= text_field :cost_hourly, :hourly_rate, :value => 0, class: 'form-control2 calcMoveHours cost_hourly_hourly_rate', style: 'width:100%', readonly: true %>
+</div>
+<div class="text-center center-block col0-5">
+  <label></label><br/>
+  <%= label :cost_hourly, '=', class: 'less-cost center-block colpds colfl', style: "width: 100%" %>
+</div>
+<!--move_cost-->
+<div class="form-group col0-8">
+  <%= label :cost_hourly, :move_cost, class: "labels" %><br>
+  <%= text_field :cost_hourly, :move_cost, :value => 0, readonly: true, class: 'form-control2 calculateTotal cost_hourly_move_cost', style: 'width:100%', readonly: true %>
+</div>

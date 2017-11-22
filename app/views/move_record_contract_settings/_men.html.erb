@@ -1,0 +1,86 @@
+<div class="col-md-1 pull-left">
+  <%= label :how, 'men', class: "labels" %><br>
+
+  <div class="left-inner-addon">
+    <% css = @settings.show_men ? @enable_icon : @disable_icon %>
+    <i field="show_men" class="<%= css %>"></i>
+    <%= select :men, 'men', options_for_select({1 => "1", 2 => "2", 3 => "3", 4 => "4", 5 => "5", 6 => "6"}, @settings.number_man_id), {include_blank: true}, class: 'form-control space-select-addon change-select', style: 'width:100%', data_id: 'number_man_id' %>
+  </div>
+</div>
+<div class="col-md-2 col-mm-2 pull-left">
+  <div class="left-inner-addon pull-left half-size">
+    <%= label :how, 'lead', class: "labels" %><br>
+    <% css = @settings.show_lead ? @enable_icon : @disable_icon %>
+    <i field="show_lead" class="<%= css %>"></i>
+    <%= text_field :how, 'lead', disabled: true, class: 'form-control', style: 'width:100%' %>
+  </div>
+  <div class="left-inner-addon pull-left half-size">
+    <%= label :how, 'hours', class: "labels" %><br>
+    <%= text_field :how, 'hours', disabled: true, class: 'form-control', style: 'width:100%' %>
+  </div>
+</div>
+
+<div class="col-md-2 col-mm-2 pull-left">
+  <div class="left-inner-addon pull-left half-size">
+    <%= label :how, 'mover', class: "labels" %><br>
+    <% css = @settings.show_mover_2 ? @enable_icon : @disable_icon %>
+    <i field="show_mover_2" class="<%= css %>"></i>
+    <%= text_field :how, 'mover', disabled: true, class: 'form-control', style: 'width:100%' %>
+  </div>
+  <div class="left-inner-addon pull-left half-size">
+    <%= label :how, 'hours', class: "labels" %><br>
+    <%= text_field :how, 'hours', disabled: true, class: 'form-control', style: 'width:100%' %>
+  </div>
+</div>
+
+<div class="col-md-2 col-mm-2 pull-left">
+  <div class="left-inner-addon pull-left half-size">
+    <%= label :how, 'mover', class: "labels" %><br>
+    <% css = @settings.show_mover_3 ? @enable_icon : @disable_icon %>
+    <i field="show_mover_3" class="<%= css %>"></i>
+    <%= text_field :how, 'mover', disabled: true, class: 'form-control', style: 'width:100%' %>
+  </div>
+  <div class="left-inner-addon pull-left half-size">
+    <%= label :how, 'hours', class: "labels" %><br>
+    <%= text_field :how, 'hours', disabled: true, class: 'form-control', style: 'width:100%' %>
+  </div>
+</div>
+
+<div class="col-md-2 col-mm-2 pull-left">
+  <div class="left-inner-addon pull-left half-size">
+    <%= label :how, 'mover', class: "labels" %><br>
+    <% css = @settings.show_mover_4 ? @enable_icon : @disable_icon %>
+    <i field="show_mover_4" class="<%= css %>"></i>
+    <%= text_field :how, 'mover', disabled: true, class: 'form-control', style: 'width:100%' %>
+  </div>
+  <div class="left-inner-addon pull-left half-size">
+    <%= label :how, 'hours', class: "labels" %><br>
+    <%= text_field :how, 'hours', disabled: true, class: 'form-control', style: 'width:100%' %>
+  </div>
+</div>
+
+<div class="col-md-2 col-mm-2 pull-left">
+  <div class="left-inner-addon pull-left half-size">
+    <%= label :how, 'mover', class: "labels" %><br>
+    <% css = @settings.show_mover_5 ? @enable_icon : @disable_icon %>
+    <i field="show_mover_5" class="<%= css %>"></i>
+    <%= text_field :how, 'mover', disabled: true, class: 'form-control', style: 'width:100%' %>
+  </div>
+  <div class="left-inner-addon pull-left half-size">
+    <%= label :how, 'hours', class: "labels" %><br>
+    <%= text_field :how, 'hours', disabled: true, class: 'form-control', style: 'width:100%' %>
+  </div>
+</div>
+
+<div class="col-md-2 col-mm-2 pull-left">
+  <div class="left-inner-addon pull-left half-size">
+    <%= label :how, 'mover', class: "labels" %><br>
+    <% css = @settings.show_mover_6 ? @enable_icon : @disable_icon %>
+    <i field="show_mover_6" class="<%= css %>"></i>
+    <%= text_field :how, 'mover', disabled: true, class: 'form-control', style: 'width:100%' %>
+  </div>
+  <div class="left-inner-addon pull-left half-size">
+    <%= label :how, 'hours', class: "labels" %><br>
+    <%= text_field :how, 'hours', disabled: true, class: 'form-control', style: 'width:100%' %>
+  </div>
+</div>

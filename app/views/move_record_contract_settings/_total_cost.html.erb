@@ -1,0 +1,37 @@
+<form class="form-inline">
+  <!--gst_hst-->
+  <div class="form-group col-md-1">
+    <%= label :total_cost, :gst_hst, "GST/HST", class: "labels" %><br>
+    <%= text_field :total_cost, :gst_hst, disabled: true, class: 'form-control', style: 'width:100%' %>
+  </div>
+  <!--pst-->
+  <div class="form-group col-md-1">
+    <%= label :total_cost, :pst, 'PST', class: "labels" %><br>
+    <%= text_field :total_cost, :pst, disabled: true, class: 'form-control', style: 'width:100%' %>
+  </div>
+  <!--subtotal-->
+  <div class="form-group col-md-1">
+    <%= label :total_cost, :subtotal, class: "labels" %><br>
+    <%= text_field :total_cost, :subtotal, disabled: true, class: 'form-control', style: 'width:100%' %>
+  </div>
+  <!--deposit-->
+  <div class="form-group col-md-1">
+    <%= label :total_cost, :deposit, class: "labels" %><br>
+    <%= text_field :total_cost, :deposit, disabled: true, class: 'form-control', style: 'width:100%' %>
+  </div>
+  <!--payment-->
+  <div class="form-group col-md-1">
+    <%= label :total_cost, :payment, class: "labels" %><br>
+    <%= text_field :total_cost, :payment, disabled: true, class: 'form-control', style: 'width:100%' %>
+  </div>
+  <!--balance_due-->
+  <div class="form-group col-md-2">
+    <%= label :total_cost, :balance_due, class: "labels" %><br>
+    <%= text_field :total_cost, :balance_due, disabled: true, class: 'form-control', style: 'width:100%' %>
+  </div>
+  <!--total_cost-->
+  <div class="form-group col-md-3">
+    <%= label :total_cost, :total_cost, class: "labels" %><br>
+    <%= text_field :total_cost, :total_cost, disabled: true, class: 'form-control', style: 'width:100%' %>
+  </div>
+</form>

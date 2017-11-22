@@ -1,0 +1,39 @@
+<div class="row">
+  <%= form_for @move_type, html: {class: 'form-inline'} do |f| %>
+      <div class="form-group col-md-2">
+        <%= f.label :description, 'Move Type', class: "labels" %><br>
+
+        <div class="left-inner-addon">
+          <% css = @settings.show_move_type ? @enable_icon : @disable_icon %>
+          <i field="show_move_type" class="<%= css %>"></i>
+          <%= f.select :description, {}, {include_blank: true}, :class => 'form-control space-select-addon change-select', style: 'width:100%', disabled: true %>
+          <% if validate_special_permission('edit.contract_field_default_values', @current_actions) %>
+            <i class="icon-edit-sign edit-dropdown-contract-settings" field="move_types" data-default="<%= @settings.move_type_id %>" data-default-key="move_type_id"></i>
+          <% end %>
+        </div>
+      </div>
+
+      <div class="form-group col-md-7">
+        <%= label :move_type, 'Move type details', class: "labels" %><br>
+
+        <div class="left-inner-addon">
+          <% css = @settings.show_move_type_details ? @enable_icon : @disable_icon %>
+          <i field="show_move_type_details" class="<%= css %>"></i>
+          <%= text_field :move_type_details, 'Move_type_details', disabled: true, class: 'form-control', style: 'width:100%' %>
+        </div>
+      </div>
+
+      <div class="form-group col-md-3">
+        <%= label :move_type_details, 'Move type alert', class: "labels" %><br>
+
+        <div class="left-inner-addon">
+          <% css = @settings.show_move_type_alert ? @enable_icon : @disable_icon %>
+          <i field="show_move_type_alert" class="<%= css %>"></i>
+          <%= select :move_type_details, 'Move_type_alert', {}, {include_blank: true}, :class => 'form-control space-select-addon change-select', style: 'width:100%', disabled: true %>
+          <% if validate_special_permission('edit.contract_field_default_values', @current_actions) %>
+            <i class="icon-edit-sign edit-dropdown-contract-settings" field="move_type_alerts" data-default="<%= @settings.move_type_alert_id %>" data-default-key="move_type_alert_id"></i>
+          <% end %>
+        </div>
+      </div>
+  <% end %>
+</div>

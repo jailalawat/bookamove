@@ -1,0 +1,53 @@
+<form class="form-inline">
+  <!--start-->
+  <div class="form-group col-md-1">
+    <%= label :cost_hourly, :start, class: "labels" %><br>
+    <%= text_field :cost_hourly, :start, disabled: true, class: 'form-control', style: 'width:100%' %>
+  </div>
+  <!--stop-->
+  <div class="form-group col-md-1">
+    <%= label :cost_hourly, :stop, class: "labels" %><br>
+    <%= text_field :cost_hourly, :stop, disabled: true, class: 'form-control', style: 'width:100%' %>
+  </div>
+  <!--hours-->
+  <div class="form-group col-md-1">
+    <%= label :cost_hourly, :hours, class: "labels" %><br>
+    <%= text_field :cost_hourly, :hours, disabled: true, class: 'form-control', style: 'width:100%' %>
+  </div>
+  <%= label :cost_hourly, '-', class: 'less-cost' %>
+  <!--breaks-->
+  <div class="form-group col-md-1">
+    <%= label :cost_hourly, :breaks, class: "labels" %><br>
+    <%= text_field :cost_hourly, :breaks, disabled: true, class: 'form-control', style: 'width:100%' %>
+  </div>
+  <%= label :cost_hourly, '+', class: 'less-cost' %>
+  <!--travel-->
+  <div class="form-group col-md-1">
+    <%= label :cost_hourly, :travel, class: "labels" %><br>
+    <%= text_field :cost_hourly, :travel, disabled: true, class: 'form-control', style: 'width:100%' %>
+  </div>
+  <%= label :cost_hourly, '=', class: 'less-cost' %>
+  <!--estimate_time-->
+  <div class="form-group col-md-2">
+    <%= label :cost_hourly, :estimate_time, class: "labels" %><br>
+    <%= text_field :cost_hourly, :estimate_time, disabled: true, class: 'form-control', style: 'width:100%' %>
+  </div>
+
+  <!--actual-->
+  <div class="form-group col-md-1">
+    <%= label :cost_hourly, :actual, class: "labels" %><br>
+    <%= text_field :cost_hourly, :actual, disabled: true, class: 'form-control', style: 'width:100%' %>
+  </div>
+  <%= label :cost_hourly, 'x', class: 'less-cost' %>
+  <!--hourly_rate-->
+  <div class="form-group col-md-1">
+    <%= label :cost_hourly, :hourly_rate, class: "labels nowrap" %><br>
+    <%= text_field :cost_hourly, :hourly_rate, disabled: true, class: 'form-control', style: 'width:100%' %>
+  </div>
+  <%= label :cost_hourly, '=', class: 'less-cost' %>
+  <!--move_cost-->
+  <div class="form-group col-md-1">
+    <%= label :cost_hourly, :move_cost, class: "labels nowrap" %><br>
+    <%= text_field :cost_hourly, :move_cost, disabled: true, class: 'form-control', style: 'width:100%' %>
+  </div>
+</form>

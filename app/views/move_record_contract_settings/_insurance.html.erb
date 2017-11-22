@@ -1,0 +1,22 @@
+<form class="form-inline">
+  <!--declared_value-->
+  <div class="form-group col-md-2">
+    <%= label :insurance, :declared_value, 'Declared Value (K)', class: "labels" %><br>
+    <%= text_field :insurance, :declared_value, disabled: true, class: 'form-control', style: 'width:100%' %>
+  </div>
+  <!--dolar_k-->
+  <div class="form-group col-md-1">
+    <%= label :insurance, :dolar_k, '$/K', class: "labels" %><br>
+    <%= text_field :insurance, :dolar_k, disabled: true, class: 'form-control', style: 'width:100%' %>
+  </div>
+  <!--description-->
+  <div class="form-group col-md-4">
+    <%= label :insurance, :description, class: "labels" %><br>
+    <%= text_field :insurance, :description, disabled: true, class: 'form-control', style: 'width:100%' %>
+  </div>
+  <!--insurance_cost-->
+  <div class="form-group col-md-3">
+    <%= label :insurance, :insurance_cost, class: "labels" %><br>
+    <%= text_field :insurance, :insurance_cost, disabled: true, class: 'form-control', style: 'width:100%' %>
+  </div>
+</form>

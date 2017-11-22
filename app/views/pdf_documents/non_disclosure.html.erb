@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <style type="text/css">
+    a { text-decoration: none; color: #33679e }
+    a:hover { color: #2a6496 !important; text-decoration: none !important; outline: 0 !important; }
+    a:focus { color: #2a6496 !important; text-decoration: none !important; outline: 0 !important; }
+
+    body {
+      font-family: Arial, sans-serif;
+      font-size: 9.6pt;
+      background-color: #f0f0f0;
+      color: #000000
+    }
+  </style>
+</head>
+<body background="#f0f0f0" style="font-family: Arial, sans-serif; background-color: #f0f0f0; padding: 8px; color: #000000">
+
+<table width="590" align="center" cellpadding="12" cellspacing="0" border="0" style="width: 590px; margin: 0 auto;">
+  <tr>
+    <td align="left" style="padding-left: 0px; padding-right: 0px; padding-bottom: 8px;">
+      <a href="<%= account.site %>"><img src="<%= logo %>" width="192" border="0"></a>
+    </td>
+    <td align="right" style="padding-left: 0px; padding-right: 0px; padding-bottom: 8px;">
+      <b><a style="font-family: Arial, sans-serif; font-size: 16pt; line-height: 16px; color: #f04241"><%= tel %></a></b>
+      <br>
+      <span style="font-family: Arial, sans-serif; color: #33679e; font-size: 8.25pt"><%= account.working_hours %></span>
+    </td>
+  </tr>
+  <tr>
+    <td bgcolor="#264b7f" colspan="2" align="center" style="height: 13px; padding: 8px;">
+      <b style="font-family: Arial, sans-serif; color: white; font-size: 17pt">Settlement Agreement</b>
+    </td>
+  </tr>
+  <tr style="line-height: 20px;">
+    <td bgcolor="white" colspan="2" align="left" style="padding: 20px; color: #000000">
+      <b style="font-family: Arial, sans-serif; color: #33679e">
+        <div class="">
+          <br />
+          <table class="bordered">
+            <tr>
+              <td>Name:</td>
+              <td><%= move.move_record_client.first.client.name if not blank == "true" %></td>
+            </tr>
+            <tr>
+              <td>Move Date:</td>
+              <td><%= move.blank? ? nil : move.move_record_date.first.move_date.blank? ? nil : move.move_record_date.first.move_date.strftime("%Y-%m-%d") if not blank == "true" %></td>
+            </tr>
+            <tr>
+              <td>Telephone:</td>
+              <td><%= move.blank? ? nil : move.move_record_client.first.client.home_phone if not blank == "true" %></td>
+            </tr>
+          </table>
+          <br />
+
+          <p>By signing this document I am accepting this resolution settlement of $______ dollars.</p>
+
+          <p>I release <%= account.name %>, its carriers, employees, and all company representatives from any further claims or obligations relating to the services provided to me. I will not seek damages in Small Claims Court or file a complaint with the Better Business Bureau. </p>
+
+          <p>This Settlement is a confidential matter. I agree to not to publicly disclose any information regarding this settlement or publish negative reviews about the services provided to me.</p>
+
+          <br />
+          <br />
+          <br />
+
+          <div style="display: flex;">
+            <div style="border-top: 1px solid black; width: 400px; float: left; margin-right: 50px">Please Print Name &amp; Signature</div>
+            <div style="border-top: 1px solid black; width: 90px; float: left;">Date</div>
+          </div>
+
+          <br  class="clear" />
+          <br />
+          <p>I authorize <%= account.name %> process a refund to the following credit card:</p>
+
+          <table class="bordered">
+            <tr>
+              <td>Card Type:</td>
+              <td>&nbsp;</td>
+            </tr>
+            <tr>
+              <td>Card Number:</td>
+              <td>&nbsp;</td>
+            </tr>
+            <tr>
+              <td>Expiry:</td>
+              <td>&nbsp;</td>
+            </tr>
+            <tr>
+              <td>Name on Card:</td>
+              <td>&nbsp;</td>
+            </tr>
+          </table>
+          <p id="card_subtext">Your refund to your credit card will show as being refunded from Canadian Movers Network.</p>
+
+          <p>Please print form, sign, scan or photograph and then send back to <%= account.email %></p>
+        </div>
+      </b>
+
+
+      <br>
+    </td>
+  </tr>
+  <tr>
+    <td bgcolor="#264b7f" colspan="2" align="center" style="padding: 8px; color: white; height: 27px;">
+      <table cellspacing="0" cellpadding="0" border="0" width="100%">
+        <tr align="center">
+          <td>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<br>
+
+</body>
+</html>

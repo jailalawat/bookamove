@@ -1,0 +1,284 @@
+<%= form_for(@truck) do |f| %>
+    <% if @truck.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@truck.errors.count, "error") %> prohibited this truck from being saved:</h2>
+
+          <ul>
+            <% @truck.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+    <div class='row'>
+      <% if @editing.present? %>
+          <%= render 'image_trucks' %>
+      <% end %>
+      <div class="col-md-8">
+        <div class="form-group clearfix">
+          <div class="col-md-1">
+            <%= f.label :name, class: 'control-label text-left' %>
+          </div>
+          <div class="col-md-5">
+            <%= f.text_field :description, class: 'form-control', required: true %>
+          </div>
+          <div class="col-md-1">
+            <%= f.label :truck_size, class: 'control-label text-left' %>
+          </div>
+          <div class="col-md-5">
+            <%= f.text_field :size, class: 'form-control' %>
+          </div>
+        </div>
+
+        <div class="form-group clearfix">
+          <div class="col-md-1">
+            <%= f.label :truck_group, class: 'control-label text-left' %>
+          </div>
+          <div class="col-md-5">
+          </div>
+          <div class="col-md-1">
+            <%= f.label :phone, class: 'control-label text-left' %>
+          </div>
+          <div class="col-md-5">
+            <%= f.text_field :phone, class: 'form-control' %>
+          </div>
+        </div>
+
+        <div class="form-group clearfix">
+          <div class="col-md-1">
+            <%= f.label :cell, class: 'control-label text-left' %>
+          </div>
+          <div class="col-md-5">
+            <%= f.text_field :cell, class: 'form-control' %>
+          </div>
+          <div class="col-md-1">
+            <%= f.label :fax, class: 'control-label text-left' %>
+          </div>
+          <div class="col-md-5">
+            <%= f.text_field :fax, class: 'form-control' %>
+          </div>
+        </div>
+
+        <div class="form-group clearfix">
+          <div class="col-md-1">
+            <%= f.label :license, class: 'control-label text-left' %>
+          </div>
+          <div class="col-md-5">
+            <%= f.text_field :license, class: 'form-control' %>
+          </div>
+          <div class="col-md-1">
+            <%= f.label :registration, class: 'control-label text-left' %>
+          </div>
+          <div class="col-md-5">
+            <%= f.text_field :registration, class: 'form-control' %>
+          </div>
+        </div>
+
+        <div class="form-group clearfix">
+          <div class="col-md-1">
+            <%= f.label :year, class: 'control-label text-left' %>
+          </div>
+          <div class="col-md-5">
+            <%= f.text_field :year, class: 'form-control' %>
+          </div>
+          <div class="col-md-1">
+            <%= f.label :make, class: 'control-label text-left' %>
+          </div>
+          <div class="col-md-5">
+            <%= f.text_field :make, class: 'form-control' %>
+          </div>
+        </div>
+
+        <div class="form-group clearfix">
+          <div class="col-md-1">
+            <%= f.label :model, class: 'control-label text-left' %>
+          </div>
+          <div class="col-md-5">
+            <%= f.text_field :model, class: 'form-control' %>
+          </div>
+          <div class="col-md-1">
+            <%= f.label :gvw, class: 'control-label text-left' %>
+          </div>
+          <div class="col-md-5">
+            <%= f.text_field :gvw, class: 'form-control' %>
+          </div>
+        </div>
+
+        <div class="form-group clearfix">
+          <div class="col-md-1">
+            <%= f.label :cu_inch, class: 'control-label text-left' %>
+          </div>
+          <div class="col-md-5">
+            <%= f.text_field :cu_inch, class: 'form-control' %>
+          </div>
+          <div class="col-md-1">
+            <%= f.label :serial_number, class: 'control-label text-left' %>
+          </div>
+          <div class="col-md-5">
+            <%= f.text_field :serial_number, class: 'form-control' %>
+          </div>
+        </div>
+
+        <div class="form-group clearfix">
+          <div class="col-md-1">
+            <%= f.label :fuel, class: 'control-label text-left' %>
+          </div>
+          <div class="col-md-5">
+            <%= f.text_field :fuel, class: 'form-control' %>
+          </div>
+          <div class="col-md-1">
+            <%= f.label :driver, class: 'control-label text-left' %>
+          </div>
+          <div class="col-md-5">
+            <%= f.collection_select :driver, @all_mover_users, :id, :name, {include_blank: true}, class: 'form-control' %>
+          </div>
+        </div>
+
+        <div class="form-group clearfix">
+          <div class="col-md-1">
+            <%= f.label :secondary_driver, class: 'control-label text-left' %>
+          </div>
+          <div class="col-md-5">
+            <%= f.text_field :secondary_driver, class: 'form-control' %>
+          </div>
+          <div class="col-md-1">
+            <%= f.label :safety_date, class: 'control-label text-left' %>
+          </div>
+          <div class="col-md-5">
+            <%= f.text_field :safety_date, class: 'form-control' %>
+          </div>
+        </div>
+
+        <div class="form-group clearfix">
+          <div class="col-md-1">
+            <%= f.label :insurance_date, class: 'control-label text-left' %>
+          </div>
+          <div class="col-md-5">
+            <%= f.text_field :insurance_date, class: 'form-control' %>
+          </div>
+          <div class="col-md-1">
+            <%= f.label :air_care_date, class: 'control-label text-left' %>
+          </div>
+          <div class="col-md-5">
+            <%= f.text_field :air_care_date, class: 'form-control' %>
+          </div>
+        </div>
+
+        <div class="form-group clearfix">
+          <div class="col-md-1">
+            <%= f.label :exterior_lenght, class: 'control-label text-left' %>
+          </div>
+          <div class="col-md-5">
+            <%= f.text_field :exterior_lenght, class: 'form-control' %>
+          </div>
+          <div class="col-md-1">
+            <%= f.label :exterior_width, class: 'control-label text-left' %>
+          </div>
+          <div class="col-md-5">
+            <%= f.text_field :exterior_width, class: 'form-control' %>
+          </div>
+        </div>
+
+        <div class="form-group clearfix">
+          <div class="col-md-1">
+            <%= f.label :exterior_height, class: 'control-label text-left' %>
+          </div>
+          <div class="col-md-5">
+            <%= f.text_field :exterior_height, class: 'form-control' %>
+          </div>
+          <div class="col-md-1">
+            <%= f.label :interior_lenght, class: 'control-label text-left' %>
+          </div>
+          <div class="col-md-5">
+            <%= f.text_field :interior_lenght, class: 'form-control' %>
+          </div>
+        </div>
+
+        <div class="form-group clearfix">
+          <div class="col-md-1">
+            <%= f.label :interior_width, class: 'control-label text-left' %>
+          </div>
+          <div class="col-md-5">
+            <%= f.text_field :interior_width, class: 'form-control' %>
+          </div>
+          <div class="col-md-1">
+            <%= f.label :interior_height, class: 'control-label text-left' %>
+          </div>
+          <div class="col-md-5">
+            <%= f.text_field :interior_height, class: 'form-control' %>
+          </div>
+        </div>
+
+        <div class="form-group clearfix">
+          <div class="col-md-1">
+            <%= f.label :inside_volume, class: 'control-label text-left' %>
+          </div>
+          <div class="col-md-5">
+            <%= f.text_field :inside_volume, class: 'form-control' %>
+          </div>
+          <div class="col-md-1">
+            <%= f.label :maximum_weight, class: 'control-label text-left' %>
+          </div>
+          <div class="col-md-5">
+            <%= f.text_field :maximum_weight, class: 'form-control' %>
+          </div>
+        </div>
+
+        <div class="form-group clearfix">
+          <div class="col-md-1">
+            <%= f.label :maximum_volume, class: 'control-label text-left' %>
+          </div>
+          <div class="col-md-5">
+            <%= f.text_field :maximum_volume, class: 'form-control' %>
+          </div>
+          <div class="col-md-1">
+            <%= f.label :men, class: 'control-label text-left' %>
+          </div>
+          <div class="col-md-5">
+            <%= f.text_field :men, class: 'form-control' %>
+          </div>
+        </div>
+
+        <div class="form-group clearfix">
+          <div class="col-md-1">
+            <%= f.label :piano, class: 'control-label text-left' %>
+          </div>
+          <div class="col-md-5">
+            <%= f.check_box :piano %>
+          </div>
+          <div class="col-md-1">
+            <%= f.label :tailgate, class: 'control-label text-left' %>
+          </div>
+          <div class="col-md-5">
+            <%= f.check_box :tailgate, class: 'center' %>
+          </div>
+        </div>
+
+        <div class="form-group clearfix">
+          <div class="col-md-1">
+            <%= f.label :status, class: 'control-label text-left' %>
+          </div>
+          <div class="col-md-5">
+            <%= f.check_box :active %>
+          </div>
+        </div>
+      </div>
+      <div class="form-group clearfix">
+        <%= f.label :bio, class: 'control-label col-md-1' %>
+        <div class="col-md-11">
+          <%= f.text_area :bio, class: 'form-control' %>
+        </div>
+      </div>
+      <div class="form-group clearfix">
+        <%= f.label :restrictions, class: 'control-label col-md-1' %>
+        <div class="col-md-11">
+          <%= f.text_area :restrictions, class: 'form-control' %>
+        </div>
+      </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="pull-right btn-user-profile">
+      <button type="submit" name="commit" class="btn btn-primary ok-user-profile">Save</button>
+      <a class="btn btn-primary" href="javascript:history.go(-1)">Back</a>
+    </div>
+<% end %>

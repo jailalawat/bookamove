@@ -1,0 +1,32 @@
+<% @page_title = raw("<i class='icon-calendar blank3 blue-text green'></i>") + "Staff Calendars" %>
+<div class="col-md-12">
+  <div class="row body_top_margin">
+    <div class="col-md-12">
+      <legend>New Staff Calendar</legend>
+    </div>
+  </div>
+
+  <%= render 'form' %>
+
+</div>
+
+<br class="clearfix"><br>
+
+<script>
+    var topBar = document.getElementById("top-bar");
+
+    topBar.innerHTML = '<div class="msg"><div class="top-bar-left-margin2"><div class="row '
+        + '"><div class="text-left col-md-12">'
+        + '<div class="pleft46 pright10">'
+
+        + '<div class="colfl mright10">'
+        + '<a href="#" class="text-dark mtop6 no_underline fc-button fc-state-default no_pointer fc-corner-left fc-corner-right"><i class="icon-calendar blank3 blue-text green"></i>Staff Calendars</a>'
+        + '</div>'
+
+        + '<div class="colfl mright10">'
+        + '<a href="<%= calendar_truck_groups_path %>" class="text-dark mtop6 no_underline fc-button fc-state-default fc-state-disabled pointer fc-corner-left fc-corner-right"><i class="icon-calendar blank3 blue-text brown"></i>Truck Calendars</a>'
+        + '</div>'
+
+        + '</div>'
+        + '</div></div></div></div>';
+</script>

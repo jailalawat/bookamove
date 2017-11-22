@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>401 | BookaMove.ca</title>
+  <%= stylesheet_link_tag 'application', media: 'all' %>
+  <%= javascript_include_tag 'application' %>
+  <%= csrf_meta_tags %>
+</head>
+<body class='contrast-red error contrast-background'>
+<div class='middle-container'>
+  <div class='middle-row'>
+    <div class='middle-wrapper'>
+      <div class='error-container-header'>
+        <div class='container'>
+          <div class='row'>
+            <div class='col-sm-12'>
+              <div class='text-center'>
+                401
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class='error-container'>
+        <div class='container'>
+          <div class='row'>
+            <div class='col-sm-4 col-sm-offset-4'>
+              <h4 class='text-center title'>We're sorry, but you don't have permissions.</h4>
+
+              <div class='text-center'>
+                <a class='btn btn-md btn-ablock' href='/home.html'>
+                  <i class='icon-chevron-left'></i>
+                  Go back
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

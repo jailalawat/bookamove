@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="format-detection" content="telephone=no">
+  <link rel="stylesheet" media="all" href="/assets/template/bootstrap/bootstrap.css" />
+  <link rel="stylesheet" media="all" href="/stylesheets/review.css" />
+  <%= stylesheet_link_tag 'referrals', media: 'all' %>
+  <script src="/assets/template/jquery/jquery.min.js"></script>
+  <script src="/assets/jquery_ujs.js"></script>
+  <script src="/assets/template/bootstrap/bootstrap.js"></script>
+  <script src="/assets/referrals.js"></script>
+  <%= csrf_meta_tags %>
+  <title>Do you know anyone who needs a good mover? Earn <% if params[:shared].present? %>$25-$100+<% else %>$50-$100+<% end %> with <%= @account.name %> Referral Rewards We give referral cash rewards to yourself, your friends and charity.</title>
+  <meta name="description" content="" />
+  <% if @account.name == "oomovers" %>
+    <link rel="image_src" href="http://oomovers.bookamove.ca/images/fb_ad.png" />
+    <meta property="og:image" content="http://oomovers.bookamove.ca/images/fb_ad.png" />
+    <meta name="twitter:image" content="http://oomovers.bookamove.ca/images/fb_ad.png" />
+    <meta property="og:image:width" content="804" />
+    <meta property="og:image:height" content="408" />
+    <meta property="og:type" content="article" />
+  <% else %>
+    <link rel="image_src" href="<%= @logo %>" />
+  <% end %>
+</head>
+<body background="#f0f0f0">
+
+<table id="main_table" align="center" cellpadding="12" cellspacing="0" border="0">
+  <tr>
+    <td align="left" style="padding-left: 0px; padding-right: 0px; padding-bottom: 8px;">
+        <a target="_blank" href="<%= @account.site %>"><img src="<%= @logo %>" width="192" class="m_img img-responsive attachment-post-thumbnail size-post-thumbnail wp-post-image"></a>
+    </td>
+    <td align="right" style="padding-left: 0px; padding-right: 0px; padding-bottom: 8px;">
+      <b style="float: right"><a class="tel" href="tel:<%= @tel %>"><%= @tel %></a></b>
+      <br style="clear: both">
+      <span class="hours"><%= @account.working_hours %></span>
+    </td>
+  </tr>
+  <tr>
+    <td bgcolor="#264b7f" colspan="2" align="center" style="height: 13px; padding: 8px;">
+      <b class="title white">Move Referral Rewards</b>
+    </td>
+  </tr>
+  <tr style="line-height: 20px;">
+    <td bgcolor="white" colspan="2" align="center" class="main_td">
+
+      <div>
+        <b class="blue">
+          <% if params[:shared].blank? #ref1 %>
+            <% if @ra_user %>Welcome <b style="color: #000"><%= @ra_user.name %></b><br><br><% end %>
+            Earn $50-$100+ for a Move Referral to
+            <% if @account.name == "oomovers" %>
+                <span class="red">oo</span> movers
+            <% else %>
+                <%= @account.name %>
+            <% end %>
+            <br/><br/>
+
+            It's easy. Simply send us the name, phone  and/or email of <br/>
+            someone who needs a mover<% if not @ra_user %>. Enter your email as the <br/>
+            referral agent<% end %>, hit submit and you are done.<br/><br/>
+
+            If we book the move, when it  is complete, we will send<br/> you an Interac e-Transfer for 10% of the move cost.
+          <% else #ref2 %>
+              Earn $25-$100+ for a Move Referral to
+              <% if @account.name == "oomovers" %>
+                  <span class="red">oo</span> movers
+              <% else %>
+                  <%= @account.name %>
+              <% end %>
+              <br/><br/>
+
+              It's easy. Simply send us the name, phone  and/or email of <br/>
+              someone who needs a mover. Enter your email as the <br/>
+              referral agent, hit submit and you are done.<br/><br/>
+
+              If we book the move, when it  is complete, we will send<br/> you an Interac e-Transfer for 5% of the move cost.
+          <% end %>
+        </b>
+      </div>
+
+      <section class="navbar navbar-default mtop20" style="background: #fbfbfb">
+        <div class="text-left p20 pleft40 pright40">
+
+          <form id="ref_quote" action="/create_referral" accept-charset="UTF-8" data-remote="true" method="post">
+          <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+          <input name="referral" type="hidden" value="true">
+          <% if params[:shared].present? %><input name="shared" type="hidden" value="true"><% end %>
+
+          <div class="form-group form-group2 text-center mbottom10 form_header text-nowrap"><b class="title red">Move Referral Form</b><hr></div>
+
+          <div id="error" class="row red pbottom7 text-center hidden"></div>
+
+          <div class="form-group form-group2 ptop6">
+            <div class="red name_star" style="position: relative; margin-bottom: -24px; margin-left: 7px; width: 0px">*</div>
+            <input class="form-control form-control2" type="text" id="name" name="name" placeholder="  Name" onkeypress="$('.name_star').css('visibility', 'hidden')">
+            <input type="hidden" name="form" value="form">
+          </div>
+          <div id="name_error" class="row red pbottom7 text-center hidden">Name is required</div>
+
+          <div class="form-group form-group2 ptop6">
+            <div class="red phone_star" style="position: relative; margin-bottom: -24px; margin-left: 7px; width: 0px">*</div>
+            <input class="form-control form-control2" type="text" id="phone_number" name="phone" placeholder="  Phone Number" onkeypress="$('.phone_star').css('visibility', 'hidden')">
+          </div>
+          <div id="phone_email_error" class="row red pbottom7 text-center hidden">Phone or Email is required</div>
+
+          <div class="form-group form-group2 ptop6">
+            <div class="red email_star" style="position: relative; margin-bottom: -24px; margin-left: 7px; width: 0px">*</div>
+            <input class="form-control form-control2" type="text" id="email" name="email" placeholder="  Email" onkeypress="$('.email_star').css('visibility', 'hidden')">
+          </div>
+          <div class="form-group form-group2 ptop2">
+            <textarea class="form-control form-control2" name="comments" rows="1" placeholder="Details (optional)" style="height: 27px"></textarea>
+          </div>
+          <div class="form-group form-group2 ptop2">
+            <div class="">
+              <label class="control-label not-bold grey">Best Time to Call:</label>
+              <select name="contact_time" class="control-label not-bold form-control2 grey" style="height: 25px">
+                <option>Now</option>
+                <option>8 AM</option>
+                <option>9 AM</option>
+                <option>10 AM</option>
+                <option>11 AM</option>
+                <option>12 PM</option>
+                <option>1 PM</option>
+                <option>2 PM</option>
+                <option>3 PM</option>
+                <option>4 PM</option>
+                <option>5 PM</option>
+                <option>6 PM</option>
+                <option>7 PM</option>
+                <option>8 PM</option>
+              </select>
+            </div>
+
+          </div>
+
+          <div class="form-group form-group2 text-center">
+            <% if params[:shared].blank? #ref1 %>
+              <input type="text" id="referral_agent_email1" name="referral_agent_email1" class="form-control form-control2 referral_agent <% if session[:ra] %>hidden<% end %>" placeholder="Referral Agent Email" value="<%= session[:ra] %>">
+            <% else #ref2 %>
+                <input type="text" id="referral_agent_email2" name="referral_agent_email2" class="form-control form-control2 referral_agent" placeholder="Referral Agent Email">
+                <input type="text" id="referral_agent_email1" name="referral_agent_email1" class="form-control form-control2 hidden" placeholder="Referral Agent Email" value="<%= session[:ra] %>">
+            <% end %>
+            <div id="referral_agent_email_error" class="row red ptop6 text-center hidden">Referral agent email must be valid and cannot be the same as client email</div>
+          </div>
+
+
+          <section class="navbar navbar-default mtop20 p20" style="background: #fff">
+            <div class="form-group form-group2">
+              <b class="grey">Share Your Referral Reward</b>
+            </div>
+
+            <% if params[:shared].blank? %>
+              <div class="form-group form-group2 grey">
+                <input type="checkbox" id="share1" name="share1" class="big_box" onclick="$('#share2').prop('disabled', ! $('#share2').prop('disabled') ); $('#share3').prop('disabled', ! $('#share3').prop('disabled') ); $('#share4').prop('disabled', ! $('#share4').prop('disabled') );"> &nbsp; 5% to you and 5% to the client
+              </div>
+            <% end %>
+
+            <div class="form-group form-group2 grey">
+              <input type="checkbox" id="share2" name="share2" class="big_box" onclick="$('#share1').prop('disabled', ! $('#share1').prop('disabled') ); $('#share3').prop('disabled', ! $('#share3').prop('disabled') ); $('#share4').prop('disabled', ! $('#share4').prop('disabled') );"> &nbsp; <% if params[:shared].blank? %>All 10%<% else %>Give 5%<% end %> to the client
+            </div>
+          </section>
+
+          <section class="navbar navbar-default mtop20 p20" style="background: #fff">
+            <div class="form-group form-group2">
+              <b class="grey">Share the Referral Reward with the Variety club</b>
+              <br/>
+              <a href="http://www.variety.bc.ca/" target="_blank"><img class="img-responsive" src="https://www.oomovers.com/assets/variety_logo_nobg.png" vspace="5" width="200" align="left"></a>
+              <p class="mtop20 text-center grey">
+                See..<br/>
+                <a id="donate_link" style="margin-left: 20px" href="http://www.variety.bc.ca" target="_blank">www.variety.bc.ca</a>
+              </p>
+            </div>
+
+            <% if params[:shared].blank? %>
+              <div class="form-group form-group2 grey" style="clear: both">
+                <input type="checkbox" id="share3" name="share3" class="big_box" onclick="$('#share1').prop('disabled', ! $('#share1').prop('disabled') ); $('#share2').prop('disabled', ! $('#share2').prop('disabled') ); $('#share4').prop('disabled', ! $('#share4').prop('disabled') );"> &nbsp; 5% to you and 5% to Variety Club
+              </div>
+            <% end %>
+
+            <div class="form-group form-group2 grey" style="clear: both">
+              <input type="checkbox" id="share4" name="share4" class="big_box" onclick="$('#share1').prop('disabled', ! $('#share1').prop('disabled') ); $('#share2').prop('disabled', ! $('#share2').prop('disabled') ); $('#share3').prop('disabled', ! $('#share3').prop('disabled') );"> &nbsp; <% if params[:shared].blank? %>All 10%<% else %>Give 5%<% end %> to Variety Club
+            </div>
+          </section>
+
+          <div class="form-group form-group2 ptop3 mbottom10">
+            <button type="button" id="reff_btn" class="form-control btn btn-red xsmall">SUBMIT MOVE REFERRAL</button>
+          </div>
+
+          </form>
+
+        </div>
+      </section>
+
+    </td>
+  </tr>
+  <tr>
+    <td bgcolor="#264b7f" colspan="2" align="center" style="height: 13px; padding: 8px;">
+      <b class="title white">Earn More - Advertise <%= @account.name %></b>
+    </td>
+  </tr>
+  <tr style="line-height: 20px;">
+    <td bgcolor="white" colspan="2" align="center" class="main_td">
+
+          <section class="navbar navbar-default mtop20 p20" style="background: #fbfbfb">
+            <b class="blue big">Earn More by Helping Your Friends Earn Referral Rewards</b>
+            <hr>
+
+            <% if @account.name == "oomovers" %>
+            <div class="text-left">
+                <div class="form-group">
+                  <b class="grey">Copy and Post this ad link for <%= @account.name %> website to your Social Network pages and automatically earn 10% of the cost of any move originating from your ad.</b>
+                </div>
+            </div>
+
+            <div class="input-group">
+                <span class="input-group-addon"><a href="javascript:void(0)" onclick="$('#previewAdModal').modal('show');" class="grey bold">Show Ad</a></span>
+                <div class="form-control grey unsel" id="link0"><%= @account.site %>?shared=true&ra=</div>
+                <div class="input-group-addon" onclick="copy_link('link0', <% if params[:shared].present? %>$('#referral_agent_email2').val()<% else %>$('#referral_agent_email1').val()<% end %>)" style="cursor: pointer"><b class="dark_grey">Copy Ad Link</b></div>
+            </div>
+            <hr>
+            <% end %>
+
+
+            <div class="text-left">
+              <div class="form-group">
+                <b class="grey">Copy and Post a link to this Referral Rewards page onto your Social Network pages and share 5% each with any visitor to your page that refers a move</b>
+              </div>
+            </div>
+
+            <div class="input-group">
+              <span class="input-group-addon"><a href="javascript:void(0)" onclick="$('#previewLinkModal').modal('show');" class="grey bold">Show Link</a></span>
+              <div class="form-control grey unsel" id="link">http://<%= @account.subdomain %>.bookamove.ca/referrals?shared=true&ra=</div>
+              <div class="input-group-addon" onclick="copy_link('link', <% if params[:shared].present? %>$('#referral_agent_email2').val()<% else %>$('#referral_agent_email1').val()<% end %>)" style="cursor: pointer"><b class="dark_grey">Copy Link</b></div>
+            </div>
+
+            <hr>
+            <div class="text-left mtop10">
+              <div class="form-group">
+                <b class="grey">Mail a 5% Referral Rewards page link to your friends and you will earn 5% of any referrals they make</b>
+              </div>
+              <form action="email_link" accept-charset="UTF-8" data-remote="true" method="post" onsubmit="get_ra(<% if params[:shared].present? %>$('#referral_agent_email2').val()<% else %>$('#referral_agent_email1').val()<% end %>)">
+                <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+                <input type="hidden" name="ra_email" value="">
+
+                <div id="f_emails">
+                  <%= render partial: "referrals/email_link" %>
+                </div>
+
+                <br>
+                <div class="mtop10 text-center">
+                  <a data-remote="true" href="/add_email" class="btn dark_grey btn_grey bold" style="border-left: 1px solid #cccccc;">+ Add Recipient</a> &nbsp;
+                  <input type="submit" class="btn dark_grey btn_grey bold" value="Send" style="border-left: 1px solid #cccccc;">
+                </div>
+
+              </form>
+
+            </div>
+
+          </section>
+
+    </td>
+  </tr>
+  <tr>
+    <td bgcolor="#264b7f" colspan="2" align="center" style="padding: 8px; color: white; height: 27px;">
+      <table cellspacing="0" cellpadding="0" border="0" width="100%">
+        <tr align="center">
+          <td>
+            <b class="white">
+              Powered by BookaMove.ca <br/>© <%= Date.today.strftime("%Y") %> Bookamove
+            </b>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" align="center" style="padding: 0px;">
+      <table cellspacing="0" cellpadding="12" border="0" width="100%">
+        <tr valign="middle">
+          <td style="padding-left: 0px;" class="addr">
+            <span class="bottom_links">
+              <%= @account.address.html_safe %>
+            </span>
+          </td>
+          <td align="center">
+            <a target="_blank" href="<%= @account.site %>" class="bottom_links">About Us</a>
+          </td>
+          <td align="center">
+            <a target="_blank" href="<%= @account.privacy_web_page %>" class="bottom_links">Privacy Policy</a>
+          </td>
+          <td align="center" style="padding-right: 0px;">
+            <a target="_blank" href="<%= @account.contact_us_web_page %>" class="bottom_links">Contact Us</a>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+
+</div>
+</div>
+
+
+<!-- Success Modal -->
+<div class="modal fade" id="successModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="request_title"></h4>
+
+      </div>
+      <div class="modal-body">
+
+        <p id="request_body">
+        </p>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default pull-right" data-dismiss="modal">Close</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+<!-- Preview email Modal -->
+<div class="modal fade" id="previewModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title green">Email Preview</h4>
+
+      </div>
+      <div class="modal-body" style="background-color: #f0f0f0; padding: 8px; color: #000000">
+
+        <p>
+          <%= render partial: "moverecord_mail/link_to_friend", locals: {name: "", account: @account, ra_email: session[:ra], ra_name: @ra_user ? @ra_user.name : "", logo: @logo, tel: @tel} %>
+        </p>
+
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- Preview ad Modal -->
+<div class="modal fade" id="previewAdModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title green">Ad Preview</h4>
+
+      </div>
+      <div class="modal-body">
+
+        <div style="border: 1px solid #e9ebee" class="text-center">
+          <img src="https://www.oomovers.com/_assets/images/fb_ad.png" width="526" class="img-responsive">
+        </div>
+        <div style="border: 1px solid #e9ebee" class="p10">
+          <span style="font-family: Georgia, serif; font-size: 18px; font-weight: 500; line-height: 22px;">Do you need a good mover? OOmovers is a BBB accredited moving company in Vancouver, Calgary and Edmonton since 1982.</span>
+          <br><br>
+          <span style="color: #90949c; font-size: 11px; line-height: 11px; text-transform: uppercase;">OOMOVERS.COM</span>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- Preview link Modal -->
+<div class="modal fade" id="previewLinkModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title green">Link Preview</h4>
+
+      </div>
+      <div class="modal-body">
+
+        <div style="border: 1px solid #e9ebee" class="text-center">
+          <% if @account.name == "oomovers" %>
+            <img src="http://oomovers.bookamove.ca/images/fb_ad.png" width="526" class="img-responsive">
+          <% else %>
+            <img src="<%= @logo %>" width="526" class="img-responsive">
+          <% end %>
+        </div>
+        <div style="border: 1px solid #e9ebee" class="p10">
+          <span style="font-family: Georgia, serif; font-size: 18px; font-weight: 500; line-height: 22px;">Do you know anyone who needs a good mover? Earn <% if params[:shared].present? %>$25-$100+<% else %>$50-$100+<% end %> with <%= @account.name %> Referral Rewards We give referral cash rewards to yourself, your friends and charity.</span>
+          <br><br>
+          <span style="color: #90949c; font-size: 11px; line-height: 11px; text-transform: uppercase;"><%= "#{request.subdomain}.#{request.domain}" %></span>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

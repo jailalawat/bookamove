@@ -1,0 +1,145 @@
+<div class="col-md-12 dashboard-home">
+  <% if !flash[:notice].blank? %>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="alert alert-success alert-dismissable">
+            <h4>
+              <i class="icon-ok-sign"></i>
+              Successful
+            </h4>
+
+            <p><%= flash[:notice] %></p>
+          </div>
+        </div>
+      </div>
+  <% end %>
+
+  <%# if validate_special_permission('show.dashboard_my_mail', @current_actions) %>
+      <br/>
+      <div class="row colpd mtop5 no-pright">
+        <div class="col7">
+          <legend>
+            <span onclick="location.href='<%= messages_path(type: 'inbox') %>'" class="pointer"><i class="icon-envelope" aria-hidden="true"></i> MY MAIL</span>
+            <div class="pull-right">
+              <a class="btn btn-xs btn-link no_underline expand-my-mail" href="javascript:void(0)" onclick="expand_my_mail()"><i class="fa fa-chevron-up"></i></a>
+            </div>
+          </legend>
+        </div>
+      </div>
+
+      <div class="my-mail-section scrolled">
+        <% if @full_messages.blank? %>
+            <div class="row">
+              <div class="col-md-12 ptop10 pbottom10 pleft25"> No messages available.</div>
+            </div>
+        <% else %>
+
+            <div class="row">
+              <div class="col-md-12">
+                <div class="">
+                  <div class="box_header p3 no-border-top">
+                    <div class="col-md-1">
+                      <span></span>
+                    </div>
+                    <div class="col-md-1">
+                      <b class="text-black text-big">From</b>
+                    </div>
+                    <div class="col-md-8 row">
+                      <div class="col-md-4">
+                        <b class="text-black text-big">To</b>
+                      </div>
+                      <div class="col-md-4">
+                        <b class="text-black text-big">Subject</b>
+                      </div>
+                      <div class="col-md-4">
+
+                      </div>
+                    </div>
+                    <div class="col-md-2">
+                      <a href="?message_sort=<%= (params[:message_sort].present? ? (params[:message_sort] == 'DESC' ? 'ASC' : 'DESC') : 'DESC') %>&type=inbox" class="underline-out"><span>Time/Date <i class="<%= (params[:message_sort].present? ? (params[:message_sort] == 'DESC' ? 'icon-caret-up' : 'icon-caret-down') : 'icon-caret-down') %>"></i> </span></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <%= render "messages/index", full_messages: @full_messages, type: 'inbox' %>
+        <% end %>
+      </div>
+  <%# end %>
+
+  <% if @roles and not @roles.include?("Customer") %>
+      <br/>
+
+      <div class="row colpd mtop15 no-pright">
+        <div class="col7">
+          <legend>
+            <span onclick="location.href='<%= personal_calendars_path %>'" class="pointer"><i class='icon-calendar'></i> MY CALENDAR - <%= Date.today.strftime("%A %B %d %Y") %></span>
+            <div class="pull-right">
+              <a class="btn btn-xs btn-link no_underline expand-my-calendar" href="javascript:void(0)" onclick="expand_my_calendar()"><i class="fa fa-chevron-up"></i></a>
+            </div>
+          </legend>
+        </div>
+      </div>
+
+      <div class="my-calendar-section">
+        <div id="calendar-home">
+        </div>
+        <% content_for :special_js do %>
+            <link href="/assets/template/plugins/fullcalendar-scheduler.css" media="all" rel="stylesheet">
+            <link href="/assets/template/plugins/scheduler.css" media="all" rel="stylesheet">
+            <script src="/assets/template/plugins/timelineview/fullcalendar-scheduler.min.js"></script>
+            <script src="/assets/template/plugins/timelineview/scheduler.min.js"></script>
+            <script src="/assets/home.js"></script>
+        <% end %>
+      </div>
+
+  <% end %>
+
+  <% if @roles and not @roles.include?("Customer") %>
+      <br/>
+
+      <div class="row colpd mtop15 no-pright">
+        <div class="col7">
+          <legend>
+            <span onclick="location.href='<%= statement_path %>'" class="pointer"><i class='icon-file-text'></i> MY STATEMENTS</span>
+            <div class="pull-right">
+              <a class="btn btn-xs btn-link no_underline expand-my-statements" href="javascript:void(0)" onclick="expand_my_statements()"><i class="fa fa-chevron-up"></i></a>
+            </div>
+          </legend>
+        </div>
+      </div>
+
+      <div class="my-statements-section">
+        <div class="table-responsive">
+          <div class="scrollable-area">
+            <table class="data-table-column-filter-statement table table-bordered table-striped table-hover dataTable" style="margin-bottom:0; min-height: 110px;" id="DataTables_Table_report" aria-describedby="DataTables_Table_report_info" data-report="statement">
+              <thead>
+              <tr role="row">
+                <th class="sorting" role="columnheader" tabindex="0" rowspan="1" colspan="1">
+                  Name
+                </th>
+                <th role="columnheader" tabindex="0" rowspan="1" colspan="1">
+                  Stages
+                </th>
+                <th class="sorting" role="columnheader" tabindex="0" rowspan="1" colspan="1">
+                  Date
+                </th>
+                <th class="sorting" role="columnheader" tabindex="0" colspan="1">
+                  Total earnings
+                </th>
+              </tr>
+              </thead>
+              <tfoot>
+              <tr>
+                <th rowspan="1" role="columnheader" tabindex="0" colspan="3" style="text-align:right">Total:</th>
+                <th></th>
+              </tr>
+              </tfoot>
+            </table>
+          </div>
+        </div>
+      </div>
+  <% end %>
+  <br/><br/>
+</div>

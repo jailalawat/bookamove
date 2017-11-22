@@ -1,0 +1,81 @@
+<h1>Other Costs/Surchage</h1>
+
+<div class="terms_section">
+  <div class="vertical" id="name_section">
+    <img src="http://oomovers.moveonline.com/media/images/pdf/name.png" width="10px" height="35px" style="margin-top: 5px;"/>
+  </div>
+  <div class="section_content">
+    <table>
+      <tr>
+        <td class="small">Client</td>
+        <td class="data_cell"><%= move.blank? ? nil : move.move_record_client.first.client.name %></td>
+        <td class="small">Contact</td>
+        <td class="data_cell"><%= move.blank? ? nil : move.move_record_client.first.client.cell_phone %></td>
+      </tr>
+      <tr>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td class="small">Email</td>
+        <td class="data_cell"><%= move.blank? ? nil : move.move_record_client.first.client.email %></td>
+      </tr>
+      <tr>
+        <td class="small">Move Date</td>
+        <td class="data_cell"><%= move.blank? ? nil : move.move_record_date.first.move_date.blank? ? nil : move.move_record_date.first.move_date.strftime("%Y-%m-%d") %></td>
+        <td class="small">Work Phone</td>
+        <td class="data_cell"><%= move.blank? ? nil : move.move_record_client.first.client.work_phone %></td>
+      </tr>
+      <tr>
+        <td class="small" colspan="4">
+          <strong>Attention: Exact dates and times are not confirmed. Contact your mover as soon as possible to
+            confirm.</strong></td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+<div class="terms_section margin_top min_height">
+  <div class="vertical min_height">
+    <img src="http://oomovers.moveonline.com/media/images/pdf/other_costs.png" width="11px" height="87px" style="margin-top: 120px;"/>
+  </div>
+  <div class="section_content">
+    <table class="blue_header">
+      <thead>
+      <tr>
+        <th></th>
+        <th>Description</th>
+        <th>Cost</th>
+        <th>PST</th>
+        <th>GST</th>
+        <th>Total Cost</th>
+      </tr>
+      </thead>
+      <% unless move.blank? %>
+          <% cost = move.move_record_other_cost.other_cost.blank? ? 0 : move.move_record_other_cost.other_cost.to_f %>
+          <% gst_cost = move.move_record_other_cost.gst ? ((cost * move.move_record_other_cost.percentage_gst.to_f).to_f / 100) : 0 %>
+          <% pst_cost = move.move_record_other_cost.pst ? ((cost * move.move_record_other_cost.percentage_pst.to_f).to_f / 100) : 0 %>
+          <tr>
+            <td>Other cost</td>
+            <td><%= move.move_record_other_cost.description %></td>
+            <td class="right"><%= number_to_currency(cost) %></td>
+            <td class="right"><%= number_to_currency(gst_cost.to_s) %></td>
+            <td class="right"><%= number_to_currency(pst_cost.to_s) %></td>
+            <td class="right"><%= number_to_currency(cost + gst_cost + pst_cost) %></td>
+          </tr>
+          <% cost = move.move_record_surcharge.surcharge.blank? ? 0 : move.move_record_surcharge.surcharge.to_f %>
+          <% gst_cost = move.move_record_surcharge.gst ? ((cost * move.move_record_surcharge.percentage_gst.to_f).to_f / 100) : 0 %>
+          <% pst_cost = move.move_record_surcharge.pst ? ((cost * move.move_record_surcharge.percentage_pst.to_f).to_f / 100) : 0 %>
+          <tr>
+            <td>Surchage cost</td>
+            <td><%= move.move_record_surcharge.description %></td>
+            <td class="right"><%= number_to_currency(cost) %></td>
+            <td class="right"><%= number_to_currency(gst_cost.to_s) %></td>
+            <td class="right"><%= number_to_currency(pst_cost.to_s) %></td>
+            <td class="right"><%= number_to_currency(cost + gst_cost + pst_cost) %></td>
+          </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
+
+<div class="centered footer">
+  <img src="http://oomovers.moveonline.com/media/images/pdf/logo_long.png" width="550px" height="96px"/></div>

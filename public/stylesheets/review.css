@@ -1,0 +1,154 @@
+a { text-decoration: none; color: #33679e }
+a:hover { color: #2a6496 !important; text-decoration: none !important; outline: 0 !important; }
+a:focus { color: #2a6496 !important; text-decoration: none !important; outline: 0 !important; }
+
+body {
+    font-family: Arial, sans-serif;
+    font-size: 9.6pt;
+    background-color: #f0f0f0;
+    color: #000000;
+    margin: 8px;
+}
+
+/******   Desktop Layout   ******/
+@media (min-width: 992px) {
+
+    #main_table{
+        width: 500px; margin: 0 auto;
+    }
+
+    .main_td{
+        padding: 20px;
+    }
+
+    .tel{
+        font-size: 16pt; line-height: 16px; color: #f04241
+    }
+
+    .hours{
+        color: #33679e; font-size: 8.25pt
+    }
+
+    .title{
+        font-size: 17pt
+    }
+
+    .bottom_links{
+        white-space: nowrap;
+        font-size: 9pt;
+        color: #a4a4a4;
+    }
+
+    .no_reg{
+        line-height: 5px;
+        white-space: nowrap;
+    }
+
+    .bbb{
+        width: 84px;
+    }
+
+    .reg_na{
+        font-size: 5.5pt
+    }
+
+}
+
+/******   Tablet Layout   ******/
+@media (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: landscape) {
+    #main_table{
+        width: 500px; margin: 0 auto;
+    }
+}
+
+@media (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: portrait) {
+    #main_table{
+        width: 500px; margin: 0 auto;
+    }
+
+    .bbb{
+        width: 94px;
+    }
+
+    .reg_na{
+        font-size: 4.5pt
+    }
+
+    .title{
+        font-size: 17pt
+    }
+
+    .tel{
+        font-size: 16pt; line-height: 16px; color: #f04241
+    }
+
+    .hours{
+        color: #33679e; font-size: 8.25pt
+    }
+
+    .bottom_links, .addr{
+        white-space: nowrap;
+        font-size: 9pt;
+        color: #a4a4a4;
+    }
+}
+
+/******   Mobile Layout   ******/
+@media (max-width: 767px) {
+    #main_table{
+        width: 100%; margin: 0 auto;
+    }
+
+    .main_td{
+        padding: 5px;
+    }
+
+    body {
+        font-size: 7.12pt;
+    }
+
+    .tel{
+        font-size: 12pt; line-height: 13pt; color: #f04241
+    }
+
+    .hours{
+        color: #33679e; font-size: 6.2pt
+    }
+
+    .title{
+        font-size: 12.5pt
+    }
+
+    .bottom_links, .addr{
+        white-space: nowrap;
+        font-size: 6.3pt;
+        color: #a4a4a4;
+    }
+
+    .no_reg{
+        line-height: 5px;
+        white-space: nowrap;
+    }
+
+    .m_img{
+        width: 160px;
+    }
+
+    .reward_line{
+        color: white;
+        white-space: nowrap;
+        font-size: 7pt;
+    }
+
+    .reg_na{
+        font-size: 3.5pt
+    }
+}
+
+@media (max-width: 767px) and (orientation: landscape) {
+
+    #main_table{
+        width: 500px; margin: 0 auto;
+    }
+
+}

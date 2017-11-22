@@ -1,0 +1,28 @@
+<legend>Cargo Types</legend>
+<div class="row">
+  <div class="col-md-12">
+    <%= link_to 'New Cargo Type', new_cargo_type_path, class: 'btn btn-primary' %>
+  </div>
+</div>
+<hr>
+<div class="row">
+  <div class="col-md-12">
+    <table class="table table-striped table-bordered table-hover">
+      <tr>
+        <th>Description</th>
+        <th>Is Active?</th>
+        <th>Actions</th>
+      </tr>
+      <% @cargo_types.each do |cargo_type| %>
+          <tr>
+            <td><%= cargo_type.description %></td>
+            <td><%= check_box_tag 'active', cargo_type.active, cargo_type.active, disabled: true %></td>
+            <td>
+              <%= link_to 'Edit', edit_cargo_type_path(cargo_type) %>
+              <%= link_to 'Destroy', cargo_type, method: :delete, data: {confirm: 'Are you sure?'} %>
+            </td>
+          </tr>
+      <% end %>
+    </table>
+  </div>
+</div>

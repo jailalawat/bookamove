@@ -1,0 +1,106 @@
+<div class="row">
+  <div class="col-md-12">
+    <form class="col-md-10" id="form-date-stats">
+      <div class="form-group col-md-1">
+        <label>Year</label>
+        <input class="form-control year-stats" type="number" name="year" value="<%= @year %>">
+      </div>
+      <%# if validate_special_permission("show.stats_by_user", @current_actions) || validate_special_permission("show.stats_by_account", @current_actions) %>
+          <div class="col-md-2">
+            <label>Staff</label>
+            <%= select "my_stats", "my_stats", options_from_collection_for_select(@all_staff_users, "id", :name), {include_blank: true}, :class => 'form-control user_stats' %>
+          </div>
+      <%# end %>
+      <div class="col-md-1">
+        <label></label>
+        <button class="btn btn-link btn-search-stats" type="submit">
+          <i class="icon-search font-size-search-stats"></i>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12">
+    <div class="table-responsive">
+      <table class="data-table-column-filter-stats table table-bordered table-striped table-hover dataTable" style="margin-bottom:0;" id="DataTables_Table_report" aria-describedby="DataTables_Table_report_info" data-report="<%= type_report %>">
+        <thead>
+        <tr role="row">
+          <th role="columnheader" tabindex="0" rowspan="1" colspan="1" class="title-table">
+            Month
+          </th>
+          <th role="columnheader" tabindex="0" rowspan="1" colspan="1">
+            Lead
+          </th>
+          <th role="columnheader" tabindex="0" rowspan="1" colspan="1">
+            Quote
+          </th>
+          <th role="columnheader" tabindex="0" rowspan="1" colspan="1">
+            Book
+          </th>
+          <th role="columnheader" tabindex="0" rowspan="1" colspan="1">
+            Dispatch
+          </th>
+          <th role="columnheader" tabindex="0" rowspan="1" colspan="1">
+            Confirm
+          </th>
+          <th role="columnheader" tabindex="0" rowspan="1" colspan="1">
+            Invoice
+          </th>
+          <th role="columnheader" tabindex="0" rowspan="1" colspan="1">
+            Aftercare
+          </th>
+          <th role="columnheader" tabindex="0" rowspan="1" colspan="1">
+            Canceled
+          </th>
+          <th role="columnheader" tabindex="0" rowspan="1" colspan="1">
+            Follow up
+          </th>
+          <th role="columnheader" tabindex="0" rowspan="1" colspan="1">
+            Receive
+          </th>
+          <th role="columnheader" tabindex="0" rowspan="1" colspan="1">
+            Unable
+          </th>
+          <th role="columnheader" tabindex="0" rowspan="1" colspan="1">
+            Submit
+          </th>
+          <th role="columnheader" tabindex="0" rowspan="1" colspan="1">
+            Post
+          </th>
+          <th role="columnheader" tabindex="0" rowspan="1" colspan="1">
+            Completed
+          </th>
+          <th role="columnheader" tabindex="0" rowspan="1" colspan="1">
+            Percentage
+          </th>
+          <th role="columnheader" tabindex="0" colspan="1">
+            Total commissions
+          </th>
+        </tr>
+        </thead>
+        <tfoot>
+        <tr>
+          <th rowspan="1" role="columnheader" tabindex="0" colspan="1" style="text-align:right">Total:</th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+        </tr>
+        </tfoot>
+      </table>
+    </div>
+  </div>
+</div>

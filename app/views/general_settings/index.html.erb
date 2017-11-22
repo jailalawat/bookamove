@@ -1,0 +1,19 @@
+<% @page_title = raw("<i class='fa fa-sliders blank3 blue-text' style='color: #264b7f !important'></i> General Settings") %>
+
+<div class="body_top_margin col-md-12">
+  <legend>Default Account Settings</legend>
+  <!--
+  <% @general_settings.each do |s| %>
+      <div class="row colpd">
+        <div class="form-group ptop5">
+          <%= form_for s, url: {method: "put"}, html: {class: "nifty_form"} do |f| %>
+              <label class="control-label colfl mright10"><%= s.description %></label> &nbsp;
+              <input class="form-control2 col-md-1 mright15 settings_change setting_value" value="<%= s.value %>" name="value" data-id="<%= s.id %>" data-type="<%= s.type %>" type="<%= (s.type == "calendar_range") ? "number" : "text" %>">
+          <% end %>
+        </div>
+      </div>
+  <% end %>
+  -->
+</div>
+
+<br class="clearfix"><br>

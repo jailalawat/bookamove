@@ -1,0 +1,78 @@
+<div class="col-xs-12">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="page-header">
+        <h1 class="pull-left">
+          <i class="icon-search"></i>
+          <span>Search results <%= @search.blank? ? '' : '- '+@search %></span>
+        </h1>
+      </div>
+    </div>
+  </div>
+  <% if @movers.count == 0 %>
+      <legend class="text-center">No data available.</legend>
+  <% end %>
+  <% @movers.each do |option| -%>
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="box">
+            <div class="box-content">
+              <div class="row">
+                <div class="col-md-6">
+                  <h4>
+                    <a class="text-contrast" target="_blank" href="move_records/<%= option["move_id"].to_s %>/edit">
+                      <%= option["name"].to_s %>
+                    </a>
+                  </h4>
+
+                  <p>
+                    Email/Cell phone:
+                    <%= option["email"].to_s %> / <%= option["cell"].to_s %>
+                  </p>
+                </div>
+                <div class="col-md-6">
+                  <p>
+                    Stage:
+                    <%= option["stage"] || option["sub_stage"] %>
+                  </p>
+
+                  <p>
+                    Origin/Destination:
+                    <%= option["origin"].to_s %> / <%= option["destination"].to_s %>
+                  </p>
+
+                  <p>
+                    Truck(s):
+                    <%= @trucks.map { |v| v.move_record_id == option["move_id"] ? (v.truck.blank? ? '' : v.truck.description) : '' }.compact.reject(&:blank?).join(', ') %>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  <% end -%>
+  <% if @options[:total_pages].to_i > 1 %>
+      <ul class="pagination pagination-sm">
+        <li class="<%= @options[:current_page].to_i == 1 ? ' disabled' : '' %>">
+          <% if @options[:current_page].to_i == 1 %>
+              <a>Previous</a>
+          <% else %>
+              <a href="search_move_record?search=<%= @search %>&page=<%= @options[:current_page].to_i - 1 %>">Previous</a>
+          <% end %>
+        </li>
+        <% (1..@options[:total_pages]).each do |i| %>
+            <li class="<%= (@options[:current_page].to_i == i) ? 'active' : '' %>">
+              <a href="search_move_record?search=<%= @search %>&page=<%= i %>"><%= i %></a>
+            </li>
+        <% end %>
+        <li class="<%= @options[:current_page].to_i == @options[:total_pages].to_i ? ' disabled' : '' %>">
+          <% if @options[:current_page].to_i == @options[:total_pages].to_i %>
+              <a>Next</a>
+          <% else %>
+              <a href="search_move_record?search=<%= @search %>&page=<%= @options[:current_page].to_i + 1 %>">Next</a>
+          <% end %>
+        </li>
+      </ul>
+  <% end %>
+</div>

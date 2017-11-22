@@ -1,0 +1,89 @@
+<% @page_title = raw("<i class='icon-calendar blank3 blue-text brown'></i>") + "Truck Calendars" %>
+<div class="body_top_margin col-md-12">
+  <legend>Truck Group Calendar</legend>
+  <%= render 'form' %>
+
+  <br class="clearfix"><br>
+  <legend>Review Links</legend>
+  <div class="alert alert-inf text-big" role="alert">Review links are used for move review emails and for clients to rate and leave feedback in outside links you provide. For example, it can be social network link like your Facebook profile or Google profile. Clients can leave their reviews and rating that can increase your visibility to new potential clients. <span class="green">Positive</span> and <span class="red">Negative feedback</span> will also be recorded on your moves with this truck group.</div>
+
+  <div id="review_links" class="col-md-12">
+    <% @calendar_truck_group.review_links.each do |link| %>
+        <div class="pull-right">
+          <%= link_to "Delete", review_link_path(id: link.id, calendar_truck_group_id: params[:id]), method: :delete, class: "btn", data: {confirm: "Are you sure?"}, id: "delete-btn" %>
+        </div>
+        <table width="36" cellspacing="0" cellpadding="0"><tr><td align="center">
+        <p style="margin-bottom: 0px; margin-top: 5px;">
+          <% if not link[:icon].nil? %>
+            <a target="_blank" href="<%= link.link_url %>"><img src="/uploads/review_link/<%= link[:icon] %>" width="36"></a>
+          <% end %>
+        </p>
+          <a target="_blank" href="<%= link.link_url %>" style="color: #000 !important;"><b style="font-size: 8pt"><%= link.name.html_safe %></b></a>
+        </td></tr></table>
+        <hr/>
+    <% end %>
+  </div>
+
+  <a name="links"></a>
+  <a class="no_underline big no_outline" href="javascript:void(0)" onclick="$('#add_review_link_modal').modal('show');"><i class="fa fa-plus small"></i> Add Review Link</a>
+</div>
+
+<br class="clearfix"><br>
+
+<!-- Add Link Modal -->
+<div class="modal fade" id="add_review_link_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <%= form_for (@review_link), :html => {:class => 'form form-horizontal form-user-profile', multipart: true} do |f| %>
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title">Create New Review Link</h4>
+
+        </div>
+        <div class="modal-body">
+
+
+            <div class="form-group2">
+              <label for="image">Review Link Icon:</label>
+              <%= f.file_field :icon, accept: 'image/jpeg,image/gif,image/png' %>
+            </div>
+
+            <div class="form-group2 mtop20">
+              <label for="image">Review Link Name:</label>
+              <%= f.text_field :name, class: 'form-control', required: true %>
+            </div>
+
+            <div class="form-group2 mtop20">
+              <label for="image">Review Link URL:</label>
+              <%= f.url_field :link_url, class: 'form-control', required: true, pattern: "https?://.+" %>
+            </div>
+            <%= f.hidden_field :calendar_truck_group_id, value: params[:id] %>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary" id="save_review_link">Save</button>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<script>
+  var topBar = document.getElementById("top-bar");
+
+  topBar.innerHTML = '<div class="msg"><div class="top-bar-left-margin2"><div class="row '
+      + '"><div class="text-left col-md-12">'
+      + '<div class="pleft46 pright10">'
+
+      + '<div class="colfl mright10">'
+      + '<a href="<%= calendar_staff_groups_path %>" class="text-dark mtop6 no_underline fc-button fc-state-default fc-state-disabled pointer fc-corner-left fc-corner-right"><i class="icon-calendar blank3 blue-text green"></i>Staff Calendars</a>'
+      + '</div>'
+
+      + '<div class="colfl mright10">'
+      + '<a href="#" class="text-dark mtop6 no_underline fc-button fc-state-default no_pointer fc-corner-left fc-corner-right"><i class="icon-calendar blank3 blue-text brown"></i>Truck Calendars</a>'
+      + '</div>'
+
+      + '</div>'
+      + '</div></div></div></div>';
+</script>

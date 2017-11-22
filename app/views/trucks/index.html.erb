@@ -1,0 +1,72 @@
+<% @page_title = raw("<i class='icon-truck blank3 blue-text'></i> Trucks ") %>
+
+<div class="body_top_margin col-md-12">
+  <legend>Trucks</legend>
+  <div class="row">
+    <div class="col-md-12">
+      <% if validate_special_permission("create_edit.trucks", @current_actions) %>
+        <%= link_to 'New Truck', new_truck_path, class: 'btn btn-primary' %>
+      <% end %>
+    </div>
+  </div>
+  <br>
+  <div class="row">
+    <div class="col-md-12">
+      <table class="table table-striped table-bordered table-hover">
+        <tr>
+          <th>Description</th>
+          <th>Is Active?</th>
+          <th>Truck Group</th>
+          <th>Availability</th>
+          <th>Actions</th>
+        </tr>
+        <% @trucks.each do |truck| %>
+            <tr>
+              <td><%= truck.description %></td>
+              <td><%= check_box_tag 'active', truck.active, truck.active, disabled: true %></td>
+              <td><%= truck.list_truck_group.present? ? truck.list_truck_group.calendar_truck_group.name : nil %></td>
+              <td><a href="<%= truck_availables_path(truck: truck.id) %>">View</a></td>
+              <td>
+                <% if validate_special_permission("create_edit.trucks", @current_actions) %>
+                    <%= link_to 'Edit', edit_truck_path(truck) %>
+                    <!-- <%= link_to 'Destroy', truck, method: :delete, data: {confirm: 'Are you sure?'} %> -->
+                <% end%>
+              </td>
+            </tr>
+        <% end %>
+      </table>
+    </div>
+  </div>
+</div>
+<br class="clearfix">
+
+<script>
+  var topBar = document.getElementById("top-bar");
+
+  topBar.innerHTML = '<div class="msg"><div class="top-bar-left-margin2"><div class="row '
+      + '"><div class="text-left col-md-12">'
+      + '<div class="pleft46 pright10">'
+
+      + '<div class="colfl mright10">'
+      + '<a href="<%= accounts_path %>" class="text-dark mtop6 no_underline fc-button fc-state-default fc-state-disabled pointer fc-corner-left fc-corner-right">Company Profile</a>'
+      + '</div>'
+
+      + '<div class="colfl mright10">'
+      + '<a href="/accounts_staff" class="text-dark mtop6 no_underline fc-button fc-state-default fc-state-disabled pointer fc-corner-left fc-corner-right">Staff</a>'
+      + '</div>'
+
+      + '<div class="colfl mright10">'
+      + '<a href="/accounts_drivers" class="text-dark mtop6 no_underline fc-button fc-state-default fc-state-disabled pointer fc-corner-left fc-corner-right">Drivers</a>'
+      + '</div>'
+
+      + '<div class="colfl mright10">'
+      + '<a href="/clients" class="text-dark mtop6 no_underline fc-button fc-state-default fc-state-disabled pointer fc-corner-left fc-corner-right">Customers</a>'
+      + '</div>'
+
+      + '<div class="colfl mright10">'
+      + '<a href="#" class="text-dark mtop6 no_underline fc-button fc-state-default no_pointer fc-corner-left fc-corner-right">Trucks</a>'
+      + '</div>'
+
+      + '</div>'
+      + '</div></div></div></div>';
+</script>

@@ -1,0 +1,89 @@
+<div class="row">
+  <div class="form-group col-md-2">
+    <%= label :source, :source, class: "labels" %><br>
+
+    <div class="left-inner-addon">
+      <% css = @settings.show_move_source ? @enable_icon : @disable_icon %>
+      <i field="show_move_source" class="<%= css %>"></i>
+      <%= select :source, :source, {}, {include_blank: true}, :class => 'form-control space-select-addon change-select', style: 'width:100%', disabled: true %>
+      <% if validate_special_permission('edit.contract_field_default_values', @current_actions) %>
+        <i class="icon-edit-sign edit-dropdown-contract-settings" field="move_sources" data-default="<%= @settings.move_source_id %>" data-default-key="move_source_id"></i>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="form-group col-md-2">
+    <%= label :source, 'Sub-Source', class: "labels" %><br>
+
+    <div class="left-inner-addon">
+      <% css = @settings.show_move_source ? @enable_icon : @disable_icon %>
+      <i field="show_move_source" class="<%= css %>"></i>
+      <%= select :source, :source, {}, {include_blank: true}, :class => 'form-control space-select-addon change-select', style: 'width:100%', disabled: true %>
+      <% if validate_special_permission('edit.contract_field_default_values', @current_actions) %>
+        <i class="icon-edit-sign edit-dropdown-contract-settings" field="move_subsources" data-default="<%= @settings.move_source_id %>" data-default-key="move_subsource_id"></i>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="form-group col-md-2">
+    <%= label :referral, :referral, class: "labels" %><br>
+
+    <div class="left-inner-addon">
+      <% css = @settings.show_move_referral ? @enable_icon : @disable_icon %>
+      <i field="show_move_referral" class="<%= css %>"></i>
+      <%= select :referral, :referral, {}, {include_blank: true}, :class => 'form-control space-select-addon change-select', style: 'width:100%', disabled: true %>
+      <% if validate_special_permission('edit.contract_field_default_values', @current_actions) %>
+        <i class="icon-edit-sign edit-dropdown-contract-settings" field="move_referrals" data-default="<%= @settings.move_referral_id %>" data-default-key="move_referral_id"></i>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="form-group col-md-2">
+    <%= label :source_details, :source_details, class: "labels" %><br>
+
+    <div class="left-inner-addon">
+      <% css = @settings.show_move_source_detail ? @enable_icon : @disable_icon %>
+      <i field="show_move_source_detail" class="<%= css %>"></i>
+      <%= text_field :source_details, :source_details, disabled: true, class: 'form-control', style: 'width:100%' %>
+    </div>
+  </div>
+
+  <div class="form-group col-md-1" style="padding-left: 3px; padding-right: 3px">
+    <%= label :keyword, :keyword, class: "labels" %><br>
+
+    <div class="left-inner-addon">
+      <% css = @settings.show_move_keyword ? @enable_icon : @disable_icon %>
+      <i field="show_move_keyword" class="<%= css %>"></i>
+      <%= select :keyword, :keyword, {}, {include_blank: true}, :class => 'form-control space-select-addon change-select', style: 'width:100%', disabled: true %>
+      <% if validate_special_permission('edit.contract_field_default_values', @current_actions) %>
+        <i class="icon-edit-sign edit-dropdown-contract-settings" field="move_keywords" data-default="<%= @settings.move_keyword_id %>" data-default-key="move_keyword_id"></i>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="form-group col-md-1" style="padding-left: 3px; padding-right: 3px">
+    <%= label :webpage, :webpage, class: "labels" %><br>
+
+    <div class="left-inner-addon">
+      <% css = @settings.show_move_webpage ? @enable_icon : @disable_icon %>
+      <i field="show_move_webpage" class="<%= css %>"></i>
+      <%= select :webpage, :webpage, {}, {include_blank: true}, :class => 'form-control space-select-addon change-select', style: 'width:100%', disabled: true %>
+      <% if validate_special_permission('edit.contract_field_default_values', @current_actions) %>
+        <i class="icon-edit-sign edit-dropdown-contract-settings" field="move_webpages" data-default="<%= @settings.move_webpage_id %>" data-default-key="move_webpage_id"></i>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="form-group col-md-2">
+    <%= label :source_details, :source_alert, class: "labels" %><br>
+
+    <div class="left-inner-addon">
+      <% css = @settings.show_move_source_alert ? @enable_icon : @disable_icon %>
+      <i field="show_move_source_alert" class="<%= css %>"></i>
+      <%= select :source_details, :source_alert, {}, {include_blank: true}, :class => 'form-control space-select-addon change-select', style: 'width:100%', disabled: true %>
+      <% if validate_special_permission('edit.contract_field_default_values', @current_actions) %>
+        <i class="icon-edit-sign edit-dropdown-contract-settings" field="move_source_alerts" data-default="<%= @settings.move_source_alert_id %>" data-default-key="move_source_alert_id"></i>
+      <% end %>
+    </div>
+  </div>
+</div>

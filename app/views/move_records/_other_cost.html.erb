@@ -1,0 +1,23 @@
+<!--gst-->
+<div class="form-group other-cost col1 colpd colmr text-center">
+  <%= label :other_cost, :gst, 'GST' %><br>
+  <%= check_box :other_cost, :gst, class: 'form-control calculateTax percentage_gst other_cost_gst', style: 'width:100%', readonly: true %>
+  <%= hidden_field :other_cost, :percentage_gst, value: 0 %>
+</div>
+<!--pst-->
+<div class="form-group other-cost col1 colpd colmr text-center">
+  <%= label :other_cost, :pst, 'PST' %><br>
+  <%= check_box :other_cost, :pst, class: 'form-control calculateTax other_cost_pst', style: 'width:100%', readonly: true %>
+  <%= hidden_field :other_cost, :percentage_pst, value: 0 %>
+</div>
+<!--description-->
+<div class="form-group col3 colmr">
+  <%= label :other_cost, :description, class: "hhidden labels" %><br>
+  <%= text_field :other_cost, :description, placeholder: "Description", class: 'form-control', style: 'width:100%',
+                 readonly: true %>
+</div>
+<!--other_cost-->
+<div class="form-group col0-8 pull-right colmr">
+  <%= label :other_cost, :other_cost, class: "labels" %><br>
+  <%= text_field :other_cost, :other_cost, value: 0, class: 'form-control2 calculateTax calculateTotal other_cost_other_cost', style: 'width:100%', readonly: true %>
+</div>

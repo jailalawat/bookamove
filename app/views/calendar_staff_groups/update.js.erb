@@ -1,0 +1,8 @@
+<% if not params[:calendar_staff_group][:active] == "1" %>
+var user = $('.user-name').data('user');
+var cal_id = $('#cal_id').val();
+
+localStorage.removeItem(user + '_taskcalendar_' + cal_id);
+<% end %>
+
+location.href = "/calendar_staff_groups";

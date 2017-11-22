@@ -1,0 +1,65 @@
+<section id='content' class="oPageCentered">
+
+  <div class="alert alert-danger alert-dismissable hidden msg-error-permissions">
+    <i class="icon-remove-sign"></i> We're sorry, but you don't have permissions.
+  </div>
+
+  <div class='container no-pleft'>
+    <div class='row' id='content-wrapper'>
+      <div class='col-xs-12 full-wrap-content-fixed'>
+        <div class="alert alert-success alert-dismissable succes-new-message">
+          <a class="close" data-dismiss="alert" href="#">×
+          </a>
+          <h4>
+            <i class="icon-ok-sign"></i>
+            Success
+          </h4>
+          Message was sent successfully.
+        </div>
+        <div class='page-header page-header-with-buttons fixed_dashboard_space'>
+          <div class="col-md-12">
+            <h1 class='pull-left'>
+              <!-- <i class='icon-dashboard'></i> -->
+              <span class='title-page'><%= @title_page.present? ? @title_page : 'Dashboard' %>  </span>
+            </h1>
+          </div>
+        </div>
+        <br/>
+        <%= yield %>
+      </div>
+    </div>
+
+  </div>
+
+</section>
+
+
+</div>
+
+<div class="clearfix" style="height:70px;"></div>
+
+<footer id='footer'>
+  <div>
+    <div>
+      <div class='text-center'>
+        Powered by BookaMove.ca <br/>© <%= Date.today.strftime("%Y") %> Bookamove
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!--<div id="loading" class="modal fade in">-->
+  <!--<div class="loading_circle">-->
+    <!--<i class="icon-3x fa-cog icon-spin"></i>-->
+
+    <!--<h2>Processing</h2>-->
+  <!--</div>-->
+<!--</div>-->
+
+</div>
+
+<%= javascript_include_tag 'application', type: 'text/javascript' %>
+<%= yield :special_js %>
+
+</body>
+</html>

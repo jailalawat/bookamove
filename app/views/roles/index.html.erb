@@ -1,0 +1,115 @@
+<% @page_title = raw("<i class='fa fa-shield blank3 blue-text'></i>") + "Roles" %>
+
+<% if flash[:notice] %>
+    <div class="alert alert-danger alert-dismissable col-md-12">
+      <i class="icon-remove-sign"></i> <%= flash[:notice] %>
+    </div>
+<% end %>
+<% if flash[:ok] %>
+    <div class="alert alert-success alert-dismissable col-md-12">
+      <i class="icon-remove-sign"></i> <%= flash[:ok] %>
+    </div>
+<% end %>
+
+<div class="col-md-12">
+  <div class="row body_top_margin">
+
+    <% if validate_special_permission("create_edit.roles", @current_actions) %>
+    <div class="col-md-12">
+        <%= link_to 'New Role', new_role_path, class: 'btn btn-primary' %>
+    </div>
+    <br>
+    <% end %>
+
+    <div class="col-md-12">
+      <table class="table table-striped table-bordered table-hover">
+        <tr>
+          <th class="nowrap" width="20%">Name</th>
+          <th class="nowrap">Description</th>
+          <th class="nowrap">Is Active?</th>
+          <th class="nowrap">Level</th>
+          <th class="nowrap">Actions</th>
+        </tr>
+        <% @roles.each do |role| %>
+            <tr>
+              <td><%= role.name.strip %><%= role.role_level %></td>
+              <td><%= role.description %></td>
+              <td><%= check_box_tag 'active', role.active, role.active, disabled: true %></td>
+              <td><%= role.role_level %></td>
+              <td>
+                <% edit_link = link_to 'Edit', edit_role_path(role) %>
+
+                <% if role.name == "Mover" or role.name == "Swamper" or role.name == "Owner Operator" %>
+                    <% if validate_special_permission("edit.mover_roles", @current_actions) %>
+                      <%= edit_link %>
+                    <% end %>
+                <% elsif role.default %>
+                    <% if validate_special_permission("edit.staff_roles", @current_actions) %>
+                        <%= edit_link %>
+                    <% end %>
+                <% else %>
+                    <% if validate_special_permission("create_edit.roles", @current_actions) %>
+                      <%= edit_link %>
+                      <% subtask_id = role.subtask_staff_group.nil? ? nil : role.subtask_staff_group.id %>
+                      <%= link_to 'Destroy', role_path(role.id, subtask_id: subtask_id), method: :delete, remote: true, data: {confirm: 'Are you sure?'} %>
+                    <% end %>
+                <% end %>
+              </td>
+            </tr>
+        <% end %>
+      </table>
+
+      <br>
+      <div class="panel panel-default">
+        <div class="panel-heading"><b class="black"><i class="fa fa-info-circle small_icon" aria-hidden="true" data-toggle="tooltip" data-placement="bottom" title="Info and Help"></i>&nbsp; ROLES, PERMISSIONS  & ROLE LEVELS</b></div>
+        <div class="panel-body">
+
+          <ul type="square" style="background-color: transparent !important;">
+            <li class="p5">Roles are basically staff positions. Roles can be made active or not and can also assigned mailboxes as needed.<br>
+
+            <li class="p5">They can be assigned to one individual such as an Owner or Manager or there may be many of them such as Salespeople or Movers.<br>
+
+            <li class="p5">Roles have preset access levels to various parts of the program . This access is controlled by Permissions.<br>
+
+            <li class="p5">Roles are created in an ascending hierarchy of access and power. This is a numerical value 1-100 called Role Level.<br>
+
+            <li class="p5">Permissions govern access to view, create, edit, assign and delete data in move records, calendars and profiles.<br>
+
+            <li class="p5">Each role has more permissions as it's role level increases. However you may also assign an individual user special permissions.<br>
+
+            <li class="p5">Role Level governs a user's ability to view Mailboxes and view, create and edit Reports.<br>
+
+            <li class="p5">The list of Roles above are specific access level positions that may be useful. Use these default Roles or create your own as needed.
+          </ul>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<br class="clearfix"><br>
+
+<script>
+  var topBar = document.getElementById("top-bar");
+
+  topBar.innerHTML = '<div class="msg"><div class="top-bar-left-margin2"><div class="row '
+      + '"><div class="text-left col-md-12">'
+      + '<div class="pleft46 pright10">'
+
+      + '<div class="colfl mright10">'
+      + '<a href="#" class="text-dark mtop6 no_underline fc-button fc-state-default no_pointer fc-corner-left fc-corner-right">Roles</a>'
+      + '</div>'
+
+      + '<div class="colfl mright10">'
+      + '<a href="<%= action_roles_path %>" class="text-dark mtop6 no_underline fc-button fc-state-default fc-state-disabled pointer fc-corner-left fc-corner-right">Assign Permissions to Roles</a>'
+      + '</div>'
+
+      + '<div class="colfl mright10">'
+      + '<a href="<%= action_users_path %>" class="text-dark mtop6 no_underline fc-button fc-state-default fc-state-disabled pointer fc-corner-left fc-corner-right"><span>Assign Permissions to Users</a>'
+      + '</div>'
+
+      + '</div>'
+      + '</div></div></div></div>';
+</script>

@@ -1,0 +1,405 @@
+<% @page_title = raw("<i class='icon-truck blank3 blue-text'></i>") + "Contract Settings" %>
+
+<div id="contract_settings_top_text">
+  <div class="row">
+    <div class="pleft30 msg">
+          <div class="col7 colmr nowrap">
+            <b class="bold-label">Customize your contract: &nbsp; <i class="fa fa-times icon-red"></i>
+              Element Excluded &nbsp; <i class="fa fa-check-circle icon-green"></i>
+              Element Included &nbsp; <i class="fa fa-lock icon-green"></i>
+              Default Value in drop down menu.
+            </b>
+          </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="col-md-12 contract-settings mtop5">
+  <div class="row">
+    <div class="col-md-12">
+      <legend id="SSwho">
+        <span onclick="expand_who()" class="pointer"><i class="fa fa-user" aria-hidden="true"></i> WHO</span>
+        <div class="pull-right">
+          <span class="pright5">
+          <a>Namelines</a>
+          <i field="number_of_clients" class="fa fa-plus icon-green add-line"></i>
+          <i field="number_of_clients" class="fa fa-minus icon-red remove-line"></i>
+        </span>
+          <a class="btn btn-xs btn-link no_underline expand-who" href="javascript:void(0)" onclick="expand_who()"><i class="fa fa-chevron-up"></i></a>
+        </div>
+      </legend>
+    </div>
+  </div>
+  <div class="who-section">
+    <%= render 'client_lines' %>
+    <%= render 'move_type' %>
+    <%= render 'move_source' %>
+    <div class="row">
+      <div class="form-group col-md-12">
+        <%= label :note, 'Note', class: "labels" %><br>
+
+        <div class="left-inner-addon">
+          <% css = @settings.show_who_note ? @enable_icon : @disable_icon %>
+          <i field="show_who_note" class="<%= css %>"></i>
+          <%= text_area :note, 'who', disabled: true, class: 'form-control', style: 'width:100%', rows: 1 %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br/>
+
+  <legend id="SSwhat" class="mtop5">
+    <span onclick="expand_what()" class="pointer"><i class="fa fa-suitcase" aria-hidden="true"></i> WHAT</span>
+    <div class="pull-right">
+      <span class="what_links">
+        <a data-toggle="modal" href="#modal-cargo">Cargo Calculator <i class="icon-collapse-top"></i></a>
+      </span>
+      <a class="btn btn-xs btn-link no_underline expand-what" href="javascript:void(0)" onclick="expand_what()"><i class="fa fa-chevron-up"></i></a>
+    </div>
+  </legend>
+
+  <div class="what-section">
+    <%= render 'cargo_info' %>
+    <div class="row">
+      <div class="form-group col-md-12">
+        <%= label :note, 'Note', class: "labels" %><br>
+
+        <div class="left-inner-addon">
+          <% css = @settings.show_what_note ? @enable_icon : @disable_icon %>
+          <i field="show_what_note" class="<%= css %>"></i>
+          <%= text_area :note, 'what', disabled: true, class: 'form-control', style: 'width:100%', rows: 1 %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br/>
+
+  <div class="row">
+    <div class="col-md-12">
+      <div>
+        <legend id="SSwhere">
+          <span onclick="expand_where()" class="pointer"><i class="fa fa-location-arrow" aria-hidden="true"></i> WHERE</span>
+          <div class="pull-right">
+            <span class="where_links">
+              <a target="_blank" href="https://www.google.co.cr/maps/@55.65552,-96.2355401,5z">Street View
+                <i field="number_of_origin" class="icon-external-link"></i></a>
+              <a target="_blank" href="https://www.google.co.cr/maps/@55.65552,-96.2355401,5z">GPS View
+                <i field="number_of_origin" class="icon-external-link"></i></a>
+              <a>Origin</a>
+              <i field="number_of_origin" class="fa fa-plus icon-green add-line"></i>
+              <i field="number_of_origin" class="fa fa-minus icon-red remove-line"></i>
+              <a>Destination</a>
+              <i field="number_of_destination" class="fa fa-plus icon-green add-line"></i>
+              <i field="number_of_destination" class="fa fa-minus icon-red remove-line"></i>
+            </span>
+            <a class="btn btn-xs btn-link no_underline expand-where" href="javascript:void(0)" onclick="expand_where()"><i class="fa fa-chevron-up"></i></a>
+          </div>
+        </legend>
+      </div>
+    </div>
+  </div>
+
+  <div class="where-section">
+    <%= render 'location_origin' %>
+    <%= render 'location_destination' %>
+    <div class="row">
+      <div class="form-group col-md-12">
+        <%= label :note, 'Note', class: "labels" %><br>
+
+        <div class="left-inner-addon">
+          <% css = @settings.show_where_note ? @enable_icon : @disable_icon %>
+          <i field="show_where_note" class="<%= css %>"></i>
+          <%= text_area :note, 'where', disabled: true, class: 'form-control', style: 'width:100%', rows: 1 %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br/>
+
+  <legend id="SSwhen">
+    <span onclick="expand_when()" class="pointer"><i class="fa fa-clock-o" aria-hidden="true"></i> WHEN</span>
+    <div class="pull-right">
+      <a class="btn btn-xs btn-link no_underline expand-when" href="javascript:void(0)" onclick="expand_when()"><i class="fa fa-chevron-up"></i></a>
+    </div>
+  </legend>
+
+  <div class="when-section">
+    <%= render 'time' %>
+    <div class="row">
+      <div class="form-group col-md-12">
+        <%= label :note, 'Note', class: "labels" %><br>
+
+        <div class="left-inner-addon">
+          <% css = @settings.show_when_note ? @enable_icon : @disable_icon %>
+          <i field="show_when_note" class="<%= css %>"></i>
+          <%= text_area :note, 'when', disabled: true, class: 'form-control', style: 'width:100%', rows: 1 %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br/>
+
+  <div class="row">
+    <div class="col-md-12">
+      <legend id="SShow">
+        <span onclick="expand_how()" class="pointer"><i class="fa fa-truck" aria-hidden="true"></i> HOW</span>
+        <div class="pull-right">
+          <a class="btn btn-xs btn-link no_underline expand-how" href="javascript:void(0)" onclick="expand_how()"><i class="fa fa-chevron-up"></i></a>
+        </div>
+      </legend>
+    </div>
+  </div>
+
+  <div class="how-section">
+  <%= render 'truck_lines' %>
+  <div class="row ptop10">
+    <div class="form-group col-md-12">
+      <%= label :note, 'Note', class: "labels" %><br>
+
+      <div class="left-inner-addon">
+        <% css = @settings.show_how_note ? @enable_icon : @disable_icon %>
+        <i field="show_how_note" class="<%= css %>"></i>
+        <%= text_area :note, 'how', disabled: true, class: 'form-control', style: 'width:100%', rows: 1 %>
+      </div>
+    </div>
+  </div>
+  </div>
+  <br/>
+
+  <legend id="SScost">
+    <span onclick="expand_how_much()" class="pointer">
+      <i class="fa fa-dollar" aria-hidden="true"></i><i class="fa fa-dollar" aria-hidden="true"></i> HOW MUCH
+    </span>
+    <div class="pull-right">
+      <a class="btn btn-xs btn-link no_underline expand-how-much" href="javascript:void(0)" onclick="expand_how_much()"><i class="fa fa-chevron-up"></i></a>
+    </div>
+  </legend>
+
+  <div class="cost how-much-section">
+    <div class="cost">
+    <em>
+      <i class="fa fa-check-circle icon-green"></i> Includes
+      <i class="fa fa-times icon-red space-addon-left"></i>Excludes
+      <input type="checkbox" checked="checked" class="space-addon-left">Include on every contract
+    </em>
+    <hr class="mright1 mleft1">
+    <div class="row">
+      <div class="col-md-1">
+        <%= label :cost, 'Move Cost Hourly', class: "bold-label" %><br>
+        <% css = @settings.show_move_cost ? @enable_icon : @disable_icon %>
+        <i field="show_move_cost" class="<%= css %>"></i>
+        <%= check_box :cost_hourly, :cost_hourly, checked: @settings.checked_cost_hourly, field: "checked_cost_hourly", class: 'change-checked' %>
+      </div>
+      <%= render 'cost_hourly' %>
+    </div>
+
+    <hr>
+    <div class="row">
+      <div class="col-md-1">
+        <%= label :cost, 'Packing', class: "bold-label" %><br>
+        <% css = @settings.show_packing ? @enable_icon : @disable_icon %>
+        <i field="show_packing" class="<%= css %>"></i>
+        <%= check_box :packing, :packing, checked: @settings.checked_packing, field: "checked_packing", class: 'change-checked' %>
+      </div>
+      <%= render 'packing' %>
+    </div>
+
+    <hr>
+    <div class="row">
+      <div class="col-md-2">
+        <%= label :cost, 'Other Cost', class: "bold-label" %><br>
+        <% css = @settings.show_other_cost ? @enable_icon : @disable_icon %>
+        <i field="show_other_cost" class="<%= css %>"></i>
+        <%= check_box :other_cost, :other_cost, checked: @settings.checked_other_cost, field: "checked_other_cost", class: 'change-checked' %>
+      </div>
+      <%= render 'other_cost' %>
+    </div>
+
+    <hr>
+    <div class="row">
+      <div class="col-md-2">
+        <%= label :cost, 'Surcharge', class: "bold-label" %><br>
+        <% css = @settings.show_surcharge ? @enable_icon : @disable_icon %>
+        <i field="show_surcharge" class="<%= css %>"></i>
+        <%= check_box :surcharge, :surcharge, checked: @settings.checked_surchage, field: "checked_surchage", class: 'change-checked' %>
+      </div>
+      <%= render 'surcharge' %>
+    </div>
+
+    <hr>
+    <div class="row">
+      <div class="col-md-2">
+        <%= label :cost, 'Move Cost - Flat Rate', class: "bold-label" %><br>
+        <% css = @settings.show_flat_rate ? @enable_icon : @disable_icon %>
+        <i field="show_flat_rate" class="<%= css %>"></i>
+        <%= check_box :flat_rate, :flat_rate, checked: @settings.checked_flat_rate, field: "checked_flat_rate", class: 'change-checked' %>
+      </div>
+      <%= render 'flat_rate' %>
+    </div>
+
+    <hr>
+    <div class="row">
+      <div class="col-md-2">
+        <%= label :cost, 'Move Cost - Discount', class: "bold-label" %><br>
+        <% css = @settings.show_discount ? @enable_icon : @disable_icon %>
+        <i field="show_discount" class="<%= css %>"></i>
+        <%= check_box :discount, :discount, checked: @settings.checked_discount, field: "checked_discount", class: 'change-checked' %>
+      </div>
+      <%= render 'discount' %>
+    </div>
+
+    <hr>
+    <div class="row">
+      <div class="col-md-2">
+        <%= label :cost, 'Insurance', class: "bold-label" %><br>
+        <% css = @settings.show_insurance ? @enable_icon : @disable_icon %>
+        <i field="show_insurance" class="<%= css %>"></i>
+        <%= check_box :insurance, :insurance, checked: @settings.checked_insurance, field: "checked_insurance", class: 'change-checked' %>
+      </div>
+      <%= render 'insurance' %>
+    </div>
+
+    <hr>
+    <div class="row">
+      <div class="col-md-2">
+        <%= label :cost, 'Fuel Cost', class: "bold-label" %><br>
+        <% css = @settings.show_fuel_cost ? @enable_icon : @disable_icon %>
+        <i field="show_fuel_cost" class="<%= css %>"></i>
+        <%= check_box :fuel_cost, :fuel_cost, checked: @settings.checked_fuel_cost, field: "checked_fuel_cost", class: 'change-checked' %>
+      </div>
+      <%= render 'fuel_cost' %>
+    </div>
+    <hr>
+    <div class="row">
+      <div class="col-md-2">
+        <%= label :cost, 'Total Cost', class: "bold-label" %><br>
+      </div>
+      <%= render 'total_cost' %>
+    </div>
+
+    <hr>
+    <div class="row">
+      <div class="col-md-1">
+        <%= label :cost, 'Payment', class: "bold-label" %><br>
+        <% css = @settings.show_payment ? @enable_icon : @disable_icon %>
+        <i field="show_payment" class="<%= css %>"></i>
+        <%= check_box :payment, :payment, checked: @settings.checked_payment, field: "checked_payment", class: 'change-checked' %>
+      </div>
+      <%= render 'payment' %>
+    </div>
+
+    <hr>
+
+    <div class="row">
+      <div class="form-group col-md-12 note">
+        <%= label :note, 'Note', class: "labels" %><br>
+
+        <div class="left-inner-addon">
+          <% css = @settings.show_cost_note ? @enable_icon : @disable_icon %>
+          <i field="show_cost_note" class="<%= css %>"></i>
+          <%= text_area :note, 'contract_notes', disabled: true, class: 'form-control', style: 'width:100%', rows: 1 %>
+        </div>
+      </div>
+    </div>
+
+    <hr>
+    <div class="text-center">
+      <small>* If you have any other cost options you would like to see included in this list, please contact us and we
+        will be glad to include your personalized cost options.
+      </small>
+    </div>
+
+  </div>
+  </div>
+  <br/>
+
+  <legend class="mtop5">
+    <span onclick="expand_note()" class="pointer"><i class="fa fa-sticky-note" aria-hidden="true"></i> MOVE NOTES</span>
+    <div class="pull-right">
+      <a class="btn btn-xs btn-link no_underline expand-note" href="javascript:void(0)" onclick="expand_note()"><i class="fa fa-chevron-up"></i></a>
+    </div>
+  </legend>
+  <div class="note-section">
+    <div class="row">
+      <div class="form-group col-md-12">
+        <%= label :note, 'Move Note', class: "labels" %><br>
+
+        <div class="left-inner-addon">
+          <% css = @settings.show_contract_note ? @enable_icon : @disable_icon %>
+          <i field="show_contract_note" class="<%= css %>"></i>
+          <%= text_area :note, 'contract_notes', disabled: true, class: 'form-control', style: 'width:100%', rows: 1 %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <br/>
+  <legend id="SScontact" class="mtop5">
+    <i class="fa fa-address-book" aria-hidden="true"></i> CONTACT STAGES AND EMAILS
+    <div class="pull-right">
+      <a class="no_underline big" href="javascript:void(0)" onclick="$('#add_sub_stage_modal').modal('show');"><i class="fa fa-plus small"></i> Create Contact Stage</a>
+      &nbsp;
+      <% if validate_special_permission('create_edit.emails', @current_actions) %>
+        <a class="no_underline big" href="javascript:void(0)" onclick="$('#add_email_alert_modal').modal('show');"><i class="fa fa-plus small"></i> Create Email</a>
+      <% end %>
+      &nbsp; <a href="javascript:void(0)" class="expand-all-email-alerts" data-state="up" data-toggle="tooltip" data-placement="right" data-original-title="Collapse All Emails"><img src="/assets/arrow_up.png" width="12"></a>
+    </div>
+  </legend>
+  <em>
+    <i class="fa fa-lock icon-green" style="margin-left: 2px; margin-right: 2px; cursor: default;"></i> Stage Locked &nbsp;
+    <i class="fa fa-check-circle icon-green no_pointer"></i> Stage Enabled
+    <i class="fa fa-times icon-red space-addon-left no_pointer"></i>Stage Disabled &nbsp;
+    <a href="javascript:void(0)"><i class="fa fa-bars no_pointer" aria-hidden="true" style="font-size: 13px !important;"></i></a> Rearranges Stage Position &nbsp;
+    <img src="/assets/auto-send.png" height="13" style="vertical-align: text-bottom"> Email Auto-Send Enabled &nbsp;
+    <i class="icon-edit-sign big"></i> Edit Emails
+  </em>
+  <hr class="mright1 mleft1 mtop10 mbottom5" />
+
+  <%= render 'contact_stages' %>
+  <div class="row">
+    <div class="form-group col-md-12">
+      <br>
+      <%= label :note, 'Contact Stage Note', class: "labels" %><br>
+
+      <div class="left-inner-addon">
+        <% css = @settings.show_contract_stage ? @enable_icon : @disable_icon %>
+        <i field="show_contract_stage" class="<%= css %>"></i>
+        <%= text_area :note, 'contract_stages', disabled: true, class: 'form-control', style: 'width:100%', rows: 1 %>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="form-group col-md-10">
+      <%= label :contract_stage, :contract_stage_detail, 'Contact Stage Alert Details', class: "labels" %><br>
+      <div class="left-inner-addon">
+        <% css = @settings.show_contract_stage_detail ? @enable_icon : @disable_icon %>
+        <i field="show_contract_stage_detail" class="<%= css %>"></i>
+        <%= text_field :contract_stage, :contract_stage_detail, disabled: true, class: 'form-control', style: 'width:100%' %>
+      </div>
+    </div>
+
+    <div class="form-group col-md-2">
+      <%= label :move_stage, :contract_stage_alert, "Contact Stage Alert", class: "labels" %><br>
+
+      <div class="left-inner-addon">
+        <% css = @settings.show_move_stage_alert ? @enable_icon : @disable_icon %>
+        <i field="show_move_stage_alert" class="<%= css %>"></i>
+        <%= select :move_stage, :move_stage_alerts, {}, {include_blank: true}, :class => 'form-control change-select disabled', style: 'width:100%', disabled: true %>
+        <% if validate_special_permission('edit.contract_field_default_values', @current_actions) %>
+          <i class="icon-edit-sign edit-dropdown-contract-settings" field="move_stage_alerts" data-default="<%= @settings.move_stage_alerts_id %>" data-default-key="move_stage_alerts_id"></i>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+</div>
+<%= render "/move_records/move_top_links", collapse: true %>
+<br/>
+
+<style>
+  iframe {
+    min-height: 160px;
+  }
+</style>

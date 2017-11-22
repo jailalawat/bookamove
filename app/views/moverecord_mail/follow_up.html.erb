@@ -1,0 +1,32 @@
+<html>
+<head>
+</head>
+<body>
+<font face="Arial" size="4">
+  <table>
+    <tr>
+      <td>
+        <% if @account.name == "oomovers" %>
+            <img src="https://s3.amazonaws.com/mmo-cdn/media/logos/oomovers/logo_large.png" border="0" style="margin-right: 30px">
+        <% end %>
+      </td>
+      <td align="right">
+        <a href="<%= @url %>/move_records/<%= @move.id %>/edit?token=<%= @move.token %>" style="background-color: #49bf67; border-radius: 3px; color: white; padding: 6px 12px; text-decoration: none; white-space: nowrap;">Your <%= @move_date.strftime("%B %d, %y") %> Move Contract</a>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2">
+        <br/><br/>
+        Dear <%= @name %>,<br/><br/>
+
+        Thank you for your move with <%= @account.name %> on <%= @start_time %>.<br/><br/>
+
+        Thank you,<br/>
+        <%= @account.name %> Support Staff<br/>
+      </td>
+    </tr>
+  </table>
+
+</font>
+</body>
+</html>

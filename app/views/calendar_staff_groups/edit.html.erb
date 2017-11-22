@@ -1,0 +1,185 @@
+<% @page_title = raw("<i class='icon-calendar blank3 blue-text green'></i>") + "Staff Calendars" %>
+
+<div class="col-md-12">
+  <div class="row body_top_margin">
+    <div class="col-md-12">
+      <legend>Staff Calendar</legend>
+    </div>
+  </div>
+
+  <%= form_for(@calendar_staff_group, remote: true) do |f| %>
+      <input type="hidden" id="cal_id" value="<%= @calendar_staff_group.id %>">
+      <% if @calendar_staff_group.errors.any? %>
+          <div id="error_explanation">
+            <h2><%= pluralize(@calendar_staff_group.errors.count, "error") %> prohibited this truck group from being
+              saved:</h2>
+
+            <ul>
+              <% @calendar_staff_group.errors.full_messages.each do |message| %>
+                  <li><%= message %></li>
+              <% end %>
+            </ul>
+          </div>
+      <% end %>
+      <div class="form-group">
+        <%= f.label :name %><br>
+        <%= f.text_field :name, class: 'form-control', required: true %>
+      </div>
+      <div class="form-group">
+        <%= f.label :description %><br>
+        <%= f.text_field :description, class: 'form-control', required: true %>
+      </div>
+      <div class="form-group">
+        <%= f.label :active %><br>
+        <%= f.check_box :active %>
+      </div>
+
+      <!--
+      <div class="form-group">
+        <label>Add Subtask Group</label>
+
+        <div class="form-inline add-subtask-group">
+          <div class="form-group">
+            <label>Name</label>
+            <input type="text" class="form-control name-subtask-group" placeholder="Name">
+          </div>
+          <div class="form-group">
+            <label>Description</label>
+            <input type="text" class="form-control description-subtask-group" placeholder="Description">
+          </div>
+          <div class="form-group">
+            <label>Active</label>
+            <input type="checkbox" checked="checked" class="form-control active-subtask-group">
+          </div>
+          <div class="form-group">
+            <label>Mailbox</label>
+            <input type="checkbox" checked="checked" class="form-control mailbox-subtask-group">
+          </div>
+          <button type="submit" class="btn btn-default btn-add-subtask-group" data-taskgroup="<%= @calendar_staff_group.id %>">Add</button>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :name, 'List Subtasks' %><br>
+        <ul>
+          <% @subtasks.each do |subtask| %>
+              <li>
+                <%= link_to subtask.name, edit_subtask_staff_group_path(subtask) %>
+              </li>
+          <% end %>
+        </ul>
+      </div>
+      -->
+
+      <div class="row">
+        <div class="col-md-12">
+          <legend class="no-m-bottom">Add Roles</legend>
+        </div>
+      </div>
+
+      <div class="row">
+        <table class="col-md-12"><tr valign="top">
+          <td class="border_right col-md-6">
+            <div class="ptop10">
+              <!--<a href="javascript:void(0)" onclick="$('#roleModal').modal('show')" class="pull-right ptop1"><b>+ Add New Role</b></a>-->
+              <label><b>Current Calendar Roles</b></label>
+              <br class="clear"/>
+              <br/>
+
+              <table id="cal_roles_table" class="table table-striped table-bordered table-hover" style="border-top: 1px solid #7287a1;">
+                <tr>
+                  <th>role name</th>
+                  <th>role level</th>
+                  <th class="col-md-2"></th>
+                </tr>
+                <% if not @calendar_roles.blank? %>
+                  <% @calendar_roles.each do |role| %>
+                    <tr bgcolor="white">
+                      <td><a href="/roles/<%= role.id %>/edit"><%= role.name %></a></td>
+                      <td><%= role.role_level %></td>
+                      <td><a href="/remove_calendar_role?role_id=<%= role.id %>">remove</a></td>
+                    </tr>
+                  <% end %>
+                <% else %>
+                  <tr bgcolor="white" id="no_roles">
+                    <td colspan="3"><em class="small">No current roles</em></td>
+                  </tr>
+                <% end %>
+              </table>
+
+
+            </div>
+          </td>
+
+          <td class="col-md-6">
+            <div class="ptop10">
+              <div class="pull-right"><label><b>Assign a Role to Calendar</b></label> <i style="font-size: 14px !important;" class="glyphicon glyphicon-info-sign" data-toggle="tooltip" data-placement="right" title="You can assign any of the existing roles to the current calendar"></i></div>
+              <br class="clear"/>
+              <br/>
+
+              <table class="col-md-12"><tr>
+              <td class="col-md-3" align="center">
+                <button type="button" class="btn btn-primary" id="btn_assign_cal_role" data-calendar="<%= params[:id]%> ">&lt;&lt;</button>
+              </td>
+              <td class="col-md-9 no-pright">
+                <select id="assigned_role" class="auto-height-width" size="10">
+                  <% @existing_roles.each do |role| %>
+                    <option class="text-right" value="<%= role.id %>"><%= role.name %> &nbsp;&nbsp; level: <%= role.role_level %></option>
+                  <% end %>
+                </select>
+              </td>
+              </tr></table>
+
+            </div>
+          </td>
+        </tr></table>
+
+      </div>
+
+      <br/>
+      <div class="form-group">
+        <button type="submit" name="commit" class="btn btn-primary">Save</button>
+        <%= link_to 'Back', calendar_staff_groups_path, class: 'btn btn-primary' %>
+      </div>
+  <% end %>
+
+</div>
+
+<!-- New Role Modal -->
+<div class="modal fade" id="roleModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title">Add New Role</h4>
+
+        </div>
+        <div class="modal-body">
+
+          <%= render 'roles/form', redirect_url: request.original_url, calendar_staff_group_id: params[:id], f_remote: false %>
+        </div>
+
+    </div>
+  </div>
+</div>
+
+<br class="clearfix"><br>
+
+<script>
+  var topBar = document.getElementById("top-bar");
+
+  topBar.innerHTML = '<div class="msg"><div class="top-bar-left-margin2"><div class="row '
+      + '"><div class="text-left col-md-12">'
+      + '<div class="pleft46 pright10">'
+
+      + '<div class="colfl mright10">'
+      + '<a href="#" class="text-dark mtop6 no_underline fc-button fc-state-default no_pointer fc-corner-left fc-corner-right"><i class="icon-calendar blank3 blue-text green"></i>Staff Calendars</a>'
+      + '</div>'
+
+      + '<div class="colfl mright10">'
+      + '<a href="<%= calendar_truck_groups_path %>" class="text-dark mtop6 no_underline fc-button fc-state-default fc-state-disabled pointer fc-corner-left fc-corner-right"><i class="icon-calendar blank3 blue-text brown"></i>Truck Calendars</a>'
+      + '</div>'
+
+      + '</div>'
+      + '</div></div></div></div>';
+</script>

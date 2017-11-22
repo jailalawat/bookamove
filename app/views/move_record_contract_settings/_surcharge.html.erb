@@ -1,0 +1,22 @@
+<form class="form-inline surcharge">
+  <!--gst-->
+  <div class="form-group col-md-1 text-center">
+    <%= label :surcharge, :gst, 'GST' %><br>
+    <%= check_box :surcharge, :gst, disabled: true, class: 'form-control', style: 'width:100%' %>
+  </div>
+  <!--pst-->
+  <div class="form-group col-md-1 text-center">
+    <%= label :surcharge, :pst, 'PST' %><br>
+    <%= check_box :surcharge, :pst, disabled: true, class: 'form-control', style: 'width:100%' %>
+  </div>
+  <!--description-->
+  <div class="form-group col-md-3">
+    <%= label :surcharge, :description, class: "labels" %><br>
+    <%= text_field :surcharge, :description, disabled: true, class: 'form-control', style: 'width:100%' %>
+  </div>
+  <!--other_cost-->
+  <div class="form-group col-md-3">
+    <%= label :surcharge, :surcharge, class: "labels" %><br>
+    <%= text_field :surcharge, :surcharge, disabled: true, class: 'form-control', style: 'width:100%' %>
+  </div>
+</form>

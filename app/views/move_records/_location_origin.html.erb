@@ -1,0 +1,89 @@
+<% @origins.each.with_index do |origin, index| %>
+    <div class="row origin-row colpd">
+      <div class="form-group col0-5 colmr">
+        <label></label><br/>
+        <label><b>Origin <%= (index == 0 ? '' : (index + 1).to_s) %>:</b></label>
+      </div>
+      <% if @settings.show_origin_no %>
+          <div class="form-group col0-5 colmr">
+            <%= label :move_record, :no, id: "originNo1", class: "hhidden labels" %><br>
+            <%= text_field "move_record_origin[#{index}]", :no, class: 'form-control data-no', style: 'width:100%', readonly: true, placeholder: "No", onchange: "showLabel('originNo1')" %>
+          </div>
+      <% end %>
+      <% if @settings.show_origin_street %>
+          <div class="form-group col1 colmr">
+            <%= label :move_record, :street, id: "originStreet1", class: "hhidden labels" %><br>
+            <%= text_field "move_record_origin[#{index}]", :street, class: 'form-control data-street', style: 'width:100%', readonly: true, placeholder: "Street", onchange: "showLabel('originStreet1')" %>
+          </div>
+      <% end %>
+      <% if @settings.show_origin_apartment %>
+          <div class="form-group col0-5 colmr">
+            <%= label :move_record, :apartment, id: "originApartment1", class: "hhidden labels" %><br>
+            <%= text_field "move_record_origin[#{index}]", :apartment, class: 'form-control', style: 'width:100%', readonly: true, placeholder: "Apartment", onchange: "showLabel('originApartment1')" %>
+          </div>
+      <% end %>
+      <% if @settings.show_origin_entry_number %>
+          <div class="form-group col0-5 colmr">
+            <%= label :move_record, :entry_number, "Entry #", id: "originEntryNumber1", class: "hhidden labels"
+            %><br>
+            <%= text_field "move_record_origin[#{index}]", :entry_number, class: 'form-control', style: 'width:100%', readonly: true, placeholder: "Entry #", onchange: "showLabel('originEntryNumber1')" %>
+          </div>
+      <% end %>
+      <% if @settings.show_origin_building %>
+          <div class="form-group col1 colmr">
+            <%= label :move_record, :building, id: "originBuilding1", class: "hhidden labels" %><br>
+            <%= text_field "move_record_origin[#{index}]", :building, class: 'form-control', style: 'width:100%', readonly: true, placeholder: "Building", onchange: "showLabel('originBuilding1')" %>
+          </div>
+      <% end %>
+
+      <% if @settings.show_origin_calendar_truck_group %>
+          <div class="form-group col1 colmr">
+            <%= label :move_record, :truck_group, id: "originTruckGroup1", class: "hhidden labels" %><br>
+            <!-- <%= select "move_record_origin[#{index}]", :calendar_truck_group_id, options_from_collection_for_select(@all_calendar_groups, "id", :description, @settings.origin_calendar_truck_group_id), {include_blank: "Truck Group"}, :class => 'form-control text-grey', style: 'width:100%', readonly: true, data_id: 'origin_calendar_truck_group_id', onchange: "showLabel('originTruckGroup1')" %> -->
+            <%= select "move_record_origin[#{index}]", :calendar_truck_group_id, {}, {include_blank: "Truck Group"}, :class => 'form-control text-grey', style: 'width:100%', readonly: true, data_id: 'origin_calendar_truck_group_id', onchange: "showLabel('originTruckGroup1')" %>
+          </div>
+      <% end %>
+
+      <% if @settings.show_origin_city %>
+          <div class="form-group col1 colmr">
+            <%= label :move_record, :city, id: "originCity1", class: "hhidden labels" %><br>
+            <!-- <%= text_field "move_record_origin[#{index}]", :city, class: 'form-control data-city', style: 'width:100%', readonly: true, placeholder: "City", onchange: "showLabel('originCity1')" %> -->
+            <%= select "move_record_origin[#{index}]", :city, {}, {include_blank: "City"}, :class => 'form-control text-grey', style: 'width:100%', readonly: true, onchange: "showLabel('originCity1')" %>
+          </div>
+      <% end %>
+      <% if @settings.show_origin_locale %>
+          <div class="form-group col1 colmr">
+            <%= label :move_record, :locale, id: "originLocale1", class: "hhidden labels" %><br>
+            <!-- <%= text_field "move_record_origin[#{index}]", :locale, class: 'form-control', style: 'width:100%', readonly: true, placeholder: "Locale", onchange: "showLabel('originLocale1')" %> -->
+            <%= select "move_record_origin[#{index}]", :locale, {}, {include_blank: "Locale"}, :class => 'form-control text-grey', style: 'width:100%', readonly: true, onchange: "showLabel('originLocale1')" %>
+          </div>
+      <% end %>
+      <div class="row colpd">
+        <% if @settings.show_origin_province %>
+            <div class="form-group col0-5 colmr">
+              <%= label :move_record, :province, id: "originProvince1", class: "hhidden labels", style: "color:
+                #f9f9f9 !important" %><br>
+              <%= select "move_record_origin[#{index}]", :province, {}, {include_blank: "Prov."}, :class => 'form-control text-grey', style: 'width:100%', readonly: true, onchange: "showLabel('originProvince1')" %>
+            </div>
+        <% end %>
+        <% if @settings.show_origin_postal_code %>
+            <div class="form-group col0-5 colmr">
+              <%= label :move_record, :postal_code, "PC", id: "originPostalCode1", class: "hhidden labels" %><br>
+              <%= text_field "move_record_origin[#{index}]", :postal_code, class: 'form-control data-postal-code', style: 'width:100%', readonly: true, placeholder: "PC", onchange: "showLabel('originPostalCode1')" %>
+            </div>
+        <% end %>
+        <% if @settings.show_origin_access_details %>
+            <div class="form-group col5 colmr">
+              <%= label :move_record, :access_details, "Origin Access Alert Details", id: "originAccessDetails1", class: "hhidden labels" %><br>
+              <%= text_field "move_record_origin[#{index}]", :access_details, class: 'form-control', style: 'width:100%', readonly: true, placeholder: "Origin Access Alert Details", onchange: "showLabel('originAccessDetails1')" %>
+            </div>
+        <% end %>
+        <% if @settings.show_origin_access_alert %>
+            <div class="form-group col1">
+              <%= label :move_record, :access_alert, id: "originAccessAlert1", class: "hhidden labels" %><br>
+              <%= select "move_record_origin[#{index}]", :access_alert_id, options_from_collection_for_select(@access_alert, :description, :description, @settings.origin_access_alert.description), {include_blank: "Access Alert"}, :class => 'form-control text-grey', style: 'width:100%', readonly: true, data_id: 'origin_access_alert_id', onchange: "showLabel('originAccessAlert1')" %>
+            </div>
+        <% end %>
+      </div>
+    </div>
+<% end %>

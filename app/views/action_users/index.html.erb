@@ -1,0 +1,78 @@
+<% @page_title = raw("<i class='fa fa-shield blank3 blue-text'></i> Assign Permissions to Users") %>
+
+<div class="body_top_margin col-md-12">
+
+  <legend>Select User</legend>
+
+  <div class="row">
+    <div class="col-md-12 ">
+      <% if (@users.blank?) %>
+          <p>You must create at least one user press <a href="/users/new"><strong>Create New user</strong></a>.</p>
+      <% else %>
+          <% options = options_from_collection_for_select(@users, 'id', 'name') %>
+          <%= select("user", "type_users", options, {}, {:class => 'dropdown-assign-user-action form-control'}) %>
+      <% end %>
+    </div>
+  </div>
+  <div class="row content-list">
+    <div class="col-md-5 no_pr">
+      <div class="panel panel-default transparent">
+        <div class="panel-heading text-center">Unassigned Permissions</div>
+        <div class="panel-body no_padding">
+          <select id="unassigned-user" class="auto-height-width" size=15 multiple>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-2 text-center mtop40 no_padding">
+      <div class="row btn-container mtop40">
+        <button class="btn btn-primary move-btn" id="add_one_user">></button>
+      </div>
+      <div class="row btn-container">
+        <button class="btn btn-primary move-btn" id="add_all_role">>></button>
+      </div>
+      <div class="row btn-container">
+        <button class="btn btn-primary move-btn" id="remove_one_user"><</button>
+      </div>
+      <div class="row btn-container">
+        <button class="btn btn-primary move-btn" id="remove_all_role"><<</button>
+      </div>
+    </div>
+    <div class="col-md-5 no_pl">
+      <div class="panel panel-default transparent">
+        <div class="panel-heading text-center">Assigned Permissions</div>
+        <div class="panel-body no_padding">
+          <select id="assigned-user" class="auto-height-width" size=15 multiple>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<br class="clearfix"><br>
+
+<script>
+  var topBar = document.getElementById("top-bar");
+
+  topBar.innerHTML = '<div class="msg"><div class="top-bar-left-margin2"><div class="row '
+      + '"><div class="text-left col-md-12">'
+      + '<div class="pleft46 pright10">'
+
+      + '<div class="colfl mright10">'
+      + '<a href="<%= roles_path %>" class="text-dark mtop6 no_underline fc-button fc-state-default fc-state-disabled pointer fc-corner-left fc-corner-right">Roles</a>'
+      + '</div>'
+
+      + '<div class="colfl mright10">'
+      + '<a href="<%= action_roles_path %>" class="text-dark mtop6 no_underline fc-button fc-state-default fc-state-disabled pointer fc-corner-left fc-corner-right">Assign Permissions to Roles</a>'
+      + '</div>'
+
+      + '<div class="colfl mright10">'
+      + '<a href="#" class="text-dark mtop6 no_underline fc-button fc-state-default no_pointer fc-corner-left fc-corner-right"><span>Assign Permissions to Users</a>'
+      + '</div>'
+
+      + '</div>'
+      + '</div></div></div></div>';
+
+</script>

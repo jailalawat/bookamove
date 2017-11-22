@@ -1,0 +1,39 @@
+  <em>Enter a name and email to create a profile. Click on the name of the user for details.</em>
+  <div class="alert alert-danger alert-dismissable hidden msg-error-pass">
+    <i class="icon-remove-sign"></i> Error, Passwords must match.
+  </div>
+  <% if flash[:notice] or not params[:errors].blank? %>
+      <div class="alert alert-danger alert-dismissable">
+        <h4>
+          <i class="icon-remove-sign"></i>
+          Error
+        </h4>
+
+        <p><%= flash[:notice] || params[:errors].gsub("{", "").gsub("}", "") %></p>
+      </div>
+  <% end %>
+
+  <div class="form-group clearfix mtop10">
+    <form method="POST" accept-charset="UTF-8" action="/users" class="form form-horizontal">
+      <input type="hidden" name="back_to" value="<%= defined?(back_to) ? back_to : "" %>">
+      <div class="row">
+        <div class="form-group col-md-12 no-pright">
+          <div class="col-md-4">
+            <%= label :user, :name, 'Name' %>
+            <%= text_field :user, :name, class: 'form-control', style: 'width:100%', required: true %>
+          </div>
+          <div class="col-md-3">
+            <%= label :user, :name, 'Role' %>
+            <%= collection_select :role, :role_id, @roles.where("role_level <= ? ", @role_level), :id, :name, {include_blank: true}, class: 'form-control', required: true %>
+          </div>
+          <div class="col-md-3">
+            <%= label :user, :email, 'Email' %>
+            <%= email_field :user, :email, class: 'form-control', style: 'width:100%', required: true %>
+          </div>
+          <div class="col-md-2 no-pright text-center">
+            <button type="submit" name="commit" class="btn btn-primary ok-user-profile" style="width:100%; margin-top: 21px">Create User</button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>

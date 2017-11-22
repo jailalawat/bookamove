@@ -1,0 +1,28 @@
+<legend>Move Access Alert</legend>
+<div class="row">
+  <div class="col-md-12">
+    <%= link_to 'New Move Type', new_access_alert_path, class: 'btn btn-primary' %>
+  </div>
+</div>
+<hr>
+<div class="row">
+  <div class="col-md-12">
+    <table class="table table-striped table-bordered table-hover">
+      <tr>
+        <th>Description</th>
+        <th>Is Active?</th>
+        <th>Actions</th>
+      </tr>
+      <% @access_alerts.each do |access_alert| %>
+          <tr>
+            <td><%= access_alert.description %></td>
+            <td><%= check_box_tag 'active', access_alert.active, access_alert.active, disabled: true %></td>
+            <td>
+              <%= link_to 'Edit', edit_access_alert_path(access_alert) %>
+              <%= link_to 'Destroy', access_alert, method: :delete, data: {confirm: 'Are you sure?'} %>
+            </td>
+          </tr>
+      <% end %>
+    </table>
+  </div>
+</div>

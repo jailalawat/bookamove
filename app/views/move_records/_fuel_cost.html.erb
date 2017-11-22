@@ -1,0 +1,21 @@
+<!--percentage_mc-->
+<div class="form-group col0-5 colmr">
+  <%= label :fuel_cost, :percentage_mc, '%/MC', class: "hhidden labels" %><br>
+  <%= text_field :fuel_cost, :percentage_mc, placeholder: "%/MC", class: 'form-control calculateFuel fuel_cost_percentage_mc', style: 'width:100%', readonly: true %>
+</div>
+<!--fixed-->
+<div class="form-group col0-5 colmr">
+  <%= label :fuel_cost, :fixed, class: "hhidden labels" %><br>
+  <%= text_field :fuel_cost, :fixed, placeholder: "Fixed", class: 'form-control calculateFuel fuel_cost_fixed', style: 'width:100%', readonly: true %>
+</div>
+<!--notes-->
+<div class="form-group col4 colmr">
+  <%= label :fuel_cost, :notes, class: "hhidden labels" %><br>
+  <%= text_field :fuel_cost, :notes, placeholder: "Fuel Cost Notes", class: 'form-control', style: 'width:100%', readonly:
+      true %>
+</div>
+<!--fuel_cost-->
+<div class="form-group col0-8 pull-right colmr">
+  <%= label :fuel_cost, :fuel_cost, class: "labels" %><br>
+  <%= text_field :fuel_cost, :fuel_cost, :value => 0, class: 'form-control2 calculateTotal fuel_cost_fuel_cost', style: 'width:100%', readonly: true %>
+</div>

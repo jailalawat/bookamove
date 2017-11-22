@@ -1,0 +1,70 @@
+<div class='login-container-header'>
+
+</div>
+<div class='login-container'>
+  <div class='container'>
+    <div class='row'>
+      <div class='row'>
+        <div class='col-sm-12'>
+          <div class='text-center'>
+
+          </div>
+        </div>
+      </div>
+      <div class='col-sm-4 col-sm-offset-4'>
+        <h1 class='text-center title'>Sign in</h1>
+        <%= form_tag(sessions_path, {class: 'validate-form'}) do %>
+            <% if (flash[:error]) %>
+                <div class="alert alert-danger alert-dismissible" role="alert">
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span></button>
+                  <%= flash[:error] %>
+                </div>
+            <% end %>
+            <% if (flash[:success]) %>
+                <div class="alert alert-success alert-dismissible" role="alert">
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span></button>
+                  <%= flash[:success] %>
+                </div>
+            <% end %>
+            <% if !request.subdomains.first or request.subdomains.first == "www" %>
+                <div class="form-group">
+                  <label class="control-label" for="email">Account</label>
+                  <input id="account" name="account" placeholder="Account name" data-rule-required="true" class="form-control" required="" type="text">
+                </div>
+            <% end %>
+            <div class='form-group'>
+              <div class='controls with-icon-over-input'>
+                <input value="" placeholder="E-mail" class="form-control" data-rule-required="true" name="email" required="" type="email"/>
+                <i class='icon-user text-muted'></i>
+              </div>
+            </div>
+            <div class='form-group'>
+              <div class='controls with-icon-over-input'>
+                <input value="" placeholder="Password" class="form-control" data-rule-required="true" name="password" required="" type="password"/>
+                <i class='icon-lock text-muted'></i>
+              </div>
+            </div>
+            <button class='btn btn-block' type="submit">Sign in</button>
+        <% end %>
+        <div class='text-center'>
+          <hr class='hr-normal'>
+          <a href='<%= forgot_password_path %>'>Forgot your password?</a>
+
+          <p> We have an easy way for you to recover your credentials.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class='login-container-footer'>
+  <div class='container'>
+    <div class='row'>
+      <div class='col-sm-12'>
+        <div class='text-center'>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

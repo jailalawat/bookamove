@@ -1,0 +1,60 @@
+<% @page_title = raw("<i class='icon-calendar blank3 blue-text green'></i>") + @calendar_groups.find { |v| v.id == @group_selected.to_i }.name + raw(" Calendar: <span id='calTitle'></span>") %>
+
+<div class="row form-group">
+  <div class="col-md-12">
+    <div class="clearfix"></div>
+  </div>
+
+  <div class="clearfix"></div>
+</div>
+
+
+<div id="error-calendar"></div>
+<div class="row">
+  <div class="col-md-12 floatnone form-group">
+    <div class="calendar-days-line"></div>
+  </div>
+</div>
+<div id='calendar-staff-task' class="col-md-10 col-md-12 ptop16"></div>
+<div id="group-users-droppable" class="col-md-2  list-staff-task-calendar">
+  <div class="clearfix"></div>
+  <div class="col-md-12 full-list-staff ptop10">
+  </div>
+</div>
+<div id="lbl7pm" class="col-md-10 move-top-17 timelbl"></div>
+<div class="clearfix"></div>
+
+<div class="form-group"></div>
+<div class="row">
+  <div class="col-md-12 update-messages-task-calendar">
+  </div>
+</div>
+
+<div id="modal"></div>
+
+<script>
+  var topBar = document.getElementById("top-bar");
+
+  topBar.innerHTML = '<div class="msg"><div class="top-bar-left-margin2"><div class="row '
+      + '"><div class="text-left col-md-12">'
+      + '<div class="pleft46 pright10">'
+      + '<div id="calLeft" class="col1">'
+      + '</div>'
+
+        // Lock
+      + '<div id="calPreRight" class="col1 pull-right">'
+      + '<div id="calRight" class="colfl"></div>'
+      <% unless params['move_referred'].present?%>
+      + '<div class="pull-right">'
+      + '<div class="btn btn-default btn-none text-white lock-calendar" data-locked="<%= params['locked'].present? ? true : false %>" data-id="<%= params['group'] %>" data-calendartype="taskcalendar">'
+      + '<%= params['locked'].present? ? raw('<i class="icon-unlock lfont"></i>') : raw('<i class="icon-lock lfont"></i>') %>'
+        //+'<span> <%= params['locked'].present? ? 'Unlock' : 'Lock' %></span>'
+      + '</div>'
+      + '</div>'
+      <% end %>
+      + '</div>'
+      + '</div>'
+      + '</div></div></div></div>';
+
+</script>
+

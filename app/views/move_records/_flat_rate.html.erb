@@ -1,0 +1,12 @@
+<!--notes-->
+<div class="form-group col5 colmr">
+  <%= label :flat_rate, :notes, class: "hhidden labels" %><br>
+  <%= text_field :flat_rate, :notes, placeholder: "Move Cost Notes", class: 'form-control', style: 'width:100%', readonly:
+      true %>
+</div>
+<!--move_cost-->
+<div class="form-group col0-8 pull-right colmr">
+  <%= label :flat_rate, :move_cost, class: "labels" %><br>
+  <%= text_field :flat_rate, :move_cost, :value => 0, class: 'form-control2 calculateTotal', style: 'width:100%',
+                 readonly: true %>
+</div>

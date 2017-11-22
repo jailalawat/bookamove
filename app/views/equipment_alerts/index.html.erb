@@ -1,0 +1,28 @@
+<legend>Move Equipment Alert</legend>
+<div class="row">
+  <div class="col-md-12">
+    <%= link_to 'New Move Type', new_equipment_alert_path, class: 'btn btn-primary' %>
+  </div>
+</div>
+<hr>
+<div class="row">
+  <div class="col-md-12">
+    <table class="table table-striped table-bordered table-hover">
+      <tr>
+        <th>Description</th>
+        <th>Is Active?</th>
+        <th>Actions</th>
+      </tr>
+      <% @equipment_alerts.each do |equipment_alert| %>
+          <tr>
+            <td><%= equipment_alert.description %></td>
+            <td><%= check_box_tag 'active', equipment_alert.active, equipment_alert.active, disabled: true %></td>
+            <td>
+              <%= link_to 'Edit', edit_equipment_alert_path(equipment_alert) %>
+              <%= link_to 'Destroy', equipment_alert, method: :delete, data: {confirm: 'Are you sure?'} %>
+            </td>
+          </tr>
+      <% end %>
+    </table>
+  </div>
+</div>

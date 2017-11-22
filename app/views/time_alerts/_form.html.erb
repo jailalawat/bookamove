@@ -1,0 +1,25 @@
+<%= form_for(@time_alert) do |f| %>
+    <% if @time_alert.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@time_alert.errors.count, "error") %> prohibited this move type from being saved:</h2>
+
+          <ul>
+            <% @time_alert.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+
+    <div class="form-group">
+      <%= f.label :description %><br>
+      <%= f.text_field :description, class: 'form-control', required: true %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :active %><br>
+      <%= f.check_box :active %>
+    </div>
+    <button type="submit" name="commit" class="btn btn-primary">Save</button>
+    <%= link_to 'Back', time_alerts_path, class: 'btn btn-primary' %>
+<% end %>

@@ -1,0 +1,6 @@
+var user = $('.user-name').data('user');
+var subtask_id = <%= params[:subtask_id] %>;
+
+localStorage.removeItem(user + '_mailRecordStaticLink_' + subtask_id);
+
+location.reload();

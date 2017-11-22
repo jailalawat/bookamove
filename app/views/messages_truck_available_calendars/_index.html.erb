@@ -1,0 +1,91 @@
+<div class="message-inbox-task-calendar new-truck-available-calendar" href="#messages">
+  <div class="box colpd">
+    <div class="col-md-12 box-header red-background">
+      <div class="row legend2">
+        <div class="col-md-1">
+          <span>NOTES</span>
+        </div>
+        <div class="col-md-1"></div>
+        <div class="col-md-8 row">
+          <div class="col-md-4">
+            <span>SUBJECT</span>
+          </div>
+          <div class="col-md-4">
+
+          </div>
+        </div>
+        <div class="col-md-2">
+          TIME/DATE
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="form-group"></div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="col-md-1">
+        <i class='icon-star-empty star-priority fa-2x pointer' title="Toggle for normal/important/urgent priority"></i>
+        <input type="hidden" class="message-priority" value="0"/>
+      </div>
+      <div class="col-md-1">
+      </div>
+      <div class="col-md-8 row">
+        <div class="col-md-12">
+          <% @subject_suggestions = (defined? subject_suggestions).present? ? subject_suggestions : @subject_suggestions %>
+          <% @all_messages = (defined? all_messages).present? ? all_messages : @all_messages %>
+          <input class='form-control message-subject' placeholder='Subject' maxlength="250" list="subject_suggestion"/>
+          <datalist id="subject_suggestion">
+            <%= options_from_collection_for_select(@subject_suggestions, "description", :description,) %>
+          </datalist>
+        </div>
+        <div class="form-group clearfix"></div>
+        <div class="col-md-12">
+          <textarea class='form-control message-body' placeholder='Your message...' rows='1'></textarea>
+        </div>
+      </div>
+      <div class="col-md-2 pull-right no-pright">
+        <div class='form-group col-md-12 no-pright'>
+          <div class="btn btn-danger btn-blue3 send-new-truck-available-calendar col-md-12" data-truck-available-calendar="<%= params[:truck] %>">Submit</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="clearfix"></div>
+  <div class="form-group"></div>
+  <% if @all_messages.blank? %>
+      <div class="col-md-12 full-wrap-messages-task-calendar colpd text-center"> No messages available.</div>
+  <% end %>
+  <div class="full-wrap-messages-task-calendar colpd">
+    <% @all_messages.each.with_index do |all_message, index| %>
+        <% if all_message.present? %>
+            <div class='panel panel-default wrap-full-message no-m-bottom' data-message="<%= all_message.id %>">
+              <div class='panel-heading accordion-toggle collapsed' data-parent='#accordion<%= index %>' data-toggle='collapse' href='#collapse-<%= index %>-<%= index %>' title="Click to expand">
+                <div class="row">
+                  <div class="col-md-1">
+                    <div class="reminder-event ui-draggable" data-duration="allDay" data-message-truck-calendar-id="<%= all_message.id %>">
+                      <i class="icon-time"></i></div>
+                  </div>
+                  <div class="col-md-1">
+                    <span><%= all_message.user.name %></span>
+                  </div>
+                  <div class="row col-md-8">
+                    <div class="col-md-12">
+                      <span class="subject"><%= all_message.subject.blank? ? nil : all_message.subject + ' - ' %></span>
+                      <span class="text-gray"><%= truncate(strip_tags(all_message.body).gsub(/&nbsp;/i, ""), length: 40) %></span>
+                    </div>
+                  </div>
+                  <div class="col-md-2">
+                    <span><%= all_message.created_at.strftime("%l:%M %P %b %d") %></span>
+                  </div>
+                </div>
+              </div>
+              <div class='panel-collapse collapse' id='collapse-<%= index %>-<%= index %>'>
+                <div class='panel-body body-warp-message p13'>
+                  <div class="body-message col-md-8 col-md-offset-2"><%= all_message.body.blank? ? all_message.body : all_message.body.html_safe %></div>
+                </div>
+              </div>
+            </div>
+        <% end %>
+    <% end %>
+  </div>
+</div>

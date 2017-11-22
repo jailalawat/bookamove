@@ -1,0 +1,28 @@
+<legend>Move Types</legend>
+<div class="row">
+  <div class="col-md-12">
+    <%= link_to 'New Move Type', new_move_type_path, class: 'btn btn-primary' %>
+  </div>
+</div>
+<hr>
+<div class="row">
+  <div class="col-md-12">
+    <table class="table table-striped table-bordered table-hover">
+      <tr>
+        <th>Description</th>
+        <th>Is Active?</th>
+        <th>Actions</th>
+      </tr>
+      <% @move_types.each do |move_type| %>
+          <tr>
+            <td><%= move_type.description %></td>
+            <td><%= check_box_tag 'active', move_type.active, move_type.active, disabled: true %></td>
+            <td>
+              <%= link_to 'Edit', edit_move_type_path(move_type) %>
+              <%= link_to 'Destroy', move_type, method: :delete, data: {confirm: 'Are you sure?'} %>
+            </td>
+          </tr>
+      <% end %>
+    </table>
+  </div>
+</div>

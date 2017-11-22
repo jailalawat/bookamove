@@ -1,0 +1,65 @@
+<% @page_title = raw("<i class='icon-calendar blank3 blue-text'></i>My Truck ") + raw(" Calendar : <span id='calTitle'></span>") %>
+<br/>
+<div id="error-calendar"></div>
+<div id='calendar-truck' class="col-md-12 ptop10"></div>
+<div id="lbl7pm" class="col-md-10 move-top-17 timelbl"></div>
+<div class="form-group"></div>
+<div class="row">
+  <div class="col-md-12 calendar-truck update-messages-truck-calendar">
+  </div>
+</div>
+
+
+
+<script>
+  var topBar = document.getElementById("top-bar");
+
+  topBar.innerHTML = '<div class="msg"><div class="top-bar-left-margin2"><div class="row '
+      + '"><div class="text-left col-md-12">'
+      + '<div class="pleft46 pright10">'
+      + '<div id="calLeft" class="colfl">'
+      + '</div>'
+
+        // Tasks
+      <% if ( @staff_truck.present?) %>
+      + '<div class="col1 text-center">'
+      <% else %>
+      + '<div class="col2 text-center">'
+      <% end %>
+      + '</div>'
+
+      + '<div class="col1 text-center">'
+        // Trucks
+      <% if ( @current_user.driver.present?) %>
+      + '<div class="dropdown">'
+      + '<a href="javascript:void(0)" class="dropdown-toggle" id="dropdownTruckMenu1" >'
+      + '<i class="icon-truck"></i> <%= @current_user.driver.description %> '
+      + '</div>'
+      <% end %>
+      + '</div>'
+
+        // Lock
+      + '<div id="calPreRight" class="pull-right">'
+      + '<div id="calprofiletruck" class="colfl"><a href="<%= edit_truck_path(@current_user.driver) %>" target="_self" class="calprofiletruck"><div class="btn btn-none"><span class="fc-button fc-state-default fc-corner-left fc-corner-right ">Profile</span></div></a></div>'
+      + '<div id="calavailabletime" class="colfl"><a href="" target="_self" data-url="<%= truck_availables_path(truck: @current_user.driver.id) %>" class="calavailabletime"><div class="btn btn-none"><span class="fc-button fc-state-default fc-corner-left fc-corner-right ">Available</span></div></a></div>'
+      + '<div id="calRight" class="colfl"></div>'
+      <% unless params['move_referred'].present?%>
+      + '<div class="pull-right">'
+      + '<div class="btn btn-default btn-none text-white lock-calendar" data-locked="<%= params['locked'].present? ? true : false %>" data-id="<%= params['group'] %>" data-calendartype="mytruckcalendar">'
+      + '<%= params['locked'].present? ? raw('<i class="icon-unlock lfont"></i>') : raw('<i class="icon-lock lfont"></i>') %>'
+        //+'<span> <%= params['locked'].present? ? 'Unlock' : 'Lock' %></span>'
+      + '</div>'
+      + '</div>'
+      <% end %>
+      + '</div>'
+      + '</div>'
+      + '</div></div></div></div>';
+
+</script>
+
+<style>
+  .fc-button-today {
+    margin-left: 3px;
+  }
+</style>
+

@@ -1,0 +1,77 @@
+<% if (@calendar_trucks.present?) %>
+    <% @page_title = raw("<i class='icon-calendar blank3 blue-text brown'></i>Truck Group Calendar ") + @calendar_trucks[0].calendar_truck_group.name + raw(": <span id='calTitle'></span>") %>
+<% end %>
+<div class="row form-group">
+
+  <div>
+
+  </div>
+  <div class="clearfix"></div>
+
+</div>
+
+
+<div id="error-calendar"></div>
+<div class="row">
+  <div class="col-md-12 floatnone form-group">
+    <div class=" calendar-days-line pleft15"></div>
+  </div>
+</div>
+<div id='calendar-move-record' class="<%= params['move_referred'].present? || params['cut_move'].present? ? 'move-referred' : '' %> col-md-10 ptop16"></div>
+<div id="group-users-droppable" class="col-md-2  list-staff-truck-calendar">
+  <div class="clearfix"></div>
+  <div class="col-md-12 full-list-staff ptop10">
+  </div>
+</div>
+<div id="lbl7pm" class="col-md-10 move-top-17 timelbl"></div>
+<div class="clearfix"></div>
+<div class="trucks-by-group hide">
+  <%= select :calendar, :trucks, options_from_collection_for_select(@trucks, "id", "description"), {prompt: 'All'}, :class => 'form-control select-trucks' %>
+</div>
+<div class="form-group"></div>
+<div class="row">
+  <div class="col-md-12 update-messages-truck-calendar">
+  </div>
+</div>
+
+<div id="modal"></div>
+
+<script>
+  var topBar = document.getElementById("top-bar");
+
+  topBar.innerHTML = '<div class="msg"><div class="top-bar-left-margin2"><div class="row '
+      + '"><div class="text-left col-md-12">'
+      + '<div class="pleft46 pright10">'
+      + '<div id="calLeft" class="col1">'
+      + '</div>'
+
+        // Trucks
+      + '<div class="col5 text-center list-trucks-calendar">'
+      <% if ( @calendar_trucks.present?) %>
+      + '<btn class="btn btn-primary btn-none all-update-move-record-calendar" >'
+      + '<i class="icon-truck"></i> All'
+      + '</btn>'
+      <% end %>
+      <% @calendar_trucks.each do |truck_info| %>
+      + '<btn class="btn btn-primary btn-none update-move-record-calendar" data-truckId="<%= truck_info.truck_id %>" >'
+      + '<i class="icon-truck"></i> <%= truck_info.truck.description %>'
+      + '</btn>'
+      <% end %>
+      + '</div>'
+
+        // Lock
+      + '<div id="calPreRight" class="col1 pull-right">'
+      + '<div id="calRight" class="colfl"></div>'
+      <% unless params['move_referred'].present?%>
+      + '<div class="pull-right">'
+      + '<div class="btn btn-default btn-none text-white lock-calendar" data-locked="<%= params['locked'].present? ? true : false %>" data-id="<%= params['group'] %>" data-calendartype="truckcalendar">'
+      + '<%= params['locked'].present? ? raw('<i class="icon-unlock lfont"></i>') : raw('<i class="icon-lock lfont"></i>') %>'
+        //+'<span> <%= params['locked'].present? ? 'Unlock' : 'Lock' %></span>'
+      + '</div>'
+      + '</div>'
+      <% end %>
+      + '</div>'
+      + '</div>'
+      + '</div></div></div></div>';
+
+</script>

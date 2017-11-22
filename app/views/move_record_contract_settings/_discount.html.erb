@@ -1,0 +1,22 @@
+<form class="form-inline">
+  <!--percentage-->
+  <div class="form-group col-md-1">
+    <%= label :discount, :percentage, '%', class: "labels" %><br>
+    <%= text_field :discount, :percentage, disabled: true, class: 'form-control', style: 'width:100%' %>
+  </div>
+  <!--hourly-->
+  <div class="form-group col-md-1">
+    <%= label :discount, :hourly, class: "labels" %><br>
+    <%= text_field :discount, :hourly, disabled: true, class: 'form-control', style: 'width:100%' %>
+  </div>
+  <!--notes-->
+  <div class="form-group col-md-5">
+    <%= label :discount, :notes, class: "labels" %><br>
+    <%= text_field :discount, :notes, disabled: true, class: 'form-control', style: 'width:100%' %>
+  </div>
+  <!--discount-->
+  <div class="form-group col-md-3">
+    <%= label :discount, :discount, class: "labels" %><br>
+    <%= text_field :discount, :discount, disabled: true, class: 'form-control', style: 'width:100%' %>
+  </div>
+</form>

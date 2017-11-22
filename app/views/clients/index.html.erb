@@ -1,0 +1,85 @@
+<% @page_title = raw("<i class='fa fa-users blank3 blue-text'></i> Customers") %>
+
+<div class="body_top_margin col-md-12">
+  <legend>Customers</legend>
+  <div class="row">
+    <div class="col-md-12">
+      <%= link_to 'New Customer', new_client_path, class: 'btn btn-primary' %>
+    </div>
+  </div>
+  <br/>
+  <div class="row">
+    <div class="col-md-12 form-group">
+      <form method="GET" action="/clients">
+        <div class="input-group">
+          <input type="text" name="criteria" value="<%= @criteria %>" class="form-control" placeholder="Find by any column">
+                  <span class="input-group-btn">
+                      <button class="btn btn-default font_small"><i class="fa fa-search small_icon"></i> Find</button>
+                  </span>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <table class="table table-striped table-bordered table-hover">
+        <tr>
+          <th>Name</th>
+          <th>Title</th>
+          <th>Home Phone</th>
+          <th>Cell Phone</th>
+          <th>Work Phone</th>
+          <th>Email</th>
+          <th>Is Active?</th>
+          <th>Actions</th>
+        </tr>
+        <% @clients.each do |client| %>
+            <tr>
+              <td><%= client.name %></td>
+              <td><%= client.title %></td>
+              <td><%= client.home_phone %></td>
+              <td><%= client.cell_phone %></td>
+              <td><%= client.work_phone %></td>
+              <td><%= client.email %></td>
+              <td align="center"><%= check_box_tag 'active', client.active, client.active, disabled: true %></td>
+              <td align="center">
+                <%= link_to 'Edit', edit_client_path(client) %>
+                <!-- <%= link_to 'Destroy', client, method: :delete, data: {confirm: 'Are you sure?'} %> -->
+              </td>
+            </tr>
+        <% end %>
+      </table>
+    </div>
+  </div>
+</div>
+
+<script>
+  var topBar = document.getElementById("top-bar");
+
+  topBar.innerHTML = '<div class="msg"><div class="top-bar-left-margin2"><div class="row '
+      + '"><div class="text-left col-md-12">'
+      + '<div class="pleft46 pright10">'
+
+      + '<div class="colfl mright10">'
+      + '<a href="<%= accounts_path %>" class="text-dark mtop6 no_underline fc-button fc-state-default fc-state-disabled pointer fc-corner-left fc-corner-right">Company Profile</a>'
+      + '</div>'
+
+      + '<div class="colfl mright10">'
+      + '<a href="/accounts_staff" class="text-dark mtop6 no_underline fc-button fc-state-default fc-state-disabled pointer fc-corner-left fc-corner-right">Staff</a>'
+      + '</div>'
+
+      + '<div class="colfl mright10">'
+      + '<a href="/accounts_drivers" class="text-dark mtop6 no_underline fc-button fc-state-default fc-state-disabled pointer fc-corner-left fc-corner-right">Drivers</a>'
+      + '</div>'
+
+      + '<div class="colfl mright10">'
+      + '<a href="#" class="text-dark mtop6 no_underline fc-button fc-state-default no_pointer fc-corner-left fc-corner-right">Customers</a>'
+      + '</div>'
+
+      + '<div class="colfl mright10">'
+      + '<a href="<%= trucks_path %>" class="text-dark mtop6 no_underline fc-button fc-state-default fc-state-disabled pointer fc-corner-left fc-corner-right">Trucks</a>'
+      + '</div>'
+
+      + '</div>'
+      + '</div></div></div></div>';
+</script>

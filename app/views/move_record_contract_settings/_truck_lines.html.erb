@@ -1,0 +1,63 @@
+<% @trucks.each do |truck| %>
+    <div class="row truck-row">
+      <%= form_for truck, html: {class: 'form-inline'} do |f| %>
+
+          <div class="form-group col-md-2">
+            <%= f.label :truck_group, class: "labels" %><br>
+
+            <div class="left-inner-addon">
+              <%# @all_calendar_groups.inspect %>
+              <% css = @settings.show_origin_calendar_truck_group ? @enable_icon : @disable_icon %>
+              <i field="show_origin_calendar_truck_group" class="<%= css %>"></i>
+              <%= f.select :truck_group_id, options_from_collection_for_select({}, "id", :description, @settings.origin_calendar_truck_group_id), {include_blank: true}, :class => 'form-control space-select-addon change-select', style: 'width:100%', data_id: 'origin_calendar_truck_group_id' %>
+              <% if validate_special_permission('edit.contract_field_default_values', @current_actions) %>
+                  <i class="icon-edit-sign edit-dropdown-contract-settings" field="calendar_truck_groups" data-default="<%= @settings.origin_calendar_truck_group_id %>" data-default-key="origin_calendar_truck_group_id"></i>
+              <% end %>
+            </div>
+          </div>
+
+          <div class="form-group col-md-2">
+            <%= f.label :description, 'Truck', class: "labels" %><br>
+
+            <div class="left-inner-addon">
+              <% css = @settings.show_truck ? @enable_icon : @disable_icon %>
+              <i field="show_truck" class="<%= css %>"></i>
+              <%= f.select :description, options_from_collection_for_select(@truck_data, "id", :description, @settings.truck_id), {include_blank: true}, :class => 'form-control space-select-addon change-select', style: 'width:100%', data_id: 'truck_id' %>
+            </div>
+          </div>
+          <div class="form-group col-md-2">
+            <%= label :truck, :truck_size, class: "labels" %><br>
+
+            <div class="left-inner-addon">
+              <% css = @settings.show_truck_name ? @enable_icon : @disable_icon %>
+              <i field="show_truck_name" class="<%= css %>"></i>
+              <%= text_field :truck, :truck_name, disabled: true, class: 'form-control', style: 'width:100%' %>
+            </div>
+          </div>
+
+          <div class="form-group col-md-4">
+            <%= label :truck, 'Equipment details', class: "labels" %><br>
+
+            <div class="left-inner-addon">
+              <% css = @settings.show_truck_equipment_details ? @enable_icon : @disable_icon %>
+              <i field="show_truck_equipment_details" class="<%= css %>"></i>
+              <%= text_field :truck, 'Equipment Details', disabled: true, class: 'form-control', style: 'width:100%' %>
+            </div>
+          </div>
+
+          <div class="form-group col-md-2">
+            <%= label :truck, 'Equipment alert', class: "labels" %><br>
+
+            <div class="left-inner-addon">
+              <% css = @settings.show_truck_name_equipment_alert ? @enable_icon : @disable_icon %>
+              <i field="show_truck_name_equipment_alert" class="<%= css %>"></i>
+              <%= select :truck, 'Equipment_details', {}, {include_blank: true}, :class => 'form-control space-select-addon change-select', style: 'width:100%', disabled: true %>
+              <% if validate_special_permission('edit.contract_field_default_values', @current_actions) %>
+                <i class="icon-edit-sign edit-dropdown-contract-settings" field="equipment_alerts" data-default="<%= @settings.equipment_alert_id %>" data-default-key="equipment_alert_id"></i>
+              <% end %>
+            </div>
+          </div>
+          <%= render 'men' %>
+      <% end %>
+    </div>
+<% end %>

@@ -1,0 +1,31 @@
+<%= form_for (@tax) do |f| %>
+    <% if @tax.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@tax.errors.count, "error") %> prohibited this tax from being saved:</h2>
+
+          <ul>
+            <% @tax.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+
+    <div class="form-group">
+      <%= f.label :province %><br>
+      <%= f.text_field :province, class: 'form-control', required: true %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :gst %><br>
+      <%= f.text_field :gst, class: 'form-control', required: true %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :pst %><br>
+      <%= f.text_field :pst, class: 'form-control', required: true %>
+    </div>
+
+    <button type="submit" name="commit" class="btn btn-primary">Save</button>
+    <%= link_to 'Back', taxes_path, class: 'btn btn-primary' %>
+<% end %>

@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>bookamove.ca</title>
+  <link rel="preload" as="font" crossorigin="crossorigin" type="font/woff" href="/assets/fonts/gotham-book.woff" />
+  <%= stylesheet_link_tag 'application', media: 'all' %>
+  <%= csrf_meta_tags %>
+</head>
+<body class='wysihtml5-supported contrast-red fixed-header fixed-navigation'>
+<div id="top">
+
+<header>
+  <nav class='navbar navbar-default navbar-fixed-top oPageCentered2 top2'>
+
+    <a class='navbar-brand' href='/home'>
+      <img class="logo img-responsive" align="center" width="192" alt="Flatty" src="<%= @account_logo %>"/>
+    </a>
+
+    <h5 id="pTitle" class="page_title" align="center">
+      <%= @page_title %>
+    </h5>
+
+    <div class="alert alert-info alert-dismissable new-msg-alert hidden">
+      <a class="close" data-dismiss="alert" href="#">×</a>
+      <b>New message received</b>
+
+      <div id="alert_msgs" class="text-black"></div>
+    </div>
+
+
+    <ul class="nav" style="background-color: #fff !important;">
+
+      <li class="dropdown dark user-menu mright5">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+						<span class="user-name" data-user="<%= @current_user.id.to_s.crypt('oo') %>"><b><%= @current_user.name
+            %></b></span>
+          <b class="caret"></b>
+          <span class="blank">&nbsp;</span>
+          <span class="blank">&nbsp;</span>
+        </a>
+        <ul class="dropdown-menu">
+          <li>
+            <a href="/home">
+              <i class="icon-dashboard mright5 small_icon"></i> My Dashboard
+            </a>
+          </li>
+          <% if @roles and not @roles.include?("Customer") %>
+            <li>
+              <a href='/personal_calendars?type=task&group=0' href-original='/personal_calendars?type=task&group=0' class="save-url-historical-calendar" data-personalcalendar="0" data-personalcalendarname="My Cal" data-calendartype="personalcalendar">
+                <i class='icon-calendar mright5 small_icon'></i>
+                <span>My Calendar</span>
+              </a>
+            </li>
+            <li>
+              <a href='<%= statement_path %>' id="reportLink" data-linkid="4" data-url="<%= statement_path %>" data-name="My Statement">
+                <i class='icon-file-text mright5 small_icon'></i>
+                <span>My Statement</span>
+              </a>
+            </li>
+          <% end %>
+          <li>
+            <a href="<%= profiles_path %>">
+              <i class="icon-user mright5"></i> My Profile
+            </a>
+          </li>
+          <li>
+            <a href='/change_password'>
+              <i class='icon-lock mright5'></i> Change Password
+            </a>
+          </li>
+          <li>
+            <a href="/logout">
+              <i class="icon-signout mright2"></i> Sign out
+            </a>
+          </li>
+        </ul>
+      </li>
+
+      <% if @roles and not @roles.include?("Customer") %>
+        <li class='dropdown medium only-icon widget'>
+          <form id="top-search" action="/search_move_record" class="navbar-form navbar-right hidden-xs" method="get">
+            <button id="search-icn" class="btn btn-link icon-search" type="button" style="font-size: 18px !important;"></button>
+            <div class="form-group">
+              <input
+              <% if !params[:search].present? %>value=""
+              <% else %>value="<%= params[:search].to_s %>"
+              <% end %> class="form-control
+                <% if !params[:search].present? %>long-input
+                <% end %>" placeholder="Search..." autocomplete="off" id="q_header" name="search" type="text">
+            </div>
+          </form>
+        </li>
+      <% end %>
+
+      <li class='dropdown medium only-icon widget'>
+        <a class='dropdown-toggle' data-toggle='dropdown' href='#'>
+          <i class='icon-bell-alt'></i>
+          <%
+             urgent_notification = filter_urgent_notification(@notification_messages)
+             personal_notification = filter_normal_notification(@notification_messages)
+             total_notification = urgent_notification.size.to_i + personal_notification.size.to_i
+          %>
+
+          <% if urgent_notification.size > 0 %>
+              <% if personal_notification.size > 0 %>
+                  <div class='label number-new-messages-notification red-bg'><%= total_notification %></div>
+              <% else %>
+                  <div class='label number-new-messages-notification red-bg'><%= urgent_notification.size %></div>
+              <% end %>
+          <% end %>
+
+          <% if personal_notification.size > 0 and urgent_notification.size == 0 %>
+              <div class='label number-new-messages-notification'><%= personal_notification.size %></div>
+          <% end %>
+
+          <% if @notification_messages.size == 0 %>
+              <div class='label number-new-messages-notification hidden'>0</div>
+          <% end %>
+        </a>
+        <ul class='dropdown-menu notification-list'>
+
+          <li class="text-center widget-footer">
+            <a href="#" class="textOrange bold"><span class="urgent-number-new-messages-notification"><%= urgent_notification.size %></span> new urgent messages</a>
+          </li>
+          <li class='divider'></li>
+
+          <% urgent_notification.each do |notification_message| %>
+              <li class="text-center notification-message-<%= notification_message.id %>">
+                <a href='#'>
+                  <div class='widget-body'>
+                    <a href='/messages?type=inbox'>
+                      <div class='pull-left col-md-5 text-right no-pright'>
+                        <i class="icon-star text-error" title="Urgent"></i> <%= truncate(strip_tags(notification_message.user.name).gsub(/&nbsp;/i, ""), length: 15) %>
+                      </div>
+                      <div class='pull-left col-md-6 no-pright'>
+                        <%= truncate(strip_tags(notification_message.subject).gsub(/&nbsp;/i, ""), length: 15) %>
+                      </div>
+                    </a>
+                  </div>
+                </a>
+              </li>
+              <li class='divider'></li>
+          <% end %>
+
+          <li class="text-center widget-footer">
+            <a href="<%= messages_path(type: 'inbox') %>"><span class="personal-number-new-messages-notification"><%= personal_notification.size %></span> new other messages</a>
+          </li>
+          <li class='divider'></li>
+
+          <!-- <% if urgent_notification.blank? %>
+              <li class="text-center widget-footer">
+                <a href="#">No new urgent messages.</a>
+              </li>
+          <% end %> -->
+          <li class="text-center widget-footer">
+            <a href="<%= messages_path(type: 'inbox') %>">All Messages</a>
+          </li>
+        </ul>
+      </li>
+
+      <% if @roles and not @roles.include?("Customer") %>
+        <li class="dropdown dark">
+          <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+            <i class='icon-cog'></i>
+          </a>
+          <ul class="dropdown-menu top-max-menu">
+            <% if validate_special_permission('configure.contract', @current_actions) %>
+                <li>
+                  <a href='/contract_settings'><i class="icon-truck blue-text" style="margin-right: 5px; margin-left: 15px;"></i> Contract</a>
+                </li>
+            <% end %>
+
+            <% if validate_special_permission('create_edit.staff_calendars', @current_actions) or validate_special_permission('create_edit.truck_calendars', @current_actions) %>
+            <li>
+              <a href="<%= calendar_staff_groups_path %>"><i class="icon-calendar blue-text" style="margin-right: 5px; margin-left: 15px;"></i> Calendars</a>
+            </li>
+            <% end %>
+
+            <!--
+            <% if validate_special_permission('show.list_accounts', @current_actions) %>
+                <li class=''>
+                  <a href='<%= list_accounts_path %>'>
+                    <i class='icon-angle-right blank'></i>
+                    <span>List accounts</span>
+                  </a>
+                </li>
+            <% end %>
+            -->
+
+            <% if validate_special_permission('create_edit.roles', @current_actions) %>
+              <li>
+                <a href='<%= roles_path %>'><i class="fa fa-shield blue-text" style="margin-right: 9px; margin-left: 15px;"></i> Security</a>
+              </li>
+            <% end %>
+
+
+                <!--<li>-->
+                  <!--<a href=""><i class="fa fa-building blue-text" style="margin-right: 6px; margin-left: 15px;"></i> Profiles</a>-->
+                <!--</li>-->
+
+
+          </ul>
+        </li>
+
+        <% if validate_special_permission('edit.company_profile', @current_actions) or validate_special_permission('create_edit.trucks', @current_actions) or validate_special_permission('create.user', @current_actions) or validate_special_permission('edit.user', @current_actions) or validate_special_permission('view.mover_profiles', @current_actions) or validate_special_permission('view.staff_profiles', @current_actions) %>
+        <li class='dropdown'>
+          <a href="<%= accounts_path %>">
+            <i class="fa fa-users ptop1" style="color: #565656 !important;" data-toggle="tooltip" data-placement="bottom" title="Profiles"></i>
+            <span class="blank">&nbsp;</span>
+          </a>
+        </li>
+        <% end %>
+
+        <li class='dropdown medium only-icon widget mright5'>
+          <%= link_to '<i class="icon-minus top-btn-icon"></i>'.html_safe, :back, class: 'btn btn-warning
+            minus-move-record top-btn-back' %>
+        </li>
+
+        <li class='dropdown medium only-icon widget'>
+          <%= link_to '<i class="icon-remove top-btn-icon" id="closeAllButton"></i>'.html_safe, "#", class: 'btn btn-danger top-btn-close' %>
+        </li>
+      <% end %>
+    </ul>
+  </nav>
+  <div id="top-bar0">
+    <div class="oPageCentered2 top2">
+      <div class="text-center">
+        <!-- new move btn -->
+        <div id="top-move" class="top-move colfl"></div>
+
+        <div id="top-bar" class="colfl"></div>
+
+      </div>
+    </div>
+  </div>
+</header>
+
+<div id='wrapper'>
+  <div id="main-nav-container">
+  <nav id='main-nav' class="main-nav-fixed affix-top">
+    <div class='navigation'>
+      <ul id="lMenu" class='nav nav-stacked nav-left nav-adaptable'>
+        <%= render 'layouts/custom_access' %>
+      </ul>
+    </div>
+  </nav>
+  </div>

@@ -1,0 +1,24 @@
+<script type="text/javascript">
+  var topBar = document.getElementById("top-bar");
+  var topMove = document.getElementById("top-move");
+
+  topBar.innerHTML = '<div class="msg pleft46">' +
+      '<div class="text-left">'
+      + '<div class="col_status"><a href="#SSwho" onclick=\'expand_who("expand");expand_note("expand")\' class="top">WHO</a></div>'
+      + '<div class="col_status"><a href="#SSwhat" onclick=\'expand_what("expand");expand_note("expand")\' class="top">WHAT</a></div>'
+      + '<div class="col_status"><a href="#SSwhere" onclick=\'expand_where("expand");expand_note("expand")\' class="top">WHERE</a></div>'
+      + '<div class="col_status"><a href="#SSwhen" onclick=\'expand_when("expand");expand_note("expand")\' class="top">WHEN</a></div>'
+      + '<div class="col_status"><a href="#SShow" onclick=\'expand_how("expand");expand_how_much("expand");expand_note("expand")\' class="top">HOW</a></div>'
+      + '<div class="col_status"><a href="javascript:void(0)" class="top">ALERTS</a></div>'
+      + '<div class="col_status"><a href="#SScontact" onclick=\'expand_contact_stage("expand")\' class="top">STAGE</a></div>'
+      + '</div></div>';
+
+  <% if not defined?(no_expand_all) %>
+    <% if not defined?(collapse) %>
+      topMove.innerHTML = '<a class="btn btn-xs btn-link white no_underline" href="#" onclick="expand_sections()">Expand All <i class="fa fa-chevron-circle-down"></i></a>';
+    <% else %>
+      topMove.innerHTML = '<a class="btn btn-xs btn-link white no_underline" href="#" onclick="colapse_sections()">Collapse All <i class="fa fa-chevron-circle-up"></i></a>';
+    <% end %>
+  <% end %>
+
+</script>

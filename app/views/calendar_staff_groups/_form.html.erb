@@ -1,0 +1,30 @@
+<%= form_for(@calendar_staff_group) do |f| %>
+    <% if @calendar_staff_group.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@calendar_staff_group.errors.count, "error") %> prohibited this truck group from being saved:</h2>
+          <ul>
+            <% @calendar_staff_group.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+    <div class="form-group">
+      <%= f.label :name %><br>
+      <%= f.text_field :name, class: 'form-control', required: true %>
+    </div>
+    <div class="form-group">
+      <%= f.label :description %><br>
+      <%= f.text_field :description, class: 'form-control', required: true %>
+    </div>
+    <div class="form-group">
+      <%= f.label :active %><br>
+      <%= f.check_box :active %>
+    </div>
+
+    <br/>
+    <div class="form-group">
+      <button type="submit" name="commit" class="btn btn-primary">Save</button>
+      <%= link_to 'Back', calendar_staff_groups_path, class: 'btn btn-primary' %>
+    </div>
+<% end %>

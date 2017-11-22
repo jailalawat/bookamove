@@ -1,0 +1,28 @@
+<legend>Move keywords</legend>
+<div class="row">
+  <div class="col-md-12">
+    <%= link_to 'New Move Type', new_move_keyword_path, class: 'btn btn-primary' %>
+  </div>
+</div>
+<hr>
+<div class="row">
+  <div class="col-md-12">
+    <table class="table table-striped table-bordered table-hover">
+      <tr>
+        <th>Description</th>
+        <th>Is Active?</th>
+        <th>Actions</th>
+      </tr>
+      <% @move_keywords.each do |move_keyword| %>
+          <tr>
+            <td><%= move_keyword.description %></td>
+            <td><%= check_box_tag 'active', move_keyword.active, move_keyword.active, disabled: true %></td>
+            <td>
+              <%= link_to 'Edit', edit_move_keyword_path(move_keyword) %>
+              <%= link_to 'Destroy', move_keyword, method: :delete, data: {confirm: 'Are you sure?'} %>
+            </td>
+          </tr>
+      <% end %>
+    </table>
+  </div>
+</div>

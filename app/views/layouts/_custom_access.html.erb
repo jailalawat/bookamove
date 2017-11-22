@@ -1,0 +1,212 @@
+<% if validate_special_permission('create.moves', @current_actions) %>
+    <li class='text-center'>
+      <a href='<%= move_records_path %>' class="btn-new-move btn-blue" style="padding-left: 10px !important;">NEW MOVE</a>
+    </li>
+<% end %>
+
+<%# if validate_special_permission('show.my_moves', @current_actions) %>
+    <li class=''>
+      <a class="dropdown-collapse hhiddenIcon" href="#">
+        <span class="text-uppercase blue-text"><b>Moves</b></span>
+        <i class='icon-angle-down angle-down hhidden blue-text' id="moveIcon"></i>
+      </a>
+
+      <div class="grey-b-border"></div>
+      <ul class='nav nav-stacked' id="moveHeader">
+        <% if validate_special_permission('create_edit.reports', @current_actions) %>
+          <li class=''>
+            <a href='<%= move_lead_path %>' id="moveLink" data-linkid="1" data-url="<%= move_lead_path %>" data-name="Leads">
+              <i class='icon-file-text blank'></i>
+              <span>Leads</span>
+            </a>
+          </li>
+          <li class=''>
+            <a href='<%= move_quote_path %>' id="moveLink" data-linkid="2" data-url="<%= move_quote_path %>"
+               data-name="Quotes">
+              <i class='icon-file-text blank'></i>
+              <span>Quotes</span>
+            </a>
+          </li>
+          <li class=''>
+            <a href='<%= move_book_path %>' id="moveLink" data-linkid="3" data-url="<%= move_book_path %>"
+               data-name="Booked">
+              <i class='icon-file-text blank'></i>
+              <span>Booked</span>
+            </a>
+          </li>
+          <li class=''>
+            <a href='<%= move_complete_path %>' id="moveLink" data-linkid="4" data-url="<%= move_complete_path %>"
+               data-name="Completed">
+              <i class='icon-file-text blank'></i>
+              <span>Completed</span>
+            </a>
+          </li>
+          <!-- <li class=''>
+            <a href='<%= review_responses_path %>' id="moveLink" data-linkid="5" data-url="<%= review_responses_path %>"
+               data-name="Review Responses">
+              <i class='icon-file-text blank'></i>
+              <span>Review Responses</span>
+            </a>
+          </li> -->
+        <% end %>
+      </ul>
+    </li>
+    <li class="move-records-links"></li>
+<%# end %>
+
+<%# if validate_special_permission('show.personal_mail', @current_actions) %>
+    <li class='ptop10'>
+      <a class="dropdown-collapse hhiddenIcon" href="#">
+        <span class="text-uppercase blue-text"><b>Mail</b> <!-- <strong class=" <%= @notification_messages.size == 0 ? 'hide' : '' %>">(<strong class="number-new-messages"><%= @notification_messages.size %></strong>)</strong>--></span>
+        <i class='icon-angle-down angle-down hhidden' id="mailIcon"></i>
+      </a>
+
+      <div class="grey-b-border"></div>
+      <ul class='nav nav-stacked' id="mailHeader">
+        <% @all_subtask.each do |subtask| %>
+            <% if @role_level >= subtask.role_level %>
+              <li class=''>
+                <a href='<%= messages_tasks_path(type: 'inbox', task: subtask.id, page_title: "#{subtask.name.strip}#{subtask.role_level}") %>' id="mailLink" data-linkid="<%= subtask.id %>" data-url="<%= messages_tasks_path(type: 'inbox', task: subtask.id, page_title: "#{subtask.name.strip}#{subtask.role_level}") %>" data-name="<%= "#{subtask.name.strip}#{subtask.role_level}" %>">
+                  <i class='icon-envelope blank'></i>
+                  <span><%= "#{subtask.name.strip}#{subtask.role_level}" %></span>
+                </a>
+              </li>
+            <% end %>
+        <% end %>
+        <li class=''>
+          <a href='<%= messages_path(type: 'inbox') %>' id="mailLink" data-linkid="0" data-url="<%= messages_path(type: 'inbox') %>" data-name="My Mail">
+            <i class='icon-envelope blank'></i>
+            <span>My Mail</span>
+          </a>
+        </li>
+      </ul>
+    </li>
+    <li class="mail-records-links"></li>
+<%# end %>
+
+<% if validate_special_permission('view.all_staff_calendars', @current_actions) or validate_special_permission("view.all_truck_calendars", @current_actions) or validate_special_permission("view.truck_calendars.only_in_my_city", @current_actions) or validate_special_permission("view.all_truck_calendars.with_all_info_blacked_out", @current_actions) or validate_special_permission("view.truck_calendars.with_all_info_blacked_out_only_in_my_city", @current_actions) %>
+    <li class='nav-calendar ptop10'>
+      <a class="dropdown-collapse hhiddenIcon" href="#">
+        <span class="text-uppercase blue-text"><b>Calendars</b></span>
+        <i class='icon-angle-down angle-down hhidden' id="calendarIcon"></i>
+      </a>
+
+      <div class="grey-b-border"></div>
+      <ul class='nav nav-stacked'>
+        <% if validate_special_permission("view.all_truck_calendars", @current_actions) or validate_special_permission("view.truck_calendars.only_in_my_city", @current_actions) or validate_special_permission("view.all_truck_calendars.with_all_info_blacked_out", @current_actions) or validate_special_permission("view.truck_calendars.with_all_info_blacked_out_only_in_my_city", @current_actions) %>
+
+            <% if validate_special_permission("view.truck_calendars.only_in_my_city", @current_actions) and not validate_special_permission("view.all_truck_calendars", @current_actions) %>
+                <% @all_calendar_groups.each do |group_info| %>
+                    <% cal_city = City.find_by(id: group_info.city_id)
+                       if @current_user.city == cal_city.description %>
+                    <li class=''>
+                      <a href='/calendar?group=<%= group_info.id %>' href-original='/calendar?group=<%= group_info.id %>' class="save-url-historical-calendar" data-truckcalendar="<%= group_info.id %>" data-truckcalendarname="<%= group_info.name %>" data-calendartype="truckcalendar">
+                        <i class='icon-calendar blank brown'></i>
+                        <span class=""><%= group_info.name %></span>
+                      </a>
+                    </li>
+                    <% end %>
+                <% end %>
+            <% else %>
+                <% @all_calendar_groups.each do |group_info| %>
+                    <li class=''>
+                      <a href='/calendar?group=<%= group_info.id %>' href-original='/calendar?group=<%= group_info.id %>' class="save-url-historical-calendar" data-truckcalendar="<%= group_info.id %>" data-truckcalendarname="<%= group_info.name %>" data-calendartype="truckcalendar">
+                        <i class='icon-calendar blank brown'></i>
+                        <span class=""><%= group_info.name %></span>
+                      </a>
+                    </li>
+                <% end %>
+            <% end %>
+
+        <% end %>
+
+        <% if validate_special_permission('view.all_staff_calendars', @current_actions) %>
+            <% @all_task.each do |task| %>
+                <li class=''>
+                  <a href='/calendar_tasks?type=task&group=<%= task.id %>' href-original='/calendar_tasks?type=task&group=<%= task.id %>' class="save-url-historical-calendar" data-taskcalendar="<%= task.id %>" data-taskcalendarname="<%= task.name %>" data-calendartype="taskcalendar">
+                    <i class='icon-calendar blank green'></i>
+                    <span class=""><%= task.name %></span>
+                  </a>
+                </li>
+            <% end %>
+        <% end %>
+
+        <%# if validate_special_permission('show.personal_calendar', @current_actions) %>
+            <li class=''>
+              <a href='/personal_calendars?type=task&group=0' href-original='/personal_calendars?type=task&group=0' class="save-url-historical-calendar" data-personalcalendar="0" data-personalcalendarname="My Cal" data-calendartype="personalcalendar">
+                <i class='icon-calendar blank'></i>
+                <span>My Calendar</span>
+              </a>
+            </li>
+        <%# end %>
+
+        <% if @current_user.driver.present? %>
+            <li class=''>
+              <a href='/truck_calendars?type=task&group=0' href-original='/truck_calendars?type=task&group=0' class="save-url-historical-calendar" data-mytruckcalendar="0" data-mytruckcalendarname="My Truck" data-calendartype="mytruckcalendar">
+                <i class='icon-calendar blank'></i>
+                <span>My Trucks</span>
+              </a>
+            </li>
+        <% end %>
+      </ul>
+    </li>
+    <li class="truckcalendar-links"></li>
+    <li class="taskcalendar-links"></li>
+    <li class="personalcalendar-links"></li>
+    <li class="mytruckcalendar-links"></li>
+<% end %>
+
+<% if validate_special_permission('create_edit.reports', @current_actions) %>
+    <li class='ptop10'>
+      <a class="dropdown-collapse hhiddenIcon" href="#">
+        <span class="text-uppercase blue-text"><b>Reports</b></span>
+        <i class='icon-angle-down angle-down hhidden' id="reportIcon"></i>
+      </a>
+
+      <div class="grey-b-border"></div>
+      <ul class='nav nav-stacked' id="reportHeader">
+
+            <li class=''>
+              <a href='/post_reports' id="reportLink" data-linkid="1" data-url="/post_reports"
+                 data-name="Post Report">
+                <i class='icon-file-text blank'></i>
+                <span>Post Report</span>
+              </a>
+            </li>
+
+            <li class=''>
+              <a href='/card_batch_reports' id="reportLink" data-linkid="2" data-url="/card_batch_reports"
+                 data-name="Card Batch">
+                <i class='icon-file-text blank'></i>
+                <span>Card Batch</span>
+              </a>
+            </li>
+
+            <li class=''>
+              <a href='/source_reports' id="reportLink" data-linkid="3" data-url="/source_reports"
+                 data-name="Source">
+                <i class='icon-file-text blank'></i>
+                <span>Source</span>
+              </a>
+            </li>
+
+            <li class=''>
+              <a href='<%= statement_path %>' id="reportLink" data-linkid="4" data-url="<%= statement_path %>"
+                 data-name="My Statement">
+                <i class='icon-file-text blank'></i>
+                <span>My Statement</span>
+              </a>
+            </li>
+
+            <li class=''>
+              <a href='<%= stats_path %>' id="reportLink" data-linkid="5" data-url="<%= stats_path %>"
+                 data-name="My Stats">
+                <i class='icon-file-text blank'></i>
+                <span>My Stats</span>
+              </a>
+            </li>
+
+      </ul>
+    </li>
+    <li class="report-records-links"></li>
+<% end %>

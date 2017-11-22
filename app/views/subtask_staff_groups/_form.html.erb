@@ -1,0 +1,32 @@
+<%= form_for(@subtask) do |f| %>
+    <% if @subtask.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@subtask.errors.count, "error") %> prohibited this truck group from being saved:</h2>
+
+          <ul>
+            <% @subtask.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+    <div class="form-group">
+      <%= f.label :name %><br>
+      <%= f.text_field :name, class: 'form-control', required: true %>
+    </div>
+    <div class="form-group">
+      <%= f.label :description %><br>
+      <%= f.text_field :description, class: 'form-control', required: true %>
+    </div>
+    <div class="form-group">
+      <%= f.label :mailbox %><br>
+      <%= f.check_box :mailbox %>
+    </div>
+    <div class="form-group">
+      <%= f.label :active %><br>
+      <%= f.check_box :active %>
+    </div>
+    <button type="submit" name="commit" class="btn btn-primary">Save</button>
+    <%= link_to 'Back', edit_calendar_staff_group_path({id: @subtask.calendar_staff_group_id}), class: 'btn btn-primary' %>
+<% end %>
+

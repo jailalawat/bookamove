@@ -1,0 +1,43 @@
+<% @dates.each.with_index do |date, index| %>
+    <div class="row date-row colpd">
+      <% if @settings.show_move_date %>
+          <div class="form-group col1 colmr">
+            <%= label :move_date, :move_time, 'Move Date', class: "labels" %><br>
+            <%= text_field "move_record_date[#{index}]", :move_date, value: Date.today.strftime("%d/%m/%Y"), class: 'form-control2 date-mover', style: 'width:100%', readonly: true %>
+          </div>
+      <% end %>
+      <% if @settings.show_move_time %>
+          <div class="form-group col0-5 colmr">
+            <%= label :move_time, :move_time, 'Time', class: "hhidden labels" %><br>
+            <%= text_field "move_record_date[#{index}]", :move_time, placeholder: "Time", class: 'form-control
+                time-mover', style: 'width:100%', readonly: true %>
+          </div>
+      <% end %>
+      <% if @settings.show_estimation_time %>
+          <div class="form-group col0-5 colmr">
+            <%= label :estimation_time, :estimation_time, 'Est. Time', class: "labels" %><br>
+            <%= select "move_record_date[#{index}]", :estimation_time, options_for_select({"0.25" => 0.25, "0.50" => 0.50, "0.75" => 0.75, "1.0" => 1.0, "1.25" => 1.25, "1.50" => 1.50, "1.75" => 1.75, "2.0" => 2.0, "2.25" => 2.25, "2.50" => 2.50, "2.75" => 2.75, "3.0" => 3.0, "3.25" => 3.25, "3.50" => 3.50, "3.75" => 3.75, "4.0" => 4.0, "5.0" => 5.0, "6.0" => 6.0, "7.0" => 7.0, "8.0" => 8.0, "9.0" => 9.0, "10.0" => 10.0, "11.0" => 11.0, "12.0" => 12.0, "13.0" => 13.0, "14.0" => 14.0, "15.0" => 15.0, "16.0" => 16.0, "17.0" => 17.0, "18.0" => 18.0, "19.0" => 19.0, "20.0" => 20.0, "21.0" => 21.0, "22.0" => 22.0, "23.0" => 23.0, "24.0" => 24.0}, nil), {}, class: 'form-control2', style: 'width:100%', readonly: true %>
+          </div>
+      <% end %>
+      <% if @settings.show_move_range %>
+          <div class="form-group col1 colmr">
+            <%= label :time_range, 'Range', class: "hhidden labels" %><br>
+            <%= text_field "move_record_date[#{index}]", :time_range, placeholder: "Range", class: 'form-control',
+                           style: 'width:100%', readonly: true %>
+          </div>
+      <% end %>
+      <% if @settings.show_move_time_detail %>
+          <div class="form-group col3 colmr">
+            <%= label :time_detail, :time_details, "Time Alert Details", class: "hhidden labels" %><br>
+            <%= text_field "move_record_date[#{index}]", :time_detail, placeholder: "Time Alert Details", class: 'form-control',
+                           style: 'width:100%', readonly: true %>
+          </div>
+      <% end %>
+      <% if @settings.show_time_alert %>
+          <div class="form-group col1">
+            <%= label :time_alert, 'Time Alert', class: "hhidden labels" %><br>
+            <%= select "move_record_date[#{index}]", :time_alert_id, options_from_collection_for_select(@time_alert, :description, :description, @settings.time_alert.description), {include_blank: "Time Alert"}, :class => 'form-control text-grey', style: 'width:100%', readonly: true, data_id: 'time_alert_id' %>
+          </div>
+      <% end %>
+    </div>
+<% end %>

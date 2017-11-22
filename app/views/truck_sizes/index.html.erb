@@ -1,0 +1,62 @@
+<% @page_title = raw("<i class='icon-truck blank3 blue-text'></i> Truck Sizes") %>
+
+<div class="body_top_margin col-md-12">
+<legend>Truck Sizes</legend>
+<div class="row">
+  <div class="col-md-12">
+    <%= link_to 'New Truck Size', new_truck_size_path, class: 'btn btn-primary' %>
+  </div>
+</div>
+<hr>
+<div class="row">
+  <div class="col-md-12">
+    <table class="table table-striped table-bordered table-hover">
+      <tr>
+        <th>Description</th>
+        <th>Is Active?</th>
+        <th>Actions</th>
+      </tr>
+      <% @truck_sizes.each do |truck_size| %>
+          <tr>
+            <td><%= truck_size.description %></td>
+            <td><%= check_box_tag 'active', truck_size.active, truck_size.active, disabled: true %></td>
+            <td>
+              <%= link_to 'Edit', edit_truck_size_path(truck_size) %>
+              <%= link_to 'Destroy', truck_size, method: :delete, data: {confirm: 'Are you sure?'} %>
+            </td>
+          </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
+</div>
+
+<br class="clearfix"><br>
+
+<script>
+  var topBar = document.getElementById("top-bar");
+
+  topBar.innerHTML = '<div class="msg"><div class="top-bar-left-margin2"><div class="row '
+      + '"><div class="text-left col-md-12">'
+      + '<div class="pleft46 pright10">'
+
+      + '<div class="colfl mright10">'
+      + '<a href="<%= accounts_path %>" class="text-dark mtop6 no_underline fc-button fc-state-default fc-corner-left fc-corner-right">Company Profile</a>'
+      + '</div>'
+
+      + '<div class="colfl mright10">'
+      + '<a href="<%= trucks_path %>" class="text-dark mtop6 no_underline fc-button fc-state-default fc-corner-left fc-corner-right">Trucks</a>'
+      + '</div>'
+
+      + '<div class="colfl mright10">'
+      + '<a href="#" class="text-dark mtop6 no_underline fc-button fc-state-default fc-state-disabled fc-corner-left fc-corner-right">Truck Sizes</a>'
+      + '</div>'
+
+      + '<div class="colfl mright10">'
+      + '<a href="<%= general_settings_path %>" class="text-dark mtop6 no_underline fc-button fc-state-default fc-corner-left fc-corner-right">General Settings</a>'
+      + '</div>'
+
+      + '</div>'
+      + '</div></div></div></div>';
+
+</script>
