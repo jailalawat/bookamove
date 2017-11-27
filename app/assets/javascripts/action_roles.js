@@ -33,22 +33,23 @@ $(document).ready(function () {
                 //    value: item.id,
                 //    text: item.description
                 //}));
-                b_opt = $('<option>', {
-                    value: item.id,
-                    text: item.role_level +" "+ item.description
-                });
-                if(item.group == "Calendars") {
-                    b_opt.insertAfter( "#assigned-role .calendars" );
-                }
-                else if(item.group == "Settings") {
-                    b_opt.insertAfter( "#assigned-role .settings" );
-                }
-                else if(item.group == "Profiles") {
-                    b_opt.insertAfter( "#assigned-role .company_profile" );
-                }
-                else if(item.group == "Move records") {
-                    b_opt.insertAfter( "#assigned-role .move_records" );
-                }
+                set_assigned_options(item.id, item.role_level +" "+ item.description, item.group)
+                // b_opt = $('<option>', {
+                //     value: item.id,
+                //     text: item.role_level +" "+ item.description
+                // });
+                // if(item.group == "Calendars") {
+                //     b_opt.insertAfter( "#assigned-role .calendars" );
+                // }
+                // else if(item.group == "Settings") {
+                //     b_opt.insertAfter( "#assigned-role .settings" );
+                // }
+                // else if(item.group == "Profiles") {
+                //     b_opt.insertAfter( "#assigned-role .company_profile" );
+                // }
+                // else if(item.group == "Move records") {
+                //     b_opt.insertAfter( "#assigned-role .move_records" );
+                // }
             });
             $.each(data.unassign, function (i, item) {
                 var opts = $('#unassigned-role option[value="' + item.id + '"]');
@@ -76,13 +77,35 @@ $(document).ready(function () {
                     //$("#assigned-role").append($("#unassigned-role").find('option:selected').remove());
                     var opts = $("#unassigned-role").find('option:selected');
                     opts.prop("disabled", true);
-                    $("#assigned-role").append($("<option></option>").attr("value",opts.attr("value")).text(opts.text()));
+                    $.each(data.assign, function (i, item) {
+                      set_assigned_options(item.id, item.role_level +" "+ item.description, item.group)
+                    });
+                    //$("#assigned-role").append($("<option></option>").attr("value",opts.attr("value")).text(opts.text()));
                 }).fail(function (data) {
                     error_permissions();
                 });
             }
         }
     });
+    function set_assigned_options(value, text, group){
+      var b_opt;
+      b_opt = $('<option>', {
+          value: value,
+          text: text
+      });
+      if(group == "Calendars") {
+        b_opt.insertAfter( "#assigned-role .calendars" );
+      }
+      else if(group == "Settings") {
+        b_opt.insertAfter( "#assigned-role .settings" );
+      }
+      else if(group == "Profiles") {
+        b_opt.insertAfter( "#assigned-role .company_profile" );
+      }
+      else if(group == "Move records") {
+        b_opt.insertAfter( "#assigned-role .move_records" );
+      }
+    }
 
     $('#add_all_role').on('click', function () {
         if (typeof id_role != 'undefined') {

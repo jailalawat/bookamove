@@ -18,7 +18,9 @@ class ActionRolesController < ApplicationController
     validate_permissions("assign.permissions_to_roles") ? '' : return
     respond_to do |format|
       if fill_list_actions()
-        format.json { render json: @action_role }
+        @action_roles = ActionRole.where(action_id: action_role_params[:action_id], role_id: @current_user.roles.map(&:id))
+        json_text = {:assign => @action_roles.map { |v| {id: v.action.id, description: v.action.description, group: v.action.group, role_level: v.action.role_level} } }
+        format.json { render json: json_text }
       else
         format.json { render json: @action_role.errors, status: :unprocessable_entity }
       end
